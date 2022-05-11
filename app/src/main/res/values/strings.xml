@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Vee</string>
+    <string name="vee_logo">Vee Logo</string>
+    <string name="nearest_gas_station">Nearest Gas Station</string>
+    <string name="histories">Histories</string>
+    <string name="app_name_small">vee</string>
+</resources>
