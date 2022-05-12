@@ -1,132 +1,252 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
     tools:context=".MainActivity">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="@font/nunito_bold"
-        android:text="@string/welcome"
-        android:textColor="@android:color/black"
-        android:textSize="20sp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="@font/nunito_bold"
-        android:text="@string/nearest_gas_station"
-        android:textColor="@android:color/black"
-        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="20dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:background="@drawable/nearest_background">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/welcome"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/nearest_gas_station"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/nearest_background"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                tools:src="@tools:sample/avatars"
-                android:layout_marginBottom="8dp"
-                app:civ_border_width="3dp"
-                app:civ_border_color="@color/background_logo_color"/>
-            <TextView
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Pertamina"
-                android:textAlignment="center"
-                android:fontFamily="@font/nunito_extra_bold"
-                android:textColor="@android:color/black"/>
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
+                    android:layout_marginBottom="8dp"
+                    tools:src="@tools:sample/avatars"
+                    app:civ_border_width="3dp"
+                    app:civ_border_color="@color/background_logo_color"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_extra_bold"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    tools:text="Pertamina" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
+                    android:layout_marginBottom="8dp"
+                    tools:src="@tools:sample/avatars"
+                    app:civ_border_width="3dp"
+                    app:civ_border_color="@color/background_logo_color"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_extra_bold"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    tools:text="Pertamina" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
+                    android:layout_marginBottom="8dp"
+                    tools:src="@tools:sample/avatars"
+                    app:civ_border_width="3dp"
+                    app:civ_border_color="@color/background_logo_color"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_extra_bold"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    tools:text="Pertamina" />
+            </LinearLayout>
         </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/robo"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/robo_background"
+            android:orientation="horizontal"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:baselineAligned="false">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                tools:src="@tools:sample/avatars"
-                android:layout_marginBottom="8dp"
-                app:civ_border_width="3dp"
-                app:civ_border_color="@color/background_logo_color"/>
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="Pertamina"
-                android:textAlignment="center"
-                android:fontFamily="@font/nunito_extra_bold"
-                android:textColor="@android:color/black"/>
-        </LinearLayout>
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="@string/robo_this_month_label"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                tools:src="@tools:sample/avatars"
-                android:layout_marginBottom="8dp"
-                app:civ_border_width="3dp"
-                app:civ_border_color="@color/background_logo_color"/>
-            <TextView
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_medium"
+                    android:text="@string/robo_fillups_label"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_medium"
+                    android:text="@string/robo_expenses_label"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="Pertamina"
-                android:textAlignment="center"
-                android:fontFamily="@font/nunito_extra_bold"
-                android:textColor="@android:color/black"/>
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_medium"
+                    android:text="@string/robo_you_are_label"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="@string/robo_category_label"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/red"
+                    android:textSize="20sp" />
+            </LinearLayout>
         </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/histories"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            tools:text="April" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            tools:listitem="@layout/row_stories" />
     </LinearLayout>
 
-    <TextView
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/nunito_bold"
-        android:text="@string/histories"
-        android:textColor="@android:color/black"
-        android:textSize="20sp" />
+        android:layout_gravity="bottom"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="10dp"
+        app:fabCradleVerticalOffset="10dp">
 
-    <TextView
-        android:layout_width="match_parent"
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/transparent_background"
+            app:itemIconTint="@drawable/bottom_nav_icon_color_selector"
+            app:itemTextColor="@drawable/bottom_nav_icon_color_selector"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_nav_menu" />
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/nunito_bold"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        tools:text="April" />
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        tools:listitem="@layout/row_stories"/>
-
-</LinearLayout>
+        android:backgroundTint="@color/secondary"
+        android:contentDescription="@string/fab_add_activity"
+        android:src="@drawable/ic_baseline_add_24"
+        app:borderWidth="0dp"
+        app:layout_anchor="@id/bottomAppBar"
+        app:tint="@color/white" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

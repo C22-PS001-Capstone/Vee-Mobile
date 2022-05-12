@@ -2,14 +2,14 @@ package id.vee.android
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import id.vee.android.databinding.ActivityNearestGasStationBinding
+import id.vee.android.databinding.ActivityLoginBinding
 
-class NearestGasStationActivity : AppCompatActivity() {
-    private var _binding: ActivityNearestGasStationBinding? = null
+class LoginActivity : AppCompatActivity() {
+    private var _binding: ActivityLoginBinding? = null
     private val binding get() = _binding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityNearestGasStationBinding.inflate(layoutInflater)
+        _binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding?.root)
     }
 }
