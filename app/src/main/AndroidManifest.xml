@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Vee">
         <activity
+            android:name=".NearestGasStationActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>

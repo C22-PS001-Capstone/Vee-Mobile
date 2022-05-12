@@ -11,4 +11,17 @@
     <color name="background_logo_color">#FFFFEFB0</color>
     <color name="background_color">#FFFFE477</color>
     <color name="logo_text">#FF6C89FF</color>
+    <color name="history_background">#FF7B61FF</color>
+
+    <color name="grey">#FF9e9e9e</color>
+    <color name="grey_50">#FFFAFAFA</color>
+    <color name="grey_100">#FFF5F5F5</color>
+    <color name="grey_200">#FFEEEEEE</color>
+    <color name="grey_300">#FFE0E0E0</color>
+    <color name="grey_400">#FFBDBDBD</color>
+    <color name="grey_500">#FF9E9E9E</color>
+    <color name="grey_600">#FF757575</color>
+    <color name="grey_700">#FF616161</color>
+    <color name="grey_800">#FF424242</color>
+    <color name="grey_900">#FF212121</color>
 </resources>
