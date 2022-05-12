@@ -9,4 +9,9 @@
     <string name="odometer_label">Odometer</string>
     <string name="quantity_label">Quantity</string>
     <string name="price_label">Price</string>
+    <string name="fill_ups_litre_label">Fill-ups Litre</string>
+    <string name="total_price_label">Total Price</string>
+    <string name="btn_add_activity">Add Activity</string>
+    <string name="btn_edit_activity">Edit</string>
+    <string name="btn_delete_activity">Delete</string>
 </resources>
