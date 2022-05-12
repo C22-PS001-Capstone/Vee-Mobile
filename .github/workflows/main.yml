@@ -1,19 +1,14 @@
-# Source Code: https://gist.github.com/TarekBenDriss/3809a576c02dd0bf27ec835fc04abec4#file-android-yml
 name: Build and test android app
-
 on:
   pull_request:
-    branches:
-      - 'master'
+    branches: [ master ]
   push:
-    branches:
-      - 'master'
+    branches: [ master ]
 
 jobs:
   test:
     name: Run Unit Tests
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v1
       - name: set up JDK 1.8
