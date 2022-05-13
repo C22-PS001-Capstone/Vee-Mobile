@@ -5,17 +5,50 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import id.vee.android.databinding.ActivityFormBinding
 
 class AddActivity : AppCompatActivity() {
-    private var _binding: ActivityFormBinding? = null
-    private val binding get() = _binding
+    private lateinit var binding: ActivityFormBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityFormBinding.inflate(layoutInflater)
-        setContentView(binding?.root)
+        binding = ActivityFormBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.title = "Add Activity"
+
+        val vNavView: BottomNavigationView = binding.bottomNavigationView
+
+        setBottomNav(vNavView)
+    }
+
+    private fun setBottomNav(navView: BottomNavigationView) {
+        navView.selectedItemId = R.id.navigation_activity
+        navView.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.navigation_home -> {
+                    val i = Intent(this, MainActivity::class.java)
+                    startActivity(i)
+                    true
+                }
+                R.id.navigation_gas_station -> {
+                    val i = Intent(this, NearestGasStationActivity::class.java)
+                    startActivity(i)
+                    true
+                }
+                R.id.navigation_activity -> {
+                    val i = Intent(this, activity_list::class.java)
+                    startActivity(i)
+                    true
+                }
+                R.id.navigation_profile -> {
+                    val i = Intent(this, ProfileActivity::class.java)
+                    startActivity(i)
+                    true
+                }
+                else -> true
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

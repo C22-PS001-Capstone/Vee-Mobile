@@ -5,17 +5,50 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import id.vee.android.databinding.ActivityNearestGasStationBinding
 
 class NearestGasStationActivity : AppCompatActivity() {
-    private var _binding: ActivityNearestGasStationBinding? = null
-    private val binding get() = _binding
+    private lateinit var binding: ActivityNearestGasStationBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityNearestGasStationBinding.inflate(layoutInflater)
-        setContentView(binding?.root)
+        binding = ActivityNearestGasStationBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.title = "Nearest Gas Station"
+
+        val vNavView: BottomNavigationView = binding.bottomNavigationView
+
+        setBottomNav(vNavView)
+    }
+
+    private fun setBottomNav(navView: BottomNavigationView) {
+        navView.selectedItemId = R.id.navigation_gas_station
+        navView.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.navigation_home -> {
+                    val i = Intent(this, MainActivity::class.java)
+                    startActivity(i)
+                    true
+                }
+                R.id.navigation_gas_station -> {
+                    val i = Intent(this, NearestGasStationActivity::class.java)
+                    startActivity(i)
+                    true
+                }
+                R.id.navigation_activity -> {
+                    val i = Intent(this, activity_list::class.java)
+                    startActivity(i)
+                    true
+                }
+                R.id.navigation_profile -> {
+                    val i = Intent(this, ProfileActivity::class.java)
+                    startActivity(i)
+                    true
+                }
+                else -> true
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
