@@ -3,14 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context=".ui.signup.SignupActivity">
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="198dp"
+        android:layout_height="120dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/vee_logo"
@@ -33,13 +34,13 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/input_background"
         android:fontFamily="@font/nunito_medium"
+        android:hint="@string/first_name_placeholder"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:paddingStart="8dp"
         android:paddingTop="12dp"
         android:paddingEnd="8dp"
-        android:paddingBottom="12dp"
-        android:hint="@string/first_name_placeholder"/>
+        android:paddingBottom="12dp" />
 
     <TextView
         android:layout_width="match_parent"
@@ -57,13 +58,13 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/input_background"
         android:fontFamily="@font/nunito_medium"
+        android:hint="@string/last_name_placeholder"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:paddingStart="8dp"
         android:paddingTop="12dp"
         android:paddingEnd="8dp"
-        android:paddingBottom="12dp"
-        android:hint="@string/last_name_placeholder"/>
+        android:paddingBottom="12dp" />
 
     <TextView
         android:layout_width="match_parent"
