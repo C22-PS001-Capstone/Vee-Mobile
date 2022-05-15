@@ -26,4 +26,3 @@ class VeeRepository private constructor(
             }
     }
 }
-}
