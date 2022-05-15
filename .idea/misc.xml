@@ -38,8 +38,11 @@
         <entry key="..\:/bangkit/capstone/vee/app/src/main/res/drawable/ic_launcher_background.xml" value="0.172" />
         <entry key="..\:/bangkit/capstone/vee/app/src/main/res/font/nunito.xml" value="0.28020833333333334" />
         <entry key="..\:/bangkit/capstone/vee/app/src/main/res/font/nunito_sans_extrabold.xml" value="0.28020833333333334" />
+        <entry key="..\:/bangkit/capstone/vee/app/src/main/res/layout/activity_login.xml" value="0.22826086956521738" />
         <entry key="..\:/bangkit/capstone/vee/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/bangkit/capstone/vee/app/src/main/res/layout/activity_signup.xml" value="0.2" />
         <entry key="..\:/bangkit/capstone/vee/app/src/main/res/layout/activity_splash.xml" value="0.16" />
+        <entry key="..\:/bangkit/capstone/vee/app/src/main/res/layout/activity_welcome.xml" value="0.22826086956521738" />
         <entry key="..\:/bangkit/capstone/vee/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
       </map>
     </option>

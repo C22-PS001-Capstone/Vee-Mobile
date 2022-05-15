@@ -41,7 +41,7 @@
     <string name="first_name_label">First Name</string>
     <string name="last_name_label">Last Name</string>
     <string name="email_label">Email</string>
-    <string name="email_hint">user@email.com</string>
+    <string name="email_hint">User@email.com</string>
     <string name="password_label">Password</string>
     <string name="password_hint">Minimal 6 characters</string>
     <string name="password_confirm_label">Password Confirmation</string>
@@ -49,4 +49,6 @@
     <string name="fab_add_activity">FAB Add Activity</string>
     <string name="welcome_screen_image">Welcome Screen Image</string>
     <string name="date_time_picker">Date Time Picker</string>
+    <string name="first_name_placeholder">John</string>
+    <string name="last_name_placeholder">Doe</string>
 </resources>

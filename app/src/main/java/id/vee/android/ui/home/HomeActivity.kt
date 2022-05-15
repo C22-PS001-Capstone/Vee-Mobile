@@ -25,6 +25,7 @@ class HomeActivity : BottomNavigationActivity() {
             val vNavView: BottomNavigationView = bottomNavigationView
             setBottomNav(vNavView)
         }
+        title = getString(R.string.welcome)
     }
 
     override fun onDestroy() {

@@ -4,8 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import id.vee.android.data.local.entity.UserEntity
 
-@Database(entities = [], version = 1, exportSchema = true)
+@Database(entities = [UserEntity::class], version = 1, exportSchema = true)
 abstract class VeeDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 

@@ -2,10 +2,14 @@ package id.vee.android.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import id.vee.android.databinding.ActivitySplashBinding
 import id.vee.android.ui.home.HomeActivity
+import id.vee.android.ui.welcome.WelcomeActivity
+import id.vee.android.vm.ViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -18,11 +22,26 @@ class SplashActivity : AppCompatActivity() {
         _binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding?.root)
         supportActionBar?.hide()
+
+        val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
+        val viewModel: SplashViewModel by viewModels {
+            factory
+        }
         lifecycleScope.launch(Dispatchers.Default) {
             delay(TIMEOUT)
-            val intent = Intent(this@SplashActivity, HomeActivity::class.java)
-            startActivity(intent)
-            finish()
+            viewModel.getUser()
+        }
+        viewModel.userResponse.observe(this@SplashActivity) { user ->
+            Log.d("Splash", "onCreate: $user")
+            if (user != null || user?.isLogin == true) {
+                val intent = Intent(this@SplashActivity, HomeActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                val intent = Intent(this@SplashActivity, WelcomeActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
         }
     }
 
