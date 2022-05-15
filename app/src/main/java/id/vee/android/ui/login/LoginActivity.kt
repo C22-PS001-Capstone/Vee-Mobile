@@ -1,15 +1,15 @@
-package id.vee.android
+package id.vee.android.ui.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import id.vee.android.databinding.ActivitySignupBinding
+import id.vee.android.databinding.ActivityLoginBinding
 
-class SignupActivity : AppCompatActivity() {
-    private var _binding: ActivitySignupBinding? = null
+class LoginActivity : AppCompatActivity() {
+    private var _binding: ActivityLoginBinding? = null
     private val binding get() = _binding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivitySignupBinding.inflate(layoutInflater)
+        _binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding?.root)
     }
 }

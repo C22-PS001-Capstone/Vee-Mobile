@@ -1,10 +1,11 @@
-package id.vee.android
+package id.vee.android.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import id.vee.android.databinding.ActivitySplashBinding
+import id.vee.android.ui.home.HomeActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -19,7 +20,7 @@ class SplashActivity : AppCompatActivity() {
         supportActionBar?.hide()
         lifecycleScope.launch(Dispatchers.Default) {
             delay(TIMEOUT)
-            val intent = Intent(this@SplashActivity, MainActivity::class.java)
+            val intent = Intent(this@SplashActivity, HomeActivity::class.java)
             startActivity(intent)
             finish()
         }

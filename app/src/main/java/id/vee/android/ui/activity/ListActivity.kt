@@ -1,25 +1,35 @@
-package id.vee.android
+package id.vee.android.ui.activity
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import id.vee.android.databinding.ActivityFormBinding
+import id.vee.android.ui.gas.NearestGasStationActivity
+import id.vee.android.ui.notification.NotificationActivity
+import id.vee.android.ui.profile.ProfileActivity
+import id.vee.android.R
+import id.vee.android.databinding.ActivityListBinding
+import id.vee.android.ui.home.HomeActivity
 
-class AddActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityFormBinding
+class ListActivity : AppCompatActivity() {
+    private var _binding: ActivityListBinding? = null
+    private val binding get() = _binding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityFormBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.title = "Add Activity"
+        _binding = ActivityListBinding.inflate(layoutInflater)
+        binding?.apply{
+            setContentView(root)
+            val vNavView: BottomNavigationView = bottomNavigationView
 
-        val vNavView: BottomNavigationView = binding.bottomNavigationView
-
-        setBottomNav(vNavView)
+            setBottomNav(vNavView)
+        }
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+            title = "Activity"
+        }
     }
 
     private fun setBottomNav(navView: BottomNavigationView) {
@@ -27,7 +37,7 @@ class AddActivity : AppCompatActivity() {
         navView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> {
-                    val i = Intent(this, MainActivity::class.java)
+                    val i = Intent(this, HomeActivity::class.java)
                     startActivity(i)
                     true
                 }
@@ -37,7 +47,7 @@ class AddActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navigation_activity -> {
-                    val i = Intent(this, activity_list::class.java)
+                    val i = Intent(this, ListActivity::class.java)
                     startActivity(i)
                     true
                 }
@@ -66,5 +76,9 @@ class AddActivity : AppCompatActivity() {
             }
             else -> true
         }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

@@ -1,4 +1,4 @@
-package id.vee.android
+package id.vee.android.ui.welcome
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
