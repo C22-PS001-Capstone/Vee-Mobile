@@ -1,8 +1,8 @@
 package id.vee.android.ui.welcome
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import id.vee.android.databinding.ActivityWelcomeBinding
 import id.vee.android.ui.login.LoginActivity
 import id.vee.android.ui.signup.SignupActivity

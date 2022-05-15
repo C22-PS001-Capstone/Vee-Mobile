@@ -31,6 +31,7 @@ class AppExecutors @VisibleForTesting constructor(
             mainThreadHandler.post(command)
         }
     }
+
     companion object {
         private const val THREAD_COUNT = 3
     }

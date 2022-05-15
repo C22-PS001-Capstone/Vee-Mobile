@@ -10,10 +10,11 @@ class VeeRepository private constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
-) : VeeDataSource{
+) : VeeDataSource {
     override fun getUser(): Flow<UserEntity> {
         return localDataSource.getUser()
     }
+
     companion object {
         @Volatile
         private var instance: VeeRepository? = null

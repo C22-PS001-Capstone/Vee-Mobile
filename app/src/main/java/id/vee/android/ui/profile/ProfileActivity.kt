@@ -1,17 +1,17 @@
 package id.vee.android.ui.profile
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import id.vee.android.ui.notification.NotificationActivity
 import id.vee.android.R
 import id.vee.android.databinding.ActivityProfileBinding
 import id.vee.android.ui.activity.ListActivity
 import id.vee.android.ui.gas.NearestGasStationActivity
 import id.vee.android.ui.home.HomeActivity
+import id.vee.android.ui.notification.NotificationActivity
 
 class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding

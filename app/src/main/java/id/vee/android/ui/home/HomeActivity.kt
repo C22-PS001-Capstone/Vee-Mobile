@@ -1,16 +1,9 @@
 package id.vee.android.ui.home
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import id.vee.android.R
 import id.vee.android.databinding.ActivityMainBinding
-import id.vee.android.ui.activity.ListActivity
-import id.vee.android.ui.gas.NearestGasStationActivity
-import id.vee.android.ui.notification.NotificationActivity
-import id.vee.android.ui.profile.ProfileActivity
 import id.vee.android.utils.BottomNavigationActivity
 
 class HomeActivity : BottomNavigationActivity() {

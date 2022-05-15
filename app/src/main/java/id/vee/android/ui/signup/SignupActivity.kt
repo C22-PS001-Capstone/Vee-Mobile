@@ -1,7 +1,7 @@
 package id.vee.android.ui.signup
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import id.vee.android.databinding.ActivitySignupBinding
 
 class SignupActivity : AppCompatActivity() {

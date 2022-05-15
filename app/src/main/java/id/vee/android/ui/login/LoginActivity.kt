@@ -1,7 +1,7 @@
 package id.vee.android.ui.login
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import id.vee.android.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -10,6 +10,8 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding?.root)
+        binding?.apply {
+            setContentView(root)
+        }
     }
 }

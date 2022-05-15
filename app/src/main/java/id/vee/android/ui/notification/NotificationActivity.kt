@@ -1,10 +1,10 @@
 package id.vee.android.ui.notification
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import id.vee.android.R
 import id.vee.android.databinding.ActivityNotificationBinding
