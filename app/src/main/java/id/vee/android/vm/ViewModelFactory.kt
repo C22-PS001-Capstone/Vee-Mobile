@@ -33,7 +33,7 @@ class ViewModelFactory private constructor(
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> SplashViewModel(
                 mVeeRepository
             ) as T
-            modelClass.isAssignableFrom(SignupViewModel::class.java) -> SplashViewModel(
+            modelClass.isAssignableFrom(SignupViewModel::class.java) -> SignupViewModel(
                 mVeeRepository
             ) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

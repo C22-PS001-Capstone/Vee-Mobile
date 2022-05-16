@@ -41,10 +41,6 @@ class MyPasswordEditText : AppCompatEditText {
                 // Do nothing.
             }
         })
-    }
-
-    override fun onDraw(canvas: Canvas) {
-        super.onDraw(canvas)
         hint = "Minimal 6 characters"
         textAlignment = View.TEXT_ALIGNMENT_VIEW_START
     }
