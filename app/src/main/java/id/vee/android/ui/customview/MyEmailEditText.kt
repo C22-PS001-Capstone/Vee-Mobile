@@ -42,10 +42,6 @@ class MyEmailEditText : AppCompatEditText {
                 // Do nothing.
             }
         })
-    }
-
-    override fun onDraw(canvas: Canvas) {
-        super.onDraw(canvas)
         hint = "User@email.com"
         textAlignment = View.TEXT_ALIGNMENT_VIEW_START
         paddingRight
