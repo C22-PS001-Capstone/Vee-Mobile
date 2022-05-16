@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    android:label="@string/title_gas_station"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="id.vee.android.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/navigation_gas_station"
+        android:name="id.vee.android.ui.gas.NearestGasStationFragment"
+        android:label="fragment_nearest_gas_station"
+        tools:layout="@layout/fragment_nearest_gas_station" />
+    <fragment
+        android:id="@+id/navigation_add_activity"
+        android:name="id.vee.android.ui.activity.AddActivityFragment"
+        android:label="@string/title_add_activity"
+        tools:layout="@layout/fragment_add_activity" />
+    <fragment
+        android:id="@+id/navigation_activity"
+        android:name="id.vee.android.ui.activity.ListActivityFragment"
+        android:label="@string/title_activity"
+        tools:layout="@layout/fragment_list_activity" />
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="id.vee.android.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>

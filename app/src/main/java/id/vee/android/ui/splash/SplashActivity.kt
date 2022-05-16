@@ -1,5 +1,6 @@
 package id.vee.android.ui.splash
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,13 +8,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import id.vee.android.databinding.ActivitySplashBinding
-import id.vee.android.ui.home.HomeActivity
+import id.vee.android.ui.MainActivity
 import id.vee.android.ui.welcome.WelcomeActivity
 import id.vee.android.vm.ViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     private var _binding: ActivitySplashBinding? = null
     private val binding get() = _binding
@@ -34,7 +36,7 @@ class SplashActivity : AppCompatActivity() {
         viewModel.userResponse.observe(this@SplashActivity) { user ->
             Log.d("Splash", "onCreate: $user")
             if (user != null || user?.isLogin == true) {
-                val intent = Intent(this@SplashActivity, HomeActivity::class.java)
+                val intent = Intent(this@SplashActivity, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {
