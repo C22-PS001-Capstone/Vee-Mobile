@@ -11,5 +11,18 @@ class SignupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding?.root)
+
+        setupData()
+    }
+
+    private fun setupData() {
+        binding?.apply {
+            btnSignupActivity.setOnClickListener{
+                val vfirstName = edtFirstName.text.toString()
+                val vLastName = edtLastName.text.toString()
+                val email = edtEmail.text.toString()
+                val password = edtPassword.text.toString()
+            }
+        }
     }
 }
