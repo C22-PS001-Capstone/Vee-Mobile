@@ -15,4 +15,11 @@ interface ApiService {
         @Field("password") password: String,
         @Field("passwordConfirm") passwordConfirm: String
     ): BasicResponse
+
+    @FormUrlEncoded
+    @POST("/authentications")
+    suspend fun login(
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): BasicResponse
 }
