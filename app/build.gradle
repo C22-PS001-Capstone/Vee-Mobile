@@ -5,6 +5,10 @@ plugins {
     id 'kotlin-kapt'
 }
 
+def projectPropertiesFile = rootProject.file("project.properties")
+def projectProperties = new Properties()
+projectProperties.load(new FileInputStream(projectPropertiesFile))
+
 android {
     compileSdk 32
 
@@ -17,6 +21,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", 'API_URL', '"https://vee-api.herokuapp.com/"'
+        buildConfigField "String", 'GOOGLE_CLIENT_ID', projectProperties['CLIENT_ID']
     }
 
     buildTypes {
