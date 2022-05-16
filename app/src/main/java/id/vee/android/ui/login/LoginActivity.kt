@@ -12,6 +12,15 @@ class LoginActivity : AppCompatActivity() {
         _binding = ActivityLoginBinding.inflate(layoutInflater)
         binding?.apply {
             setContentView(root)
+            btnLoginActivity.setOnClickListener{
+                val vEmail = edtEmail.text.toString()
+                val vPassword = edtPassword.text.toString()
+                loginUser(vEmail, vPassword)
+            }
         }
+    }
+
+    private fun loginUser(email: String, password: String) {
+
     }
 }

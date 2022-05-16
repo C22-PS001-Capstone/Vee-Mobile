@@ -10,7 +10,6 @@ class NearestGasStationActivity : BottomNavigationActivity() {
     override var _binding: ActivityNearestGasStationBinding? = null
     override val binding get() = _binding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityNearestGasStationBinding.inflate(layoutInflater)
@@ -25,5 +24,10 @@ class NearestGasStationActivity : BottomNavigationActivity() {
             setDisplayShowHomeEnabled(true)
             title = "Nearest Gas Station"
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
