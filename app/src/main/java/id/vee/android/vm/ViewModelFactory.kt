@@ -24,7 +24,7 @@ class ViewModelFactory private constructor(
             modelClass.isAssignableFrom(SplashViewModel::class.java) -> SplashViewModel(
                 mVeeRepository
             ) as T
-            modelClass.isAssignableFrom(LoginViewModel::class.java) -> SplashViewModel(
+            modelClass.isAssignableFrom(LoginViewModel::class.java) -> LoginViewModel(
                 mVeeRepository
             ) as T
             modelClass.isAssignableFrom(NotificationViewModel::class.java) -> SplashViewModel(

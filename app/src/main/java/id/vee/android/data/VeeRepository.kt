@@ -35,6 +35,17 @@ class VeeRepository private constructor(
         )
     }
 
+    override fun login(email: String, password: String): Flow<BasicResponse> {
+        return flow {
+            emit(
+                remoteDataSource.login(
+                    email,
+                    password
+                )
+            )
+        }
+    }
+
     companion object {
         @Volatile
         private var instance: VeeRepository? = null

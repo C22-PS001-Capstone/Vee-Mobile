@@ -13,4 +13,6 @@ interface VeeDataSource {
         password: String,
         passwordConfirm: String
     ): Flow<BasicResponse>
+
+    fun login(email: String, password: String): Flow<BasicResponse>
 }
