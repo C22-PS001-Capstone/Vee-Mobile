@@ -2,7 +2,7 @@
 The project related to mobile application of vee project.
 
 ## TODO
-- [ ] Design the application using figma
+- [x] Design the application using figma
 - [ ] Implementation the design to Application Layout (XML)
 - [ ] Importing the required libraries
 - [ ] Features get nearest gas station
