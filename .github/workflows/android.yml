@@ -38,14 +38,13 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: gradle
-
+    - name: move properties file
+      run: |
+        cp project.properties.example project.properties
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
-    - name: move properties file
-      run: |
-        cp project.properties.example project.properties
     - name: Upload APK
       uses: actions/upload-artifact@v1
       with:
