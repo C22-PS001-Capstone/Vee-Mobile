@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import id.vee.android.data.VeeDataSource
 import id.vee.android.di.Injection
+import id.vee.android.ui.activity.ActivityViewModel
 import id.vee.android.ui.home.HomeViewModel
 import id.vee.android.ui.login.LoginViewModel
 import id.vee.android.ui.notification.NotificationViewModel
@@ -34,6 +35,9 @@ class ViewModelFactory private constructor(
                 mVeeRepository
             ) as T
             modelClass.isAssignableFrom(SignupViewModel::class.java) -> SignupViewModel(
+                mVeeRepository
+            ) as T
+            modelClass.isAssignableFrom(ActivityViewModel::class.java) -> ActivityViewModel(
                 mVeeRepository
             ) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
