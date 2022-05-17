@@ -7,8 +7,10 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import id.vee.android.databinding.ActivityLoginBinding
 import id.vee.android.databinding.ActivitySplashBinding
 import id.vee.android.ui.MainActivity
+import id.vee.android.ui.login.LoginViewModel
 import id.vee.android.ui.welcome.WelcomeActivity
 import id.vee.android.vm.ViewModelFactory
 import kotlinx.coroutines.Dispatchers
@@ -17,18 +19,18 @@ import kotlinx.coroutines.launch
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
-    private var _binding: ActivitySplashBinding? = null
-    private val binding get() = _binding
+    private val binding by lazy(LazyThreadSafetyMode.NONE) {
+        ActivitySplashBinding.inflate(layoutInflater)
+    }
+    private val viewModel: SplashViewModel by viewModels {
+        ViewModelFactory.getInstance(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivitySplashBinding.inflate(layoutInflater)
-        setContentView(binding?.root)
+        setContentView(binding.root)
         supportActionBar?.hide()
 
-        val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
-        val viewModel: SplashViewModel by viewModels {
-            factory
-        }
         lifecycleScope.launch(Dispatchers.Default) {
             delay(TIMEOUT)
             viewModel.getUser()
@@ -45,11 +47,6 @@ class SplashActivity : AppCompatActivity() {
                 finish()
             }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 
     companion object {

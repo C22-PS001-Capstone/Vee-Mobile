@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import id.vee.android.databinding.FragmentProfileBinding
 import id.vee.android.ui.home.HomeViewModel
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
@@ -36,5 +36,9 @@ class ProfileFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onClick(p0: View?) {
+        TODO("Not yet implemented")
     }
 }

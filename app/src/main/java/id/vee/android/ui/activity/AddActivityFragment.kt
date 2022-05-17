@@ -12,7 +12,6 @@ import id.vee.android.R
 import id.vee.android.databinding.FragmentAddActivityBinding
 import id.vee.android.ui.home.HomeViewModel
 import id.vee.android.utils.MyDatePickerDialog
-import java.time.Year
 
 class AddActivityFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentAddActivityBinding? = null
