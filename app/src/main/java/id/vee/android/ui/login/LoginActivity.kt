@@ -1,14 +1,22 @@
 package id.vee.android.ui.login
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import id.vee.android.BuildConfig
 import id.vee.android.R
 import id.vee.android.databinding.ActivityLoginBinding
 import id.vee.android.utils.isValidEmail
 import id.vee.android.vm.ViewModelFactory
+
 
 class LoginActivity : AppCompatActivity() {
     private val binding by lazy(LazyThreadSafetyMode.NONE) {
@@ -20,12 +28,27 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Google sign-in
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestId()
+            .requestProfile()
+            .requestEmail()
+            .requestIdToken(BuildConfig.GOOGLE_CLIENT_ID)
+            .requestServerAuthCode(BuildConfig.GOOGLE_CLIENT_ID)
+            .build()
+        val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+
         binding.apply {
             setContentView(root)
             btnLoginActivity.setOnClickListener {
                 val vEmail = edtEmail.text.toString()
                 val vPassword = edtPassword.text.toString()
                 loginUser(vEmail, vPassword)
+            }
+            googleSignIn.setOnClickListener {
+                val signInIntent = mGoogleSignInClient.signInIntent
+                resultLauncher.launch(signInIntent)
             }
         }
         viewModel.response.observe(this) { response ->
@@ -51,6 +74,24 @@ class LoginActivity : AppCompatActivity() {
             }
             Log.d(TAG, "onCreate: $response")
         }
+    }
+
+    private val resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                try {
+                    val account = task.getResult(ApiException::class.java)!!
+                    account.idToken?.let { loginWithGoogleId(it) }
+                } catch (e: ApiException) {
+                    Log.w(TAG, "Google sign in failed: ", e)
+                    Toast.makeText(this, "Google sign in failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+    private fun loginWithGoogleId(idToken: String) {
+        Log.d(TAG, "loginWithGoogleId: $idToken")
     }
 
     private fun loginUser(email: String, password: String) {
