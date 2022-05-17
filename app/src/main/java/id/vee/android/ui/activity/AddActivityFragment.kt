@@ -49,7 +49,6 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
                 }
             }
         }
-
     }
 
     private fun showDate(year: Int, month: Int, day: Int) {

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nearest_gas_station">Pom Bensin Terdekat</string>
+    <string name="histories">Riwayat</string>
+    <string name="welcome">Hati - hati di jalan, %1s</string>
+    <string name="date_label">Tanggal</string>
+    <string name="quantity_label">Kuantitas</string>
+    <string name="price_label">Harga</string>
+    <string name="fill_ups_litre_label">Liter Bensin</string>
+    <string name="total_price_label">Total Harga</string>
+    <string name="btn_add_activity">Tambah Aktivitas</string>
+    <string name="btn_edit_activity">Ubah</string>
+    <string name="btn_delete_activity">Hapus</string>
+    <string name="btn_profile">Profil</string>
+    <string name="btn_theme">Tema</string>
+    <string name="btn_language">Bahasa</string>
+    <string name="btn_logout">Keluar</string>
+    <string name="robo_this_month_label">Bulan %1s</string>
+    <string name="robo_fillups_label">Mengisi: %1d Litre</string>
+    <string name="robo_expenses_label">Pengeluaran: Rp %1d</string>
+    <string name="robo_you_are_label">Anda adalah seorang</string>
+    <string name="robo_category_label">Pembalap</string>
+    <string name="title_home">Beranda</string>
+    <string name="title_gas_station">Pom Bensin</string>
+    <string name="title_activity">Aktivitas</string>
+    <string name="title_add_activity">Tambah Aktivitas</string>
+    <string name="title_profile">Profil</string>
+    <string name="notification">Notifikasi</string>
+    <string name="sign_up">Daftar</string>
+    <string name="log_in">Masuk</string>
+    <string name="first_name_label">Nama Depan</string>
+    <string name="last_name_label">Nama Belakang</string>
+    <string name="password_label">Kata Sandi</string>
+    <string name="password_hint">Minimal 6 karakter</string>
+    <string name="password_confirm_label">Konfirmasi Password</string>
+    <string name="or_login_with">atau masuk dengan</string>
+    <string name="welcome_screen_image">Gambar Welcome Screen</string>
+    <string name="change">Ubah</string>
+    <string name="save_profile">Simpan Profil</string>
+</resources>

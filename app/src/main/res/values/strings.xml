@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">Vee</string>
-    <string name="vee_logo">Vee Logo</string>
+    <string name="app_name" translatable="false">Vee</string>
+    <string name="vee_logo" translatable="false">Vee Logo</string>
     <string name="nearest_gas_station">Nearest Gas Station</string>
     <string name="histories">Histories</string>
-    <string name="app_name_small">vee</string>
+    <string name="app_name_small" translatable="false">vee</string>
     <string name="welcome">Have a safe driving, %1s</string>
     <string name="date_label">Date</string>
-    <string name="odometer_label">Odometer</string>
+    <string name="odometer_label" translatable="false">Odometer</string>
     <string name="quantity_label">Quantity</string>
     <string name="price_label">Price</string>
     <string name="fill_ups_litre_label">Fill-ups Litre</string>
@@ -14,18 +14,18 @@
     <string name="btn_add_activity">Add Activity</string>
     <string name="btn_edit_activity">Edit</string>
     <string name="btn_delete_activity">Delete</string>
-    <string name="date_hint">01–05–2022</string>
-    <string name="odometer_hint">123456</string>
-    <string name="fillups_hint">123</string>
-    <string name="price_hint">123.456</string>
-    <string name="litre_label">L</string>
-    <string name="km_label">Km</string>
-    <string name="rp_label">Rp</string>
+    <string name="date_hint" translatable="false">01–05–2022</string>
+    <string name="odometer_hint" translatable="false">123456</string>
+    <string name="fillups_hint" translatable="false">123</string>
+    <string name="price_hint" translatable="false">123.456</string>
+    <string name="litre_label" translatable="false">L</string>
+    <string name="km_label" translatable="false">Km</string>
+    <string name="rp_label" translatable="false">Rp</string>
     <string name="btn_profile">Profile</string>
     <string name="btn_theme">Theme</string>
     <string name="btn_language">Language</string>
     <string name="btn_logout">Log Out</string>
-    <string name="robo">Robo</string>
+    <string name="robo" translatable="false">Robo</string>
     <string name="robo_this_month_label">This %1s</string>
     <string name="robo_fillups_label">Fill-ups: %1d Litre</string>
     <string name="robo_expenses_label">Expenses: Rp %1d</string>
@@ -41,20 +41,19 @@
     <string name="log_in">Log In</string>
     <string name="first_name_label">First Name</string>
     <string name="last_name_label">Last Name</string>
-    <string name="email_label">Email</string>
-    <string name="email_hint">User@email.com</string>
+    <string name="email_label" translatable="false">Email</string>
+    <string name="email_hint" translatable="false">User@email.com</string>
     <string name="password_label">Password</string>
     <string name="password_hint">Minimal 6 characters</string>
     <string name="password_confirm_label">Password Confirmation</string>
     <string name="or_login_with">or login with</string>
-    <string name="fab_add_activity">FAB Add Activity</string>
+    <string name="fab_add_activity" translatable="false">FAB Add Activity</string>
     <string name="welcome_screen_image">Welcome Screen Image</string>
-    <string name="date_time_picker">Date Time Picker</string>
-    <string name="first_name_placeholder">John</string>
-    <string name="last_name_placeholder">Doe</string>
+    <string name="date_time_picker" translatable="false">Date Time Picker</string>
+    <string name="first_name_placeholder" translatable="false">John</string>
+    <string name="last_name_placeholder" translatable="false">Doe</string>
     <string name="change">Change</string>
-    <string name="dummy">dummy</string>
+    <string name="dummy" translatable="false">dummy</string>
     <string name="save_profile">Save Profile</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
