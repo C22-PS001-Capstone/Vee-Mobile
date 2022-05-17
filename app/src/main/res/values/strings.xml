@@ -55,5 +55,6 @@
     <string name="change">Change</string>
     <string name="dummy" translatable="false">dummy</string>
     <string name="save_profile">Save Profile</string>
+    <string name="retry">Retry</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

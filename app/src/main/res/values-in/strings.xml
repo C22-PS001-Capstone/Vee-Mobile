@@ -37,4 +37,5 @@
     <string name="welcome_screen_image">Gambar Welcome Screen</string>
     <string name="change">Ubah</string>
     <string name="save_profile">Simpan Profil</string>
+    <string name="retry">Coba Lagi</string>
 </resources>
