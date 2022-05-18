@@ -27,4 +27,20 @@ interface ApiService {
     suspend fun userDetail(
         @Header("Authorization") token: String
     ): UserDetailResponse
+
+    @FormUrlEncoded
+    @POST("/activities")
+    suspend fun insertActivity(
+        @Header("Authorization") token: String,
+        @Field("date") date: String,
+        @Field("km") distance: Int,
+        @Field("liter") litre: Int,
+        @Field("price") expense: Int
+    ): BasicResponse
+
+    @FormUrlEncoded
+    @PUT("/authentications")
+    suspend fun refreshToken(
+        @Field("refreshToken") refreshToken: String
+    ): LoginResponse
 }

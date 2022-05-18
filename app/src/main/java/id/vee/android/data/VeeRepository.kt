@@ -20,6 +20,10 @@ class VeeRepository private constructor(
         return localDataSource.getUser()
     }
 
+    override fun getToken(): Flow<TokenEntity> {
+        return localDataSource.getToken()
+    }
+
     override fun signup(
         firstName: String,
         lastName: String,
@@ -49,8 +53,16 @@ class VeeRepository private constructor(
         }
     }
 
+    override fun refreshToken(refreshToken: String): Flow<LoginResponse> {
+        return flow {
+            emit(
+                remoteDataSource.refreshToken(refreshToken)
+            )
+        }
+    }
+
     override fun userDetail(data: TokenEntity): Flow<UserDetailResponse> {
-        return flow{
+        return flow {
             emit(
                 remoteDataSource.userDetail(data)
             )
@@ -65,6 +77,26 @@ class VeeRepository private constructor(
     override suspend fun saveUser(user: UserEntity) {
         localDataSource.deleteUser()
         localDataSource.saveUser(user)
+    }
+
+    override fun insertActivity(
+        token: String,
+        date: String,
+        distance: Int,
+        litre: Int,
+        expense: Int
+    ): Flow<BasicResponse> {
+        return flow {
+            emit(
+                remoteDataSource.insertActivity(
+                    token,
+                    date,
+                    distance,
+                    litre,
+                    expense
+                )
+            )
+        }
     }
 
     companion object {

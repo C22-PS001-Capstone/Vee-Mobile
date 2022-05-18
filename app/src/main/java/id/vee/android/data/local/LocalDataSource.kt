@@ -25,6 +25,10 @@ class LocalDataSource(
         mUserDao.insertUser(user)
     }
 
+    fun getToken(): Flow<TokenEntity> {
+        return mUserDao.getToken()
+    }
+
     companion object {
         private var instance: LocalDataSource? = null
         fun getInstance(mUserDao: VeeDao): LocalDataSource =

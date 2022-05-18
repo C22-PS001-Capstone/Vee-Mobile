@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface VeeDataSource {
     fun getUser(): Flow<UserEntity>
+    fun getToken(): Flow<TokenEntity>
     fun signup(
         firstName: String,
         lastName: String,
@@ -21,4 +22,6 @@ interface VeeDataSource {
     fun userDetail(data: TokenEntity): Flow<UserDetailResponse>
     suspend fun saveToken(data: TokenEntity)
     suspend fun saveUser(user: UserEntity)
+    fun insertActivity(token: String, date: String, distance: Int, litre: Int, expense: Int): Flow<BasicResponse>
+    fun refreshToken(refreshToken: String): Flow<LoginResponse>
 }

@@ -39,4 +39,7 @@
     <string name="save_profile">Simpan Profil</string>
     <string name="retry">Coba Lagi</string>
     <string name="dark_mode">Mode Gelap</string>
+    <string name="missing_permission">Izin diperlukan</string>
+    <string name="yes">Ya</string>
+    <string name="missing_permission_description">Izin lokasi dibutuhkan untuk menambahkan aktifitas. Kamu bisa mengaktifkan kembali di pengaturan.</string>
 </resources>
