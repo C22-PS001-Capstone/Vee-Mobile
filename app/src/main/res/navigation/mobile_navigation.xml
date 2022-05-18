@@ -46,7 +46,11 @@
         android:id="@+id/navigation_profile_detail"
         android:name="id.vee.android.ui.profile.ProfileDetailFragment"
         android:label="@string/title_profile_detail"
-        tools:layout="@layout/fragment_profile_detail" />
+        tools:layout="@layout/fragment_profile_detail" >
+        <action
+            android:id="@+id/action_navigation_profile_detail_to_navigation_change_password"
+            app:destination="@id/navigation_change_password" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_theme"
         android:name="id.vee.android.ui.profile.ThemeFragment"
@@ -57,4 +61,9 @@
         android:name="id.vee.android.ui.notification.NotificationFragment"
         android:label="@string/title_notification"
         tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/navigation_change_password"
+        android:name="id.vee.android.ui.profile.ChangePasswordFragment"
+        android:label="@string/title_change_password"
+        tools:layout="@layout/fragment_change_password" />
 </navigation>

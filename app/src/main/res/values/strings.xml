@@ -39,6 +39,7 @@
     <string name="title_profile_detail">Profile Detail</string>
     <string name="title_theme">Theme</string>
     <string name="title_notification">Notification</string>
+    <string name="title_change_password">Change Password</string>
     <string name="notification">Notification</string>
     <string name="sign_up">Sign Up</string>
     <string name="log_in">Log In</string>
@@ -63,5 +64,11 @@
     <string name="missing_permission">Permission Needed</string>
     <string name="missing_permission_description">The access to location is required to create an activity. You can re-enable it in settings.</string>
     <string name="yes">Yes</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="new_password_label">New Password</string>
+    <string name="current_password_label">Current Password</string>
+    <string name="confirm_new_password_label">Confirm New Password</string>
+    <string name="update_password">Update Password</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

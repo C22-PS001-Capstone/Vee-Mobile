@@ -45,4 +45,9 @@
     <string name="title_profile_detail">Detail Profil</string>
     <string name="title_theme">Tema</string>
     <string name="title_notification">Notifikasi</string>
+    <string name="new_password_label">Password Baru</string>
+    <string name="current_password_label">Password Sekarang</string>
+    <string name="confirm_new_password_label">Konfirmasi Password Baru</string>
+    <string name="update_password">Ubah Password</string>
+    <string name="title_change_password">Ubah Password</string>
 </resources>
