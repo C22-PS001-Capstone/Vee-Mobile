@@ -2,7 +2,6 @@ package id.vee.android.ui.signup
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -53,7 +52,7 @@ class SignupActivity : AppCompatActivity() {
                     .setMessage(response.message)
                     .setPositiveButton("OK") { dialog, _ ->
                         dialog.dismiss()
-                        binding.btnSignupActivity.isEnabled = false
+                        binding.btnSignupActivity.isEnabled = true
                         binding.btnSignupActivity.text = resources.getText(R.string.sign_up)
                     }
                     .show()

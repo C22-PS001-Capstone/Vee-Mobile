@@ -37,7 +37,7 @@ class SplashActivity : AppCompatActivity() {
         }
         viewModel.userResponse.observe(this@SplashActivity) { user ->
             Log.d("Splash", "onCreate: $user")
-            if (user != null || user?.isLogin == true) {
+            if (user != null) {
                 val intent = Intent(this@SplashActivity, MainActivity::class.java)
                 startActivity(intent)
                 finish()
