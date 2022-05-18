@@ -35,7 +35,9 @@ interface ApiService {
         @Field("date") date: String,
         @Field("km") distance: Int,
         @Field("liter") litre: Int,
-        @Field("price") expense: Int
+        @Field("price") expense: Int,
+        @Field("lat") lat: Double,
+        @Field("lon") lon: Double
     ): BasicResponse
 
     @FormUrlEncoded

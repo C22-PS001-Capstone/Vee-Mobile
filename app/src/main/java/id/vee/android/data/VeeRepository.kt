@@ -84,7 +84,9 @@ class VeeRepository private constructor(
         date: String,
         distance: Int,
         litre: Int,
-        expense: Int
+        expense: Int,
+        lat: Double,
+        long: Double
     ): Flow<BasicResponse> {
         return flow {
             emit(
@@ -93,7 +95,9 @@ class VeeRepository private constructor(
                     date,
                     distance,
                     litre,
-                    expense
+                    expense,
+                    lat,
+                    long
                 )
             )
         }

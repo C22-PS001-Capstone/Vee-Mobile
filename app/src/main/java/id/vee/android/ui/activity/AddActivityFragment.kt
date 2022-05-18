@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.tasks.Task
 import id.vee.android.R
 import id.vee.android.data.local.entity.TokenEntity
 import id.vee.android.databinding.FragmentAddActivityBinding
@@ -34,6 +33,8 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
 
     private var userToken: TokenEntity? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    private var currentLocation: Location? = null
 
 
     override fun onCreateView(
@@ -70,12 +71,20 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
                     ) {
                         return@setOnClickListener
                     }
+                    var lat = 0.0
+                    var lon = 0.0
+                    currentLocation?.apply {
+                        lat = latitude
+                        lon = longitude
+                    }
                     viewModel.insertActivity(
                         userToken?.accessToken ?: "",
                         edtDate.text.toString(),
                         edtDistance.text.toString().toInt(),
                         edtLitre.text.toString().toInt(),
-                        edtExpense.text.toString().toInt()
+                        edtExpense.text.toString().toInt(),
+                        lat,
+                        lon
                     )
                 }
                 viewModel.actionResponse.observe(viewLifecycleOwner) { response ->
@@ -117,27 +126,9 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
         if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION, context) &&
             checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION, context)
         ) {
-            fusedLocationClient.locationAvailability.addOnSuccessListener { locationAvailability ->
-                if(locationAvailability.isLocationAvailable){
-                    val locationTask: Task<Location> = fusedLocationClient.lastLocation
-                    Log.d(TAG, "getMyLastLocation: ${locationTask.exception}")
-                    Log.d(TAG, "getMyLastLocation: ${context}")
-                    locationTask.addOnSuccessListener { location ->
-                        if (location != null) {
-                            val lat = location.latitude
-                            val lng = location.longitude
-                            Log.d(TAG, "getMyLastLocation: $lat, $lng")
-                        }
-                    }
-                    locationTask.addOnFailureListener { exception ->
-                        Log.d(TAG, "getMyLastLocation exception: ${exception.message}")
-                    }
-                    Log.d(TAG, "getMyLastLocation: location available")
-                }
-            }
             fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
                 if (location != null) {
-                    Log.d(TAG, "getMyLastLocation: $location")
+                    currentLocation = location
                 } else {
                     Toast.makeText(
                         context,
@@ -145,6 +136,8 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+            }.addOnFailureListener {
+                Log.d(TAG, "getMyLastLocation: $it")
             }
         } else {
             requestPermissionLauncher.launch(

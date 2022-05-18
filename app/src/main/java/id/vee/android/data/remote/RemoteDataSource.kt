@@ -47,10 +47,11 @@ class RemoteDataSource private constructor(
             )
         }
     }
+
     suspend fun refreshToken(refreshToken: String): LoginResponse {
-        return try{
+        return try {
             apiService.refreshToken(refreshToken)
-        }catch (e: Exception){
+        } catch (e: Exception) {
             LoginResponse(
                 status = "error",
                 message = e.message.toString(),
@@ -71,9 +72,17 @@ class RemoteDataSource private constructor(
         }
     }
 
-    suspend fun insertActivity(token: String, date: String, distance: Int, litre: Int, expense: Int): BasicResponse {
-        return try{
-            apiService.insertActivity(token.bearer(), date, distance, litre, expense)
+    suspend fun insertActivity(
+        token: String,
+        date: String,
+        distance: Int,
+        litre: Int,
+        expense: Int,
+        lat: Double,
+        long: Double
+    ): BasicResponse {
+        return try {
+            apiService.insertActivity(token.bearer(), date, distance, litre, expense, lat, long)
         } catch (e: Exception) {
             BasicResponse(
                 status = "error",
