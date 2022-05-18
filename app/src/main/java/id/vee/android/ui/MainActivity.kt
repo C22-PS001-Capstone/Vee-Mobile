@@ -2,7 +2,6 @@ package id.vee.android.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -18,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding.apply {
             setContentView(root)
 
@@ -42,6 +42,11 @@ class MainActivity : AppCompatActivity() {
                 setDisplayHomeAsUpEnabled(true)
                 setDisplayShowHomeEnabled(true)
             }
+        }
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        binding.fabAddActivity.setOnClickListener {
+            navController.navigateUp() // to clear previous navigation history
+            navController.navigate(R.id.navigation_add_activity)
         }
     }
 }
