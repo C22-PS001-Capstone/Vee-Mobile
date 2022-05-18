@@ -71,21 +71,7 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
                     ) {
                         return@setOnClickListener
                     }
-                    var lat = 0.0
-                    var lon = 0.0
-                    currentLocation?.apply {
-                        lat = latitude
-                        lon = longitude
-                    }
-                    viewModel.insertActivity(
-                        userToken?.accessToken ?: "",
-                        edtDate.text.toString(),
-                        edtDistance.text.toString().toInt(),
-                        edtLitre.text.toString().toInt(),
-                        edtExpense.text.toString().toInt(),
-                        lat,
-                        lon
-                    )
+                    insertActivity(viewModel)
                 }
                 viewModel.actionResponse.observe(viewLifecycleOwner) { response ->
                     Log.d(TAG, "onViewCreated: $response")
@@ -93,6 +79,26 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
             }
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
             getMyLastLocation(this)
+        }
+    }
+
+    private fun insertActivity(viewModel: ActivityViewModel) {
+        var lat = 0.0
+        var lon = 0.0
+        currentLocation?.apply {
+            lat = latitude
+            lon = longitude
+        }
+        binding?.apply{
+            viewModel.insertActivity(
+                userToken?.accessToken ?: "",
+                edtDate.text.toString()+"T00:00:00+00:00",
+                edtDistance.text.toString().toInt(),
+                edtLitre.text.toString().toInt(),
+                edtExpense.text.toString().toInt(),
+                lat,
+                lon
+            )
         }
     }
 
