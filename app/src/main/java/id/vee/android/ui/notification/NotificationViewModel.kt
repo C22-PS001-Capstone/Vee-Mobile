@@ -1,4 +1,6 @@
 package id.vee.android.ui.notification
 
-class NotificationViewModel {
+import androidx.lifecycle.ViewModel
+
+class NotificationViewModel : ViewModel() {
 }
