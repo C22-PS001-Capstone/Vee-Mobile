@@ -19,10 +19,12 @@
             android:exported="false" />
         <activity
             android:name=".ui.login.LoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ui.welcome.WelcomeActivity"/>
         <activity
             android:name=".ui.signup.SignupActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ui.welcome.WelcomeActivity"/>
         <activity
             android:name=".ui.welcome.WelcomeActivity"
             android:exported="false" />

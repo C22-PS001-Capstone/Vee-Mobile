@@ -31,6 +31,12 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        var actionBar = getSupportActionBar()
+
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true)
+        }
+
         // Google sign-in
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestId()
@@ -67,7 +73,10 @@ class LoginActivity : AppCompatActivity() {
         viewModel.responseDetail.observe(this) { response ->
             if (response.status == "success" && response.data != null && response.data.user != null) {
                 viewModel.saveUser(response.data.user)
-                startActivity(Intent(this, MainActivity::class.java))
+                val intent = (Intent(this, MainActivity::class.java))
+                intent.flags =
+                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
                 finish()
             } else {
                 showLoginFailed()

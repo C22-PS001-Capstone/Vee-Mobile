@@ -13,6 +13,7 @@ import androidx.navigation.Navigation
 import id.vee.android.R
 import id.vee.android.databinding.FragmentProfileBinding
 import id.vee.android.ui.home.HomeViewModel
+import id.vee.android.ui.welcome.WelcomeActivity
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
@@ -37,7 +38,11 @@ class ProfileFragment : Fragment() {
         binding.btnProfile.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_profile_to_profileDetailFragment))
         binding.btnLanguage.setOnClickListener { startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS)) }
         binding.btnTheme.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_profile_to_themeFragment))
-
+        binding.btnLogout.setOnClickListener {
+            val intent = Intent(activity, WelcomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
     }
 
     override fun onDestroyView() {
