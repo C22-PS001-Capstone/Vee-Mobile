@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="16dp"
     android:orientation="vertical"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
@@ -119,9 +120,9 @@
             android:layout_marginStart="4dp"
             android:layout_weight="1"
             android:backgroundTint="@color/grey"
-            android:textColor="@color/black"
             android:text="@string/change"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
 
     </LinearLayout>
 

@@ -2,6 +2,7 @@ package id.vee.android.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -23,6 +24,8 @@ class MainActivity : AppCompatActivity() {
             val navView: BottomNavigationView = bottomNavigationView
             val navController = findNavController(R.id.nav_host_fragment_activity_main)
             title = getString(R.string.welcome)
+
+
             val appBarConfiguration = AppBarConfiguration(
                 setOf(
                     R.id.navigation_home,
@@ -31,6 +34,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.navigation_profile
                 )
             )
+
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)
 
@@ -38,6 +42,10 @@ class MainActivity : AppCompatActivity() {
                 setDisplayHomeAsUpEnabled(true)
                 setDisplayShowHomeEnabled(true)
             }
+
+            fabAddActivity.setOnClickListener (
+                Navigation.createNavigateOnClickListener(R.id.action_navigation_home_to_navigation_add_activity)
+            )
         }
     }
 }

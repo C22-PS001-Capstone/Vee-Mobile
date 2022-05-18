@@ -1,21 +1,19 @@
 package id.vee.android.ui.profile
 
-import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import id.vee.android.R
-import id.vee.android.databinding.FragmentProfileBinding
+import id.vee.android.databinding.FragmentProfileDetailBinding
+import id.vee.android.databinding.FragmentThemeBinding
 import id.vee.android.ui.home.HomeViewModel
 
-class ProfileFragment : Fragment() {
-    private var _binding: FragmentProfileBinding? = null
+class ThemeFragment : Fragment() {
+    private var _binding: FragmentThemeBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -26,17 +24,14 @@ class ProfileFragment : Fragment() {
         val homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
-        (activity as AppCompatActivity).supportActionBar?.title = "Profile"
+        _binding = FragmentThemeBinding.inflate(inflater, container, false)
+        (activity as AppCompatActivity).supportActionBar?.title = "Theme"
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnProfile.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_profile_to_profileDetailFragment))
-        binding.btnLanguage.setOnClickListener { startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS)) }
-        binding.btnTheme.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_profile_to_themeFragment))
 
     }
 

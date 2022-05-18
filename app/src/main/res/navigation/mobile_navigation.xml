@@ -10,7 +10,11 @@
         android:id="@+id/navigation_home"
         android:name="id.vee.android.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_add_activity"
+            app:destination="@id/navigation_add_activity" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_gas_station"
         android:name="id.vee.android.ui.gas.NearestGasStationFragment"
@@ -30,5 +34,22 @@
         android:id="@+id/navigation_profile"
         android:name="id.vee.android.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navigation_profile_to_profileDetailFragment"
+            app:destination="@id/profileDetailFragment" />
+        <action
+            android:id="@+id/action_navigation_profile_to_themeFragment"
+            app:destination="@id/themeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileDetailFragment"
+        android:name="id.vee.android.ui.profile.ProfileDetailFragment"
+        android:label="fragment_profile_detail"
+        tools:layout="@layout/fragment_profile_detail" />
+    <fragment
+        android:id="@+id/themeFragment"
+        android:name="id.vee.android.ui.profile.ThemeFragment"
+        android:label="fragment_theme"
+        tools:layout="@layout/fragment_theme" />
 </navigation>
