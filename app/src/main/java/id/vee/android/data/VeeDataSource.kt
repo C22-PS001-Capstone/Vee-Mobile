@@ -1,7 +1,9 @@
 package id.vee.android.data
 
+import id.vee.android.data.local.entity.TokenEntity
 import id.vee.android.data.local.entity.UserEntity
 import id.vee.android.data.remote.response.BasicResponse
+import id.vee.android.data.remote.response.LoginResponse
 import kotlinx.coroutines.flow.Flow
 
 interface VeeDataSource {
@@ -14,5 +16,6 @@ interface VeeDataSource {
         passwordConfirm: String
     ): Flow<BasicResponse>
 
-    fun login(email: String, password: String): Flow<BasicResponse>
+    fun login(email: String, password: String): Flow<LoginResponse>
+    suspend fun saveUser(data: TokenEntity)
 }

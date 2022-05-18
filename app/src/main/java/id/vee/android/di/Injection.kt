@@ -14,7 +14,7 @@ object Injection {
         val database = VeeDatabase.getInstance(context)
 
         val remoteDatasource = RemoteDataSource.getInstance(ApiConfig.provideApiService())
-        val localDatasource = LocalDataSource.getInstance(database.userDao())
+        val localDatasource = LocalDataSource.getInstance(database.veeDao())
         val appExecutors = AppExecutors()
         return VeeRepository.getInstance(remoteDatasource, localDatasource, appExecutors)
     }

@@ -1,6 +1,7 @@
 package id.vee.android.ui.login
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -13,7 +14,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import id.vee.android.BuildConfig
 import id.vee.android.R
+import id.vee.android.data.local.entity.TokenEntity
 import id.vee.android.databinding.ActivityLoginBinding
+import id.vee.android.ui.MainActivity
 import id.vee.android.utils.isValidEmail
 import id.vee.android.vm.ViewModelFactory
 
@@ -52,12 +55,15 @@ class LoginActivity : AppCompatActivity() {
             }
         }
         viewModel.response.observe(this) { response ->
-            if (response.status == "success") {
+            if (response.status == "success" && response.data != null) {
+                val data = response.data
+                viewModel.saveUser(data)
                 AlertDialog.Builder(this)
                     .setTitle("Login Success")
                     .setMessage("Login success but still waiting the api get user detail")
                     .setPositiveButton("OK") { dialog, _ ->
                         dialog.dismiss()
+                        startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     }
                     .show()
