@@ -10,10 +10,20 @@
         <item name="colorSecondaryVariant">@color/blue_400</item>
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
         <!-- Customize your theme here. -->
+        <item name="actionBarTheme">@style/ThemeOverlay.ActionBar</item>
         <item name="android:textViewStyle">@style/NunitoTextViewStyle</item>
         <item name="android:buttonStyle">@style/NunitoButtonStyle</item>
+    </style>
+
+    <style name="ThemeEditText">
+        <!-- bottom line color -->
+        <item name="colorControlNormal">@color/black</item>
+        <!-- text color -->
+        <item name="android:textColor">@color/black</item>
+        <!-- hint text color -->
+        <item name="android:textColorHint">@color/grey</item>
     </style>
 
     <style name="NunitoTextViewStyle" parent="android:Widget.TextView">
@@ -22,5 +32,10 @@
 
     <style name="NunitoButtonStyle" parent="android:Widget.Button">
         <item name="android:fontFamily">@font/nunito_bold</item>
+    </style>
+
+    <style name="ThemeOverlay.ActionBar" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+        <item name="colorPrimary">@color/black</item>
+        <item name="android:textColorPrimary">@color/white</item>
     </style>
 </resources>

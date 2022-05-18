@@ -23,6 +23,12 @@ class SignupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            title = "Sign Up"
+            elevation = 0f
+        }
+
         binding.apply {
             setContentView(root)
             btnSignupActivity.setOnClickListener {

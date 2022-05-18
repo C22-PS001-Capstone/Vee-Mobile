@@ -42,4 +42,7 @@
     <string name="missing_permission">Izin diperlukan</string>
     <string name="yes">Ya</string>
     <string name="missing_permission_description">Izin lokasi dibutuhkan untuk menambahkan aktifitas. Kamu bisa mengaktifkan kembali di pengaturan.</string>
+    <string name="title_profile_detail">Detail Profil</string>
+    <string name="title_theme">Tema</string>
+    <string name="title_notification">Notifikasi</string>
 </resources>

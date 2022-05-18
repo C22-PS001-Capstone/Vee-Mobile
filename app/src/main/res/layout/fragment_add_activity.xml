@@ -27,6 +27,7 @@
 
         <EditText
             android:id="@+id/edt_date"
+            style="@style/ThemeEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -69,6 +70,7 @@
 
         <EditText
             android:id="@+id/edt_distance"
+            style="@style/ThemeEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -111,6 +113,7 @@
 
         <EditText
             android:id="@+id/edt_litre"
+            style="@style/ThemeEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -163,6 +166,7 @@
 
         <EditText
             android:id="@+id/edt_expense"
+            style="@style/ThemeEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
