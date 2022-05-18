@@ -2,9 +2,8 @@ package id.vee.android.data.remote.network
 
 import id.vee.android.data.remote.response.BasicResponse
 import id.vee.android.data.remote.response.LoginResponse
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import id.vee.android.data.remote.response.UserDetailResponse
+import retrofit2.http.*
 
 interface ApiService {
     @FormUrlEncoded
@@ -23,4 +22,9 @@ interface ApiService {
         @Field("email") email: String,
         @Field("password") password: String
     ): LoginResponse
+
+    @GET("/users")
+    suspend fun userDetail(
+        @Header("Authorization") token: String
+    ): UserDetailResponse
 }

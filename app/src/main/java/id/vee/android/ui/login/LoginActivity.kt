@@ -14,7 +14,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import id.vee.android.BuildConfig
 import id.vee.android.R
-import id.vee.android.data.local.entity.TokenEntity
 import id.vee.android.databinding.ActivityLoginBinding
 import id.vee.android.ui.MainActivity
 import id.vee.android.utils.isValidEmail
@@ -57,29 +56,34 @@ class LoginActivity : AppCompatActivity() {
         viewModel.response.observe(this) { response ->
             if (response.status == "success" && response.data != null) {
                 val data = response.data
-                viewModel.saveUser(data)
-                AlertDialog.Builder(this)
-                    .setTitle("Login Success")
-                    .setMessage("Login success but still waiting the api get user detail")
-                    .setPositiveButton("OK") { dialog, _ ->
-                        dialog.dismiss()
-                        startActivity(Intent(this, MainActivity::class.java))
-                        finish()
-                    }
-                    .show()
+                Log.d(TAG, "onCreate: Testing")
+                viewModel.saveToken(data)
+                viewModel.userDetail(data)
             } else {
-                AlertDialog.Builder(this)
-                    .setTitle("Login Failed")
-                    .setMessage("Email or Password is wrong")
-                    .setPositiveButton("OK") { dialog, _ ->
-                        dialog.dismiss()
-                        binding.btnLoginActivity.isEnabled = true
-                        binding.btnLoginActivity.text = resources.getText(R.string.log_in)
-                    }
-                    .show()
+                showLoginFailed()
             }
             Log.d(TAG, "onCreate: $response")
         }
+        viewModel.responseDetail.observe(this) { response ->
+            if (response.status == "success" && response.data != null && response.data.user != null) {
+                viewModel.saveUser(response.data.user)
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            } else {
+                showLoginFailed()
+            }
+        }
+    }
+    private fun showLoginFailed(){
+        AlertDialog.Builder(this)
+            .setTitle("Login Failed")
+            .setMessage("Email or Password is wrong")
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+                binding.btnLoginActivity.isEnabled = true
+                binding.btnLoginActivity.text = resources.getText(R.string.log_in)
+            }
+            .show()
     }
 
     private val resultLauncher =

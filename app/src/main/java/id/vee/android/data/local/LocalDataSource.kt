@@ -17,6 +17,14 @@ class LocalDataSource(
         mUserDao.saveToken(data)
     }
 
+    suspend fun deleteUser() {
+        mUserDao.deleteUser()
+    }
+
+    suspend fun saveUser(user: UserEntity) {
+        mUserDao.insertUser(user)
+    }
+
     companion object {
         private var instance: LocalDataSource? = null
         fun getInstance(mUserDao: VeeDao): LocalDataSource =

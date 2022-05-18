@@ -8,17 +8,14 @@ import com.google.gson.annotations.SerializedName
 data class UserEntity(
     @PrimaryKey
     @field:SerializedName("id")
-    val id: Int,
+    val id: String,
 
-    @field:SerializedName("first_name")
+    @field:SerializedName("firstname")
     val firstName: String,
 
-    @field:SerializedName("last_name")
+    @field:SerializedName("lastname")
     val lastName: String,
 
     @field:SerializedName("email")
-    val email: String,
-
-    @field:SerializedName("isLogin")
-    var isLogin: Boolean = false
+    val email: String
 )
