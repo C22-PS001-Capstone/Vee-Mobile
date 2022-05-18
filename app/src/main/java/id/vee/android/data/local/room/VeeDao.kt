@@ -24,4 +24,7 @@ interface VeeDao {
 
     @Query("DELETE FROM token WHERE 1")
     suspend fun deleteToken()
+
+    @Query("SELECT * FROM token LIMIT 1")
+    fun getToken(): Flow<TokenEntity>
 }

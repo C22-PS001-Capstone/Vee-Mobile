@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import id.vee.android.databinding.ActivityLoginBinding
 import id.vee.android.databinding.ActivitySplashBinding
+import id.vee.android.ui.GeneralViewModel
 import id.vee.android.ui.MainActivity
 import id.vee.android.ui.login.LoginViewModel
 import id.vee.android.ui.welcome.WelcomeActivity
@@ -22,7 +23,7 @@ class SplashActivity : AppCompatActivity() {
     private val binding by lazy(LazyThreadSafetyMode.NONE) {
         ActivitySplashBinding.inflate(layoutInflater)
     }
-    private val viewModel: SplashViewModel by viewModels {
+    private val viewModel: GeneralViewModel by viewModels {
         ViewModelFactory.getInstance(this)
     }
 
@@ -33,7 +34,7 @@ class SplashActivity : AppCompatActivity() {
 
         lifecycleScope.launch(Dispatchers.Default) {
             delay(TIMEOUT)
-            viewModel.getUser()
+            viewModel.getUserData()
         }
         viewModel.userResponse.observe(this@SplashActivity) { user ->
             Log.d("Splash", "onCreate: $user")

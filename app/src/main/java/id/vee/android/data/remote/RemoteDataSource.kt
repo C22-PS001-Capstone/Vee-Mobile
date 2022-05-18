@@ -48,11 +48,43 @@ class RemoteDataSource private constructor(
         }
     }
 
+    suspend fun refreshToken(refreshToken: String): LoginResponse {
+        return try {
+            apiService.refreshToken(refreshToken)
+        } catch (e: Exception) {
+            LoginResponse(
+                status = "error",
+                message = e.message.toString(),
+                data = null
+            )
+        }
+    }
+
     suspend fun userDetail(data: TokenEntity): UserDetailResponse {
         return try {
             apiService.userDetail(data.accessToken.bearer())
         } catch (e: Exception) {
             UserDetailResponse(
+                status = "error",
+                message = e.message.toString(),
+                data = null
+            )
+        }
+    }
+
+    suspend fun insertActivity(
+        token: String,
+        date: String,
+        distance: Int,
+        litre: Int,
+        expense: Int,
+        lat: Double,
+        long: Double
+    ): BasicResponse {
+        return try {
+            apiService.insertActivity(token.bearer(), date, distance, litre, expense, lat, long)
+        } catch (e: Exception) {
+            BasicResponse(
                 status = "error",
                 message = e.message.toString(),
                 data = null

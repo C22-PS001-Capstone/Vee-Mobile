@@ -10,20 +10,20 @@ class MyDatePickerDialog(
     onShowDateClicked: (Int, Int, Int) -> Unit
 ) {
     private val calendar = Calendar.getInstance()
-    val year: Int
+    private val year: Int
         get() = calendar.get(Calendar.YEAR)
-    val month: Int
+    private val month: Int
         get() = calendar.get(Calendar.MONTH)
-    val day: Int
+    private val day: Int
         get() = calendar.get(Calendar.DAY_OF_MONTH)
 
     private val dialog = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
         DatePickerDialog(
             activity,
             { _, year, month, day -> onShowDateClicked.invoke(year, month, day) },
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH)
+            year,
+            month,
+            day
         )
     } else {
         DatePickerDialog(activity).apply {
