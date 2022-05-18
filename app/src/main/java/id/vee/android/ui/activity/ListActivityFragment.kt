@@ -25,7 +25,15 @@ class ListActivityFragment : Fragment() {
         _binding = FragmentListActivityBinding.inflate(inflater, container, false)
         (activity as AppCompatActivity).supportActionBar?.title = "Activity"
 
+        setupBackButton()
+
         return binding.root
+    }
+
+    private fun setupBackButton() {
+        if (activity is AppCompatActivity) {
+            (activity as AppCompatActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

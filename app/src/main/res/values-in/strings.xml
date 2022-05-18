@@ -39,4 +39,7 @@
     <string name="save_profile">Simpan Profil</string>
     <string name="retry">Coba Lagi</string>
     <string name="dark_mode">Mode Gelap</string>
+    <string name="title_profile_detail">Detail Profil</string>
+    <string name="title_theme">Tema</string>
+    <string name="title_notification">Notifikasi</string>
 </resources>

@@ -36,20 +36,25 @@
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" >
         <action
-            android:id="@+id/action_navigation_profile_to_profileDetailFragment"
-            app:destination="@id/profileDetailFragment" />
+            android:id="@+id/action_navigation_profile_to_navigation_theme"
+            app:destination="@id/navigation_theme" />
         <action
-            android:id="@+id/action_navigation_profile_to_themeFragment"
-            app:destination="@id/themeFragment" />
+            android:id="@+id/action_navigation_profile_to_navigation_profile_detail"
+            app:destination="@id/navigation_profile_detail" />
     </fragment>
     <fragment
-        android:id="@+id/profileDetailFragment"
+        android:id="@+id/navigation_profile_detail"
         android:name="id.vee.android.ui.profile.ProfileDetailFragment"
-        android:label="fragment_profile_detail"
+        android:label="@string/title_profile_detail"
         tools:layout="@layout/fragment_profile_detail" />
     <fragment
-        android:id="@+id/themeFragment"
+        android:id="@+id/navigation_theme"
         android:name="id.vee.android.ui.profile.ThemeFragment"
-        android:label="fragment_theme"
+        android:label="@string/title_theme"
         tools:layout="@layout/fragment_theme" />
+    <fragment
+        android:id="@+id/navigation_notification"
+        android:name="id.vee.android.ui.notification.NotificationFragment"
+        android:label="@string/title_notification"
+        tools:layout="@layout/fragment_notification" />
 </navigation>
