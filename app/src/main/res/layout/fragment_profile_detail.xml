@@ -20,6 +20,7 @@
 
     <EditText
         android:id="@+id/edt_first_name"
+        style="@style/ThemeEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -45,6 +46,7 @@
 
     <EditText
         android:id="@+id/edt_last_name"
+        style="@style/ThemeEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -70,6 +72,7 @@
 
     <id.vee.android.ui.customview.MyEmailEditText
         android:id="@+id/edt_email"
+        style="@style/ThemeEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -98,6 +101,7 @@
 
         <id.vee.android.ui.customview.MyPasswordEditText
             android:id="@+id/edt_password"
+            style="@style/ThemeEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"

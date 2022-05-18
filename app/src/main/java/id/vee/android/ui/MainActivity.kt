@@ -19,15 +19,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        supportActionBar?.apply {
+            elevation = 0f
+        }
 
         binding.apply {
             setContentView(root)
 
             val navView: BottomNavigationView = bottomNavigationView
             val navController = findNavController(R.id.nav_host_fragment_activity_main)
-            title = getString(R.string.welcome)
-
 
             val appBarConfiguration = AppBarConfiguration(
                 setOf(

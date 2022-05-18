@@ -29,6 +29,7 @@
 
     <id.vee.android.ui.customview.MyEmailEditText
         android:id="@+id/edt_email"
+        style="@style/ThemeEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -52,6 +53,7 @@
 
     <id.vee.android.ui.customview.MyPasswordEditText
         android:id="@+id/edt_password"
+        style="@style/ThemeEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -68,11 +70,11 @@
         android:id="@+id/btn_login_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/primary"
         android:fontFamily="@font/nunito_extra_bold"
         android:text="@string/log_in"
-        android:backgroundTint="@color/primary"
-        android:textColor="@color/black"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:textColor="@color/black" />
 
     <TextView
         android:layout_width="match_parent"

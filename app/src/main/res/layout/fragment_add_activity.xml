@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
     android:layout_marginTop="16dp"
+    android:layout_marginRight="16dp"
     android:orientation="vertical"
     tools:context=".ui.activity.AddActivityFragment">
 
@@ -25,6 +25,7 @@
 
         <EditText
             android:id="@+id/edt_date"
+            style="@style/ThemeEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -66,6 +67,7 @@
         android:orientation="horizontal">
 
         <EditText
+            style="@style/ThemeEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -104,6 +106,7 @@
         android:orientation="horizontal">
 
         <EditText
+            style="@style/ThemeEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -150,6 +153,7 @@
             android:textColor="?android:textColorPrimary" />
 
         <EditText
+            style="@style/ThemeEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
