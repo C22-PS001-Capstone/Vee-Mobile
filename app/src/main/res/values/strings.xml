@@ -56,5 +56,6 @@
     <string name="dummy" translatable="false">dummy</string>
     <string name="save_profile">Save Profile</string>
     <string name="retry">Retry</string>
+    <string name="dark_mode">Dark Mode</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

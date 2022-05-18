@@ -42,10 +42,6 @@ class MainActivity : AppCompatActivity() {
                 setDisplayHomeAsUpEnabled(true)
                 setDisplayShowHomeEnabled(true)
             }
-
-            fabAddActivity.setOnClickListener (
-                Navigation.createNavigateOnClickListener(R.id.action_navigation_home_to_navigation_add_activity)
-            )
         }
     }
 }
