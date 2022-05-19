@@ -1,19 +1,20 @@
 package id.vee.android.ui.profile
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import id.vee.android.R
+import id.vee.android.data.local.entity.TokenEntity
 import id.vee.android.databinding.FragmentProfileBinding
-import id.vee.android.ui.home.HomeViewModel
 import id.vee.android.ui.welcome.WelcomeActivity
 import id.vee.android.vm.ViewModelFactory
 
@@ -21,6 +22,7 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding
 
+    private var userToken: TokenEntity? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,12 +49,30 @@ class ProfileFragment : Fragment() {
             val viewModel: ProfileViewModel by viewModels {
                 factory
             }
-            binding?.apply{
+            viewModel.getToken()
+            viewModelListener(viewModel, this)
+            binding?.apply {
                 btnProfile.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_profile_to_navigation_profile_detail))
                 btnLanguage.setOnClickListener { startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS)) }
                 btnTheme.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_profile_to_navigation_theme))
                 btnLogout.setOnClickListener {
-                    viewModel.logout()
+                    viewModel.logout(userToken?.refreshToken ?: "")
+                }
+            }
+        }
+    }
+
+    private fun viewModelListener(viewModel: ProfileViewModel, context: Context) {
+        viewModel.tokenResponse.observe(viewLifecycleOwner) {
+            if (it != null) {
+                userToken = it
+                Log.d(TAG, "viewModelListener: $it")
+            }
+        }
+        viewModel.logoutResponse.observe(viewLifecycleOwner) {
+            if (it != null) {
+                Log.d(TAG, "viewModelListener: $it")
+                if (it.status == "success") {
                     val intent = Intent(activity, WelcomeActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
@@ -64,5 +84,9 @@ class ProfileFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        private const val TAG = "ProfileFragment"
     }
 }

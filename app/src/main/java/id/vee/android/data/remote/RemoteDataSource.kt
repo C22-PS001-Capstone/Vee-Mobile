@@ -92,6 +92,18 @@ class RemoteDataSource private constructor(
         }
     }
 
+    suspend fun logout(token: String): BasicResponse {
+        return try{
+            apiService.logout(token)
+        } catch (e: Exception) {
+            BasicResponse(
+                status = "error",
+                message = e.message.toString(),
+                data = null
+            )
+        }
+    }
+
     companion object {
         @Volatile
         private var instance: RemoteDataSource? = null
