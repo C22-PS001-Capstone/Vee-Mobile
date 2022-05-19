@@ -50,4 +50,6 @@
     <string name="confirm_new_password_label">Konfirmasi Password Baru</string>
     <string name="update_password">Ubah Password</string>
     <string name="title_change_password">Ubah Password</string>
+    <string name="language_theme">Bahasa</string>
+    <string name="authentication_theme">Autentikasi</string>
 </resources>
