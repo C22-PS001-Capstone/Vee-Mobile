@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import id.vee.android.R
@@ -100,7 +101,7 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
                     .setMessage("Activity has been added")
                     .setPositiveButton("OK") { dialog, _ ->
                         dialog.dismiss()
-                        // TODO: Navigate to Home
+                        Navigation.createNavigateOnClickListener(R.id.action_navigation_add_activity_to_navigation_home)
                     }
                     .show()
             } else {

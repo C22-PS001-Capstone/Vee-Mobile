@@ -20,7 +20,11 @@
         android:id="@+id/navigation_add_activity"
         android:name="id.vee.android.ui.activity.AddActivityFragment"
         android:label="@string/title_add_activity"
-        tools:layout="@layout/fragment_add_activity" />
+        tools:layout="@layout/fragment_add_activity" >
+        <action
+            android:id="@+id/action_navigation_add_activity_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_activity"
         android:name="id.vee.android.ui.activity.ListActivityFragment"
