@@ -6,11 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import id.vee.android.R
 import id.vee.android.databinding.FragmentProfileDetailBinding
-import id.vee.android.ui.home.HomeViewModel
 
 class ProfileDetailFragment : Fragment() {
     private var _binding: FragmentProfileDetailBinding? = null

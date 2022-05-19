@@ -14,7 +14,7 @@ import id.vee.android.ui.profile.ProfileViewModel
 import id.vee.android.ui.signup.SignupViewModel
 
 class ViewModelFactory private constructor(
-    private val mVeeRepository: VeeDataSource,
+    private val mVeeRepository: VeeDataSource
 ) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T =
@@ -40,6 +40,9 @@ class ViewModelFactory private constructor(
             modelClass.isAssignableFrom(GeneralViewModel::class.java) -> GeneralViewModel(
                 mVeeRepository
             ) as T
+           /* modelClass.isAssignableFrom(ThemeViewModel::class.java) -> ThemeViewModel(
+                mThemePreferences
+            ) as T*/
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
 

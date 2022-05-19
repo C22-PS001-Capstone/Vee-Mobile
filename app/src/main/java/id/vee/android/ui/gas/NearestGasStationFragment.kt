@@ -1,16 +1,10 @@
 package id.vee.android.ui.gas
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import id.vee.android.R
 import id.vee.android.databinding.FragmentNearestGasStationBinding
-import id.vee.android.ui.home.HomeViewModel
-import id.vee.android.ui.welcome.WelcomeActivity
 
 class NearestGasStationFragment : Fragment() {
     private var _binding: FragmentNearestGasStationBinding? = null

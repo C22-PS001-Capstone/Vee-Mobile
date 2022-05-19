@@ -7,11 +7,9 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import id.vee.android.databinding.ActivityLoginBinding
 import id.vee.android.databinding.ActivitySplashBinding
 import id.vee.android.ui.GeneralViewModel
 import id.vee.android.ui.MainActivity
-import id.vee.android.ui.login.LoginViewModel
 import id.vee.android.ui.welcome.WelcomeActivity
 import id.vee.android.vm.ViewModelFactory
 import kotlinx.coroutines.Dispatchers
