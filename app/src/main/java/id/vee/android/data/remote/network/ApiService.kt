@@ -45,4 +45,9 @@ interface ApiService {
     suspend fun refreshToken(
         @Field("refreshToken") refreshToken: String
     ): LoginResponse
+
+    @DELETE("/authentications")
+    suspend fun logout(
+        @Query("refreshToken") refreshToken: String
+    ): BasicResponse
 }

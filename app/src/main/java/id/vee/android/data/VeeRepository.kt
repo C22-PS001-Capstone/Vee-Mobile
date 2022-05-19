@@ -1,5 +1,6 @@
 package id.vee.android.data
 
+import android.util.Log
 import id.vee.android.data.local.LocalDataSource
 import id.vee.android.data.local.entity.TokenEntity
 import id.vee.android.data.local.entity.UserEntity
@@ -61,6 +62,24 @@ class VeeRepository private constructor(
         }
     }
 
+    override suspend fun deleteUser() {
+        return localDataSource.deleteUser()
+    }
+
+    override suspend fun deleteToken() {
+        return localDataSource.deleteToken()
+    }
+
+    override fun deleteTokenNetwork(token: String): Flow<BasicResponse> {
+        return flow {
+            emit(
+                remoteDataSource.logout(
+                    token
+                )
+            )
+        }
+    }
+
     override fun userDetail(data: TokenEntity): Flow<UserDetailResponse> {
         return flow {
             emit(
@@ -117,5 +136,8 @@ class VeeRepository private constructor(
                     instance = this
                 }
             }
+
+        private const val TAG = "VeeRepository"
     }
+
 }
