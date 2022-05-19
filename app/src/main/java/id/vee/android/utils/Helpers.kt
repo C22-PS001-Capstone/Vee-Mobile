@@ -19,3 +19,6 @@ fun checkEmptyEditText(view: EditText): Boolean {
     }
     return true
 }
+fun getCurrentUnix(): Long {
+    return System.currentTimeMillis() / 1000
+}

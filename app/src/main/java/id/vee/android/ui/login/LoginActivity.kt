@@ -16,6 +16,7 @@ import id.vee.android.BuildConfig
 import id.vee.android.R
 import id.vee.android.databinding.ActivityLoginBinding
 import id.vee.android.ui.MainActivity
+import id.vee.android.utils.getCurrentUnix
 import id.vee.android.utils.isValidEmail
 import id.vee.android.vm.ViewModelFactory
 
@@ -62,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.response.observe(this) { response ->
             if (response.status == "success" && response.data != null) {
                 val data = response.data
-                Log.d(TAG, "onCreate: Testing")
+                data.expiredAt += getCurrentUnix()
                 viewModel.saveToken(data)
                 viewModel.userDetail(data)
             } else {
@@ -83,7 +84,8 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-    private fun showLoginFailed(){
+
+    private fun showLoginFailed() {
         AlertDialog.Builder(this)
             .setTitle("Login Failed")
             .setMessage("Email or Password is wrong")
