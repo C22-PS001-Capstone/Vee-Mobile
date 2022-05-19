@@ -22,7 +22,7 @@ import id.vee.android.ui.home.HomeViewModel
 class ThemeFragment : Fragment() {
     private var _binding: FragmentThemeBinding? = null
     private val binding get() = _binding!!
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+//    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
     override fun onCreateView(
         inflater: LayoutInflater,
