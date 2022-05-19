@@ -61,6 +61,14 @@ class VeeRepository private constructor(
         }
     }
 
+    override suspend fun deleteUser() {
+        return localDataSource.deleteUser()
+    }
+
+    override suspend fun deleteToken() {
+        return localDataSource.deleteToken()
+    }
+
     override fun userDetail(data: TokenEntity): Flow<UserDetailResponse> {
         return flow {
             emit(

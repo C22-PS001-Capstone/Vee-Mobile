@@ -27,4 +27,6 @@ interface VeeDataSource {
     ): Flow<BasicResponse>
 
     fun refreshToken(refreshToken: String): Flow<LoginResponse>
+    suspend fun deleteUser()
+    suspend fun deleteToken()
 }
