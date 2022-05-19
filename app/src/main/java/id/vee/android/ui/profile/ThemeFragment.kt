@@ -18,6 +18,7 @@ import id.vee.android.data.local.ThemePreferences
 import id.vee.android.databinding.FragmentProfileDetailBinding
 import id.vee.android.databinding.FragmentThemeBinding
 import id.vee.android.ui.home.HomeViewModel
+import id.vee.android.vm.ViewModelFactory
 
 class ThemeFragment : Fragment() {
     private var _binding: FragmentThemeBinding? = null
@@ -46,18 +47,16 @@ class ThemeFragment : Fragment() {
         ) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                binding?.switchTheme?.isChecked = true
+                binding.switchTheme.isChecked = true
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                binding?.switchTheme?.isChecked = false
+                binding.switchTheme.isChecked = false
             }
         }
 
-        binding?.switchTheme?.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+        binding.switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             settingsViewModel.saveThemeSetting(isChecked)
         }*/
-//    }
-
     }
 
     override fun onDestroyView() {

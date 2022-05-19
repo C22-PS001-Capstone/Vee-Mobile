@@ -8,6 +8,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -41,13 +42,20 @@ class MainActivity : AppCompatActivity() {
                     R.id.navigation_profile,
                 )
             )
+            fabAddActivity.setOnClickListener {
+                navController.navigateUp()
+                navController.navigate(R.id.navigation_add_activity)
+            }
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)
-        }
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        binding.fabAddActivity.setOnClickListener {
-            navController.navigateUp()
-            navController.navigate(R.id.navigation_add_activity)
+
+            navController.addOnDestinationChangedListener { _, destination, _ ->
+                if (destination.id == R.id.navigation_add_activity) {
+                    bottomAppBar.visibility = View.GONE
+                } else {
+                    bottomAppBar.visibility = View.VISIBLE
+                }
+            }
         }
 
         // Permission
@@ -59,6 +67,7 @@ class MainActivity : AppCompatActivity() {
             )
         }
     }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -76,9 +85,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
+
     companion object {
         val REQUIRED_PERMISSIONS = arrayOf(
             android.Manifest.permission.ACCESS_FINE_LOCATION,

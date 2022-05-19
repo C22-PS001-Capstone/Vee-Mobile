@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:visibility="visible"
         app:fabCradleMargin="10dp"
         app:fabCradleRoundedCornerRadius="10dp"
         app:fabCradleVerticalOffset="10dp">
@@ -44,6 +45,7 @@
         android:backgroundTint="@color/secondary"
         android:contentDescription="@string/fab_add_activity"
         android:src="@drawable/ic_baseline_add_24"
+        android:visibility="visible"
         app:borderWidth="0dp"
         app:layout_anchor="@id/bottomAppBar"
         app:tint="@color/white" />
