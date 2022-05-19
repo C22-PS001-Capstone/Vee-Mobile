@@ -57,7 +57,8 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val currentTime: Date = Calendar.getInstance().time
-        val formattedDate = SimpleDateFormat("dd-mm-yyyy", Locale.getDefault()).format(currentTime)
+        val formattedDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(currentTime)
+        Log.d(TAG, "onViewCreated: $formattedDate")
 
         context?.apply {
             val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
