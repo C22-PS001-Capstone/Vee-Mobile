@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -24,6 +25,7 @@ import id.vee.android.utils.MyDatePickerDialog
 import id.vee.android.utils.checkEmptyEditText
 import id.vee.android.utils.padStart
 import id.vee.android.vm.ViewModelFactory
+import okhttp3.internal.format
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -65,10 +67,8 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
             val viewModel: ActivityViewModel by viewModels {
                 factory
             }
+            viewModelListener(viewModel, this)
             viewModel.getToken()
-            viewModel.tokenResponse.observe(viewLifecycleOwner) { tokenData ->
-                userToken = tokenData
-            }
             binding?.apply {
                 btnDpd.setOnClickListener(this@AddActivityFragment)
                 edtDate.setText(formattedDate)
@@ -90,6 +90,32 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    private fun viewModelListener(viewModel: ActivityViewModel, context: Context) {
+        viewModel.tokenResponse.observe(viewLifecycleOwner) { tokenData ->
+            userToken = tokenData
+        }
+        viewModel.actionResponse.observe(viewLifecycleOwner){ response ->
+            if(response.status == "success"){
+                AlertDialog.Builder(context)
+                    .setTitle("Success")
+                    .setMessage("Activity has been added")
+                    .setPositiveButton("OK") { dialog, _ ->
+                        dialog.dismiss()
+                        // TODO: Navigate to Home
+                    }
+                    .show()
+            } else {
+                AlertDialog.Builder(context)
+                    .setTitle("Error")
+                    .setMessage("Activity has not been added. "+ response.message)
+                    .setPositiveButton("OK") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .show()
+            }
+        }
+    }
+
     private fun insertActivity(viewModel: ActivityViewModel) {
         var lat = 0.0
         var lon = 0.0
@@ -97,10 +123,16 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
             lat = latitude
             lon = longitude
         }
+        val initDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse(binding?.edtDate?.text.toString())
+        val formatter = initDate?.let {
+            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(
+                it
+            )
+        }
         binding?.apply{
             viewModel.insertActivity(
                 userToken?.accessToken ?: "",
-                edtDate.text.toString()+"T00:00:00+00:00",
+                formatter.toString(),
                 edtDistance.text.toString().toInt(),
                 edtLitre.text.toString().toInt(),
                 edtExpense.text.toString().toInt(),
