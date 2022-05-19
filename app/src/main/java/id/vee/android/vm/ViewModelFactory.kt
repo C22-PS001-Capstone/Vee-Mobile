@@ -19,7 +19,9 @@ class ViewModelFactory private constructor(
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T =
         when {
-            modelClass.isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel() as T
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel(
+                mVeeRepository
+            ) as T
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> LoginViewModel(
                 mVeeRepository
             ) as T

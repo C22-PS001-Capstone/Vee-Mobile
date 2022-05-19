@@ -19,9 +19,6 @@ class ListActivityFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
         _binding = FragmentListActivityBinding.inflate(inflater, container, false)
         (activity as AppCompatActivity).supportActionBar?.title = "Activity"
 
