@@ -21,8 +21,6 @@ class ProfileDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentProfileDetailBinding.inflate(inflater, container, false)
         (activity as AppCompatActivity).supportActionBar?.title = "Profile Detail"
