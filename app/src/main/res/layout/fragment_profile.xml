@@ -5,60 +5,107 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
     android:layout_marginTop="16dp"
+    android:layout_marginRight="16dp"
     android:orientation="vertical"
     tools:context=".ui.profile.ProfileFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/nunito_extra_bold"
+        android:text="@string/title_profile"
+        android:textColor="?colorSecondary" />
 
     <Button
         android:id="@+id/btn_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/transparent"
         android:backgroundTint="@color/white"
+        android:drawableTint="@color/grey_600"
         android:fontFamily="@font/nunito_extra_bold"
         android:text="@string/btn_profile"
         android:textAlignment="textStart"
         android:textAllCaps="false"
         android:textColor="@color/black"
-        app:strokeColor="@color/grey"
-        app:strokeWidth="2dp" />
+        android:textSize="16sp"
+        app:drawableLeftCompat="@drawable/ic_baseline_account_circle_24" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/nunito_extra_bold"
+        android:text="@string/title_theme"
+        android:textColor="?colorSecondary" />
 
     <Button
         android:id="@+id/btn_theme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/transparent"
         android:backgroundTint="@color/white"
+        android:drawableTint="@color/grey_600"
         android:fontFamily="@font/nunito_extra_bold"
         android:text="@string/btn_theme"
         android:textAlignment="textStart"
         android:textAllCaps="false"
         android:textColor="@color/black"
+        android:textSize="16sp"
+        app:drawableLeftCompat="@drawable/ic_baseline_color_lens_24"
         app:strokeColor="@color/grey"
         app:strokeWidth="2dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/nunito_extra_bold"
+        android:text="@string/language_theme"
+        android:textColor="?colorSecondary" />
 
     <Button
         android:id="@+id/btn_language"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/transparent"
         android:backgroundTint="@color/white"
+        android:drawableTint="@color/grey_600"
         android:fontFamily="@font/nunito_extra_bold"
         android:text="@string/btn_language"
         android:textAlignment="textStart"
         android:textAllCaps="false"
         android:textColor="@color/black"
+        android:textSize="16sp"
+        app:drawableLeftCompat="@drawable/ic_baseline_translate_24"
         app:strokeColor="@color/grey"
         app:strokeWidth="2dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/nunito_extra_bold"
+        android:text="@string/authentication_theme"
+        android:textColor="?colorSecondary" />
 
     <Button
         android:id="@+id/btn_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:drawableTint="@color/white"
         android:fontFamily="@font/nunito_extra_bold"
         android:text="@string/btn_logout"
         android:textAlignment="textStart"
         android:textAllCaps="false"
-        android:textColor="@color/black"
-        app:strokeColor="@color/grey"
-        app:strokeWidth="2dp" />
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:drawableLeftCompat="@drawable/ic_baseline_exit_to_app_24" />
 </LinearLayout>

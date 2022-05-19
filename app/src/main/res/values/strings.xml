@@ -70,5 +70,7 @@
     <string name="current_password_label">Current Password</string>
     <string name="confirm_new_password_label">Confirm New Password</string>
     <string name="update_password">Update Password</string>
+    <string name="language_theme">Language</string>
+    <string name="authentication_theme">Authentication</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
