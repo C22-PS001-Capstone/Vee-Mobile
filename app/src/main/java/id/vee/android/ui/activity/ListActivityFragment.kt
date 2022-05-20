@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import id.vee.android.R
 import id.vee.android.databinding.FragmentListActivityBinding
 
 class ListActivityFragment : Fragment() {
@@ -18,7 +19,7 @@ class ListActivityFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentListActivityBinding.inflate(inflater, container, false)
-        (activity as AppCompatActivity).supportActionBar?.title = "Activity"
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.title_activity)
 
         setupBackButton()
 

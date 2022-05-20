@@ -21,7 +21,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        changeTitle("User")
+        changeTitle(getString(R.string.dummy))
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding?.root
     }

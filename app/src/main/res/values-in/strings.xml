@@ -52,4 +52,19 @@
     <string name="title_change_password">Ubah Password</string>
     <string name="language_theme">Bahasa</string>
     <string name="authentication_theme">Autentikasi</string>
+    <string name="signing_up_btn">Mendaftarkan  akun...</string>
+    <string name="loading_btn">Memuat...</string>
+    <string name="email_is_required_error">Email harus diisi</string>
+    <string name="email_is_not_valid_error">Email tidak valid</string>
+    <string name="password_is_required_error">Password harus diisi</string>
+    <string name="failed_google_sign_in">Gagal sign in Google</string>
+    <string name="first_name_is_required_error">Nama depan harus diisi</string>
+    <string name="last_name_is_required_error">Nama belakang harus diisi</string>
+    <string name="password_confirm_not_match_error">Konfirmasi password tidak sesuai</string>
+    <string name="success_account_created">Akun Anda berhasil dibuat</string>
+    <string name="login_failed">Gagal masuk</string>
+    <string name="email_or_password_wrong">Email atau Password salah</string>
+    <string name="success_add_activity">Aktivitas berhasil didaftarkan</string>
+    <string name="error_add_activity">Aktivitas gagal didaftarkan</string>
+    <string name="location_not_found">Lokasi tidak ditemukan. Coba lagi</string>
 </resources>

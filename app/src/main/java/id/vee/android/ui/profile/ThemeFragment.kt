@@ -32,7 +32,7 @@ class ThemeFragment : Fragment() {
     ): View {
 
         _binding = FragmentThemeBinding.inflate(inflater, container, false)
-        (activity as AppCompatActivity).supportActionBar?.title = "Theme"
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.title_theme)
 
         return binding.root
     }

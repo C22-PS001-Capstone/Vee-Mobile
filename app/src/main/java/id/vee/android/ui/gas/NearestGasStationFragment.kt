@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import id.vee.android.R
 import id.vee.android.databinding.FragmentNearestGasStationBinding
 
 class NearestGasStationFragment : Fragment() {
@@ -16,7 +17,7 @@ class NearestGasStationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentNearestGasStationBinding.inflate(inflater, container, false)
-        (activity as AppCompatActivity).supportActionBar?.title = "Nearest Gas Station"
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.nearest_gas_station)
 
         setupBackButton()
 

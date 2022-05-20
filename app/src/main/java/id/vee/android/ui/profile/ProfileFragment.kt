@@ -1,6 +1,5 @@
 package id.vee.android.ui.profile
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
@@ -29,7 +28,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
-        (activity as AppCompatActivity).supportActionBar?.title = "Profile"
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.title_profile)
 
         setupBackButton()
 
@@ -50,7 +49,7 @@ class ProfileFragment : Fragment() {
                 factory
             }
             viewModel.getToken()
-            viewModelListener(viewModel, this)
+            viewModelListener(viewModel)
             binding?.apply {
                 btnProfile.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_profile_to_navigation_profile_detail))
                 btnLanguage.setOnClickListener { startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS)) }
@@ -62,7 +61,7 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun viewModelListener(viewModel: ProfileViewModel, context: Context) {
+    private fun viewModelListener(viewModel: ProfileViewModel) {
         viewModel.tokenResponse.observe(viewLifecycleOwner) {
             if (it != null) {
                 userToken = it

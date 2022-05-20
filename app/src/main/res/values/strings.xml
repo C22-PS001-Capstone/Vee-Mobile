@@ -72,5 +72,25 @@
     <string name="update_password">Update Password</string>
     <string name="language_theme">Language</string>
     <string name="authentication_theme">Authentication</string>
+    <string name="signing_up_btn">Signing up...</string>
+    <string name="loading_btn">Loading...</string>
+    <string name="email_is_required_error">Email is required</string>
+    <string name="email_is_not_valid_error">Email is not valid</string>
+    <string name="password_is_required_error">Password is required</string>
+    <string name="failed_google_sign_in">Google sign in failed</string>
+    <string name="first_name_is_required_error">First name is required</string>
+    <string name="last_name_is_required_error">Last name is required</string>
+    <string name="password_confirm_not_match_error">Password confirmation is not match</string>
+    <string name="positive_dialog_btn_text" translatable="false">OK</string>
+    <string name="error" translatable="false">Error</string>
+    <string name="success" translatable="false">Success</string>
+    <string name="success_account_created">Your account has been created</string>
+    <string name="login_failed">Login Failed</string>
+    <string name="email_or_password_wrong">Email or Password is wrong</string>
+    <string name="date_format" translatable="false">dd-MM-yyyy</string>
+    <string name="success_add_activity">Activity has been added</string>
+    <string name="error_add_activity">Activity has not been added</string>
+    <string name="date_format_reversed" translatable="false">yyyy-MM-dd</string>
+    <string name="location_not_found">Location is not found. Try Again</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

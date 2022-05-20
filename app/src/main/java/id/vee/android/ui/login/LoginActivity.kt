@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
 
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
-            title = "Log In"
+            title = getString(R.string.log_in)
             elevation = 0f
         }
 
@@ -87,9 +87,9 @@ class LoginActivity : AppCompatActivity() {
 
     private fun showLoginFailed() {
         AlertDialog.Builder(this)
-            .setTitle("Login Failed")
-            .setMessage("Email or Password is wrong")
-            .setPositiveButton("OK") { dialog, _ ->
+            .setTitle(getString(R.string.login_failed))
+            .setMessage(getString(R.string.email_or_password_wrong))
+            .setPositiveButton(getString(R.string.positive_dialog_btn_text)) { dialog, _ ->
                 dialog.dismiss()
                 binding.btnLoginActivity.isEnabled = true
                 binding.btnLoginActivity.text = resources.getText(R.string.log_in)
@@ -106,7 +106,7 @@ class LoginActivity : AppCompatActivity() {
                     account.idToken?.let { loginWithGoogleId(it) }
                 } catch (e: ApiException) {
                     Log.w(TAG, "Google sign in failed: ", e)
-                    Toast.makeText(this, "Google sign in failed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.failed_google_sign_in), Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -118,22 +118,22 @@ class LoginActivity : AppCompatActivity() {
     private fun loginUser(email: String, password: String) {
         binding.apply {
             if (email.isEmpty()) {
-                edtEmail.error = "Email is required"
+                edtEmail.error = getString(R.string.email_is_required_error)
                 edtEmail.requestFocus()
                 return
             }
             if (!email.isValidEmail()) {
-                edtEmail.error = "Email is not valid"
+                edtEmail.error = getString(R.string.email_is_not_valid_error)
                 edtEmail.requestFocus()
                 return
             }
             if (password.isEmpty()) {
-                edtPassword.error = "Password is required"
+                edtPassword.error = getString(R.string.password_is_required_error)
                 edtPassword.requestFocus()
                 return
             }
             btnLoginActivity.isEnabled = false
-            btnLoginActivity.text = "Loading..."
+            btnLoginActivity.text = getString(R.string.loading_btn)
         }
         viewModel.login(email, password)
     }

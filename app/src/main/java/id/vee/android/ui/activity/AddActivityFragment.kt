@@ -45,7 +45,7 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAddActivityBinding.inflate(inflater, container, false)
-        (activity as AppCompatActivity).supportActionBar?.title = "Add Activity"
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.title_add_activity)
         setupBackButton()
         return binding?.root
     }
@@ -59,7 +59,7 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val currentTime: Date = Calendar.getInstance().time
-        val formattedDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(currentTime)
+        val formattedDate = SimpleDateFormat(getString(R.string.date_format), Locale.getDefault()).format(currentTime)
         Log.d(TAG, "onViewCreated: $formattedDate")
 
         context?.apply {
@@ -97,18 +97,18 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
         viewModel.actionResponse.observe(viewLifecycleOwner){ response ->
             if(response.status == "success"){
                 AlertDialog.Builder(context)
-                    .setTitle("Success")
-                    .setMessage("Activity has been added")
-                    .setPositiveButton("OK") { dialog, _ ->
+                    .setTitle(getString(R.string.success))
+                    .setMessage(getString(R.string.success_add_activity))
+                    .setPositiveButton(getString(R.string.positive_dialog_btn_text)) { dialog, _ ->
                         dialog.dismiss()
                         Navigation.createNavigateOnClickListener(R.id.action_navigation_add_activity_to_navigation_home)
                     }
                     .show()
             } else {
                 AlertDialog.Builder(context)
-                    .setTitle("Error")
-                    .setMessage("Activity has not been added. "+ response.message)
-                    .setPositiveButton("OK") { dialog, _ ->
+                    .setTitle(getString(R.string.error))
+                    .setMessage(getString(R.string.error_add_activity)+ response.message)
+                    .setPositiveButton(getString(R.string.positive_dialog_btn_text)) { dialog, _ ->
                         dialog.dismiss()
                     }
                     .show()
@@ -123,9 +123,9 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
             lat = latitude
             lon = longitude
         }
-        val initDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse(binding?.edtDate?.text.toString())
+        val initDate = SimpleDateFormat(getString(R.string.date_format), Locale.getDefault()).parse(binding?.edtDate?.text.toString())
         val formatter = initDate?.let {
-            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(
+            SimpleDateFormat(getString(R.string.date_format_reversed), Locale.getDefault()).format(
                 it
             )
         }
@@ -178,7 +178,7 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
                 } else {
                     Toast.makeText(
                         context,
-                        "Location is not found. Try Again",
+                        getString(R.string.location_not_found),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

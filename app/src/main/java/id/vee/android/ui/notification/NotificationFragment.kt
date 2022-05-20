@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import id.vee.android.R
 import id.vee.android.databinding.FragmentNotificationBinding
 import id.vee.android.ui.home.HomeViewModel
 
@@ -23,7 +24,7 @@ class NotificationFragment : Fragment() {
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentNotificationBinding.inflate(inflater, container, false)
-        (activity as AppCompatActivity).supportActionBar?.title = "Notification"
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.title_notification)
 
         setupBackButton()
 

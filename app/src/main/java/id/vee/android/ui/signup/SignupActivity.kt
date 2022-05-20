@@ -25,7 +25,7 @@ class SignupActivity : AppCompatActivity() {
 
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
-            title = "Sign Up"
+            title = getString(R.string.sign_up)
             elevation = 0f
         }
 
@@ -43,9 +43,9 @@ class SignupActivity : AppCompatActivity() {
         viewModel.response.observe(this) { response ->
             if (response.status == "success") {
                 AlertDialog.Builder(this)
-                    .setTitle("Success")
-                    .setMessage("Your account has been created")
-                    .setPositiveButton("OK") { dialog, _ ->
+                    .setTitle(getString(R.string.success))
+                    .setMessage(getString(R.string.success_account_created))
+                    .setPositiveButton(getString(R.string.positive_dialog_btn_text)) { _, _ ->
                         startActivity(
                             Intent(this@SignupActivity, LoginActivity::class.java)
                         )
@@ -54,9 +54,9 @@ class SignupActivity : AppCompatActivity() {
                     .show()
             } else {
                 AlertDialog.Builder(this)
-                    .setTitle("Error")
+                    .setTitle(getString(R.string.error))
                     .setMessage(response.message)
-                    .setPositiveButton("OK") { dialog, _ ->
+                    .setPositiveButton(getString(R.string.positive_dialog_btn_text)) { dialog, _ ->
                         dialog.dismiss()
                         binding.btnSignupActivity.isEnabled = true
                         binding.btnSignupActivity.text = resources.getText(R.string.sign_up)
@@ -75,47 +75,43 @@ class SignupActivity : AppCompatActivity() {
     ) {
         binding.apply {
             if (firstName.isEmpty()) {
-                edtFirstName.error = "First name is required"
+                edtFirstName.error = getString(R.string.first_name_is_required_error)
                 edtFirstName.requestFocus()
                 return
             }
             if (lastName.isEmpty()) {
-                edtLastName.error = "Last name is required"
+                edtLastName.error = getString(R.string.last_name_is_required_error)
                 edtLastName.requestFocus()
                 return
             }
             if (email.isEmpty()) {
-                edtEmail.error = "Email is required"
+                edtEmail.error = getString(R.string.email_is_required_error)
                 edtEmail.requestFocus()
                 return
             }
             if (!email.isValidEmail()) {
-                edtEmail.error = "Email is not valid"
+                edtEmail.error = getString(R.string.email_is_not_valid_error)
                 edtEmail.requestFocus()
                 return
             }
             if (password.isEmpty()) {
-                edtPassword.error = "Password is required"
+                edtPassword.error = getString(R.string.password_is_required_error)
                 edtPassword.requestFocus()
                 return
             }
             if (password.length < 6) {
-                edtPassword.error = "Password must be at least 6 characters"
+                edtPassword.error = getString(R.string.password_hint)
                 edtPassword.requestFocus()
                 return
             }
             if (password != passwordConfirm) {
-                edtPasswordConfirm.error = "Password confirmation is not match"
+                edtPasswordConfirm.error = getString(R.string.password_confirm_not_match_error)
                 edtPasswordConfirm.requestFocus()
                 return
             }
             btnSignupActivity.isEnabled = false
-            btnSignupActivity.text = "Signing up..."
+            btnSignupActivity.text = getString(R.string.signing_up_btn)
             viewModel.signup(firstName, lastName, email, password, passwordConfirm)
         }
-    }
-
-    companion object {
-        private const val TAG = "SignupActivity"
     }
 }
