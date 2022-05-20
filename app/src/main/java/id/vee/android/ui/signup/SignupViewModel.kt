@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import id.vee.android.data.remote.response.BasicResponse
-import id.vee.android.domain.repository.VeeDataSource
 import id.vee.android.domain.usecase.VeeUseCase
 import kotlinx.coroutines.launch
 

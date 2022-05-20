@@ -1,6 +1,5 @@
 package id.vee.android.data.remote
 
-import android.util.Log
 import id.vee.android.data.local.entity.TokenEntity
 import id.vee.android.data.remote.network.ApiService
 import id.vee.android.data.remote.response.BasicResponse
@@ -27,7 +26,6 @@ class RemoteDataSource(
                 passwordConfirm
             )
         } catch (e: Exception) {
-            Log.d(TAG, "signup: $e")
             BasicResponse(
                 status = "error",
                 message = e.message.toString(),
@@ -93,7 +91,7 @@ class RemoteDataSource(
     }
 
     suspend fun logout(token: String): BasicResponse {
-        return try{
+        return try {
             apiService.logout(token)
         } catch (e: Exception) {
             BasicResponse(
@@ -102,17 +100,5 @@ class RemoteDataSource(
                 data = null
             )
         }
-    }
-
-    companion object {
-        @Volatile
-        private var instance: RemoteDataSource? = null
-
-        fun getInstance(service: ApiService): RemoteDataSource =
-            instance ?: synchronized(this) {
-                instance ?: RemoteDataSource(service)
-            }
-
-        private const val TAG = "RemoteDataSource"
     }
 }

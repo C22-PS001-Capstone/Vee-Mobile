@@ -1,15 +1,13 @@
 package id.vee.android.ui.notification
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
 import id.vee.android.R
 import id.vee.android.databinding.FragmentNotificationBinding
-import id.vee.android.ui.home.HomeViewModel
 
 class NotificationFragment : Fragment() {
     private var _binding: FragmentNotificationBinding? = null
@@ -21,7 +19,8 @@ class NotificationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentNotificationBinding.inflate(inflater, container, false)
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.title_notification)
+        (activity as AppCompatActivity).supportActionBar?.title =
+            getString(R.string.title_notification)
 
         setupBackButton()
 

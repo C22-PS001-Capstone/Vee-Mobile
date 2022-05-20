@@ -28,12 +28,4 @@ class LocalDataSource(
     fun getToken(): Flow<TokenEntity?> {
         return mUserDao.getToken()
     }
-
-    companion object {
-        private var instance: LocalDataSource? = null
-        fun getInstance(mUserDao: VeeDao): LocalDataSource =
-            instance ?: LocalDataSource(mUserDao).apply {
-                instance = this
-            }
-    }
 }

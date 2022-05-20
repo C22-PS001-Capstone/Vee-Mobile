@@ -126,22 +126,4 @@ class VeeRepository(
             )
         }
     }
-
-    companion object {
-        @Volatile
-        private var instance: VeeRepository? = null
-
-        fun getInstance(
-            remoteDataSource: RemoteDataSource,
-            localDataSource: LocalDataSource,
-        ): VeeRepository =
-            instance ?: synchronized(this) {
-                VeeRepository(remoteDataSource, localDataSource).apply {
-                    instance = this
-                }
-            }
-
-        private const val TAG = "VeeRepository"
-    }
-
 }

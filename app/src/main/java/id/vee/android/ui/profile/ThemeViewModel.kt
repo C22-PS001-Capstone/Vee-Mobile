@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import id.vee.android.data.local.ThemeInterface
-import id.vee.android.data.local.ThemePreferences
 import kotlinx.coroutines.launch
 
 class ThemeViewModel(private val pref: ThemeInterface) : ViewModel() {

@@ -1,6 +1,5 @@
 package id.vee.android.data.local
 
-import android.annotation.SuppressLint
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -27,19 +26,4 @@ class ThemePreferences(private val context: Context) : ThemeInterface {
             preferences[theme] = isDarkModeActive
         }
     }
-
-    companion object {
-        @SuppressLint("StaticFieldLeak")
-        @Volatile
-        private var INSTANCE: ThemePreferences? = null
-
-        fun getInstance(context: Context): ThemePreferences {
-            return INSTANCE ?: synchronized(this) {
-                val instance = ThemePreferences(context)
-                INSTANCE = instance
-                instance
-            }
-        }
-    }
-
 }

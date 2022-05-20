@@ -18,13 +18,15 @@ object DataMapper {
         refreshToken = input.refreshToken,
         expiredAt = input.expiredAt,
     )
+
     fun mapDomainToEntity(input: User) = UserEntity(
         id = input.id,
         firstName = input.firstName,
         lastName = input.lastName,
         email = input.email
     )
-    fun mapDomainToEntity(input:Token) = TokenEntity(
+
+    fun mapDomainToEntity(input: Token) = TokenEntity(
         accessToken = input.accessToken,
         refreshToken = input.refreshToken,
         expiredAt = input.expiredAt,

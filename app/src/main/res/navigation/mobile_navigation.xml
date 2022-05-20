@@ -20,7 +20,7 @@
         android:id="@+id/navigation_add_activity"
         android:name="id.vee.android.ui.activity.AddActivityFragment"
         android:label="@string/title_add_activity"
-        tools:layout="@layout/fragment_add_activity" >
+        tools:layout="@layout/fragment_add_activity">
         <action
             android:id="@+id/action_navigation_add_activity_to_navigation_home"
             app:destination="@id/navigation_home" />
@@ -34,7 +34,7 @@
         android:id="@+id/navigation_profile"
         android:name="id.vee.android.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_navigation_profile_to_navigation_theme"
             app:destination="@id/navigation_theme" />
@@ -46,7 +46,7 @@
         android:id="@+id/navigation_profile_detail"
         android:name="id.vee.android.ui.profile.ProfileDetailFragment"
         android:label="@string/title_profile_detail"
-        tools:layout="@layout/fragment_profile_detail" >
+        tools:layout="@layout/fragment_profile_detail">
         <action
             android:id="@+id/action_navigation_profile_detail_to_navigation_change_password"
             app:destination="@id/navigation_change_password" />

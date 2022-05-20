@@ -5,8 +5,8 @@
     <item
         android:id="@+id/menu_notification"
         android:icon="@drawable/ic_baseline_notifications_24"
-        android:title="@string/notification"
         android:iconTint="@color/black"
+        android:title="@string/notification"
         app:showAsAction="ifRoom"
         tools:ignore="UnusedAttribute" />
 </menu>
