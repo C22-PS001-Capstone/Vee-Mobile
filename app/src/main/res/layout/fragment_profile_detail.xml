@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <id.vee.android.ui.customview.MyPasswordEditText
+        <EditText
             android:id="@+id/edt_password"
             style="@style/ThemeEditText"
             android:layout_width="0dp"
