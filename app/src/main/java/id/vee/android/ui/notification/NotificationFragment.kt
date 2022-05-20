@@ -13,13 +13,13 @@ import id.vee.android.ui.home.HomeViewModel
 
 class NotificationFragment : Fragment() {
     private var _binding: FragmentNotificationBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         val homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
@@ -28,7 +28,7 @@ class NotificationFragment : Fragment() {
 
         setupBackButton()
 
-        return binding.root
+        return binding?.root
     }
 
     private fun setupBackButton() {

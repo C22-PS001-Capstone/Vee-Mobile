@@ -23,7 +23,7 @@ class ViewModelFactory private constructor(
     override fun <T : ViewModel> create(modelClass: Class<T>): T =
         when {
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel(
-                mVeeRepository
+                mVeeRepository, pref
             ) as T
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> LoginViewModel(
                 mVeeRepository
@@ -32,16 +32,16 @@ class ViewModelFactory private constructor(
                 mVeeRepository
             ) as T
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> ProfileViewModel(
-                mVeeRepository
+                mVeeRepository, pref
             ) as T
             modelClass.isAssignableFrom(SignupViewModel::class.java) -> SignupViewModel(
                 mVeeRepository
             ) as T
             modelClass.isAssignableFrom(ActivityViewModel::class.java) -> ActivityViewModel(
-                mVeeRepository
+                mVeeRepository, pref
             ) as T
             modelClass.isAssignableFrom(GeneralViewModel::class.java) -> GeneralViewModel(
-                mVeeRepository
+                mVeeRepository, pref
             ) as T
             modelClass.isAssignableFrom(ThemeViewModel::class.java) -> ThemeViewModel(
                 pref
