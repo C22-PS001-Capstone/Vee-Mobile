@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 class LocalDataSource(
     private val mUserDao: VeeDao
 ) {
-    fun getUser(): Flow<UserEntity> = mUserDao.getUser()
+    fun getUser(): Flow<UserEntity?> = mUserDao.getUser()
     suspend fun deleteToken() {
         mUserDao.deleteToken()
     }
@@ -25,7 +25,7 @@ class LocalDataSource(
         mUserDao.insertUser(user)
     }
 
-    fun getToken(): Flow<TokenEntity> {
+    fun getToken(): Flow<TokenEntity?> {
         return mUserDao.getToken()
     }
 

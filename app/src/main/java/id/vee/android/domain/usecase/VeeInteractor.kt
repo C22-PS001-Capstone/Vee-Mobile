@@ -9,10 +9,10 @@ import id.vee.android.domain.repository.VeeDataSource
 import kotlinx.coroutines.flow.Flow
 
 class VeeInteractor(private val repository: VeeDataSource) : VeeUseCase {
-    override fun getUser(): Flow<User> = repository.getUser()
+    override fun getUser(): Flow<User?> = repository.getUser()
 
 
-    override fun getToken(): Flow<Token> = repository.getToken()
+    override fun getToken(): Flow<Token?> = repository.getToken()
 
 
     override fun signup(

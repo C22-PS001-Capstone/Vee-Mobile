@@ -8,8 +8,8 @@ import id.vee.android.domain.model.User
 import kotlinx.coroutines.flow.Flow
 
 interface VeeDataSource {
-    fun getUser(): Flow<User>
-    fun getToken(): Flow<Token>
+    fun getUser(): Flow<User?>
+    fun getToken(): Flow<Token?>
     fun signup(
         firstName: String,
         lastName: String,

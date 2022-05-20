@@ -29,25 +29,25 @@ open class GeneralViewModel constructor(
 
     fun getUserData() = viewModelScope.launch {
         useCase.getUser().collect { values ->
-            _user.value = values
+            _user.postValue(values)
         }
     }
 
     fun getToken() = viewModelScope.launch {
         useCase.getToken().collect { values ->
-            _token.value = values
+            _token.postValue(values)
         }
     }
 
     fun refreshToken(refreshToken: String) = viewModelScope.launch {
         useCase.refreshToken(refreshToken).collect { values ->
-            _refresh.value = values
+            _refresh.postValue(values)
         }
     }
 
     fun getThemeSettings() = viewModelScope.launch {
-        pref.getThemeSetting().collect {
-            _themeResponse.value = it
+        pref.getThemeSetting().collect { values ->
+            _themeResponse.postValue(values)
         }
     }
 }

@@ -8,9 +8,9 @@ import id.vee.android.domain.model.User
 import kotlinx.coroutines.flow.Flow
 
 interface VeeUseCase {
-    fun getUser(): Flow<User>
+    fun getUser(): Flow<User?>
 
-    fun getToken(): Flow<Token>
+    fun getToken(): Flow<Token?>
 
     fun signup(
         firstName: String,

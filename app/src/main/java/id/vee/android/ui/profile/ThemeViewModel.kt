@@ -11,13 +11,13 @@ class ThemeViewModel(private val pref: ThemePreferences) : ViewModel() {
     private var _themeResponse: MutableLiveData<Boolean> = MutableLiveData()
     val themeResponse: LiveData<Boolean> = _themeResponse
     fun getThemeSettings() = viewModelScope.launch {
-        pref.getThemeSetting().collect {
-            _themeResponse.value = it
+        pref.getThemeSetting().collect { values ->
+            _themeResponse.postValue(values)
         }
     }
 
     fun saveThemeSetting(isDarkModeActive: Boolean) = viewModelScope.launch {
-            pref.saveThemeSetting(isDarkModeActive)
-        }
+        pref.saveThemeSetting(isDarkModeActive)
+    }
 
 }

@@ -20,7 +20,7 @@ class ProfileViewModel constructor(
 
     fun logout(token: String) = viewModelScope.launch {
         useCase.deleteTokenNetwork(token).collect { values ->
-            _logoutResponse.value = values
+            _logoutResponse.postValue(values)
         }
         useCase.deleteUser()
         useCase.deleteToken()

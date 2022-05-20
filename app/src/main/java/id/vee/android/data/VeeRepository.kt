@@ -1,6 +1,5 @@
 package id.vee.android.data
 
-import android.util.Log
 import id.vee.android.data.local.LocalDataSource
 import id.vee.android.data.remote.RemoteDataSource
 import id.vee.android.data.remote.response.BasicResponse
@@ -10,22 +9,24 @@ import id.vee.android.domain.model.Token
 import id.vee.android.domain.model.User
 import id.vee.android.domain.repository.VeeDataSource
 import id.vee.android.utils.DataMapper
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapNotNull
 
 class VeeRepository private constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource
 ) : VeeDataSource {
-    override fun getUser(): Flow<User> {
-        Log.d(TAG, "getUser: Before crash")
-        localDataSource.getUser().map {
-            DataMapper.mapEntityToDomain(it)
+    override fun getUser(): Flow<User?> {
+        return localDataSource.getUser().map {
+            it?.let { user -> DataMapper.mapEntityToDomain(user) }
         }
     }
 
-    override fun getToken(): Flow<Token> {
+    override fun getToken(): Flow<Token?> {
         return localDataSource.getToken().mapNotNull {
-            DataMapper.mapEntityToDomain(it)
+            it?.let { DataMapper.mapEntityToDomain(it) }
         }
     }
 

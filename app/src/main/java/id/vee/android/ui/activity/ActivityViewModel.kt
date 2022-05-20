@@ -29,7 +29,7 @@ class ActivityViewModel constructor(
         viewModelScope.launch {
             useCase.insertActivity(token, date, distance, litre, expense, lat, long)
                 .collect { values ->
-                    _actionResponse.value = values
+                    _actionResponse.postValue(values)
                 }
         }
 }

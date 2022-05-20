@@ -22,7 +22,7 @@ class SignupViewModel constructor(
         passwordConfirm: String
     ) = viewModelScope.launch {
         useCase.signup(firstName, lastName, email, password, passwordConfirm).collect { values ->
-            _response.value = values
+            _response.postValue(values)
         }
     }
 }
