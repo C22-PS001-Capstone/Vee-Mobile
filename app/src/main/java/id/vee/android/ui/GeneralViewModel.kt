@@ -4,22 +4,22 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import id.vee.android.data.VeeDataSource
 import id.vee.android.data.local.ThemeInterface
-import id.vee.android.data.local.entity.TokenEntity
-import id.vee.android.data.local.entity.UserEntity
 import id.vee.android.data.remote.response.LoginResponse
+import id.vee.android.domain.model.Token
+import id.vee.android.domain.model.User
+import id.vee.android.domain.usecase.VeeUseCase
 import kotlinx.coroutines.launch
 
 open class GeneralViewModel constructor(
-    private val repository: VeeDataSource,
+    private val useCase: VeeUseCase,
     private val pref: ThemeInterface
 ) : ViewModel() {
-    private val _user: MutableLiveData<UserEntity> = MutableLiveData()
-    val userResponse: LiveData<UserEntity> = _user
+    private val _user: MutableLiveData<User> = MutableLiveData()
+    val userResponse: LiveData<User> = _user
 
-    private val _token: MutableLiveData<TokenEntity> = MutableLiveData()
-    val tokenResponse: LiveData<TokenEntity> = _token
+    private val _token: MutableLiveData<Token> = MutableLiveData()
+    val tokenResponse: LiveData<Token> = _token
 
     private val _refresh: MutableLiveData<LoginResponse> = MutableLiveData()
     val refreshResponse: LiveData<LoginResponse> = _refresh
@@ -28,25 +28,26 @@ open class GeneralViewModel constructor(
     val themeResponse: LiveData<Boolean> = _themeResponse
 
     fun getUserData() = viewModelScope.launch {
-        repository.getUser().collect { values ->
-            _user.value = values
+        useCase.getUser().collect { values ->
+            _user.postValue(values)
         }
     }
 
     fun getToken() = viewModelScope.launch {
-        repository.getToken().collect { values ->
-            _token.value = values
+        useCase.getToken().collect { values ->
+            _token.postValue(values)
         }
     }
 
     fun refreshToken(refreshToken: String) = viewModelScope.launch {
-        repository.refreshToken(refreshToken).collect { values ->
-            _refresh.value = values
+        useCase.refreshToken(refreshToken).collect { values ->
+            _refresh.postValue(values)
         }
     }
+
     fun getThemeSettings() = viewModelScope.launch {
-        pref.getThemeSetting().collect {
-            _themeResponse.value = it
+        pref.getThemeSetting().collect { values ->
+            _themeResponse.postValue(values)
         }
     }
 }

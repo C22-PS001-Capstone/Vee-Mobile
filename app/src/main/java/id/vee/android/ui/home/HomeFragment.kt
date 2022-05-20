@@ -42,11 +42,11 @@ class HomeFragment : Fragment() {
                 factory
             }
             viewModel.getUserData()
-            viewModelListener(viewModel, this)
+            viewModelListener(viewModel)
         }
     }
 
-    private fun viewModelListener(viewModel: HomeViewModel, context: Context) {
+    private fun viewModelListener(viewModel: HomeViewModel) {
         viewModel.userResponse.observe(viewLifecycleOwner) { userData ->
             if (userData != null) {
                 changeTitle(userData.firstName)

@@ -17,8 +17,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import id.vee.android.R
 import id.vee.android.data.local.ThemePreferences
-import id.vee.android.data.local.entity.TokenEntity
 import id.vee.android.databinding.FragmentProfileBinding
+import id.vee.android.domain.model.Token
 import id.vee.android.ui.welcome.WelcomeActivity
 import id.vee.android.vm.ViewModelFactory
 
@@ -28,7 +28,7 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding
 
-    private var userToken: TokenEntity? = null
+    private var userToken: Token? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -63,6 +63,7 @@ class ProfileFragment : Fragment() {
                 btnLanguage.setOnClickListener { startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS)) }
                 btnTheme.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_profile_to_navigation_theme))
                 btnLogout.setOnClickListener {
+                    btnLogout.isEnabled = false
                     viewModel.logout(userToken?.refreshToken ?: "")
                 }
             }
@@ -84,6 +85,7 @@ class ProfileFragment : Fragment() {
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                 }
+                binding?.btnLogout?.isEnabled = true
             }
         }
     }

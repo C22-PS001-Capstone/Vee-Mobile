@@ -4,11 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import id.vee.android.data.VeeDataSource
 import id.vee.android.data.remote.response.BasicResponse
+import id.vee.android.domain.repository.VeeDataSource
+import id.vee.android.domain.usecase.VeeUseCase
 import kotlinx.coroutines.launch
 
-class SignupViewModel constructor(private val repository: VeeDataSource) : ViewModel() {
+class SignupViewModel constructor(
+    private val useCase: VeeUseCase
+) : ViewModel() {
     private var _response: MutableLiveData<BasicResponse> = MutableLiveData()
     val response: LiveData<BasicResponse> = _response
     fun signup(
@@ -18,8 +21,8 @@ class SignupViewModel constructor(private val repository: VeeDataSource) : ViewM
         password: String,
         passwordConfirm: String
     ) = viewModelScope.launch {
-        repository.signup(firstName, lastName, email, password, passwordConfirm).collect { values->
-            _response.value = values
+        useCase.signup(firstName, lastName, email, password, passwordConfirm).collect { values ->
+            _response.postValue(values)
         }
     }
 }

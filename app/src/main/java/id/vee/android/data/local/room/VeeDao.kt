@@ -14,7 +14,7 @@ interface VeeDao {
     suspend fun deleteUser()
 
     @Query("SELECT * FROM user LIMIT 1")
-    fun getUser(): Flow<UserEntity>
+    fun getUser(): Flow<UserEntity?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(user: UserEntity)
@@ -26,5 +26,5 @@ interface VeeDao {
     suspend fun deleteToken()
 
     @Query("SELECT * FROM token LIMIT 1")
-    fun getToken(): Flow<TokenEntity>
+    fun getToken(): Flow<TokenEntity?>
 }

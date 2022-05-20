@@ -3,9 +3,10 @@ package id.vee.android.vm
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import id.vee.android.data.VeeDataSource
+import id.vee.android.domain.repository.VeeDataSource
 import id.vee.android.data.local.ThemePreferences
 import id.vee.android.di.Injection
+import id.vee.android.domain.usecase.VeeUseCase
 import id.vee.android.ui.GeneralViewModel
 import id.vee.android.ui.activity.ActivityViewModel
 import id.vee.android.ui.home.HomeViewModel
@@ -16,32 +17,32 @@ import id.vee.android.ui.profile.ThemeViewModel
 import id.vee.android.ui.signup.SignupViewModel
 
 class ViewModelFactory private constructor(
-    private val mVeeRepository: VeeDataSource,
+    private val useCase: VeeUseCase,
     private val pref: ThemePreferences
 ) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T =
         when {
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel(
-                mVeeRepository, pref
+                useCase, pref
             ) as T
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> LoginViewModel(
-                mVeeRepository
+                useCase
             ) as T
             modelClass.isAssignableFrom(NotificationViewModel::class.java) -> NotificationViewModel(
-                mVeeRepository
+                useCase
             ) as T
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> ProfileViewModel(
-                mVeeRepository, pref
+                useCase, pref
             ) as T
             modelClass.isAssignableFrom(SignupViewModel::class.java) -> SignupViewModel(
-                mVeeRepository
+                useCase
             ) as T
             modelClass.isAssignableFrom(ActivityViewModel::class.java) -> ActivityViewModel(
-                mVeeRepository, pref
+                useCase, pref
             ) as T
             modelClass.isAssignableFrom(GeneralViewModel::class.java) -> GeneralViewModel(
-                mVeeRepository, pref
+                useCase, pref
             ) as T
             modelClass.isAssignableFrom(ThemeViewModel::class.java) -> ThemeViewModel(
                 pref
@@ -55,7 +56,7 @@ class ViewModelFactory private constructor(
         private var instance: ViewModelFactory? = null
         fun getInstance(context: Context, pref: ThemePreferences): ViewModelFactory =
             instance ?: synchronized(this) {
-                instance ?: ViewModelFactory(Injection.provideRepository(context), pref)
+                instance ?: ViewModelFactory(Injection.provideVeeRepository(context), pref)
             }.also { instance = it }
     }
 }

@@ -1,28 +1,33 @@
 package id.vee.android.data
 
-import android.util.Log
 import id.vee.android.data.local.LocalDataSource
-import id.vee.android.data.local.entity.TokenEntity
-import id.vee.android.data.local.entity.UserEntity
 import id.vee.android.data.remote.RemoteDataSource
 import id.vee.android.data.remote.response.BasicResponse
 import id.vee.android.data.remote.response.LoginResponse
 import id.vee.android.data.remote.response.UserDetailResponse
-import id.vee.android.utils.AppExecutors
+import id.vee.android.domain.model.Token
+import id.vee.android.domain.model.User
+import id.vee.android.domain.repository.VeeDataSource
+import id.vee.android.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapNotNull
 
 class VeeRepository private constructor(
     private val remoteDataSource: RemoteDataSource,
-    private val localDataSource: LocalDataSource,
-    private val appExecutors: AppExecutors
+    private val localDataSource: LocalDataSource
 ) : VeeDataSource {
-    override fun getUser(): Flow<UserEntity> {
-        return localDataSource.getUser()
+    override fun getUser(): Flow<User?> {
+        return localDataSource.getUser().map {
+            it?.let { user -> DataMapper.mapEntityToDomain(user) }
+        }
     }
 
-    override fun getToken(): Flow<TokenEntity> {
-        return localDataSource.getToken()
+    override fun getToken(): Flow<Token?> {
+        return localDataSource.getToken().mapNotNull {
+            it?.let { DataMapper.mapEntityToDomain(it) }
+        }
     }
 
     override fun signup(
@@ -80,22 +85,22 @@ class VeeRepository private constructor(
         }
     }
 
-    override fun userDetail(data: TokenEntity): Flow<UserDetailResponse> {
+    override fun userDetail(data: Token): Flow<UserDetailResponse> {
         return flow {
             emit(
-                remoteDataSource.userDetail(data)
+                remoteDataSource.userDetail(DataMapper.mapDomainToEntity(data))
             )
         }
     }
 
-    override suspend fun saveToken(data: TokenEntity) {
+    override suspend fun saveToken(data: Token) {
         localDataSource.deleteToken()
-        localDataSource.saveToken(data)
+        localDataSource.saveToken(DataMapper.mapDomainToEntity(data))
     }
 
-    override suspend fun saveUser(user: UserEntity) {
+    override suspend fun saveUser(user: User) {
         localDataSource.deleteUser()
-        localDataSource.saveUser(user)
+        localDataSource.saveUser(DataMapper.mapDomainToEntity(user))
     }
 
     override fun insertActivity(
@@ -129,10 +134,9 @@ class VeeRepository private constructor(
         fun getInstance(
             remoteDataSource: RemoteDataSource,
             localDataSource: LocalDataSource,
-            appExecutors: AppExecutors
         ): VeeRepository =
             instance ?: synchronized(this) {
-                VeeRepository(remoteDataSource, localDataSource, appExecutors).apply {
+                VeeRepository(remoteDataSource, localDataSource).apply {
                     instance = this
                 }
             }

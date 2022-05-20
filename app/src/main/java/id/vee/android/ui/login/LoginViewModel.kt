@@ -5,38 +5,38 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import id.vee.android.data.VeeDataSource
-import id.vee.android.data.local.entity.TokenEntity
-import id.vee.android.data.local.entity.UserEntity
 import id.vee.android.data.remote.response.LoginResponse
 import id.vee.android.data.remote.response.UserDetailResponse
+import id.vee.android.domain.model.Token
+import id.vee.android.domain.model.User
+import id.vee.android.domain.usecase.VeeUseCase
 import kotlinx.coroutines.launch
 
-class LoginViewModel constructor(private val repository: VeeDataSource) : ViewModel() {
+class LoginViewModel constructor(private val useCase: VeeUseCase) : ViewModel() {
     private val _response = MutableLiveData<LoginResponse>()
     val response: LiveData<LoginResponse> = _response
 
     private val _responseDetail = MutableLiveData<UserDetailResponse>()
     val responseDetail: LiveData<UserDetailResponse> = _responseDetail
     fun login(email: String, password: String) = viewModelScope.launch {
-        repository.login(email, password).collect { values ->
-            _response.value = values
+        useCase.login(email, password).collect { values ->
+            _response.postValue(values)
         }
     }
 
-    fun userDetail(data: TokenEntity) = viewModelScope.launch {
-        repository.userDetail(data).collect { values ->
+    fun userDetail(data: Token) = viewModelScope.launch {
+        useCase.userDetail(data).collect { values ->
             Log.d(TAG, "userDetail: $values")
-            _responseDetail.value = values
+            _responseDetail.postValue(values)
         }
     }
 
-    fun saveToken(data: TokenEntity) = viewModelScope.launch {
-        repository.saveToken(data)
+    fun saveToken(data: Token) = viewModelScope.launch {
+        useCase.saveToken(data)
     }
 
-    fun saveUser(user: UserEntity) = viewModelScope.launch {
-        repository.saveUser(user)
+    fun saveUser(user: User) = viewModelScope.launch {
+        useCase.saveUser(user)
     }
 
     companion object {

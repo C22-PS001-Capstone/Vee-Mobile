@@ -21,11 +21,13 @@ import id.vee.android.R
 import id.vee.android.data.local.ThemePreferences
 import id.vee.android.databinding.ActivityLoginBinding
 import id.vee.android.ui.MainActivity
+import id.vee.android.utils.DataMapper
 import id.vee.android.utils.getCurrentUnix
 import id.vee.android.utils.isValidEmail
 import id.vee.android.vm.ViewModelFactory
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
 class LoginActivity : AppCompatActivity() {
     private val binding by lazy(LazyThreadSafetyMode.NONE) {
         ActivityLoginBinding.inflate(layoutInflater)
@@ -70,8 +72,9 @@ class LoginActivity : AppCompatActivity() {
             if (response.status == "success" && response.data != null) {
                 val data = response.data
                 data.expiredAt += getCurrentUnix()
-                viewModel.saveToken(data)
-                viewModel.userDetail(data)
+                val mapperData = DataMapper.mapEntityToDomain(data)
+                viewModel.saveToken(mapperData)
+                viewModel.userDetail(mapperData)
             } else {
                 showLoginFailed()
             }
@@ -79,7 +82,8 @@ class LoginActivity : AppCompatActivity() {
         }
         viewModel.responseDetail.observe(this) { response ->
             if (response.status == "success" && response.data != null && response.data.user != null) {
-                viewModel.saveUser(response.data.user)
+                val mapperData = DataMapper.mapEntityToDomain(response.data.user)
+                viewModel.saveUser(mapperData)
                 val intent = (Intent(this, MainActivity::class.java))
                 intent.flags =
                     Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -112,7 +116,11 @@ class LoginActivity : AppCompatActivity() {
                     account.idToken?.let { loginWithGoogleId(it) }
                 } catch (e: ApiException) {
                     Log.w(TAG, "Google sign in failed: ", e)
-                    Toast.makeText(this, getString(R.string.failed_google_sign_in), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        getString(R.string.failed_google_sign_in),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
