@@ -14,26 +14,19 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import id.vee.android.R
-import id.vee.android.data.local.ThemePreferences
 import id.vee.android.databinding.FragmentAddActivityBinding
 import id.vee.android.domain.model.Token
 import id.vee.android.utils.MyDatePickerDialog
 import id.vee.android.utils.checkEmptyEditText
 import id.vee.android.utils.padStart
-import id.vee.android.vm.ViewModelFactory
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
-
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class AddActivityFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentAddActivityBinding? = null
@@ -43,7 +36,7 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     private var currentLocation: Location? = null
-
+    private val viewModel: ActivityViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,11 +66,6 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
         Log.d(TAG, "onViewCreated: $formattedDate")
 
         context?.apply {
-            val pref = ThemePreferences.getInstance(this.dataStore)
-            val factory: ViewModelFactory = ViewModelFactory.getInstance(this, pref)
-            val viewModel: ActivityViewModel by viewModels {
-                factory
-            }
             viewModelListener(viewModel, this)
             viewModel.getToken()
             binding?.apply {

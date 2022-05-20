@@ -8,7 +8,7 @@ import id.vee.android.data.remote.response.LoginResponse
 import id.vee.android.data.remote.response.UserDetailResponse
 import id.vee.android.utils.bearer
 
-class RemoteDataSource private constructor(
+class RemoteDataSource(
     private val apiService: ApiService
 ) {
     suspend fun signup(

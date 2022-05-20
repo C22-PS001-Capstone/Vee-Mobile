@@ -1,26 +1,22 @@
 package id.vee.android.ui.home
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import id.vee.android.R
-import id.vee.android.data.local.ThemePreferences
 import id.vee.android.databinding.FragmentHomeBinding
-import id.vee.android.vm.ViewModelFactory
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding
+
+    private val viewModel: HomeViewModel by viewModel()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,11 +32,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         showRobo(false)
         context?.apply {
-            val pref = ThemePreferences.getInstance(this.dataStore)
-            val factory: ViewModelFactory = ViewModelFactory.getInstance(this, pref)
-            val viewModel: HomeViewModel by viewModels {
-                factory
-            }
             viewModel.getUserData()
             viewModelListener(viewModel)
         }

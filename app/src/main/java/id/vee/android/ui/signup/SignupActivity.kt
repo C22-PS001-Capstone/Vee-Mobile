@@ -1,31 +1,21 @@
 package id.vee.android.ui.signup
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
 import id.vee.android.R
-import id.vee.android.data.local.ThemePreferences
 import id.vee.android.databinding.ActivitySignupBinding
 import id.vee.android.ui.login.LoginActivity
 import id.vee.android.utils.isValidEmail
-import id.vee.android.vm.ViewModelFactory
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class SignupActivity : AppCompatActivity() {
 
     private val binding by lazy(LazyThreadSafetyMode.NONE) {
         ActivitySignupBinding.inflate(layoutInflater)
     }
-    private val viewModel: SignupViewModel by viewModels {
-        val pref = ThemePreferences.getInstance(this.dataStore)
-        ViewModelFactory.getInstance(this, pref)
-    }
+    private val viewModel: SignupViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
