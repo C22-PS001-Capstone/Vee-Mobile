@@ -1,58 +1,49 @@
 package id.vee.android.ui.profile
 
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import id.vee.android.R
-import id.vee.android.data.local.ThemePreferences
 import id.vee.android.databinding.FragmentProfileDetailBinding
-import id.vee.android.vm.ViewModelFactory
-
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileDetailFragment : Fragment() {
     private var _binding: FragmentProfileDetailBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
+
+    private val viewModel: ProfileViewModel by viewModel()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
 
         _binding = FragmentProfileDetailBinding.inflate(inflater, container, false)
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.title_profile_detail)
+        (activity as AppCompatActivity).supportActionBar?.title =
+            getString(R.string.title_profile_detail)
 
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         context?.apply {
-            val pref = ThemePreferences.getInstance(this.dataStore)
-            val factory: ViewModelFactory = ViewModelFactory.getInstance(this, pref)
-            val viewModel: ProfileViewModel by viewModels {
-                factory
-            }
             viewModel.getUserData()
             viewModelListener(viewModel)
         }
-        binding.btnChangePassword.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_profile_detail_to_navigation_change_password))
+        binding?.btnChangePassword?.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_profile_detail_to_navigation_change_password))
     }
 
     private fun viewModelListener(viewModel: ProfileViewModel) {
         viewModel.userResponse.observe(viewLifecycleOwner) { userData ->
             if (userData != null) {
-                binding.apply {
+                binding?.apply {
                     edtFirstName.setText(userData.firstName)
                     edtLastName.setText(userData.lastName)
                     edtEmail.setText(userData.email)

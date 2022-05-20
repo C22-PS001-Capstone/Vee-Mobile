@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
@@ -18,24 +17,18 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import id.vee.android.BuildConfig
 import id.vee.android.R
-import id.vee.android.data.local.ThemePreferences
 import id.vee.android.databinding.ActivityLoginBinding
 import id.vee.android.ui.MainActivity
 import id.vee.android.utils.DataMapper
 import id.vee.android.utils.getCurrentUnix
 import id.vee.android.utils.isValidEmail
-import id.vee.android.vm.ViewModelFactory
-
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
     private val binding by lazy(LazyThreadSafetyMode.NONE) {
         ActivityLoginBinding.inflate(layoutInflater)
     }
-    private val viewModel: LoginViewModel by viewModels {
-        val pref = ThemePreferences.getInstance(this.dataStore)
-        ViewModelFactory.getInstance(this, pref)
-    }
+    private val viewModel: LoginViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

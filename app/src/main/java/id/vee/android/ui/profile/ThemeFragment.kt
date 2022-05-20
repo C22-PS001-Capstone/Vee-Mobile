@@ -8,21 +8,19 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import id.vee.android.R
 import id.vee.android.data.local.ThemePreferences
 import id.vee.android.databinding.FragmentThemeBinding
-import id.vee.android.vm.ViewModelFactory
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class ThemeFragment : Fragment() {
     private var _binding: FragmentThemeBinding? = null
     private val binding get() = _binding
+
+    private val viewModel: ThemeViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,11 +37,6 @@ class ThemeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         context?.apply {
-            val pref = ThemePreferences.getInstance(this.dataStore)
-            val factory: ViewModelFactory = ViewModelFactory.getInstance(this, pref)
-            val viewModel: ThemeViewModel by viewModels {
-                factory
-            }
             viewModel.getThemeSettings()
             viewModelListener(viewModel, this)
             binding?.apply {
@@ -55,7 +48,7 @@ class ThemeFragment : Fragment() {
     }
 
     private fun viewModelListener(viewModel: ThemeViewModel, context: Context) {
-        binding?.apply{
+        binding?.apply {
             viewModel.themeResponse.observe(viewLifecycleOwner) { isDarkModeActive: Boolean ->
                 if (isDarkModeActive) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)

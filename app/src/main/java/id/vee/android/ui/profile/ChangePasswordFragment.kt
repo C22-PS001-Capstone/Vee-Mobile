@@ -6,50 +6,40 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import id.vee.android.R
-import id.vee.android.data.local.ThemePreferences
 import id.vee.android.databinding.FragmentChangePasswordBinding
-import id.vee.android.vm.ViewModelFactory
-
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChangePasswordFragment : Fragment() {
     private var _binding: FragmentChangePasswordBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
+
+    private val viewModel: ProfileViewModel by viewModel()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
 
         _binding = FragmentChangePasswordBinding.inflate(inflater, container, false)
         (activity as AppCompatActivity).supportActionBar?.title = "Change Password"
 
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         context?.apply {
-            val pref = ThemePreferences.getInstance(this.dataStore)
-
-            val factory: ViewModelFactory = ViewModelFactory.getInstance(this, pref)
-            val viewModel: ProfileViewModel by viewModels {
-                factory
-            }
             viewModel.getUserData()
             viewModelListener(viewModel, this)
         }
     }
 
     private fun viewModelListener(viewModel: ProfileViewModel, context: Context) {
-        binding.apply {
+        binding?.apply {
             btnUpdatePassword.setOnClickListener {
                 val vCurrentPassword = edtCurrentPassword.text.toString()
                 val vNewPassword = edtNewPassword.text.toString()
@@ -64,7 +54,7 @@ class ChangePasswordFragment : Fragment() {
         newPassword: String,
         newPasswordConfirm: String
     ) {
-        binding.apply {
+        binding?.apply {
             if (currentPassword.isEmpty()) {
                 edtCurrentPassword.error = "Current password is required"
                 edtCurrentPassword.requestFocus()
