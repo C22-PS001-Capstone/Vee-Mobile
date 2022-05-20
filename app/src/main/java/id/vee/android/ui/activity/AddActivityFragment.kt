@@ -24,8 +24,8 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import id.vee.android.R
 import id.vee.android.data.local.ThemePreferences
-import id.vee.android.data.local.entity.TokenEntity
 import id.vee.android.databinding.FragmentAddActivityBinding
+import id.vee.android.domain.model.Token
 import id.vee.android.utils.MyDatePickerDialog
 import id.vee.android.utils.checkEmptyEditText
 import id.vee.android.utils.padStart
@@ -39,7 +39,7 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentAddActivityBinding? = null
     private val binding get() = _binding
 
-    private var userToken: TokenEntity? = null
+    private var userToken: Token? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     private var currentLocation: Location? = null

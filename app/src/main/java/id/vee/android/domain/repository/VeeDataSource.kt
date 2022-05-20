@@ -1,15 +1,15 @@
-package id.vee.android.data
+package id.vee.android.domain.repository
 
-import id.vee.android.data.local.entity.TokenEntity
-import id.vee.android.data.local.entity.UserEntity
 import id.vee.android.data.remote.response.BasicResponse
 import id.vee.android.data.remote.response.LoginResponse
 import id.vee.android.data.remote.response.UserDetailResponse
+import id.vee.android.domain.model.Token
+import id.vee.android.domain.model.User
 import kotlinx.coroutines.flow.Flow
 
 interface VeeDataSource {
-    fun getUser(): Flow<UserEntity>
-    fun getToken(): Flow<TokenEntity>
+    fun getUser(): Flow<User>
+    fun getToken(): Flow<Token>
     fun signup(
         firstName: String,
         lastName: String,
@@ -19,11 +19,17 @@ interface VeeDataSource {
     ): Flow<BasicResponse>
 
     fun login(email: String, password: String): Flow<LoginResponse>
-    fun userDetail(data: TokenEntity): Flow<UserDetailResponse>
-    suspend fun saveToken(data: TokenEntity)
-    suspend fun saveUser(user: UserEntity)
+    fun userDetail(data: Token): Flow<UserDetailResponse>
+    suspend fun saveToken(data: Token)
+    suspend fun saveUser(user: User)
     fun insertActivity(
-        token: String, date: String, distance: Int, litre: Int, expense: Int, lat: Double, long: Double
+        token: String,
+        date: String,
+        distance: Int,
+        litre: Int,
+        expense: Int,
+        lat: Double,
+        long: Double
     ): Flow<BasicResponse>
 
     fun refreshToken(refreshToken: String): Flow<LoginResponse>
