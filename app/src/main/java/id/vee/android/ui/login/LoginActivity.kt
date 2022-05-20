@@ -1,6 +1,7 @@
 package id.vee.android.ui.login
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,24 +10,29 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import id.vee.android.BuildConfig
 import id.vee.android.R
+import id.vee.android.data.local.ThemePreferences
 import id.vee.android.databinding.ActivityLoginBinding
 import id.vee.android.ui.MainActivity
 import id.vee.android.utils.getCurrentUnix
 import id.vee.android.utils.isValidEmail
 import id.vee.android.vm.ViewModelFactory
 
-
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class LoginActivity : AppCompatActivity() {
     private val binding by lazy(LazyThreadSafetyMode.NONE) {
         ActivityLoginBinding.inflate(layoutInflater)
     }
     private val viewModel: LoginViewModel by viewModels {
-        ViewModelFactory.getInstance(this)
+        val pref = ThemePreferences.getInstance(this.dataStore)
+        ViewModelFactory.getInstance(this, pref)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

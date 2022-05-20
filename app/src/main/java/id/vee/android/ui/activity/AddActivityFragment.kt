@@ -14,12 +14,16 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import id.vee.android.R
+import id.vee.android.data.local.ThemePreferences
 import id.vee.android.data.local.entity.TokenEntity
 import id.vee.android.databinding.FragmentAddActivityBinding
 import id.vee.android.utils.MyDatePickerDialog
@@ -28,6 +32,8 @@ import id.vee.android.utils.padStart
 import id.vee.android.vm.ViewModelFactory
 import java.text.SimpleDateFormat
 import java.util.*
+
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class AddActivityFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentAddActivityBinding? = null
@@ -45,7 +51,8 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAddActivityBinding.inflate(inflater, container, false)
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.title_add_activity)
+        (activity as AppCompatActivity).supportActionBar?.title =
+            getString(R.string.title_add_activity)
         setupBackButton()
         return binding?.root
     }
@@ -59,11 +66,15 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val currentTime: Date = Calendar.getInstance().time
-        val formattedDate = SimpleDateFormat(getString(R.string.date_format), Locale.getDefault()).format(currentTime)
+        val formattedDate =
+            SimpleDateFormat(getString(R.string.date_format), Locale.getDefault()).format(
+                currentTime
+            )
         Log.d(TAG, "onViewCreated: $formattedDate")
 
         context?.apply {
-            val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
+            val pref = ThemePreferences.getInstance(this.dataStore)
+            val factory: ViewModelFactory = ViewModelFactory.getInstance(this, pref)
             val viewModel: ActivityViewModel by viewModels {
                 factory
             }
@@ -94,8 +105,8 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
         viewModel.tokenResponse.observe(viewLifecycleOwner) { tokenData ->
             userToken = tokenData
         }
-        viewModel.actionResponse.observe(viewLifecycleOwner){ response ->
-            if(response.status == "success"){
+        viewModel.actionResponse.observe(viewLifecycleOwner) { response ->
+            if (response.status == "success") {
                 AlertDialog.Builder(context)
                     .setTitle(getString(R.string.success))
                     .setMessage(getString(R.string.success_add_activity))
@@ -107,7 +118,7 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
             } else {
                 AlertDialog.Builder(context)
                     .setTitle(getString(R.string.error))
-                    .setMessage(getString(R.string.error_add_activity)+ response.message)
+                    .setMessage(getString(R.string.error_add_activity) + response.message)
                     .setPositiveButton(getString(R.string.positive_dialog_btn_text)) { dialog, _ ->
                         dialog.dismiss()
                     }
@@ -123,13 +134,16 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
             lat = latitude
             lon = longitude
         }
-        val initDate = SimpleDateFormat(getString(R.string.date_format), Locale.getDefault()).parse(binding?.edtDate?.text.toString())
+        val initDate = SimpleDateFormat(
+            getString(R.string.date_format),
+            Locale.getDefault()
+        ).parse(binding?.edtDate?.text.toString())
         val formatter = initDate?.let {
             SimpleDateFormat(getString(R.string.date_format_reversed), Locale.getDefault()).format(
                 it
             )
         }
-        binding?.apply{
+        binding?.apply {
             viewModel.insertActivity(
                 userToken?.accessToken ?: "",
                 formatter.toString(),

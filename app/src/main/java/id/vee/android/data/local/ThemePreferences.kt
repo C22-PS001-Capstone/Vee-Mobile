@@ -7,17 +7,17 @@ import androidx.datastore.preferences.core.edit
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class ThemePreferences private constructor(private val dataStore: DataStore<Preferences>) {
+class ThemePreferences private constructor(private val dataStore: DataStore<Preferences>): ThemeInterface {
 
     private val theme = booleanPreferencesKey("theme_setting")
 
-    fun getThemeSetting(): Flow<Boolean> {
+    override fun getThemeSetting(): Flow<Boolean> {
         return dataStore.data.map { preferences ->
             preferences[theme] ?: false
         }
     }
 
-    suspend fun saveThemeSetting(isDarkModeActive: Boolean) {
+    override suspend fun saveThemeSetting(isDarkModeActive: Boolean) {
         dataStore.edit { preferences ->
             preferences[theme] = isDarkModeActive
         }

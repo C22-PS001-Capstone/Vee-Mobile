@@ -2,16 +2,21 @@ package id.vee.android.ui.profile
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import id.vee.android.R
+import id.vee.android.data.local.ThemePreferences
 import id.vee.android.databinding.FragmentChangePasswordBinding
-import id.vee.android.utils.isValidEmail
 import id.vee.android.vm.ViewModelFactory
+
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class ChangePasswordFragment : Fragment() {
     private var _binding: FragmentChangePasswordBinding? = null
@@ -32,7 +37,9 @@ class ChangePasswordFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         context?.apply {
-            val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
+            val pref = ThemePreferences.getInstance(this.dataStore)
+
+            val factory: ViewModelFactory = ViewModelFactory.getInstance(this, pref)
             val viewModel: ProfileViewModel by viewModels {
                 factory
             }
