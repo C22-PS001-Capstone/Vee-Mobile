@@ -14,6 +14,8 @@ class ProfileViewModel constructor(
     pref: ThemeInterface
 ) : GeneralViewModel(useCase, pref) {
     private val _logoutResponse: MutableLiveData<BasicResponse> = MutableLiveData()
+    private val _updateNameResponse: MutableLiveData<BasicResponse> = MutableLiveData()
+    private val _updatePasswordResponse: MutableLiveData<BasicResponse> = MutableLiveData()
     val logoutResponse: LiveData<BasicResponse> = _logoutResponse
 
 
@@ -23,5 +25,23 @@ class ProfileViewModel constructor(
         }
         useCase.deleteUser()
         useCase.deleteToken()
+    }
+
+    fun updateName(token: String, firstName: String, lastName: String) = viewModelScope.launch {
+        useCase.updateName(token, firstName, lastName).collect { values ->
+            _updateNameResponse.postValue(values)
+        }
+    }
+
+    fun updatePassword(
+        token: String,
+        passwordCurrent: String,
+        password: String,
+        passwordConfirm: String
+    ) = viewModelScope.launch {
+        useCase.updatePassword(token, passwordCurrent, password, passwordConfirm)
+            .collect { values ->
+                _updatePasswordResponse.postValue(values)
+            }
     }
 }
