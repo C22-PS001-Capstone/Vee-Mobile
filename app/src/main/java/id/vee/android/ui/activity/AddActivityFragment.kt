@@ -80,9 +80,6 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
                     }
                     insertActivity(viewModel)
                 }
-                viewModel.actionResponse.observe(viewLifecycleOwner) { response ->
-                    Log.d(TAG, "onViewCreated: $response")
-                }
             }
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
             getMyLastLocation(this)

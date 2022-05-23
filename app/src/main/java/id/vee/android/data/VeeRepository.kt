@@ -2,9 +2,12 @@ package id.vee.android.data
 
 import id.vee.android.data.local.LocalDataSource
 import id.vee.android.data.remote.RemoteDataSource
+import id.vee.android.data.remote.network.ApiResponse
+import id.vee.android.data.remote.response.ActivityResponse
 import id.vee.android.data.remote.response.BasicResponse
 import id.vee.android.data.remote.response.LoginResponse
 import id.vee.android.data.remote.response.UserDetailResponse
+import id.vee.android.domain.model.Activity
 import id.vee.android.domain.model.Token
 import id.vee.android.domain.model.User
 import id.vee.android.domain.repository.VeeDataSource
@@ -114,6 +117,25 @@ class VeeRepository(
             )
         )
     }
+
+    override fun getActivity(token: String): Flow<Resource<List<Activity>>> =
+        object : NetworkBoundResource<List<Activity>, List<ActivityResponse>>() {
+            override fun loadFromDB(): Flow<List<Activity>> {
+                return localDataSource.getActivity().map {
+                    DataMapper.mapEntitiesToDomain(it)
+                }
+            }
+
+            override fun shouldFetch(data: List<Activity>?): Boolean = true
+
+            override suspend fun createCall(): Flow<ApiResponse<List<ActivityResponse>>> =
+                remoteDataSource.getActivity(token)
+
+            override suspend fun saveCallResult(data: List<ActivityResponse>) {
+                val activityList = DataMapper.mapResponsesToEntities(data)
+                localDataSource.insertActivity(activityList)
+            }
+        }.asFlow()
 
     override fun userDetail(data: Token): Flow<UserDetailResponse> {
         return flow {

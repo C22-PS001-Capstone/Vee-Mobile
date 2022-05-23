@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import id.vee.android.data.local.entity.ActivityEntity
 import id.vee.android.data.local.entity.TokenEntity
 import id.vee.android.data.local.entity.UserEntity
 import kotlinx.coroutines.flow.Flow
@@ -27,4 +28,10 @@ interface VeeDao {
 
     @Query("SELECT * FROM token LIMIT 1")
     fun getToken(): Flow<TokenEntity?>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertActivity(activityList: List<ActivityEntity>)
+
+    @Query("SELECT * FROM activity_entities")
+    fun getActivity(): Flow<List<ActivityEntity>>
 }
