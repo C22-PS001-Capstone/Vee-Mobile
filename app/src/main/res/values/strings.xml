@@ -15,7 +15,7 @@
     <string name="btn_edit_activity">Edit</string>
     <string name="btn_delete_activity">Delete</string>
     <string name="date_hint" translatable="false">01–05–2022</string>
-    <string name="odometer_hint" translatable="false">123456</string>
+    <string name="odometer_hint" translatable="false">123.456</string>
     <string name="fillups_hint" translatable="false">123</string>
     <string name="price_hint" translatable="false">123.456</string>
     <string name="litre_label" translatable="false">L</string>

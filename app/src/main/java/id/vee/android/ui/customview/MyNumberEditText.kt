@@ -43,11 +43,11 @@ class MyNumberEditText : AppCompatEditText {
                 removeTextChangedListener(this)
 
                 try {
-                    var givenstring: String = s.toString()
-                    if (givenstring.contains(thousandSeparator)) {
-                        givenstring = givenstring.replace(thousandSeparator.toString(), "")
+                    var givenString: String = s.toString()
+                    if (givenString.contains(thousandSeparator)) {
+                        givenString = givenString.replace(thousandSeparator.toString(), "")
                     }
-                    val doubleVal: Double = givenstring.toDouble()
+                    val doubleVal: Double = givenString.toDouble()
 
                     val unusualSymbols = DecimalFormatSymbols()
                     unusualSymbols.decimalSeparator = decimalSeparator
