@@ -67,4 +67,5 @@
     <string name="success_add_activity">Aktivitas berhasil didaftarkan</string>
     <string name="error_add_activity">Aktivitas gagal didaftarkan</string>
     <string name="location_not_found">Lokasi tidak ditemukan. Coba lagi</string>
+    <string name="save_profile_btn">Menyimpan…</string>
 </resources>

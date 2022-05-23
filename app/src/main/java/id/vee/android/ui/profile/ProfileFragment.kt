@@ -22,7 +22,6 @@ class ProfileFragment : Fragment() {
 
     private val viewModel: ProfileViewModel by viewModel()
 
-
     private var userToken: Token? = null
     override fun onCreateView(
         inflater: LayoutInflater,
