@@ -1,11 +1,17 @@
 package id.vee.android.data.remote
 
 import id.vee.android.data.local.entity.TokenEntity
+import id.vee.android.data.remote.network.ApiResponse
 import id.vee.android.data.remote.network.ApiService
+import id.vee.android.data.remote.response.ActivityResponse
 import id.vee.android.data.remote.response.BasicResponse
 import id.vee.android.data.remote.response.LoginResponse
 import id.vee.android.data.remote.response.UserDetailResponse
 import id.vee.android.utils.bearer
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 class RemoteDataSource(
     private val apiService: ApiService
@@ -134,4 +140,13 @@ class RemoteDataSource(
             )
         }
     }
+
+    fun getActivity(token: String): Flow<ApiResponse<List<ActivityResponse>>> = flow {
+        try {
+            val response = apiService.getActivity(token.bearer())
+            emit(ApiResponse.Success(response.data.activities))
+        } catch (e: Exception) {
+            emit(ApiResponse.Error(e.toString()))
+        }
+    }.flowOn(Dispatchers.IO)
 }

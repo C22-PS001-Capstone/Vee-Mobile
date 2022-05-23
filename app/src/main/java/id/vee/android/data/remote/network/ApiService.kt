@@ -1,5 +1,6 @@
 package id.vee.android.data.remote.network
 
+import id.vee.android.data.remote.response.ActivityListResponse
 import id.vee.android.data.remote.response.BasicResponse
 import id.vee.android.data.remote.response.LoginResponse
 import id.vee.android.data.remote.response.UserDetailResponse
@@ -67,4 +68,9 @@ interface ApiService {
     suspend fun logout(
         @Query("refreshToken") refreshToken: String
     ): BasicResponse
+
+    @GET("/activities")
+    suspend fun getActivity(
+        @Header("Authorization") token: String,
+    ): ActivityListResponse
 }

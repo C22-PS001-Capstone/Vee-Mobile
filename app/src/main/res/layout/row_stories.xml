@@ -26,6 +26,7 @@
             android:textColor="@android:color/white" />
 
         <TextView
+            android:id="@+id/story_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -49,6 +50,7 @@
             android:textColor="@android:color/white" />
 
         <TextView
+            android:id="@+id/story_km"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -72,6 +74,7 @@
             android:textColor="@android:color/white" />
 
         <TextView
+            android:id="@+id/story_liter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -94,6 +97,7 @@
             android:textColor="@android:color/white" />
 
         <TextView
+            android:id="@+id/story_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

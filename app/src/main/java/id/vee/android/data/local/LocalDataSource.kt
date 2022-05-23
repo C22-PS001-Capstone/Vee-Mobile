@@ -1,5 +1,6 @@
 package id.vee.android.data.local
 
+import id.vee.android.data.local.entity.ActivityEntity
 import id.vee.android.data.local.entity.TokenEntity
 import id.vee.android.data.local.entity.UserEntity
 import id.vee.android.data.local.room.VeeDao
@@ -28,4 +29,9 @@ class LocalDataSource(
     fun getToken(): Flow<TokenEntity?> {
         return mUserDao.getToken()
     }
+
+    suspend fun insertActivity(activityList: List<ActivityEntity>) =
+        mUserDao.insertActivity(activityList)
+
+    fun getActivity(): Flow<List<ActivityEntity>> = mUserDao.getActivity()
 }
