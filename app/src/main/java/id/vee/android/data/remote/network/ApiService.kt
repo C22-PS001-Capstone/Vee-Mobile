@@ -17,6 +17,23 @@ interface ApiService {
     ): BasicResponse
 
     @FormUrlEncoded
+    @PUT("/users")
+    suspend fun updateName(
+        @Header("Authorization") token: String,
+        @Field("firstname") firstName: String,
+        @Field("lastname") lastName: String
+    ): BasicResponse
+
+    @FormUrlEncoded
+    @PUT("/users")
+    suspend fun updatePassword(
+        @Header("Authorization") token: String,
+        @Field("password") passwordCurrent: String,
+        @Field("password") password: String,
+        @Field("passwordConfirm") passwordConfirm: String
+    ): BasicResponse
+
+    @FormUrlEncoded
     @POST("/authentications")
     suspend fun login(
         @Field("email") email: String,
