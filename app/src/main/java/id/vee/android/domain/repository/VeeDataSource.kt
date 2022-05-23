@@ -36,4 +36,17 @@ interface VeeDataSource {
     suspend fun deleteUser()
     suspend fun deleteToken()
     fun deleteTokenNetwork(token: String): Flow<BasicResponse>
+
+    fun updateName(
+        token: String,
+        firstName: String,
+        lastName: String
+    ): Flow<BasicResponse>
+
+    fun updatePassword(
+        token: String,
+        passwordCurrent: String,
+        password: String,
+        passwordConfirm: String
+    ): Flow<BasicResponse>
 }

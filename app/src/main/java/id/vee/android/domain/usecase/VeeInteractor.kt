@@ -54,4 +54,19 @@ class VeeInteractor(private val repository: VeeDataSource) : VeeUseCase {
     ): Flow<BasicResponse> =
         repository.insertActivity(token, date, distance, litre, expense, lat, long)
 
+    override fun updateName(
+        token: String,
+        firstName: String,
+        lastName: String
+    ): Flow<BasicResponse> =
+        repository.updateName(token, firstName, lastName)
+
+    override fun updatePassword(
+        token: String,
+        passwordCurrent: String,
+        password: String,
+        passwordConfirm: String
+    ): Flow<BasicResponse> =
+        repository.updatePassword(token, passwordCurrent, password, passwordConfirm)
+
 }
