@@ -15,7 +15,9 @@ class ProfileViewModel constructor(
 ) : GeneralViewModel(useCase, pref) {
     private val _logoutResponse: MutableLiveData<BasicResponse> = MutableLiveData()
     private val _updateNameResponse: MutableLiveData<BasicResponse> = MutableLiveData()
+    val updateNameResponse = _updateNameResponse
     private val _updatePasswordResponse: MutableLiveData<BasicResponse> = MutableLiveData()
+    val updatePasswordResponse = _updatePasswordResponse
     val logoutResponse: LiveData<BasicResponse> = _logoutResponse
 
 

@@ -93,5 +93,6 @@
     <string name="date_format_reversed" translatable="false">yyyy-MM-dd</string>
     <string name="location_not_found">Location is not found. Try Again</string>
     <string name="save_profile_btn">Saving…</string>
+    <string name="success_update_profile">Update Profile Successful</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

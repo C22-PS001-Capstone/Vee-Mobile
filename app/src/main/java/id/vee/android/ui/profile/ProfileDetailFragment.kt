@@ -1,16 +1,21 @@
 package id.vee.android.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import id.vee.android.R
 import id.vee.android.databinding.FragmentProfileDetailBinding
 import id.vee.android.domain.model.Token
+import id.vee.android.ui.MainActivity
+import id.vee.android.ui.activity.ActivityViewModel
+import id.vee.android.utils.checkEmptyEditText
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileDetailFragment : Fragment() {
@@ -42,29 +47,28 @@ class ProfileDetailFragment : Fragment() {
             }
             viewModelListener(viewModel)
             binding?.apply {
-                val vCurrentFirstName = edtFirstName.text.toString()
-                val vCurrentLastName = edtLastName.text.toString()
-                updateName(userToken?.refreshToken?: "", vCurrentFirstName, vCurrentLastName)
+                btnSaveProfile.setOnClickListener {
+                    if (!checkEmptyEditText(edtFirstName) && !checkEmptyEditText(edtLastName)
+                    ) {
+                        return@setOnClickListener
+                    }
+                    updateName(viewModel)
+                }
             }
         }
         binding?.btnChangePassword?.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_profile_detail_to_navigation_change_password))
     }
 
-    private fun updateName(token: String, currentFirstName: String, currentLastName: String) {
+    private fun updateName(viewModel: ProfileViewModel) {
         binding?.apply {
-            if (currentFirstName.isEmpty()) {
-                edtFirstName.error = getString(R.string.first_name_is_required_error)
-                edtFirstName.requestFocus()
-                return
-            }
-            if (currentLastName.isEmpty()) {
-                edtLastName.error = getString(R.string.last_name_is_required_error)
-                edtLastName.requestFocus()
-                return
-            }
             btnSaveProfile.isEnabled = false
             btnSaveProfile.text = getString(R.string.save_profile_btn)
-            viewModel.updateName(token, currentFirstName, currentLastName)
+            binding.apply {
+                val currentFirstName = edtFirstName.text.toString()
+                val currentLastName = edtLastName.text.toString()
+                viewModel.updateName(userToken?.accessToken ?: "", currentFirstName, currentLastName)
+            }
+
         }
     }
 
@@ -79,10 +83,34 @@ class ProfileDetailFragment : Fragment() {
                     }
                 }
             }
-            tokenResponse.observe(viewLifecycleOwner) {
-                if (it != null) {
-                    userToken = it
-                    Log.d(TAG, "viewModelListener: $it")
+            tokenResponse.observe(viewLifecycleOwner) { tokenData ->
+                userToken = tokenData
+            }
+            updateNameResponse.observe(viewLifecycleOwner) { response ->
+                if (response.status == "success") {
+                    activity?.let {
+                        AlertDialog.Builder(it)
+                            .setTitle(getString(R.string.success))
+                            .setMessage(getString(R.string.success_update_profile))
+                            .setPositiveButton(getString(R.string.positive_dialog_btn_text)) { _, _ ->
+                                val intent = Intent(activity, MainActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                startActivity(intent)
+                            }
+                            .show()
+                    }
+                } else {
+                    activity?.let {
+                        AlertDialog.Builder(it)
+                            .setTitle(getString(R.string.error))
+                            .setMessage(response.message)
+                            .setPositiveButton(getString(R.string.positive_dialog_btn_text)) { dialog, _ ->
+                                dialog.dismiss()
+                                binding?.btnSaveProfile?.isEnabled = true
+                                binding?.btnSaveProfile?.text  = resources.getText(R.string.save_profile)
+                            }
+                            .show()
+                    }
                 }
             }
         }
