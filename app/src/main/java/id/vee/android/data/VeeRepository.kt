@@ -85,6 +85,36 @@ class VeeRepository(
         }
     }
 
+    override fun updateName(
+        token: String,
+        firstName: String,
+        lastName: String
+    ): Flow<BasicResponse> = flow {
+        emit(
+            remoteDataSource.updateName(
+                token,
+                firstName,
+                lastName
+            )
+        )
+    }
+
+    override fun updatePassword(
+        token: String,
+        passwordCurrent: String,
+        password: String,
+        passwordConfirm: String
+    ): Flow<BasicResponse> = flow {
+        emit(
+            remoteDataSource.updatePassword(
+                token,
+                passwordCurrent,
+                password,
+                passwordConfirm
+            )
+        )
+    }
+
     override fun userDetail(data: Token): Flow<UserDetailResponse> {
         return flow {
             emit(

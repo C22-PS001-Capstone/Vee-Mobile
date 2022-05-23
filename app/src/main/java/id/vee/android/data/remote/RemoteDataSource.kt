@@ -101,4 +101,37 @@ class RemoteDataSource(
             )
         }
     }
+
+    suspend fun updateName(
+        token: String,
+        firstName: String,
+        lastName: String
+    ): BasicResponse {
+        return try {
+            apiService.updateName(token.bearer(), firstName, lastName)
+        } catch (e: Exception) {
+            BasicResponse(
+                status = "error",
+                message = e.message.toString(),
+                data = null
+            )
+        }
+    }
+
+    suspend fun updatePassword(
+        token: String,
+        passwordCurrent: String,
+        password: String,
+        passwordConfirm: String
+    ): BasicResponse {
+        return try {
+            apiService.updatePassword(token.bearer(), passwordCurrent, password, passwordConfirm)
+        } catch (e: Exception) {
+            BasicResponse(
+                status = "error",
+                message = e.message.toString(),
+                data = null
+            )
+        }
+    }
 }
