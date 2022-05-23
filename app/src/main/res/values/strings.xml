@@ -72,8 +72,8 @@
     <string name="update_password">Update Password</string>
     <string name="language_theme">Language</string>
     <string name="authentication_theme">Authentication</string>
-    <string name="signing_up_btn">Signing up...</string>
-    <string name="loading_btn">Loading...</string>
+    <string name="signing_up_btn">Signing up…</string>
+    <string name="loading_btn">Loading…</string>
     <string name="email_is_required_error">Email is required</string>
     <string name="email_is_not_valid_error">Email is not valid</string>
     <string name="password_is_required_error">Password is required</string>
