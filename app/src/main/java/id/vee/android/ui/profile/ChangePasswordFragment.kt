@@ -1,14 +1,16 @@
 package id.vee.android.ui.profile
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import id.vee.android.R
 import id.vee.android.databinding.FragmentChangePasswordBinding
+import id.vee.android.domain.model.Token
+import id.vee.android.utils.checkEmptyEditText
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChangePasswordFragment : Fragment() {
@@ -16,7 +18,7 @@ class ChangePasswordFragment : Fragment() {
     private val binding get() = _binding
 
     private val viewModel: ProfileViewModel by viewModel()
-
+    private var userToken: Token? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,45 +35,73 @@ class ChangePasswordFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         context?.apply {
-            viewModel.getUserData()
-            viewModelListener(viewModel, this)
+            viewModel.apply {
+                getUserData()
+                getToken()
+            }
+            viewModelListener(viewModel)
+            binding?.apply {
+                btnUpdatePassword.setOnClickListener {
+                    if (!checkEmptyEditText(edtCurrentPassword) && !checkEmptyEditText(edtNewPassword) && !checkEmptyEditText(edtNewPasswordConfirm)
+                    ) {
+                        return@setOnClickListener
+                    }
+                    changePassword(viewModel)
+                }
+            }
         }
     }
 
-    private fun viewModelListener(viewModel: ProfileViewModel, context: Context) {
-        binding?.apply {
-            btnUpdatePassword.setOnClickListener {
-                val vCurrentPassword = edtCurrentPassword.text.toString()
-                val vNewPassword = edtNewPassword.text.toString()
-                val vNewPasswordConfirm = edtNewPasswordConfirm.text.toString()
-                changePassword(vCurrentPassword, vNewPassword, vNewPasswordConfirm)
+    private fun viewModelListener(viewModel: ProfileViewModel) {
+        viewModel.apply {
+            tokenResponse.observe(viewLifecycleOwner) { tokenData ->
+                userToken = tokenData
+            }
+            updatePasswordResponse.observe(viewLifecycleOwner) { response ->
+                if (response.status == "success") {
+                    activity?.let {
+                        AlertDialog.Builder(it)
+                            .setTitle(getString(R.string.success))
+                            .setMessage(getString(R.string.success_update_password))
+                            .setPositiveButton(getString(R.string.positive_dialog_btn_text)) { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                            .show()
+                    }
+                } else {
+                    activity?.let {
+                        AlertDialog.Builder(it)
+                            .setTitle(getString(R.string.error))
+                            .setMessage(response.message)
+                            .setPositiveButton(getString(R.string.positive_dialog_btn_text)) { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                            .show()
+                    }
+                }
+                binding?.apply {
+                    btnUpdatePassword.isEnabled = true
+                    btnUpdatePassword.text = resources.getText(R.string.update_password)
+                }
             }
         }
     }
 
     private fun changePassword(
-        currentPassword: String,
-        newPassword: String,
-        newPasswordConfirm: String
+        viewModel: ProfileViewModel
     ) {
         binding?.apply {
-            if (currentPassword.isEmpty()) {
-                edtCurrentPassword.error = "Current password is required"
-                edtCurrentPassword.requestFocus()
-                return
-            }
-            if (newPassword.length < 6) {
-                edtNewPassword.error = "Password must be at least 6 characters"
-                edtNewPassword.requestFocus()
-                return
-            }
-            if (newPassword != newPasswordConfirm) {
-                edtNewPasswordConfirm.error = "Password confirmation is not match"
+            btnUpdatePassword.isEnabled = false
+            btnUpdatePassword.text = getString(R.string.loading_btn)
+            val currentPassword = edtCurrentPassword.text.toString()
+            val password = edtNewPassword.text.toString()
+            val passwordConfirm = edtNewPasswordConfirm.text.toString()
+            if (password != passwordConfirm) {
+                edtNewPasswordConfirm.error = getString(R.string.password_confirm_not_match_error)
                 edtNewPasswordConfirm.requestFocus()
                 return
             }
-            btnUpdatePassword.isEnabled = false
-            btnUpdatePassword.text = getString(R.string.loading_btn)
+            viewModel.updatePassword(userToken?.accessToken ?: "", currentPassword, password, passwordConfirm)
         }
     }
 

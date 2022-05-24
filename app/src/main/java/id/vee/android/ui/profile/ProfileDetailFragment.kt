@@ -1,6 +1,5 @@
 package id.vee.android.ui.profile
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +11,8 @@ import androidx.navigation.Navigation
 import id.vee.android.R
 import id.vee.android.databinding.FragmentProfileDetailBinding
 import id.vee.android.domain.model.Token
-import id.vee.android.ui.MainActivity
 import id.vee.android.utils.DataMapper
 import id.vee.android.utils.checkEmptyEditText
-import id.vee.android.utils.getCurrentUnix
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileDetailFragment : Fragment() {
@@ -63,12 +60,9 @@ class ProfileDetailFragment : Fragment() {
         binding?.apply {
             btnSaveProfile.isEnabled = false
             btnSaveProfile.text = getString(R.string.save_profile_btn)
-            binding.apply {
-                val currentFirstName = edtFirstName.text.toString()
-                val currentLastName = edtLastName.text.toString()
-                viewModel.updateName(userToken?.accessToken ?: "", currentFirstName, currentLastName)
-            }
-
+            val currentFirstName = edtFirstName.text.toString()
+            val currentLastName = edtLastName.text.toString()
+            viewModel.updateName(userToken?.accessToken ?: "", currentFirstName, currentLastName)
         }
     }
 

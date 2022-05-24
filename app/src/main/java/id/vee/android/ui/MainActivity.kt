@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.navigation_home,
                     R.id.navigation_gas_station,
                     R.id.navigation_activity,
-                    R.id.navigation_profile,
+                    R.id.navigation_profile
                 )
             )
             fabAddActivity.setOnClickListener {
