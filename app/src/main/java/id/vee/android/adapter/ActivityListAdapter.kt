@@ -31,7 +31,7 @@ class ActivityListAdapter(private val onItemClick: (Activity) -> Unit) :
         binding.root
     ) {
         fun bind(activity: Activity) {
-            binding.storyDate.text = formatDate(activity.date)
+            binding.storyDate.text = activity.date.formatDate()
             binding.storyKm.text = activity.km.toString()
             binding.storyLiter.text = activity.liter.toString()
             binding.storyPrice.text = activity.price.toString()
