@@ -218,6 +218,13 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    private fun trimDottedString(string: String): String{
+        return if (string.contains(".")){
+            string.replace(".", "")
+        }else
+            string
+    }
+
     companion object {
         private const val TAG = "AddActivityFragment"
     }
