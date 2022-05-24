@@ -33,6 +33,10 @@ open class GeneralViewModel constructor(
         }
     }
 
+    fun saveToken(data: Token) = viewModelScope.launch {
+        useCase.saveToken(data)
+    }
+
     fun getToken() = viewModelScope.launch {
         useCase.getToken().collect { values ->
             _token.postValue(values)

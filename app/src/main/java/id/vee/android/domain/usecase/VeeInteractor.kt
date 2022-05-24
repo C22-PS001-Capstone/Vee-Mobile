@@ -30,7 +30,7 @@ class VeeInteractor(private val repository: VeeDataSource) : VeeUseCase {
         repository.login(email, password)
 
     override fun refreshToken(refreshToken: String): Flow<LoginResponse> =
-        refreshToken(refreshToken)
+        repository.refreshToken(refreshToken)
 
     override suspend fun deleteUser() = repository.deleteUser()
 

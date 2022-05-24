@@ -28,7 +28,7 @@ class VeeRepository(
     }
 
     override fun getToken(): Flow<Token?> {
-        return localDataSource.getToken().mapNotNull {
+        return localDataSource.getToken().map {
             it?.let { DataMapper.mapEntityToDomain(it) }
         }
     }

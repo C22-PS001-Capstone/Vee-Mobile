@@ -23,6 +23,7 @@ import id.vee.android.databinding.FragmentAddActivityBinding
 import id.vee.android.domain.model.Token
 import id.vee.android.utils.MyDatePickerDialog
 import id.vee.android.utils.checkEmptyEditText
+import id.vee.android.utils.checkTokenAvailability
 import id.vee.android.utils.padStart
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -129,15 +130,19 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
             )
         }
         binding?.apply {
-            viewModel.insertActivity(
-                userToken?.accessToken ?: "",
-                formatter.toString(),
-                edtDistance.text.toString().toInt(),
-                edtLitre.text.toString().toInt(),
-                edtExpense.text.toString().toInt(),
-                lat,
-                lon
-            )
+            userToken?.let {
+                checkTokenAvailability(viewModel, it, viewLifecycleOwner){
+                    viewModel.insertActivity(
+                        it.accessToken,
+                        formatter.toString(),
+                        edtDistance.text.toString().toInt(),
+                        edtLitre.text.toString().toInt(),
+                        edtExpense.text.toString().toInt(),
+                        lat,
+                        lon
+                    )
+                }
+            }
         }
     }
 

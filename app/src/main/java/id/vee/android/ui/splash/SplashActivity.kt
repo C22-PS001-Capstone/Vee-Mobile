@@ -23,6 +23,9 @@ class SplashActivity : AppCompatActivity() {
     }
     private val viewModel: GeneralViewModel by viewModel()
 
+    private var isTokenValid: Boolean? = null
+    private var isUserValid: Boolean? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,18 +35,17 @@ class SplashActivity : AppCompatActivity() {
         lifecycleScope.launch(Dispatchers.Default) {
             delay(TIMEOUT)
             viewModel.getUserData()
+            viewModel.getToken()
         }
         viewModel.userResponse.observe(this@SplashActivity) { user ->
             Log.d("Splash", "onCreate: $user")
-            if (user != null) {
-                val intent = Intent(this@SplashActivity, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                val intent = Intent(this@SplashActivity, WelcomeActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
+            isUserValid = user != null
+            checkNavigation()
+        }
+        viewModel.tokenResponse.observe(this@SplashActivity) { token ->
+            Log.d("Splash", "onCreate: token")
+            isTokenValid = token != null
+            checkNavigation()
         }
         viewModel.getThemeSettings()
         viewModel.themeResponse.observe(
@@ -53,6 +55,25 @@ class SplashActivity : AppCompatActivity() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
+    }
+
+    private fun checkNavigation() {
+        Log.d("validation", "checkNavigation: TEstttt")
+        isTokenValid?.let { tokenValid ->
+            Log.d("validation", "checkNavigation: TEstttt")
+            isUserValid?.let { isUserValid ->
+                Log.d("validation", "checkNavigation: TEstttt")
+                if (tokenValid && isUserValid) {
+                    val intent = Intent(this@SplashActivity, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    val intent = Intent(this@SplashActivity, WelcomeActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
             }
         }
     }
