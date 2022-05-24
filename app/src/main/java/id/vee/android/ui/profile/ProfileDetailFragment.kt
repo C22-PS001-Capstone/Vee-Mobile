@@ -1,5 +1,6 @@
 package id.vee.android.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,10 @@ import androidx.navigation.Navigation
 import id.vee.android.R
 import id.vee.android.databinding.FragmentProfileDetailBinding
 import id.vee.android.domain.model.Token
+import id.vee.android.ui.MainActivity
+import id.vee.android.utils.DataMapper
 import id.vee.android.utils.checkEmptyEditText
+import id.vee.android.utils.getCurrentUnix
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileDetailFragment : Fragment() {
@@ -84,15 +88,7 @@ class ProfileDetailFragment : Fragment() {
             }
             updateNameResponse.observe(viewLifecycleOwner) { response ->
                 if (response.status == "success") {
-                    activity?.let {
-                        AlertDialog.Builder(it)
-                            .setTitle(getString(R.string.success))
-                            .setMessage(getString(R.string.success_update_profile))
-                            .setPositiveButton(getString(R.string.positive_dialog_btn_text)) { dialog, _ ->
-                                dialog.dismiss()
-                            }
-                            .show()
-                    }
+                    viewModel.userDetail(userToken!!)
                 } else {
                     activity?.let {
                         AlertDialog.Builder(it)
@@ -109,6 +105,21 @@ class ProfileDetailFragment : Fragment() {
                     btnSaveProfile.text = resources.getText(R.string.save_profile)
                     edtFirstName.isFocusable = false
                     edtLastName.isFocusable = false
+                }
+            }
+            responseDetail.observe(viewLifecycleOwner) { response ->
+                if (response.status == "success" && response.data != null && response.data.user != null) {
+                    val mapperData = DataMapper.mapEntityToDomain(response.data.user)
+                    viewModel.saveUser(mapperData)
+                    activity?.let {
+                        AlertDialog.Builder(it)
+                            .setTitle(getString(R.string.success))
+                            .setMessage(getString(R.string.success_update_profile))
+                            .setPositiveButton(getString(R.string.positive_dialog_btn_text)) { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                            .show()
+                    }
                 }
             }
         }

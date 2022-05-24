@@ -1,12 +1,17 @@
 package id.vee.android.ui.profile
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import id.vee.android.data.local.ThemeInterface
 import id.vee.android.data.remote.response.BasicResponse
+import id.vee.android.data.remote.response.UserDetailResponse
+import id.vee.android.domain.model.Token
+import id.vee.android.domain.model.User
 import id.vee.android.domain.usecase.VeeUseCase
 import id.vee.android.ui.GeneralViewModel
+import id.vee.android.ui.login.LoginViewModel
 import kotlinx.coroutines.launch
 
 class ProfileViewModel constructor(
@@ -19,7 +24,19 @@ class ProfileViewModel constructor(
     private val _updatePasswordResponse: MutableLiveData<BasicResponse> = MutableLiveData()
     val updatePasswordResponse = _updatePasswordResponse
     val logoutResponse: LiveData<BasicResponse> = _logoutResponse
+    private val _responseDetail = MutableLiveData<UserDetailResponse>()
+    val responseDetail: LiveData<UserDetailResponse> = _responseDetail
 
+    fun userDetail(data: Token) = viewModelScope.launch {
+        useCase.userDetail(data).collect { values ->
+            Log.d(TAG, "userDetail: $values")
+            _responseDetail.postValue(values)
+        }
+    }
+
+    fun saveUser(user: User) = viewModelScope.launch {
+        useCase.saveUser(user)
+    }
 
     fun logout(token: String) = viewModelScope.launch {
         useCase.deleteTokenNetwork(token).collect { values ->
@@ -45,5 +62,9 @@ class ProfileViewModel constructor(
             .collect { values ->
                 _updatePasswordResponse.postValue(values)
             }
+    }
+
+    companion object {
+        private const val TAG = "ProfileViewModel"
     }
 }
