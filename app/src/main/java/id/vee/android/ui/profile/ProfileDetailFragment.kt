@@ -104,8 +104,12 @@ class ProfileDetailFragment : Fragment() {
                             .show()
                     }
                 }
-                binding?.btnSaveProfile?.isEnabled = true
-                binding?.btnSaveProfile?.text  = resources.getText(R.string.save_profile)
+                binding?.apply {
+                    btnSaveProfile.isEnabled = true
+                    btnSaveProfile.text = resources.getText(R.string.save_profile)
+                    edtFirstName.isFocusable = false
+                    edtLastName.isFocusable = false
+                }
             }
         }
     }
@@ -113,9 +117,5 @@ class ProfileDetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        private const val TAG = "ProfileDetailFragment"
     }
 }

@@ -124,10 +124,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/grey"
+            android:backgroundTint="@color/blue_600"
             android:text="@string/change"
             android:textAllCaps="false"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
