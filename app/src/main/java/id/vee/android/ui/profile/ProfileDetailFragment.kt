@@ -97,8 +97,6 @@ class ProfileDetailFragment : Fragment() {
                 binding?.apply {
                     btnSaveProfile.isEnabled = true
                     btnSaveProfile.text = resources.getText(R.string.save_profile)
-                    edtFirstName.isFocusable = false
-                    edtLastName.isFocusable = false
                 }
             }
             responseDetail.observe(viewLifecycleOwner) { response ->

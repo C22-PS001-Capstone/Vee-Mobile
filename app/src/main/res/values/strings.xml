@@ -95,5 +95,7 @@
     <string name="save_profile_btn">Saving…</string>
     <string name="success_update_profile">Update Profile Successful</string>
     <string name="success_update_password">Update Profile Successful</string>
+    <string name="current_password_wrong">Current Password is wrong</string>
+    <string name="change_password_title">Change Password</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

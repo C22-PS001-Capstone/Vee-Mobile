@@ -27,7 +27,7 @@ class ChangePasswordFragment : Fragment() {
     ): View? {
 
         _binding = FragmentChangePasswordBinding.inflate(inflater, container, false)
-        (activity as AppCompatActivity).supportActionBar?.title = "Change Password"
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.change_password_title)
 
         return binding?.root
     }
@@ -72,7 +72,7 @@ class ChangePasswordFragment : Fragment() {
                     activity?.let {
                         AlertDialog.Builder(it)
                             .setTitle(getString(R.string.error))
-                            .setMessage(response.message)
+                            .setMessage(getString(R.string.current_password_wrong))
                             .setPositiveButton(getString(R.string.positive_dialog_btn_text)) { dialog, _ ->
                                 dialog.dismiss()
                             }

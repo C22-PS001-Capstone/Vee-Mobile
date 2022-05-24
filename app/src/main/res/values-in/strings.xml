@@ -46,7 +46,7 @@
     <string name="title_theme">Tema</string>
     <string name="title_notification">Notifikasi</string>
     <string name="new_password_label">Password Baru</string>
-    <string name="current_password_label">Password Sekarang</string>
+    <string name="current_password_label">Password Saat Ini</string>
     <string name="confirm_new_password_label">Konfirmasi Password Baru</string>
     <string name="update_password">Ubah Password</string>
     <string name="title_change_password">Ubah Password</string>
@@ -70,4 +70,6 @@
     <string name="save_profile_btn">Menyimpan…</string>
     <string name="success_update_profile">Profil Berhasil Diperbaharui</string>
     <string name="success_update_password">Password Berhasil Diperbaharui</string>
+    <string name="current_password_wrong">Password saat ini salah</string>
+    <string name="change_password_title">Ubah Password</string>
 </resources>

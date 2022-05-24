@@ -26,10 +26,10 @@ interface ApiService {
     ): BasicResponse
 
     @FormUrlEncoded
-    @PUT("/users")
+    @PUT("/passwords")
     suspend fun updatePassword(
         @Header("Authorization") token: String,
-        @Field("password") passwordCurrent: String,
+        @Field("passwordCurrent") passwordCurrent: String,
         @Field("password") password: String,
         @Field("passwordConfirm") passwordConfirm: String
     ): BasicResponse
