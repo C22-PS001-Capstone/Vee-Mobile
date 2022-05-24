@@ -13,6 +13,7 @@ import id.vee.android.adapter.ActivityListAdapter
 import id.vee.android.data.Resource
 import id.vee.android.databinding.FragmentHomeBinding
 import id.vee.android.domain.model.Token
+import id.vee.android.utils.checkTokenAvailability
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -82,11 +83,10 @@ class HomeFragment : Fragment() {
             }
         }
         viewModel.tokenResponse.observe(viewLifecycleOwner) { tokenData ->
-            if (tokenData.expiredAt > System.currentTimeMillis()) {
-                Log.d("Expires", "viewModelListener: Token expires")
-            }
             userToken = tokenData
-            viewModel.getActivity(tokenData.accessToken)
+            checkTokenAvailability(viewModel, tokenData, viewLifecycleOwner) {
+                viewModel.getActivity(tokenData.accessToken)
+            }
         }
     }
 
