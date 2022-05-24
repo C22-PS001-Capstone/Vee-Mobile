@@ -204,8 +204,17 @@
         tools:text="April" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_stories"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         tools:listitem="@layout/row_stories" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/grey_800"
+        android:visibility="gone" />
 </LinearLayout>

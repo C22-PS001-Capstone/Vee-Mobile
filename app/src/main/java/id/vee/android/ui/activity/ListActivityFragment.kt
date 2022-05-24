@@ -13,6 +13,7 @@ import id.vee.android.adapter.ActivityListAdapter
 import id.vee.android.data.Resource
 import id.vee.android.databinding.FragmentListActivityBinding
 import id.vee.android.domain.model.Token
+import id.vee.android.utils.checkTokenAvailability
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListActivityFragment : Fragment() {
@@ -81,7 +82,9 @@ class ListActivityFragment : Fragment() {
         viewModel.tokenResponse.observe(viewLifecycleOwner) { tokenData ->
             userToken = tokenData
             Log.d("Token", "viewModelListener: $tokenData")
-            viewModel.getActivity(tokenData.accessToken)
+            checkTokenAvailability(viewModel, tokenData, viewLifecycleOwner){
+                viewModel.getActivity(tokenData.accessToken)
+            }
         }
     }
 
