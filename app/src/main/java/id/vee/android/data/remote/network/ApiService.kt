@@ -89,7 +89,7 @@ interface ApiService {
         @Field("lat") lat: Double,
         @Field("lon") lon: Double
     ): BasicResponse
-  
+
     @GET("/gasstations")
     suspend fun getGasStations(
         @Field("lat") lat: Double,

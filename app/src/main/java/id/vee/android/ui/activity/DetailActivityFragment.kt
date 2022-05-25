@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +21,7 @@ import id.vee.android.databinding.FragmentAddActivityBinding
 import id.vee.android.domain.model.Token
 import id.vee.android.utils.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -156,7 +156,6 @@ class DetailActivityFragment : Fragment(), View.OnClickListener {
                     }
                     .show()
             } else {
-                Log.d("ERROR", "viewModelListener: ${response.message}")
                 AlertDialog.Builder(context)
                     .setTitle(getString(R.string.error))
                     .setMessage(getString(R.string.error_add_activity) + response.message)
@@ -191,7 +190,7 @@ class DetailActivityFragment : Fragment(), View.OnClickListener {
                     showLocationNotAvailable()
                 }
             }.addOnFailureListener {
-                Log.d("DetailActivityFragment", "getMyLastLocation: $it")
+                Timber.d("getMyLastLocation: $it")
             }
         } else {
             requestPermissionLauncher.launch(
@@ -230,7 +229,6 @@ class DetailActivityFragment : Fragment(), View.OnClickListener {
         }
 
     private fun showDate(year: Int, month: Int, day: Int) {
-        Log.d("Picked Date", "$year-$month-$day")
         val formatedDate = "${day.padStart(2)}-${(month + 1).padStart(2)}-$year"
         // Implement to text view
         binding?.apply {

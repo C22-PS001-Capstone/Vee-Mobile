@@ -3,7 +3,6 @@ package id.vee.android.ui.profile
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,12 +62,10 @@ class ProfileFragment : Fragment() {
         viewModel.tokenResponse.observe(viewLifecycleOwner) {
             if (it != null) {
                 userToken = it
-                Log.d(TAG, "viewModelListener: $it")
             }
         }
         viewModel.logoutResponse.observe(viewLifecycleOwner) {
             if (it != null) {
-                Log.d(TAG, "viewModelListener: $it")
                 if (it.status == "success") {
                     val intent = Intent(activity, WelcomeActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

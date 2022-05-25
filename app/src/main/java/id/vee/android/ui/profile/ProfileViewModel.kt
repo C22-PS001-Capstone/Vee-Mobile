@@ -1,6 +1,5 @@
 package id.vee.android.ui.profile
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -28,7 +27,6 @@ class ProfileViewModel constructor(
 
     fun userDetail(data: Token) = viewModelScope.launch {
         useCase.userDetail(data).collect { values ->
-            Log.d(TAG, "userDetail: $values")
             _responseDetail.postValue(values)
         }
     }

@@ -1,7 +1,6 @@
 package id.vee.android.ui.activity
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -85,7 +84,7 @@ class ListActivityFragment : Fragment() {
                             }
                         }
                         is Resource.Error -> {
-                            Log.d("ERROR", "viewModelListener: ${responses.message}")
+                            // Show error
                         }
                     }
                 }
@@ -97,7 +96,6 @@ class ListActivityFragment : Fragment() {
     private fun viewModelListener() {
         viewModel.tokenResponse.observe(viewLifecycleOwner) { tokenData ->
             userToken = tokenData
-            Log.d("Token", "viewModelListener: $tokenData")
             checkTokenAvailability(viewModel, tokenData, viewLifecycleOwner) {
                 viewModel.getActivity(tokenData.accessToken)
             }

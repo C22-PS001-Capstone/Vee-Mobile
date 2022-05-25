@@ -1,6 +1,5 @@
 package id.vee.android.ui.login
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,7 +25,6 @@ class LoginViewModel constructor(private val useCase: VeeUseCase) : ViewModel() 
 
     fun userDetail(data: Token) = viewModelScope.launch {
         useCase.userDetail(data).collect { values ->
-            Log.d(TAG, "userDetail: $values")
             _responseDetail.postValue(values)
         }
     }

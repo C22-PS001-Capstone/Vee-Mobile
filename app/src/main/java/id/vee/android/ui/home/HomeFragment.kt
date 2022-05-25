@@ -1,7 +1,6 @@
 package id.vee.android.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +16,7 @@ import id.vee.android.utils.CustomLinearLayoutManager
 import id.vee.android.utils.checkTokenAvailability
 import id.vee.android.utils.formatDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 
 class HomeFragment : Fragment() {
@@ -57,7 +57,7 @@ class HomeFragment : Fragment() {
                 }
                 viewModel.activityResponse.observe(viewLifecycleOwner) { responses ->
                     if (responses != null) {
-                        Log.d("ListActivity", "viewModelListener: ${responses.data}")
+                        Timber.d("viewModelListener: ${responses.data}")
                         when (responses) {
                             is Resource.Loading -> {
                                 rvStories.visibility = View.GONE
@@ -82,7 +82,7 @@ class HomeFragment : Fragment() {
                             is Resource.Error -> {
                                 rvStories.visibility = View.GONE
                                 progressBar.visibility = View.GONE
-                                Log.d("ERROR", "viewModelListener: ${responses.message}")
+                                // Show error
                             }
                         }
                     }

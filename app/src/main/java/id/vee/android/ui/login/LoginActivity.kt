@@ -19,6 +19,7 @@ import id.vee.android.utils.DataMapper
 import id.vee.android.utils.getCurrentUnix
 import id.vee.android.utils.isValidEmail
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class LoginActivity : AppCompatActivity() {
     private val binding by lazy(LazyThreadSafetyMode.NONE) {
@@ -67,7 +68,6 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 showLoginFailed()
             }
-            Log.d(TAG, "onCreate: $response")
         }
         viewModel.responseDetail.observe(this) { response ->
             if (response.status == "success" && response.data != null && response.data.user != null) {
@@ -115,7 +115,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
     private fun loginWithGoogleId(idToken: String) {
-        Log.d(TAG, "loginWithGoogleId: $idToken")
+        Timber.d("loginWithGoogleId: $idToken")
     }
 
     private fun loginUser(email: String, password: String) {
