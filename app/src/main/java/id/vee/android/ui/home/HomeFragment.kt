@@ -15,6 +15,7 @@ import id.vee.android.databinding.FragmentHomeBinding
 import id.vee.android.domain.model.Token
 import id.vee.android.utils.CustomLinearLayoutManager
 import id.vee.android.utils.checkTokenAvailability
+import id.vee.android.utils.formatDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -65,9 +66,18 @@ class HomeFragment : Fragment() {
                             is Resource.Success -> {
                                 rvStories.visibility = View.VISIBLE
                                 progressBar.visibility = View.GONE
-                                storyAdapter.submitList(null)
-                                storyAdapter.clearMonth()
-                                storyAdapter.submitList(responses.data)
+                                if (responses.data?.isNotEmpty() == true) {
+                                    val activities = responses.data
+                                    activities.mapIndexed { index, activity ->
+                                        activity.isMonthShow =
+                                            (index > 0 && responses.data[index].date.formatDate("MMM") != responses.data[index - 1].date.formatDate(
+                                                "MMM"
+                                            )) || index == 0
+                                    }
+                                    storyAdapter.submitList(responses.data)
+                                } else {
+                                    storyAdapter.submitList(null)
+                                }
                             }
                             is Resource.Error -> {
                                 rvStories.visibility = View.GONE

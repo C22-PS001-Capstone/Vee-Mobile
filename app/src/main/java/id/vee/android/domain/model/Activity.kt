@@ -12,5 +12,6 @@ data class Activity(
     val liter: Int,
     val lon: Double,
     val id: String,
-    val lat: Double
+    val lat: Double,
+    var isMonthShow: Boolean = false
 ) : Parcelable

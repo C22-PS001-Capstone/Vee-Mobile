@@ -15,6 +15,7 @@ import id.vee.android.data.Resource
 import id.vee.android.databinding.FragmentListActivityBinding
 import id.vee.android.domain.model.Token
 import id.vee.android.utils.checkTokenAvailability
+import id.vee.android.utils.formatDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListActivityFragment : Fragment() {
@@ -64,15 +65,24 @@ class ListActivityFragment : Fragment() {
             viewModel.activityResponse.observe(viewLifecycleOwner) { responses ->
                 if (responses != null) {
                     storyAdapter.submitList(null)
-                    storyAdapter.clearMonth()
-                    Log.d("ListActivity", "viewModelListener: ${responses.data}")
                     when (responses) {
                         is Resource.Loading -> {
                             progressBar.visibility = View.VISIBLE
                         }
                         is Resource.Success -> {
                             progressBar.visibility = View.GONE
-                            storyAdapter.submitList(responses.data)
+                            if (responses.data?.isNotEmpty() == true) {
+                                val activities = responses.data
+                                activities.mapIndexed { index, activity ->
+                                    activity.isMonthShow =
+                                        (index > 0 && responses.data[index].date.formatDate("MMM") != responses.data[index - 1].date.formatDate(
+                                            "MMM"
+                                        )) || index == 0
+                                }
+                                storyAdapter.submitList(responses.data)
+                            } else {
+                                storyAdapter.submitList(null)
+                            }
                         }
                         is Resource.Error -> {
                             Log.d("ERROR", "viewModelListener: ${responses.message}")
