@@ -71,6 +71,23 @@ class VeeInteractor(private val repository: VeeDataSource) : VeeUseCase {
     ): Flow<BasicResponse> =
         repository.updatePassword(token, passwordCurrent, password, passwordConfirm)
 
-    override fun getActivity(token: String): Flow<Resource<List<Activity>>> = repository.getActivity(token)
+    override fun getActivity(token: String): Flow<Resource<List<Activity>>> =
+        repository.getActivity(token)
+
+    override fun deleteActivity(accessToken: String, id: String): Flow<BasicResponse> =
+        repository.deleteActivity(accessToken, id)
+
+    override fun updateActivity(
+        id: String,
+        token: String,
+        date: String,
+        distance: Int,
+        litre: Int,
+        expense: Int,
+        lat: Double,
+        long: Double
+    ): Flow<BasicResponse> =
+        repository.updateActivity(id, token, date, distance, litre, expense, lat, long)
+
 
 }

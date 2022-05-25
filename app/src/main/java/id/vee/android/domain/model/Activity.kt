@@ -1,5 +1,9 @@
 package id.vee.android.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Activity(
     val date: String,
     val owner: String,
@@ -9,4 +13,4 @@ data class Activity(
     val lon: Double,
     val id: String,
     val lat: Double
-)
+) : Parcelable

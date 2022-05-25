@@ -54,13 +54,20 @@ fun checkTokenAvailability(
     }
 }
 
-fun String.formatDate(): String? {
+fun String.formatDate(format: String = "dd MMM yyyy"): String? {
     val dateTime = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).apply {
         timeZone = TimeZone.getTimeZone("UTC")
     }.parse(this)
     return dateTime?.let {
-        SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).apply {
+        SimpleDateFormat(format, Locale.getDefault()).apply {
             timeZone = TimeZone.getDefault()
         }.format(it)
     }
+}
+
+fun String.trimDottedString(): String {
+    return if (this.contains(".")) {
+        this.replace(".", "")
+    } else
+        this
 }

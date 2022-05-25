@@ -89,6 +89,7 @@
     <string name="email_or_password_wrong">Email or Password is wrong</string>
     <string name="date_format" translatable="false">dd-MM-yyyy</string>
     <string name="success_add_activity">Activity has been added</string>
+    <string name="success_action_activity">The action activity successfully</string>
     <string name="error_add_activity">Activity has not been added</string>
     <string name="date_format_reversed" translatable="false">yyyy-MM-dd</string>
     <string name="location_not_found">Location is not found. Try Again</string>
@@ -97,5 +98,7 @@
     <string name="success_update_password">Update Profile Successful</string>
     <string name="current_password_wrong">Current Password is wrong</string>
     <string name="change_password_title">Change Password</string>
+    <string name="update_location">Update to current location</string>
+    <string name="address_label">Address</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

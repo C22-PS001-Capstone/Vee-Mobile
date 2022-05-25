@@ -1,6 +1,5 @@
 package id.vee.android.ui.activity
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -41,6 +40,27 @@ class ActivityViewModel constructor(
     fun getActivity(token: String) = viewModelScope.launch {
         useCase.getActivity(token).collect {
             _activityResponse.postValue(it)
+        }
+    }
+
+    fun deleteActivity(accessToken: String, id: String) = viewModelScope.launch {
+        useCase.deleteActivity(accessToken, id).collect {
+            _actionResponse.postValue(it)
+        }
+    }
+
+    fun updateActivity(
+        id: String,
+        token: String,
+        date: String,
+        distance: Int,
+        litre: Int,
+        expense: Int,
+        lat: Double,
+        long: Double
+    ) = viewModelScope.launch {
+        useCase.updateActivity(id, token, date, distance, litre, expense, lat, long).collect {
+            _actionResponse.postValue(it)
         }
     }
 }

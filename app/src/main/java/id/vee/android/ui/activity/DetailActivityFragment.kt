@@ -17,31 +17,32 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import id.vee.android.R
 import id.vee.android.databinding.FragmentAddActivityBinding
 import id.vee.android.domain.model.Token
-import id.vee.android.utils.MyDatePickerDialog
-import id.vee.android.utils.checkEmptyEditText
-import id.vee.android.utils.checkTokenAvailability
-import id.vee.android.utils.padStart
+import id.vee.android.utils.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AddActivityFragment : Fragment(), View.OnClickListener {
+class DetailActivityFragment : Fragment(), View.OnClickListener {
+
     private var _binding: FragmentAddActivityBinding? = null
     private val binding get() = _binding
 
     private var userToken: Token? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    private var currentLocation: Location? = null
     private val viewModel: ActivityViewModel by viewModel()
 
+    private var currentLocation: Location? = null
+
+    private val activityData by lazy {
+        DetailActivityFragmentArgs.fromBundle(arguments as Bundle).activity
+    }
+
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAddActivityBinding.inflate(inflater, container, false)
@@ -59,31 +60,79 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val currentTime: Date = Calendar.getInstance().time
-        val formattedDate =
-            SimpleDateFormat(getString(R.string.date_format), Locale.getDefault()).format(
-                currentTime
-            )
-        Log.d(TAG, "onViewCreated: $formattedDate")
 
         context?.apply {
             viewModelListener(this)
             viewModel.getToken()
             binding?.apply {
-                btnDpd.setOnClickListener(this@AddActivityFragment)
-                edtDate.setText(formattedDate)
-                btnAddActivity.setOnClickListener {
+                btnAddActivity.visibility = View.GONE
+                btnEditActivity.visibility = View.VISIBLE
+                btnDeleteActivity.visibility = View.VISIBLE
+                btnDpd.setOnClickListener(this@DetailActivityFragment)
+                btnEditActivity.setOnClickListener {
                     if (!checkEmptyEditText(edtDate) && !checkEmptyEditText(edtDistance) && !checkEmptyEditText(
                             edtLitre
                         ) && !checkEmptyEditText(edtExpense)
                     ) {
                         return@setOnClickListener
                     }
-                    insertActivity(viewModel)
+                    updateActivity()
+                }
+                btnDeleteActivity.setOnClickListener {
+                    deleteActivity()
+                }
+                edtDistance.setText(activityData.km.toString())
+                edtDate.setText(activityData.date.formatDate("dd-MM-yyyy"))
+                edtLitre.setText(activityData.liter.toString())
+                edtExpense.setText(activityData.price.toString())
+            }
+        }
+    }
+
+    private fun deleteActivity() {
+        userToken?.let {
+            checkTokenAvailability(viewModel, it, viewLifecycleOwner) {
+                viewModel.deleteActivity(it.accessToken, activityData.id)
+            }
+        }
+    }
+
+    private fun updateActivity() {
+        var lat = activityData.lat
+        var lon = activityData.lon
+        binding?.apply {
+            if (chkUpdateLocation.isChecked) {
+                currentLocation?.apply {
+                    lat = latitude
+                    lon = longitude
                 }
             }
-            fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-            getMyLastLocation(this)
+            val initDate = SimpleDateFormat(
+                getString(R.string.date_format),
+                Locale.getDefault()
+            ).parse(edtDate.text.toString())
+            val formatter = initDate?.let {
+                SimpleDateFormat(
+                    getString(R.string.date_format_reversed),
+                    Locale.getDefault()
+                ).format(
+                    it
+                )
+            }
+            userToken?.let {
+                checkTokenAvailability(viewModel, it, viewLifecycleOwner) {
+                    viewModel.updateActivity(
+                        activityData.id,
+                        it.accessToken,
+                        formatter.toString(),
+                        edtDistance.text.toString().trimDottedString().toInt(),
+                        edtLitre.text.toString().trimDottedString().toInt(),
+                        edtExpense.text.toString().trimDottedString().toInt(),
+                        lat,
+                        lon
+                    )
+                }
+            }
         }
     }
 
@@ -98,10 +147,11 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
                     .setMessage(getString(R.string.success_add_activity))
                     .setPositiveButton(getString(R.string.positive_dialog_btn_text)) { dialog, _ ->
                         dialog.dismiss()
-                        Navigation.createNavigateOnClickListener(R.id.action_navigation_add_activity_to_navigation_home)
+                        Navigation.createNavigateOnClickListener(R.id.action_detailActivityFragment_to_navigation_activity)
                     }
                     .show()
             } else {
+                Log.d("ERROR", "viewModelListener: ${response.message}")
                 AlertDialog.Builder(context)
                     .setTitle(getString(R.string.error))
                     .setMessage(getString(R.string.error_add_activity) + response.message)
@@ -112,58 +162,6 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
             }
         }
     }
-
-    private fun insertActivity(viewModel: ActivityViewModel) {
-        var lat = 0.0
-        var lon = 0.0
-        currentLocation?.apply {
-            lat = latitude
-            lon = longitude
-        }
-        val initDate = SimpleDateFormat(
-            getString(R.string.date_format),
-            Locale.getDefault()
-        ).parse(binding?.edtDate?.text.toString())
-        val formatter = initDate?.let {
-            SimpleDateFormat(getString(R.string.date_format_reversed), Locale.getDefault()).format(
-                it
-            )
-        }
-        binding?.apply {
-            userToken?.let {
-                checkTokenAvailability(viewModel, it, viewLifecycleOwner) {
-                    viewModel.insertActivity(
-                        it.accessToken,
-                        formatter.toString(),
-                        edtDistance.text.toString().toInt(),
-                        edtLitre.text.toString().toInt(),
-                        edtExpense.text.toString().toInt(),
-                        lat,
-                        lon
-                    )
-                }
-            }
-        }
-    }
-
-    private val requestPermissionLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions()
-        ) { permissions ->
-            when {
-                permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> {
-                    // Precise location access granted.
-                    context?.let { getMyLastLocation(it) }
-                }
-                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> {
-                    // Only approximate location access granted.
-                    context?.let { getMyLastLocation(it) }
-                }
-                else -> {
-                    // No location access granted.
-                }
-            }
-        }
 
     private fun checkPermission(permission: String, context: Context): Boolean {
         return ContextCompat.checkSelfPermission(
@@ -187,7 +185,7 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
                     ).show()
                 }
             }.addOnFailureListener {
-                Log.d(TAG, "getMyLastLocation: $it")
+                Log.d("DetailActivityFragment", "getMyLastLocation: $it")
             }
         } else {
             requestPermissionLauncher.launch(
@@ -199,20 +197,24 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    override fun onClick(v: View) {
-        when (v.id) {
-            R.id.btn_dpd -> {
-                activity?.takeIf { !it.isFinishing && !it.isDestroyed }?.let { activity ->
-                    MyDatePickerDialog(activity, ::showDate).show()
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            when {
+                permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> {
+                    // Precise location access granted.
+                    context?.let { getMyLastLocation(it) }
+                }
+                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> {
+                    // Only approximate location access granted.
+                    context?.let { getMyLastLocation(it) }
+                }
+                else -> {
+                    // No location access granted.
                 }
             }
         }
-    }
 
     private fun showDate(year: Int, month: Int, day: Int) {
         Log.d("Picked Date", "$year-$month-$day")
@@ -223,14 +225,13 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun trimDottedString(string: String): String {
-        return if (string.contains(".")) {
-            string.replace(".", "")
-        } else
-            string
-    }
-
-    companion object {
-        private const val TAG = "AddActivityFragment"
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.btn_dpd -> {
+                activity?.takeIf { !it.isFinishing && !it.isDestroyed }?.let { activity ->
+                    MyDatePickerDialog(activity, ::showDate).show()
+                }
+            }
+        }
     }
 }

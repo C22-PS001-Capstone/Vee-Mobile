@@ -15,7 +15,6 @@ import id.vee.android.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.mapNotNull
 
 class VeeRepository(
     private val remoteDataSource: RemoteDataSource,
@@ -136,6 +135,27 @@ class VeeRepository(
                 localDataSource.insertActivity(activityList)
             }
         }.asFlow()
+
+    override fun deleteActivity(accessToken: String, id: String): Flow<BasicResponse> {
+        return flow {
+            emit(remoteDataSource.deleteActivity(accessToken, id))
+        }
+    }
+
+    override fun updateActivity(
+        id: String,
+        token: String,
+        date: String,
+        distance: Int,
+        litre: Int,
+        expense: Int,
+        lat: Double,
+        long: Double
+    ): Flow<BasicResponse> {
+        return flow {
+            emit(remoteDataSource.updateActivity(id, token, date, distance, litre, expense, lat, long))
+        }
+    }
 
     override fun userDetail(data: Token): Flow<UserDetailResponse> {
         return flow {

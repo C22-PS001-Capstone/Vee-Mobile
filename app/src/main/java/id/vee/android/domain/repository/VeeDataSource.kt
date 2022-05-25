@@ -53,4 +53,15 @@ interface VeeDataSource {
     ): Flow<BasicResponse>
 
     fun getActivity(token: String): Flow<Resource<List<Activity>>>
+    fun deleteActivity(accessToken: String, id: String): Flow<BasicResponse>
+    fun updateActivity(
+        id: String,
+        token: String,
+        date: String,
+        distance: Int,
+        litre: Int,
+        expense: Int,
+        lat: Double,
+        long: Double
+    ): Flow<BasicResponse>
 }

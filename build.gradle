@@ -3,6 +3,10 @@ buildscript {
         google()
         mavenCentral()
     }
+    dependencies {
+        // Navigation Args
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.4.2"
+    }
 }
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.

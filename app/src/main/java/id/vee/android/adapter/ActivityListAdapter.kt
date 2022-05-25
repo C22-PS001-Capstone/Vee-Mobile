@@ -1,7 +1,10 @@
 package id.vee.android.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.location.Geocoder
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -10,6 +13,7 @@ import id.vee.android.adapter.ActivityListAdapter.MyViewHolder
 import id.vee.android.databinding.RowStoriesBinding
 import id.vee.android.domain.model.Activity
 import id.vee.android.utils.formatDate
+import java.util.*
 
 class ActivityListAdapter(private val onItemClick: (Activity) -> Unit) :
     ListAdapter<Activity, MyViewHolder>(DIFF_CALLBACK) {
@@ -21,7 +25,7 @@ class ActivityListAdapter(private val onItemClick: (Activity) -> Unit) :
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val activity = getItem(position)
-        holder.bind(activity)
+        holder.bind(activity, holder.itemView.context)
         holder.itemView.setOnClickListener {
             onItemClick(activity)
         }
@@ -30,11 +34,18 @@ class ActivityListAdapter(private val onItemClick: (Activity) -> Unit) :
     class MyViewHolder(private val binding: RowStoriesBinding) : RecyclerView.ViewHolder(
         binding.root
     ) {
-        fun bind(activity: Activity) {
+        fun bind(activity: Activity, context: Context) {
+            val geocoder = Geocoder(context, Locale.getDefault())
+            val addresses = geocoder.getFromLocation(activity.lat, activity.lon, 1)
             binding.storyDate.text = activity.date.formatDate()
             binding.storyKm.text = activity.km.toString()
             binding.storyLiter.text = activity.liter.toString()
             binding.storyPrice.text = activity.price.toString()
+            if (activity.lat != 0.0 && activity.lon != 0.0) {
+                binding.storyAddress.text = addresses[0].getAddressLine(0)
+            } else {
+                binding.storyAddress.visibility = View.GONE
+            }
         }
     }
 

@@ -10,7 +10,11 @@
         android:id="@+id/navigation_home"
         android:name="id.vee.android.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_detailActivityFragment"
+            app:destination="@id/detailActivityFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_gas_station"
         android:name="id.vee.android.ui.gas.NearestGasStationFragment"
@@ -29,7 +33,11 @@
         android:id="@+id/navigation_activity"
         android:name="id.vee.android.ui.activity.ListActivityFragment"
         android:label="@string/title_activity"
-        tools:layout="@layout/fragment_list_activity" />
+        tools:layout="@layout/fragment_list_activity" >
+        <action
+            android:id="@+id/action_navigation_activity_to_detailActivityFragment"
+            app:destination="@id/detailActivityFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_profile"
         android:name="id.vee.android.ui.profile.ProfileFragment"
@@ -66,4 +74,15 @@
         android:name="id.vee.android.ui.profile.ChangePasswordFragment"
         android:label="@string/title_change_password"
         tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/detailActivityFragment"
+        android:name="id.vee.android.ui.activity.DetailActivityFragment"
+        android:label="DetailActivityFragment" >
+        <argument
+            android:name="activity"
+            app:argType="id.vee.android.domain.model.Activity" />
+        <action
+            android:id="@+id/action_detailActivityFragment_to_navigation_activity"
+            app:destination="@id/navigation_activity" />
+    </fragment>
 </navigation>

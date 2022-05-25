@@ -73,4 +73,23 @@ interface ApiService {
     suspend fun getActivity(
         @Header("Authorization") token: String,
     ): ActivityListResponse
+
+    @DELETE("/activities/{id}")
+    fun deleteActivity(
+        @Path("id") id: String,
+        @Header("Authorization") bearer: String
+    ): BasicResponse
+
+    @FormUrlEncoded
+    @PUT("/activities/{id}")
+    suspend fun updateActivity(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+        @Field("date") date: String,
+        @Field("km") distance: Int,
+        @Field("liter") litre: Int,
+        @Field("price") expense: Int,
+        @Field("lat") lat: Double,
+        @Field("lon") lon: Double
+    ): BasicResponse
 }
