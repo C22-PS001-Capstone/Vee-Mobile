@@ -69,6 +69,10 @@ class DetailActivityFragment : Fragment(), View.OnClickListener {
                 btnEditActivity.visibility = View.VISIBLE
                 btnDeleteActivity.visibility = View.VISIBLE
                 chkUpdateLocation.visibility = View.VISIBLE
+                btnContinue.setOnClickListener {
+                    available.visibility = View.VISIBLE
+                    notAvailable.visibility = View.GONE
+                }
                 btnDpd.setOnClickListener(this@DetailActivityFragment)
                 btnEditActivity.setOnClickListener {
                     if (!checkEmptyEditText(edtDate) && !checkEmptyEditText(edtDistance) && !checkEmptyEditText(
@@ -184,6 +188,7 @@ class DetailActivityFragment : Fragment(), View.OnClickListener {
                         getString(R.string.location_not_found),
                         Toast.LENGTH_SHORT
                     ).show()
+                    showLocationNotAvailable()
                 }
             }.addOnFailureListener {
                 Log.d("DetailActivityFragment", "getMyLastLocation: $it")
@@ -195,6 +200,13 @@ class DetailActivityFragment : Fragment(), View.OnClickListener {
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 )
             )
+        }
+    }
+
+    private fun showLocationNotAvailable() {
+        binding?.apply {
+            notAvailable.visibility = View.VISIBLE
+            available.visibility = View.GONE
         }
     }
 

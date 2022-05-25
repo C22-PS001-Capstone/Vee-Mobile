@@ -11,221 +11,275 @@
     android:orientation="vertical"
     tools:context=".ui.activity.AddActivityFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/nunito_bold"
-        android:text="@string/date_label"
-        android:textColor="?android:textColorPrimary" />
-
     <LinearLayout
+        android:id="@+id/not_available"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
 
-        <EditText
-            android:id="@+id/edt_date"
-            style="@style/ThemeEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/input_background"
-            android:fontFamily="@font/nunito_medium"
-            android:hint="@string/date_hint"
-            android:importantForAutofill="no"
-            android:inputType="date"
-            android:paddingStart="8dp"
-            android:paddingTop="12dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="12dp" />
-
-        <ImageButton
-            android:id="@+id/btn_dpd"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
-            android:backgroundTint="@color/primary"
-            android:contentDescription="@string/date_time_picker"
-            android:gravity="center"
-            app:srcCompat="@drawable/ic_baseline_date_range_24"
-            app:tint="@color/black" />
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/nunito_bold"
-        android:text="@string/odometer_label"
-        android:textColor="?android:textColorPrimary" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
-
-        <id.vee.android.ui.customview.MyNumberEditText
-            android:id="@+id/edt_distance"
-            style="@style/ThemeEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/input_background"
-            android:fontFamily="@font/nunito_medium"
-            android:hint="@string/odometer_hint"
-            android:importantForAutofill="no"
-            android:inputType="number"
-            android:paddingStart="8dp"
-            android:paddingTop="12dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="12dp" />
-
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_gravity="center"
-            android:fontFamily="@font/nunito_extra_bold"
-            android:gravity="center"
-            android:text="@string/km_label"
-            android:textAlignment="center"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="24sp" />
-    </LinearLayout>
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/nunito_bold"
-        android:text="@string/fill_ups_litre_label"
-        android:textColor="?android:textColorPrimary" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
-
-        <id.vee.android.ui.customview.MyNumberEditText
-            android:id="@+id/edt_litre"
-            style="@style/ThemeEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/input_background"
-            android:fontFamily="@font/nunito_medium"
-            android:hint="@string/fillups_hint"
-            android:importantForAutofill="no"
-            android:inputType="number"
-            android:paddingStart="8dp"
-            android:paddingTop="12dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="12dp" />
+            android:layout_marginBottom="10sp"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="map-pin.json"
+            app:lottie_loop="true" />
 
         <TextView
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/nunito_extra_bold"
-            android:gravity="center"
-            android:text="@string/litre_label"
-            android:textAlignment="center"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="24sp" />
-    </LinearLayout>
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/nunito_bold"
-        android:text="@string/total_price_label"
-        android:textColor="?android:textColorPrimary" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_extra_bold"
-            android:gravity="center"
-            android:text="@string/rp_label"
-            android:textAlignment="center"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="24sp" />
-
-        <id.vee.android.ui.customview.MyNumberEditText
-            android:id="@+id/edt_expense"
-            style="@style/ThemeEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/input_background"
-            android:fontFamily="@font/nunito_medium"
-            android:hint="@string/price_hint"
-            android:importantForAutofill="no"
-            android:inputType="number"
-            android:paddingStart="8dp"
-            android:paddingTop="12dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="12dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/edit_location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:id="@+id/chk_update_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_bold"
-            android:text="@string/update_location"
-            android:visibility="gone" />
+            android:layout_marginBottom="8sp"
+            android:fontFamily="@font/nunito_extra_bold"
+            android:text="@string/location_not_available"
+            android:textAlignment="center"
+            android:textColor="?colorOnPrimary"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/nunito_semi_bold"
+            android:text="@string/location_not_available_detail"
+            android:textAlignment="center"
+            android:textColor="?colorOnPrimary"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btn_continue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_extra_bold"
+            android:text="@string/btn_continue"
+            android:textAllCaps="false" />
+
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_add_activity"
+    <LinearLayout
+        android:id="@+id/available"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/primary"
-        android:fontFamily="@font/nunito_extra_bold"
-        android:text="@string/btn_add_activity"
-        android:textAllCaps="false"
-        android:textColor="@color/black" />
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_edit_activity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/secondary"
-        android:fontFamily="@font/nunito_extra_bold"
-        android:text="@string/btn_edit_activity"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:visibility="gone" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/date_label"
+            android:textColor="?android:textColorPrimary" />
 
-    <Button
-        android:id="@+id/btn_delete_activity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/red"
-        android:fontFamily="@font/nunito_extra_bold"
-        android:text="@string/btn_delete_activity"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:visibility="gone" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edt_date"
+                style="@style/ThemeEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/input_background"
+                android:fontFamily="@font/nunito_medium"
+                android:hint="@string/date_hint"
+                android:importantForAutofill="no"
+                android:inputType="date"
+                android:paddingStart="8dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="12dp" />
+
+            <ImageButton
+                android:id="@+id/btn_dpd"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/primary"
+                android:contentDescription="@string/date_time_picker"
+                android:gravity="center"
+                app:srcCompat="@drawable/ic_baseline_date_range_24"
+                app:tint="@color/black" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/odometer_label"
+            android:textColor="?android:textColorPrimary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <id.vee.android.ui.customview.MyNumberEditText
+                android:id="@+id/edt_distance"
+                style="@style/ThemeEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/input_background"
+                android:fontFamily="@font/nunito_medium"
+                android:hint="@string/odometer_hint"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:paddingStart="8dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="12dp" />
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/nunito_extra_bold"
+                android:gravity="center"
+                android:text="@string/km_label"
+                android:textAlignment="center"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/fill_ups_litre_label"
+            android:textColor="?android:textColorPrimary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <id.vee.android.ui.customview.MyNumberEditText
+                android:id="@+id/edt_litre"
+                style="@style/ThemeEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/input_background"
+                android:fontFamily="@font/nunito_medium"
+                android:hint="@string/fillups_hint"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:paddingStart="8dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="12dp" />
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/nunito_extra_bold"
+                android:gravity="center"
+                android:text="@string/litre_label"
+                android:textAlignment="center"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/total_price_label"
+            android:textColor="?android:textColorPrimary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_extra_bold"
+                android:gravity="center"
+                android:text="@string/rp_label"
+                android:textAlignment="center"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="24sp" />
+
+            <id.vee.android.ui.customview.MyNumberEditText
+                android:id="@+id/edt_expense"
+                style="@style/ThemeEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/input_background"
+                android:fontFamily="@font/nunito_medium"
+                android:hint="@string/price_hint"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:paddingStart="8dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/edit_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/chk_update_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/update_location"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_add_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/primary"
+            android:fontFamily="@font/nunito_extra_bold"
+            android:text="@string/btn_add_activity"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/btn_edit_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/secondary"
+            android:fontFamily="@font/nunito_extra_bold"
+            android:text="@string/btn_edit_activity"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btn_delete_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/red"
+            android:fontFamily="@font/nunito_extra_bold"
+            android:text="@string/btn_delete_activity"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:visibility="gone" />
+    </LinearLayout>
 </LinearLayout>

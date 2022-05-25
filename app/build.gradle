@@ -104,4 +104,7 @@ dependencies {
     // Koin Test features
     testImplementation "io.insert-koin:koin-test:3.2.0"
 
+    // Lottie
+    implementation "com.airbnb.android:lottie:3.4.1"
+
 }

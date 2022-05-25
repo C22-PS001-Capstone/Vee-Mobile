@@ -78,6 +78,10 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
                     }
                     insertActivity(viewModel)
                 }
+                btnContinue.setOnClickListener {
+                    available.visibility = View.VISIBLE
+                    notAvailable.visibility = View.GONE
+                }
             }
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
             getMyLastLocation(this)
@@ -182,6 +186,7 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
                         getString(R.string.location_not_found),
                         Toast.LENGTH_SHORT
                     ).show()
+                    showLocationNotAvailable()
                 }
             }.addOnFailureListener {
                 Log.d(TAG, "getMyLastLocation: $it")
@@ -193,6 +198,13 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 )
             )
+        }
+    }
+
+    private fun showLocationNotAvailable() {
+        binding?.apply {
+            notAvailable.visibility = View.VISIBLE
+            available.visibility = View.GONE
         }
     }
 
