@@ -75,4 +75,6 @@
     <string name="update_location">Ubah ke lokasi saat ini</string>
     <string name="success_action_activity">Action berhasil</string>
     <string name="address_label">Alamat</string>
+    <string name="month_label">Bulan</string>
+    <string name="title_detail_activity">Detail Aktifitas</string>
 </resources>

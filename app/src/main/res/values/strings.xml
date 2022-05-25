@@ -100,5 +100,7 @@
     <string name="change_password_title">Change Password</string>
     <string name="update_location">Update to current location</string>
     <string name="address_label">Address</string>
+    <string name="month_label">Month</string>
+    <string name="title_detail_activity">Detail Activity</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

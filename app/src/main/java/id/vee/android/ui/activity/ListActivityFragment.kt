@@ -63,6 +63,8 @@ class ListActivityFragment : Fragment() {
             }
             viewModel.activityResponse.observe(viewLifecycleOwner) { responses ->
                 if (responses != null) {
+                    storyAdapter.submitList(null)
+                    storyAdapter.clearMonth()
                     Log.d("ListActivity", "viewModelListener: ${responses.data}")
                     when (responses) {
                         is Resource.Loading -> {

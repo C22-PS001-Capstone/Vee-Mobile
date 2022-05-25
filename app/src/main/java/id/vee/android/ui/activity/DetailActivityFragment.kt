@@ -47,7 +47,7 @@ class DetailActivityFragment : Fragment(), View.OnClickListener {
     ): View? {
         _binding = FragmentAddActivityBinding.inflate(inflater, container, false)
         (activity as AppCompatActivity).supportActionBar?.title =
-            getString(R.string.title_add_activity)
+            getString(R.string.title_detail_activity)
         setupBackButton()
         return binding?.root
     }
@@ -68,6 +68,7 @@ class DetailActivityFragment : Fragment(), View.OnClickListener {
                 btnAddActivity.visibility = View.GONE
                 btnEditActivity.visibility = View.VISIBLE
                 btnDeleteActivity.visibility = View.VISIBLE
+                chkUpdateLocation.visibility = View.VISIBLE
                 btnDpd.setOnClickListener(this@DetailActivityFragment)
                 btnEditActivity.setOnClickListener {
                     if (!checkEmptyEditText(edtDate) && !checkEmptyEditText(edtDistance) && !checkEmptyEditText(
@@ -218,7 +219,7 @@ class DetailActivityFragment : Fragment(), View.OnClickListener {
 
     private fun showDate(year: Int, month: Int, day: Int) {
         Log.d("Picked Date", "$year-$month-$day")
-        val formatedDate = "${day.padStart(2)}-${month.padStart(2)}-$year"
+        val formatedDate = "${day.padStart(2)}-${(month + 1).padStart(2)}-$year"
         // Implement to text view
         binding?.apply {
             edtDate.setText(formatedDate)

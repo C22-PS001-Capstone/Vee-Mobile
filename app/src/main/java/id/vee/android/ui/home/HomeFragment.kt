@@ -65,6 +65,8 @@ class HomeFragment : Fragment() {
                             is Resource.Success -> {
                                 rvStories.visibility = View.VISIBLE
                                 progressBar.visibility = View.GONE
+                                storyAdapter.submitList(null)
+                                storyAdapter.clearMonth()
                                 storyAdapter.submitList(responses.data)
                             }
                             is Resource.Error -> {

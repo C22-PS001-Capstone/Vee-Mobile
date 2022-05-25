@@ -213,7 +213,7 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
 
     private fun showDate(year: Int, month: Int, day: Int) {
         Log.d("Picked Date", "$year-$month-$day")
-        val formatedDate = "${day.padStart(2)}-${month.padStart(2)}-$year"
+        val formatedDate = "${day.padStart(2)}-${(month + 1).padStart(2)}-$year"
         // Implement to text view
         binding?.apply {
             edtDate.setText(formatedDate)
