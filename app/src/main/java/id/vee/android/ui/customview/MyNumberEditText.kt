@@ -67,8 +67,8 @@ class MyNumberEditText : AppCompatEditText {
 
                 addTextChangedListener(this)
             }
-            })
-            textAlignment = View.TEXT_ALIGNMENT_VIEW_START
-            paddingRight
-        }
+        })
+        textAlignment = View.TEXT_ALIGNMENT_VIEW_START
+        paddingRight
     }
+}

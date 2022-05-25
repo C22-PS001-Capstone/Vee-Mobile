@@ -89,7 +89,7 @@ class VeeInteractor(private val repository: VeeDataSource) : VeeUseCase {
         long: Double
     ): Flow<BasicResponse> =
         repository.updateActivity(id, token, date, distance, litre, expense, lat, long)
-        
+
     override fun getGasStations(
         lat: Double,
         lon: Double

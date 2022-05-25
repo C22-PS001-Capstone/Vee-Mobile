@@ -162,7 +162,18 @@ class VeeRepository(
         long: Double
     ): Flow<BasicResponse> {
         return flow {
-            emit(remoteDataSource.updateActivity(id, token, date, distance, litre, expense, lat, long))
+            emit(
+                remoteDataSource.updateActivity(
+                    id,
+                    token,
+                    date,
+                    distance,
+                    litre,
+                    expense,
+                    lat,
+                    long
+                )
+            )
         }
     }
 

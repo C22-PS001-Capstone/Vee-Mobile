@@ -27,7 +27,8 @@ class ChangePasswordFragment : Fragment() {
     ): View? {
 
         _binding = FragmentChangePasswordBinding.inflate(inflater, container, false)
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.change_password_title)
+        (activity as AppCompatActivity).supportActionBar?.title =
+            getString(R.string.change_password_title)
 
         return binding?.root
     }
@@ -42,7 +43,9 @@ class ChangePasswordFragment : Fragment() {
             viewModelListener(viewModel)
             binding?.apply {
                 btnUpdatePassword.setOnClickListener {
-                    if (!checkEmptyEditText(edtCurrentPassword) && !checkEmptyEditText(edtNewPassword) && !checkEmptyEditText(edtNewPasswordConfirm)
+                    if (!checkEmptyEditText(edtCurrentPassword) && !checkEmptyEditText(
+                            edtNewPassword
+                        ) && !checkEmptyEditText(edtNewPasswordConfirm)
                     ) {
                         return@setOnClickListener
                     }
@@ -101,7 +104,12 @@ class ChangePasswordFragment : Fragment() {
                 edtNewPasswordConfirm.requestFocus()
                 return
             }
-            viewModel.updatePassword(userToken?.accessToken ?: "", currentPassword, password, passwordConfirm)
+            viewModel.updatePassword(
+                userToken?.accessToken ?: "",
+                currentPassword,
+                password,
+                passwordConfirm
+            )
         }
     }
 

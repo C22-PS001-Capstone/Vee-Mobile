@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import id.vee.android.R
-import id.vee.android.databinding.FragmentAddActivityBinding
 import id.vee.android.databinding.FragmentNearestGasStationBinding
 import id.vee.android.ui.activity.ActivityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -49,6 +48,7 @@ class NearestGasStationFragment : Fragment() {
 
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

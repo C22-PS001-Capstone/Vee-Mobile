@@ -3,7 +3,6 @@ package id.vee.android.ui.splash
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
@@ -38,12 +37,10 @@ class SplashActivity : AppCompatActivity() {
             viewModel.getToken()
         }
         viewModel.userResponse.observe(this@SplashActivity) { user ->
-            Log.d("Splash", "onCreate: $user")
             isUserValid = user != null
             checkNavigation()
         }
         viewModel.tokenResponse.observe(this@SplashActivity) { token ->
-            Log.d("Splash", "onCreate: token")
             isTokenValid = token != null
             checkNavigation()
         }
@@ -60,11 +57,8 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun checkNavigation() {
-        Log.d("validation", "checkNavigation: TEstttt")
         isTokenValid?.let { tokenValid ->
-            Log.d("validation", "checkNavigation: TEstttt")
             isUserValid?.let { isUserValid ->
-                Log.d("validation", "checkNavigation: TEstttt")
                 if (tokenValid && isUserValid) {
                     val intent = Intent(this@SplashActivity, MainActivity::class.java)
                     startActivity(intent)

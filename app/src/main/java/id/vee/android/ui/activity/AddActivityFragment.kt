@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +22,7 @@ import id.vee.android.databinding.FragmentAddActivityBinding
 import id.vee.android.domain.model.Token
 import id.vee.android.utils.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -61,7 +61,6 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
             SimpleDateFormat(getString(R.string.date_format), Locale.getDefault()).format(
                 currentTime
             )
-        Log.d(TAG, "onViewCreated: $formattedDate")
 
         context?.apply {
             viewModelListener(this)
@@ -189,7 +188,7 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
                     showLocationNotAvailable()
                 }
             }.addOnFailureListener {
-                Log.d(TAG, "getMyLastLocation: $it")
+                Timber.e(it)
             }
         } else {
             requestPermissionLauncher.launch(
@@ -224,7 +223,6 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
     }
 
     private fun showDate(year: Int, month: Int, day: Int) {
-        Log.d("Picked Date", "$year-$month-$day")
         val formatedDate = "${day.padStart(2)}-${(month + 1).padStart(2)}-$year"
         // Implement to text view
         binding?.apply {
