@@ -2,6 +2,7 @@ package id.vee.android.domain.usecase
 
 import id.vee.android.data.Resource
 import id.vee.android.data.remote.response.BasicResponse
+import id.vee.android.data.remote.response.GasStationsResponse
 import id.vee.android.data.remote.response.LoginResponse
 import id.vee.android.data.remote.response.UserDetailResponse
 import id.vee.android.domain.model.Activity
@@ -70,6 +71,12 @@ class VeeInteractor(private val repository: VeeDataSource) : VeeUseCase {
         passwordConfirm: String
     ): Flow<BasicResponse> =
         repository.updatePassword(token, passwordCurrent, password, passwordConfirm)
+
+    override fun getGasStations(
+        lat: Double,
+        lon: Double
+    ): Flow<GasStationsResponse> =
+        repository.getGasStations(lat, lon)
 
     override fun getActivity(token: String): Flow<Resource<List<Activity>>> = repository.getActivity(token)
 

@@ -2,6 +2,7 @@ package id.vee.android.domain.repository
 
 import id.vee.android.data.Resource
 import id.vee.android.data.remote.response.BasicResponse
+import id.vee.android.data.remote.response.GasStationsResponse
 import id.vee.android.data.remote.response.LoginResponse
 import id.vee.android.data.remote.response.UserDetailResponse
 import id.vee.android.domain.model.Activity
@@ -51,6 +52,11 @@ interface VeeDataSource {
         password: String,
         passwordConfirm: String
     ): Flow<BasicResponse>
+
+    fun getGasStations(
+        lat: Double,
+        lon: Double
+    ): Flow<GasStationsResponse>
 
     fun getActivity(token: String): Flow<Resource<List<Activity>>>
 }

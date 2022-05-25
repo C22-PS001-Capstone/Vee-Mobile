@@ -1,9 +1,6 @@
 package id.vee.android.data.remote.network
 
-import id.vee.android.data.remote.response.ActivityListResponse
-import id.vee.android.data.remote.response.BasicResponse
-import id.vee.android.data.remote.response.LoginResponse
-import id.vee.android.data.remote.response.UserDetailResponse
+import id.vee.android.data.remote.response.*
 import retrofit2.http.*
 
 interface ApiService {
@@ -73,4 +70,10 @@ interface ApiService {
     suspend fun getActivity(
         @Header("Authorization") token: String,
     ): ActivityListResponse
+
+    @GET("/gasstations")
+    suspend fun getGasStations(
+        @Field("lat") lat: Double,
+        @Field("lon") lon: Double
+    ): GasStationsResponse
 }

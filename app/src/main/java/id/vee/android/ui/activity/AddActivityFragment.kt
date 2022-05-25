@@ -130,7 +130,7 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
             )
         }
         binding?.apply {
-            userToken?.let {
+            userToken?.let { it ->
                 checkTokenAvailability(viewModel, it, viewLifecycleOwner){
                     viewModel.insertActivity(
                         it.accessToken,

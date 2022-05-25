@@ -2,10 +2,10 @@ package id.vee.android.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class ActivityListResponse(
+data class GasStationsResponse(
 
     @field:SerializedName("data")
-    val data: ActivityListDataResponse,
+    val data: GasStationsDataResponse? = null,
 
     @field:SerializedName("message")
     val message: String,
@@ -14,8 +14,8 @@ data class ActivityListResponse(
     val status: String
 )
 
-data class ActivityListDataResponse(
+data class GasStationsDataResponse(
 
     @field:SerializedName("activities")
-    val activities: List<ActivityResponse>
+    val activities: List<GasStationsResponse>
 )
