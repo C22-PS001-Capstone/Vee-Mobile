@@ -140,7 +140,6 @@ class VeeRepository(
                 remoteDataSource.getActivity(token)
 
             override suspend fun saveCallResult(data: List<ActivityResponse>) {
-                localDataSource.deleteActivities()
                 val activityList = DataMapper.mapResponsesToEntities(data)
                 localDataSource.insertActivity(activityList)
             }
@@ -149,6 +148,7 @@ class VeeRepository(
     override fun deleteActivity(accessToken: String, id: String): Flow<BasicResponse> {
         return flow {
             emit(remoteDataSource.deleteActivity(accessToken, id))
+            localDataSource.deleteActivity(id)
         }
     }
 
