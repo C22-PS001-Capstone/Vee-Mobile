@@ -162,7 +162,7 @@ class RemoteDataSource(
         }
     }.flowOn(Dispatchers.IO)
 
-    fun deleteActivity(accessToken: String, id: String): BasicResponse =
+    suspend fun deleteActivity(accessToken: String, id: String): BasicResponse =
         try {
             apiService.deleteActivity(id, accessToken.bearer())
         } catch (e: Exception) {

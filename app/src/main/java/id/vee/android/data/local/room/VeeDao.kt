@@ -34,4 +34,7 @@ interface VeeDao {
 
     @Query("SELECT * FROM activity_entities")
     fun getActivity(): Flow<List<ActivityEntity>>
+
+    @Query("DELETE FROM activity_entities WHERE 1")
+    suspend fun deleteActivities()
 }

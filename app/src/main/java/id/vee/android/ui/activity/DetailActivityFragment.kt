@@ -14,7 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import id.vee.android.R
 import id.vee.android.databinding.FragmentAddActivityBinding
@@ -149,10 +149,10 @@ class DetailActivityFragment : Fragment(), View.OnClickListener {
             if (response.status == "success") {
                 AlertDialog.Builder(context)
                     .setTitle(getString(R.string.success))
-                    .setMessage(getString(R.string.success_add_activity))
+                    .setMessage(getString(R.string.success_action_activity))
                     .setPositiveButton(getString(R.string.positive_dialog_btn_text)) { dialog, _ ->
                         dialog.dismiss()
-                        Navigation.createNavigateOnClickListener(R.id.action_detailActivityFragment_to_navigation_activity)
+                        findNavController().popBackStack()
                     }
                     .show()
             } else {

@@ -140,6 +140,7 @@ class VeeRepository(
                 remoteDataSource.getActivity(token)
 
             override suspend fun saveCallResult(data: List<ActivityResponse>) {
+                localDataSource.deleteActivities()
                 val activityList = DataMapper.mapResponsesToEntities(data)
                 localDataSource.insertActivity(activityList)
             }

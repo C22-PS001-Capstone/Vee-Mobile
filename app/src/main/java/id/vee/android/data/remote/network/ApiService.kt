@@ -72,7 +72,7 @@ interface ApiService {
     ): ActivityListResponse
 
     @DELETE("/activities/{id}")
-    fun deleteActivity(
+    suspend fun deleteActivity(
         @Path("id") id: String,
         @Header("Authorization") bearer: String
     ): BasicResponse

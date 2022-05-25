@@ -14,7 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import id.vee.android.R
@@ -98,7 +98,7 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
                     .setMessage(getString(R.string.success_add_activity))
                     .setPositiveButton(getString(R.string.positive_dialog_btn_text)) { dialog, _ ->
                         dialog.dismiss()
-                        Navigation.createNavigateOnClickListener(R.id.action_navigation_add_activity_to_navigation_home)
+                        findNavController().popBackStack()
                     }
                     .show()
             } else {

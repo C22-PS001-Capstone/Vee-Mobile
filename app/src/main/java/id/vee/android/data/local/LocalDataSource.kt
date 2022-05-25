@@ -34,4 +34,5 @@ class LocalDataSource(
         mUserDao.insertActivity(activityList)
 
     fun getActivity(): Flow<List<ActivityEntity>> = mUserDao.getActivity()
+    suspend fun deleteActivities() = mUserDao.deleteActivities()
 }
