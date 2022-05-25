@@ -161,4 +161,36 @@ class RemoteDataSource(
             emit(ApiResponse.Error(e.toString()))
         }
     }.flowOn(Dispatchers.IO)
+
+    fun deleteActivity(accessToken: String, id: String): BasicResponse =
+        try {
+            apiService.deleteActivity(id, accessToken.bearer())
+        } catch (e: Exception) {
+            BasicResponse(
+                status = "error",
+                message = e.message.toString(),
+                data = null
+            )
+        }
+
+    suspend fun updateActivity(
+        id: String,
+        token: String,
+        date: String,
+        distance: Int,
+        litre: Int,
+        expense: Int,
+        lat: Double,
+        long: Double
+    ): BasicResponse =
+        try {
+            apiService.updateActivity(token.bearer(), id, date, distance, litre, expense, lat, long)
+        } catch (e: Exception) {
+            BasicResponse(
+                status = "error",
+                message = e.message.toString(),
+                data = null
+            )
+        }
+
 }

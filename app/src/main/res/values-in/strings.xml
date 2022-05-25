@@ -72,4 +72,6 @@
     <string name="success_update_password">Password Berhasil Diperbaharui</string>
     <string name="current_password_wrong">Password saat ini salah</string>
     <string name="change_password_title">Ubah Password</string>
+    <string name="update_location">Ubah ke lokasi saat ini</string>
+    <string name="success_action_activity">Action berhasil</string>
 </resources>

@@ -9,7 +9,7 @@ import id.vee.android.data.local.entity.UserEntity
 @Database(
     entities = [UserEntity::class, TokenEntity::class, ActivityEntity::class],
     version = 1,
-    exportSchema = true
+    exportSchema = false
 )
 abstract class VeeDatabase : RoomDatabase() {
     abstract fun veeDao(): VeeDao

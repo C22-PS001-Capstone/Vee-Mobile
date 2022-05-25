@@ -42,4 +42,25 @@ class ActivityViewModel constructor(
             _activityResponse.postValue(it)
         }
     }
+
+    fun deleteActivity(accessToken: String, id: String) = viewModelScope.launch {
+        useCase.deleteActivity(accessToken, id).collect {
+            _actionResponse.postValue(it)
+        }
+    }
+
+    fun updateActivity(
+        id: String,
+        token: String,
+        date: String,
+        distance: Int,
+        litre: Int,
+        expense: Int,
+        lat: Double,
+        long: Double
+    ) = viewModelScope.launch {
+        useCase.updateActivity(id, token, date, distance, litre, expense, lat, long).collect {
+            _actionResponse.postValue(it)
+        }
+    }
 }

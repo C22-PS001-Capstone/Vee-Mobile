@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.vee.android.R
 import id.vee.android.adapter.ActivityListAdapter
@@ -40,7 +41,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         showRobo(false)
         val storyAdapter = ActivityListAdapter {
-            // Implement next time
+            val direction = HomeFragmentDirections.actionNavigationHomeToDetailActivityFragment(it)
+            findNavController().navigate(direction)
         }
         context?.apply {
             viewModel.getUserData()
@@ -84,7 +86,7 @@ class HomeFragment : Fragment() {
         }
         viewModel.tokenResponse.observe(viewLifecycleOwner) { tokenData ->
             userToken = tokenData
-            if(tokenData != null){
+            if (tokenData != null) {
                 checkTokenAvailability(viewModel, tokenData, viewLifecycleOwner) {
                     viewModel.getActivity(tokenData.accessToken)
                 }
