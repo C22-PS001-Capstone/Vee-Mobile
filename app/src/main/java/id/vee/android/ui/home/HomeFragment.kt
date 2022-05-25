@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import id.vee.android.R
 import id.vee.android.adapter.ActivityListAdapter
 import id.vee.android.data.Resource
 import id.vee.android.databinding.FragmentHomeBinding
 import id.vee.android.domain.model.Token
+import id.vee.android.utils.CustomLinearLayoutManager
 import id.vee.android.utils.checkTokenAvailability
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -50,7 +50,7 @@ class HomeFragment : Fragment() {
             viewModelListener(viewModel)
             binding?.apply {
                 rvStories.apply {
-                    layoutManager = LinearLayoutManager(context)
+                    layoutManager = CustomLinearLayoutManager(context).setScrollEnabled(false)
                     setHasFixedSize(true)
                     adapter = storyAdapter
                 }
@@ -69,6 +69,7 @@ class HomeFragment : Fragment() {
                             }
                             is Resource.Error -> {
                                 rvStories.visibility = View.GONE
+                                progressBar.visibility = View.GONE
                                 Log.d("ERROR", "viewModelListener: ${responses.message}")
                             }
                         }
