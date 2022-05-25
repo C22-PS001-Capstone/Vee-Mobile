@@ -21,10 +21,7 @@ import com.google.android.gms.location.LocationServices
 import id.vee.android.R
 import id.vee.android.databinding.FragmentAddActivityBinding
 import id.vee.android.domain.model.Token
-import id.vee.android.utils.MyDatePickerDialog
-import id.vee.android.utils.checkEmptyEditText
-import id.vee.android.utils.checkTokenAvailability
-import id.vee.android.utils.padStart
+import id.vee.android.utils.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -135,9 +132,9 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
                     viewModel.insertActivity(
                         it.accessToken,
                         formatter.toString(),
-                        edtDistance.text.toString().toInt(),
-                        edtLitre.text.toString().toInt(),
-                        edtExpense.text.toString().toInt(),
+                        edtDistance.text.toString().trimDottedString().toInt(),
+                        edtLitre.text.toString().trimDottedString().toInt(),
+                        edtExpense.text.toString().trimDottedString().toInt(),
                         lat,
                         lon
                     )
@@ -221,13 +218,6 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
         binding?.apply {
             edtDate.setText(formatedDate)
         }
-    }
-
-    private fun trimDottedString(string: String): String {
-        return if (string.contains(".")) {
-            string.replace(".", "")
-        } else
-            string
     }
 
     companion object {
