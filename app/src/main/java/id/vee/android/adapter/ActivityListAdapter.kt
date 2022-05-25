@@ -51,7 +51,7 @@ class ActivityListAdapter(private val onItemClick: (Activity) -> Unit) :
             } else {
                 binding.storyAddress.visibility = View.GONE
             }
-            val formattedMonth = activity.date.formatDate("MMMM").toString()
+            val formattedMonth = activity.date.formatDate("MMM").toString()
             if (!listMonth.contains(formattedMonth)) {
                 binding.monthName.text = activity.date.formatDate("MMM")
                 listMonth.add(formattedMonth)
