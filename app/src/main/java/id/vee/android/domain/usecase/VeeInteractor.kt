@@ -2,6 +2,7 @@ package id.vee.android.domain.usecase
 
 import id.vee.android.data.Resource
 import id.vee.android.data.remote.response.BasicResponse
+import id.vee.android.data.remote.response.GasStationsResponse
 import id.vee.android.data.remote.response.LoginResponse
 import id.vee.android.data.remote.response.UserDetailResponse
 import id.vee.android.domain.model.Activity
@@ -88,6 +89,11 @@ class VeeInteractor(private val repository: VeeDataSource) : VeeUseCase {
         long: Double
     ): Flow<BasicResponse> =
         repository.updateActivity(id, token, date, distance, litre, expense, lat, long)
-
+        
+    override fun getGasStations(
+        lat: Double,
+        lon: Double
+    ): Flow<GasStationsResponse> =
+        repository.getGasStations(lat, lon)
 
 }

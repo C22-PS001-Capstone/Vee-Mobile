@@ -3,10 +3,7 @@ package id.vee.android.data
 import id.vee.android.data.local.LocalDataSource
 import id.vee.android.data.remote.RemoteDataSource
 import id.vee.android.data.remote.network.ApiResponse
-import id.vee.android.data.remote.response.ActivityResponse
-import id.vee.android.data.remote.response.BasicResponse
-import id.vee.android.data.remote.response.LoginResponse
-import id.vee.android.data.remote.response.UserDetailResponse
+import id.vee.android.data.remote.response.*
 import id.vee.android.domain.model.Activity
 import id.vee.android.domain.model.Token
 import id.vee.android.domain.model.User
@@ -113,6 +110,18 @@ class VeeRepository(
                 passwordCurrent,
                 password,
                 passwordConfirm
+            )
+        )
+    }
+
+    override fun getGasStations(
+        lat: Double,
+        lon: Double
+    ): Flow<GasStationsResponse> = flow {
+        emit(
+            remoteDataSource.getGasStations(
+                lat,
+                lon
             )
         )
     }

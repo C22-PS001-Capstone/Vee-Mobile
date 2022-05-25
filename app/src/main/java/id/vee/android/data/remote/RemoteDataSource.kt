@@ -3,10 +3,7 @@ package id.vee.android.data.remote
 import id.vee.android.data.local.entity.TokenEntity
 import id.vee.android.data.remote.network.ApiResponse
 import id.vee.android.data.remote.network.ApiService
-import id.vee.android.data.remote.response.ActivityResponse
-import id.vee.android.data.remote.response.BasicResponse
-import id.vee.android.data.remote.response.LoginResponse
-import id.vee.android.data.remote.response.UserDetailResponse
+import id.vee.android.data.remote.response.*
 import id.vee.android.utils.bearer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -134,6 +131,21 @@ class RemoteDataSource(
             apiService.updatePassword(token.bearer(), passwordCurrent, password, passwordConfirm)
         } catch (e: Exception) {
             BasicResponse(
+                status = "error",
+                message = e.message.toString(),
+                data = null
+            )
+        }
+    }
+
+    suspend fun getGasStations(
+        lat: Double,
+        lon: Double
+    ): GasStationsResponse {
+        return try {
+            apiService.getGasStations(lat, lon)
+        } catch (e: Exception) {
+            GasStationsResponse(
                 status = "error",
                 message = e.message.toString(),
                 data = null

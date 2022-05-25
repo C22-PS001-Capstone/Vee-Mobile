@@ -1,6 +1,5 @@
 package id.vee.android.ui.profile
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -36,7 +35,7 @@ class ThemeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         context?.apply {
             viewModel.getThemeSettings()
-            viewModelListener(viewModel, this)
+            viewModelListener(viewModel)
             binding?.apply {
                 switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
                     viewModel.saveThemeSetting(isChecked)
@@ -45,7 +44,7 @@ class ThemeFragment : Fragment() {
         }
     }
 
-    private fun viewModelListener(viewModel: ThemeViewModel, context: Context) {
+    private fun viewModelListener(viewModel: ThemeViewModel) {
         binding?.apply {
             viewModel.themeResponse.observe(viewLifecycleOwner) { isDarkModeActive: Boolean ->
                 if (isDarkModeActive) {

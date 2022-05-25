@@ -11,7 +11,6 @@ import id.vee.android.domain.model.Token
 import id.vee.android.domain.model.User
 import id.vee.android.domain.usecase.VeeUseCase
 import id.vee.android.ui.GeneralViewModel
-import id.vee.android.ui.login.LoginViewModel
 import kotlinx.coroutines.launch
 
 class ProfileViewModel constructor(

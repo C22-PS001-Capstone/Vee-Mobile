@@ -14,6 +14,7 @@ import id.vee.android.domain.usecase.VeeInteractor
 import id.vee.android.domain.usecase.VeeUseCase
 import id.vee.android.ui.GeneralViewModel
 import id.vee.android.ui.activity.ActivityViewModel
+import id.vee.android.ui.gas.GasStationsViewModel
 import id.vee.android.ui.home.HomeViewModel
 import id.vee.android.ui.login.LoginViewModel
 import id.vee.android.ui.notification.NotificationViewModel
@@ -81,4 +82,5 @@ val viewModelModule = module {
     viewModel { ActivityViewModel(get(), get()) }
     viewModel { GeneralViewModel(get(), get()) }
     viewModel { ThemeViewModel(get()) }
+    viewModel { GasStationsViewModel(get(), get()) }
 }
