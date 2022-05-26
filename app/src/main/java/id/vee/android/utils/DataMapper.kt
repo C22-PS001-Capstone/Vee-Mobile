@@ -1,10 +1,13 @@
 package id.vee.android.utils
 
 import id.vee.android.data.local.entity.ActivityEntity
+import id.vee.android.data.local.entity.GasStationsEntity
 import id.vee.android.data.local.entity.TokenEntity
 import id.vee.android.data.local.entity.UserEntity
 import id.vee.android.data.remote.response.ActivityResponse
+import id.vee.android.data.remote.response.GasStationsResponse
 import id.vee.android.domain.model.Activity
+import id.vee.android.domain.model.GasStations
 import id.vee.android.domain.model.Token
 import id.vee.android.domain.model.User
 
@@ -47,7 +50,25 @@ object DataMapper {
                     liter = it.liter,
                     lon = it.lon,
                     id = it.id,
+                    lat = it.lat
+                )
+            )
+        }
+        return list
+    }
+
+    @JvmName("mapResponsesToEntities1")
+    fun mapResponsesToEntities(input: List<GasStationsResponse>): List<GasStationsEntity> {
+        val list = mutableListOf<GasStationsEntity>()
+        input.map {
+            list.add(
+                GasStationsEntity(
+                    id = it.id,
+                    name = it.name,
+                    vendor = it.vendor,
+                    distance = it.distance,
                     lat = it.lat,
+                    lon = it.lon
                 )
             )
         }
@@ -65,6 +86,19 @@ object DataMapper {
                 lon = it.lon,
                 id = it.id,
                 lat = it.lat,
+            )
+        }
+
+    @JvmName("mapEntitiesToDomain1")
+    fun mapEntitiesToDomain(input: List<GasStationsEntity>): List<GasStations> =
+        input.map {
+            GasStations(
+                id = it.id,
+                name = it.name,
+                vendor = it.vendor,
+                distance = it.distance,
+                lat = it.lat,
+                lon = it.lon
             )
         }
 }

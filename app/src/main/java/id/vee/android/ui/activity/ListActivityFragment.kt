@@ -33,9 +33,7 @@ class ListActivityFragment : Fragment() {
     ): View? {
         _binding = FragmentListActivityBinding.inflate(inflater, container, false)
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.title_activity)
-
         setupBackButton()
-
         return binding?.root
     }
 

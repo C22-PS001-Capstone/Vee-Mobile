@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import id.vee.android.data.local.entity.ActivityEntity
+import id.vee.android.data.local.entity.GasStationsEntity
 import id.vee.android.data.local.entity.TokenEntity
 import id.vee.android.data.local.entity.UserEntity
 import kotlinx.coroutines.flow.Flow
@@ -35,9 +36,9 @@ interface VeeDao {
     @Query("SELECT * FROM activity_entities")
     fun getActivity(): Flow<List<ActivityEntity>>
 
-    @Query("DELETE FROM activity_entities WHERE 1")
-    suspend fun deleteActivities()
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertGasStations(gasStationsList: List<GasStationsEntity>)
 
-    @Query("DELETE FROM activity_entities WHERE id = :id")
-    suspend fun deleteActivity(id: String)
+    @Query("SELECT * FROM gas_stations_entities")
+    fun getGasStations(): Flow<List<GasStationsEntity>>
 }

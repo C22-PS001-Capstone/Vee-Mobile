@@ -29,37 +29,41 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/name_gas_station"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="5"
                 android:fontFamily="@font/nunito_bold"
                 android:textColor="@color/black"
-                tools:text="Pertamina" />
+                tools:text="@string/dummy" />
 
             <TextView
+                android:id="@+id/distance_gas_station"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="20"
                 android:fontFamily="@font/nunito_extra_bold"
                 android:textAlignment="center"
-                tools:text="500M"
+                tools:text="@string/dummy"
                 tools:textColor="@color/black" />
         </LinearLayout>
 
         <TextView
+            android:id="@+id/vendor_gas_station"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"
             android:fontFamily="@font/nunito_semi_bold"
             android:textColor="@color/black"
-            tools:text="Jalan Melati Mas No. 36" />
+            tools:text="@string/dummy" />
 
         <TextView
+            android:id="@+id/address_gas_stations"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_semi_bold"
             android:textColor="@color/black"
-            tools:text="Pertalite, Pertamax, Permina Dex" />
+            tools:text="@string/dummy" />
     </LinearLayout>
 </LinearLayout>

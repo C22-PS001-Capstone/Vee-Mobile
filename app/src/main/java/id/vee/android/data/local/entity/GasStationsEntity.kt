@@ -1,8 +1,10 @@
-package id.vee.android.data.remote.response
+package id.vee.android.data.local.entity
 
 import androidx.room.ColumnInfo
+import androidx.room.Entity
 
-data class GasStationsResponse(
+@Entity(tableName = "gas_stations_entities", primaryKeys = ["id"])
+data class GasStationsEntity(
     @ColumnInfo(name = "id")
     val id: String,
 
