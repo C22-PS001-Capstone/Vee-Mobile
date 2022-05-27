@@ -32,7 +32,7 @@ class GasStationListAdapter :
         fun bind(gasStations: GasStations, context: Context) {
             binding.vendorGasStation.text = gasStations.vendor
             binding.nameGasStation.text = gasStations.name
-            binding.distanceGasStation.text = gasStations.distance
+            binding.distanceGasStation.text = gasStations.distance.toString()
             try {
                 if (gasStations.lat != 0.0 && gasStations.lon != 0.0) {
                     val geocoder = Geocoder(context, Locale.getDefault())

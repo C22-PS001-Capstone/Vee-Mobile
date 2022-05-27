@@ -60,8 +60,9 @@ class NearestGasStationFragment : Fragment() {
         val gasStationAdapter = GasStationListAdapter()
         context?.apply {
             viewModelListener()
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+            getMyLastLocation(this)
             viewModel.getToken()
-            getGasStations(viewModel)
             binding.apply {
                 rvGasStations.apply {
                     layoutManager = LinearLayoutManager(context)
@@ -84,14 +85,14 @@ class NearestGasStationFragment : Fragment() {
                                 }
                             }
                             is Resource.Error -> {
+                                Timber.e(responses.message)
                                 // Show error
                             }
                         }
                     }
                 }
             }
-            fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-            getMyLastLocation(this)
+
 
         }
     }
@@ -102,7 +103,7 @@ class NearestGasStationFragment : Fragment() {
         }
     }
 
-    private fun getGasStations(viewModel: GasStationsViewModel) {
+    private fun getGasStations() {
         var lat = 0.0
         var lon = 0.0
         currentLocation?.apply {
@@ -155,6 +156,7 @@ class NearestGasStationFragment : Fragment() {
             fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
                 if (location != null) {
                     currentLocation = location
+                    getGasStations()
                 } else {
                     Toast.makeText(
                         context,

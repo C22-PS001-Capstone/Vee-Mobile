@@ -13,7 +13,7 @@ data class GasStationsResponse(
     val vendor: String,
 
     @ColumnInfo(name = "distance")
-    val distance: String,
+    val distance: Double = 0.0,
 
     @ColumnInfo(name = "lat")
     val lat: Double,

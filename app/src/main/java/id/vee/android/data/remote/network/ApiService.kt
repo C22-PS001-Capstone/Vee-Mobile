@@ -93,7 +93,7 @@ interface ApiService {
     @GET("/gasstations")
     suspend fun getGasStations(
         @Header("Authorization") token: String,
-        @Field("lat") lat: Double,
-        @Field("lon") lon: Double
+        @Query("lat") lat: Double,
+        @Query("lon") lon: Double
     ): GasStationsListResponse
 }
