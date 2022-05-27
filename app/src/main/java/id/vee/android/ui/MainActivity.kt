@@ -106,8 +106,8 @@ class MainActivity : AppCompatActivity() {
         val geofence = Geofence.Builder()
             .setRequestId("kampus")
             .setCircularRegion(
-                -6.2342115,
-                106.6173419,
+                -6.243716,
+                106.626614,
                 400.0.toFloat()
             )
             .setExpirationDuration(Geofence.NEVER_EXPIRE)

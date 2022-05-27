@@ -28,18 +28,22 @@ class NearestGasStationReceiver : BroadcastReceiver() {
             }
             val geofenceTransition = geofencingEvent.geofenceTransition
 
-            if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_DWELL || geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT) {
+            if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_DWELL ||
+                geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER ||
+                geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT
+            ) {
                 val geofenceTransitionString =
                     when (geofenceTransition) {
-                        Geofence.GEOFENCE_TRANSITION_DWELL -> "You are near to gas station"
-                        Geofence.GEOFENCE_TRANSITION_EXIT -> "Are you leaving gas station?"
+                        Geofence.GEOFENCE_TRANSITION_ENTER -> "You are near to gas station at %s"
+                        Geofence.GEOFENCE_TRANSITION_DWELL -> "Are you filling up your car at %s?"
+                        Geofence.GEOFENCE_TRANSITION_EXIT -> "Are you leaving gas station at %s?"
                         else -> "Invalid transition type"
                     }
 
                 val triggeringGeofences = geofencingEvent.triggeringGeofences
                 val requestId = triggeringGeofences[0].requestId
 
-                val geofenceTransitionDetails = "$geofenceTransitionString $requestId"
+                val geofenceTransitionDetails = geofenceTransitionString.format(requestId)
                 Timber.i(geofenceTransitionDetails)
                 sendNotification(context, geofenceTransitionDetails)
             } else {
