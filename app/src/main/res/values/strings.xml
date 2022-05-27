@@ -106,5 +106,6 @@
     <string name="location_not_available_detail">Please check your location and GPS settings</string>
     <string name="btn_continue">Continue without location</string>
     <string name="no_data">No Data</string>
+    <string name="no_nearest_gas_station">No nearest gas stations available in your area</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

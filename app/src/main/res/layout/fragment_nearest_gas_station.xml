@@ -21,7 +21,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="10sp"
             app:lottie_autoPlay="true"
-            app:lottie_fileName="map-pin.json"
+            app:lottie_fileName="no-data.json"
             app:lottie_loop="true" />
 
         <TextView
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8sp"
             android:fontFamily="@font/nunito_extra_bold"
-            android:text="@string/location_not_available"
+            android:text="@string/no_nearest_gas_station"
             android:textAlignment="center"
             android:textColor="?colorOnPrimary"
             android:textSize="20sp" />
