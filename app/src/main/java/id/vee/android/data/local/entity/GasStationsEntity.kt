@@ -9,16 +9,17 @@ data class GasStationsEntity(
     val id: String,
 
     @ColumnInfo(name = "name")
-    val name: String,
+    val name: String?,
 
     @ColumnInfo(name = "vendor")
-    val vendor: String,
+    val vendor: String?,
 
-    val distance: Double = 0.0,
+    @ColumnInfo(name = "distance")
+    val distance: String?,
 
     @ColumnInfo(name = "lat")
-    val lat: Double,
+    val lat: Double?,
 
     @ColumnInfo(name = "lon")
-    val lon: Double
+    val lon: Double?
 )

@@ -1,23 +1,23 @@
 package id.vee.android.data.remote.response
 
-import androidx.room.ColumnInfo
+import com.google.gson.annotations.SerializedName
 
 data class GasStationsResponse(
-    @ColumnInfo(name = "id")
+    @field:SerializedName("distance")
+    val distance: String? = null,
+
+    @field:SerializedName("vendor")
+    val vendor: String? = null,
+
+    @field:SerializedName("name")
+    val name: String? = null,
+
+    @field:SerializedName("lon")
+    val lon: Double? = null,
+
+    @field:SerializedName("id")
     val id: String,
 
-    @ColumnInfo(name = "name")
-    val name: String,
-
-    @ColumnInfo(name = "vendor")
-    val vendor: String,
-
-    @ColumnInfo(name = "distance")
-    val distance: Double = 0.0,
-
-    @ColumnInfo(name = "lat")
-    val lat: Double,
-
-    @ColumnInfo(name = "lon")
-    val lon: Double
+    @field:SerializedName("lat")
+    val lat: Double? = null
 )

@@ -36,7 +36,7 @@ class GasStationListAdapter :
             try {
                 if (gasStations.lat != 0.0 && gasStations.lon != 0.0) {
                     val geocoder = Geocoder(context, Locale.getDefault())
-                    val addresses = geocoder.getFromLocation(gasStations.lat, gasStations.lon, 1)
+                    val addresses = geocoder.getFromLocation(gasStations.lat!!, gasStations.lon!!, 1)
                     binding.addressGasStations.text = addresses[0].getAddressLine(0)
                 } else {
                     binding.addressGasStations.visibility = View.GONE

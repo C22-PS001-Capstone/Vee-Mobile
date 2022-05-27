@@ -78,6 +78,6 @@
     <string name="month_label">Bulan</string>
     <string name="title_detail_activity">Detail Aktifitas</string>
     <string name="location_not_available">Lokasi tidak tersedia</string>
-    <string name="location_not_available_detail">Mohon untuk mengecek pengaturan lokasi dan gps</string>
+    <string name="location_not_available_detail">Mohon untuk mengecek pengaturan lokasi dan GPS</string>
     <string name="btn_continue">Lanjutkan tanpa lokasi</string>
 </resources>
