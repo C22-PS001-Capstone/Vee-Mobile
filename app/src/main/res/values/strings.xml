@@ -105,5 +105,6 @@
     <string name="location_not_available">Location not available</string>
     <string name="location_not_available_detail">Please check your location and GPS settings</string>
     <string name="btn_continue">Continue without location</string>
+    <string name="no_data">No Data</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
