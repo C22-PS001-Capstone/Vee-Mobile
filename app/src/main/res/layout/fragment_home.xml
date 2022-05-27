@@ -44,6 +44,7 @@
                 android:orientation="vertical">
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_vendor_1"
                     android:layout_width="68dp"
                     android:layout_height="68dp"
                     android:layout_marginBottom="8dp"
@@ -52,9 +53,19 @@
                     tools:src="@tools:sample/avatars" />
 
                 <TextView
+                    android:id="@+id/tv_vendor_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_extra_bold"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    tools:text="Pertamina" />
+
+                <TextView
+                    android:id="@+id/tv_distance_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_regular"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     tools:text="Pertamina" />

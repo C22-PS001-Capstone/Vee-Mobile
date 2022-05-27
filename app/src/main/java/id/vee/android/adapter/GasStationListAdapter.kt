@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import id.vee.android.R
 import id.vee.android.databinding.RowGasStationBinding
 import id.vee.android.domain.model.GasStations
 import java.util.*
@@ -33,6 +34,11 @@ class GasStationListAdapter :
             binding.vendorGasStation.text = gasStations.vendor
             binding.nameGasStation.text = gasStations.name
             binding.distanceGasStation.text = gasStations.distance.toString()
+            when (gasStations.vendor) {
+                "Pertamina" -> binding.ivVendor.setImageResource(R.drawable.pertamina)
+                "Shell" -> binding.ivVendor.setImageResource(R.drawable.shell)
+                else -> binding.ivVendor.setImageResource(R.drawable.other_vendor_gasstaions)
+            }
             try {
                 if (gasStations.lat != 0.0 && gasStations.lon != 0.0) {
                     val geocoder = Geocoder(context, Locale.getDefault())
