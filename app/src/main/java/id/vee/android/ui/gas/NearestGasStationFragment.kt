@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -82,6 +83,7 @@ class NearestGasStationFragment : Fragment() {
                                     gasStationAdapter.submitList(responses.data)
                                 } else {
                                     gasStationAdapter.submitList(null)
+                                    showGasStationsNotAvailable()
                                 }
                             }
                             is Resource.Error -> {
@@ -180,7 +182,14 @@ class NearestGasStationFragment : Fragment() {
 
     private fun showLocationNotAvailable() {
         binding.apply {
-            notAvailable.visibility = View.VISIBLE
+            locationNotAvailable.visibility = View.VISIBLE
+            rvGasStations.visibility = View.GONE
+        }
+    }
+
+    private fun showGasStationsNotAvailable() {
+        binding.apply {
+            gasStationsNotAvailable.visibility = View.VISIBLE
             rvGasStations.visibility = View.GONE
         }
     }

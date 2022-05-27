@@ -65,8 +65,8 @@ class HomeFragment : Fragment() {
                                     val data = responses.data
                                     setGasStationHomeData(data)
                                 } else
-                                    tvNoDataGasStations.isVisible = true
-                                    dataGasStation.isVisible = false
+                                    tvNoDataGasStations.visibility = View.VISIBLE
+                                    dataGasStation.visibility = View.GONE
                             }
                             is Resource.Error -> {
                                 Timber.e(responses.message)
