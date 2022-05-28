@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="5dp"
-    android:background="@drawable/plain_rounded_background"
-    android:backgroundTint="@color/background_color"
+    android:background="@drawable/nearest_background"
+
     android:orientation="horizontal"
     android:paddingLeft="16dp"
     android:paddingTop="16dp"
