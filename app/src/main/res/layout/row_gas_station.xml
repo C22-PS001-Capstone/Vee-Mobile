@@ -45,9 +45,9 @@
                 android:id="@+id/distance_gas_station"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="20"
+                android:layout_weight="10"
                 android:fontFamily="@font/nunito_extra_bold"
-                android:textAlignment="center"
+                android:textAlignment="viewEnd"
                 tools:text="@string/dummy"
                 tools:textColor="@color/black" />
         </LinearLayout>

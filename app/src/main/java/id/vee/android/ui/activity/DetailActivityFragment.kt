@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import id.vee.android.R
 import id.vee.android.databinding.FragmentAddActivityBinding
 import id.vee.android.domain.model.Token
@@ -91,6 +92,8 @@ class DetailActivityFragment : Fragment(), View.OnClickListener {
                 edtLitre.setText(activityData.liter.toString())
                 edtExpense.setText(activityData.price.toString())
             }
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+            getMyLastLocation(this)
         }
     }
 

@@ -145,7 +145,7 @@ class RemoteDataSource(
     ): Flow<ApiResponse<List<GasStationsResponse>>> = flow {
         try {
             val response = apiService.getGasStations(token.bearer(), lat, lon)
-            emit(ApiResponse.Success(response.data.gasStations))
+            emit(ApiResponse.Success(response.data))
         } catch (e: Exception) {
             emit(ApiResponse.Error(e.toString()))
         }
