@@ -21,6 +21,11 @@ jobs:
       - name: move properties file
         run: |
           cp project.properties.example project.properties
+      - name: add google services
+        env:
+          DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: |
+          echo $DATA > app/google-services.json
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Unit tests
@@ -41,6 +46,11 @@ jobs:
     - name: move properties file
       run: |
         cp project.properties.example project.properties
+    - name: add google services
+      env:
+        DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
+      run: |
+        echo $DATA > app/google-services.json
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
