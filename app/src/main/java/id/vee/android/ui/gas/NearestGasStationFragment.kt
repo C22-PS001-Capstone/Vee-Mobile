@@ -62,17 +62,19 @@ class NearestGasStationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val gasStationAdapter = GasStationListAdapter()
         viewModelListener()
-        context?.apply {
-            fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-            getMyLastLocation(this)
+        context?.let { ctx ->
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(ctx)
+            getMyLastLocation(ctx)
+            binding?.apply {
+                rvGasStations.apply {
+                    layoutManager = LinearLayoutManager(ctx)
+                    setHasFixedSize(true)
+                    adapter = gasStationAdapter
+                }
+            }
         }
         viewModel.getToken()
         binding?.apply {
-            rvGasStations.apply {
-                layoutManager = LinearLayoutManager(context)
-                setHasFixedSize(true)
-                adapter = gasStationAdapter
-            }
             viewModel.gasStationsResponse.observe(viewLifecycleOwner) { responses ->
                 gasStationAdapter.submitList(null)
                 if (responses != null) {
