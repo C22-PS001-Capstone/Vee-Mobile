@@ -48,7 +48,12 @@ class ActivityListAdapter(private val onItemClick: (Activity) -> Unit) :
                 if (activity.lat != 0.0 && activity.lon != 0.0) {
                     val geocoder = Geocoder(context, Locale.getDefault())
                     val addresses = geocoder.getFromLocation(activity.lat, activity.lon, 1)
-                    binding.storyAddress.text = addresses[0].getAddressLine(0)
+                    val address = StringBuilder()
+                    addresses[0]?.let {
+                        val tempAddress = it.getAddressLine(0).split(", " + it.locality)[0]
+                        address.append(tempAddress)
+                    }
+                    binding.storyAddress.text = address.toString()
                 } else {
                     binding.storyAddress.visibility = View.GONE
                 }
