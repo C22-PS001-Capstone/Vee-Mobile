@@ -36,62 +36,67 @@ class NearestGasStationFragment : Fragment() {
 
     private val viewModel: GasStationsViewModel by viewModel()
 
+    private val activityContext by lazy {
+        (activity as AppCompatActivity)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentNearestGasStationBinding.inflate(inflater, container, false)
-        (activity as AppCompatActivity).supportActionBar?.title =
-            getString(R.string.nearest_gas_station)
         setupBackButton()
         return binding?.root
     }
 
     private fun setupBackButton() {
-        if (activity is AppCompatActivity) {
-            (activity as AppCompatActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        activityContext.supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+            title = getString(R.string.nearest_gas_station)
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getToken()
         val gasStationAdapter = GasStationListAdapter()
+        viewModelListener()
         context?.apply {
-            viewModelListener()
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
             getMyLastLocation(this)
-            binding?.apply {
-                rvGasStations.apply {
-                    layoutManager = LinearLayoutManager(context)
-                    setHasFixedSize(true)
-                    adapter = gasStationAdapter
-                }
-                viewModel.gasStationsResponse.observe(viewLifecycleOwner) { responses ->
-                    gasStationAdapter.submitList(null)
-                    if (responses != null) {
-                        when (responses) {
-                            is Resource.Loading -> {
-                                progressBar.visibility = View.VISIBLE
+        }
+        viewModel.getToken()
+        binding?.apply {
+            rvGasStations.apply {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = gasStationAdapter
+            }
+            viewModel.gasStationsResponse.observe(viewLifecycleOwner) { responses ->
+                gasStationAdapter.submitList(null)
+                if (responses != null) {
+                    when (responses) {
+                        is Resource.Loading -> {
+                            progressBar.visibility = View.VISIBLE
+                        }
+                        is Resource.Success -> {
+                            progressBar.visibility = View.GONE
+                            rvGasStations.visibility = View.VISIBLE
+                            if (responses.data?.isNotEmpty() == true) {
+                                gasStationAdapter.submitList(responses.data.sortedBy { it.distance })
+                            } else {
+                                showGasStationsNotAvailable()
                             }
-                            is Resource.Success -> {
-                                progressBar.visibility = View.GONE
-                                rvGasStations.visibility = View.VISIBLE
-                                if (responses.data?.isNotEmpty() == true) {
-                                    gasStationAdapter.submitList(responses.data.sortedBy { it.distance })
-                                } else {
-                                    showGasStationsNotAvailable()
-                                }
-                                Timber.d(gasStationAdapter.itemCount.toString())
-                            }
-                            is Resource.Error -> {
-                                Timber.e(responses.message)
-                            }
+                            Timber.d(gasStationAdapter.itemCount.toString())
+                        }
+                        is Resource.Error -> {
+                            Timber.e(responses.message)
                         }
                     }
                 }
             }
+
         }
     }
 

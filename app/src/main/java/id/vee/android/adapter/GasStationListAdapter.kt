@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import id.vee.android.R
 import id.vee.android.databinding.RowGasStationBinding
 import id.vee.android.domain.model.GasStations
+import timber.log.Timber
 import java.util.*
 
 class GasStationListAdapter :
