@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -28,7 +27,7 @@ import timber.log.Timber
 
 class NearestGasStationFragment : Fragment() {
     private var _binding: FragmentNearestGasStationBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
 
     private var userToken: Token? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -41,12 +40,12 @@ class NearestGasStationFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         _binding = FragmentNearestGasStationBinding.inflate(inflater, container, false)
         (activity as AppCompatActivity).supportActionBar?.title =
             getString(R.string.nearest_gas_station)
         setupBackButton()
-        return binding.root
+        return binding?.root
     }
 
     private fun setupBackButton() {
@@ -63,45 +62,43 @@ class NearestGasStationFragment : Fragment() {
             viewModelListener()
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
             getMyLastLocation(this)
-            viewModel.getToken()
-            binding.apply {
+            binding?.apply {
                 rvGasStations.apply {
                     layoutManager = LinearLayoutManager(context)
                     setHasFixedSize(true)
                     adapter = gasStationAdapter
                 }
                 viewModel.gasStationsResponse.observe(viewLifecycleOwner) { responses ->
+                    gasStationAdapter.submitList(null)
                     if (responses != null) {
-                        gasStationAdapter.submitList(null)
                         when (responses) {
                             is Resource.Loading -> {
                                 progressBar.visibility = View.VISIBLE
                             }
                             is Resource.Success -> {
                                 progressBar.visibility = View.GONE
+                                rvGasStations.visibility = View.VISIBLE
                                 if (responses.data?.isNotEmpty() == true) {
-                                    gasStationAdapter.submitList(responses.data)
+                                    gasStationAdapter.submitList(responses.data.sortedBy { it.distance })
                                 } else {
-                                    gasStationAdapter.submitList(null)
                                     showGasStationsNotAvailable()
                                 }
+                                Timber.d(gasStationAdapter.itemCount.toString())
                             }
                             is Resource.Error -> {
                                 Timber.e(responses.message)
-                                // Show error
                             }
                         }
                     }
                 }
             }
-
-
         }
     }
 
     private fun viewModelListener() {
         viewModel.tokenResponse.observe(viewLifecycleOwner) { tokenData ->
             userToken = tokenData
+            getGasStations()
         }
     }
 
@@ -158,7 +155,6 @@ class NearestGasStationFragment : Fragment() {
             fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
                 if (location != null) {
                     currentLocation = location
-                    getGasStations()
                 } else {
                     Toast.makeText(
                         context,
@@ -181,14 +177,14 @@ class NearestGasStationFragment : Fragment() {
     }
 
     private fun showLocationNotAvailable() {
-        binding.apply {
+        binding?.apply {
             locationNotAvailable.visibility = View.VISIBLE
             rvGasStations.visibility = View.GONE
         }
     }
 
     private fun showGasStationsNotAvailable() {
-        binding.apply {
+        binding?.apply {
             gasStationsNotAvailable.visibility = View.VISIBLE
             rvGasStations.visibility = View.GONE
         }

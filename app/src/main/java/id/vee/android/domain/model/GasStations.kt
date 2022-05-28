@@ -9,6 +9,6 @@ data class GasStations(
     val name: String?,
     val vendor: String?,
     val distance: String?,
-    val lat: Double?,
-    val lon: Double?
+    val lat: Double = 0.0,
+    val lon: Double = 0.0
 ) : Parcelable

@@ -41,4 +41,7 @@ interface VeeDao {
 
     @Query("SELECT * FROM gas_stations_entities")
     fun getGasStations(): Flow<List<GasStationsEntity>>
+
+    @Query("SELECT * FROM gas_stations_entities ORDER BY ABS(lat - :latitude) + ABS(lon - :longitude) ASC")
+    fun getNearestGasStation(latitude: Double, longitude: Double): Flow<List<GasStationsEntity>>
 }

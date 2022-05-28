@@ -40,4 +40,7 @@ class LocalDataSource(
     fun getActivity(): Flow<List<ActivityEntity>> = mUserDao.getActivity()
 
     fun getGasStations(): Flow<List<GasStationsEntity>> = mUserDao.getGasStations()
+
+    fun getNearestGasStation(latitude: Double, longitude: Double): Flow<List<GasStationsEntity>> =
+        mUserDao.getNearestGasStation(latitude, longitude)
 }
