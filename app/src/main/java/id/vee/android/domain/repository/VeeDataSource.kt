@@ -22,6 +22,7 @@ interface VeeDataSource {
     ): Flow<BasicResponse>
 
     fun login(email: String, password: String): Flow<LoginResponse>
+    fun loginGoogle(token: String): Flow<LoginResponse>
     fun userDetail(data: Token): Flow<UserDetailResponse>
     suspend fun saveToken(data: Token)
     suspend fun saveUser(user: User)

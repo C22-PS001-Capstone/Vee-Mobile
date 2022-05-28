@@ -27,6 +27,7 @@ class VeeInteractor(private val repository: VeeDataSource) : VeeUseCase {
 
     override fun login(email: String, password: String): Flow<LoginResponse> =
         repository.login(email, password)
+    override fun loginGoogle(token: String): Flow<LoginResponse> = repository.loginGoogle(token)
 
     override fun refreshToken(refreshToken: String): Flow<LoginResponse> =
         repository.refreshToken(refreshToken)

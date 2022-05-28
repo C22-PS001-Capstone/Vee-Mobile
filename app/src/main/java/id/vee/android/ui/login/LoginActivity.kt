@@ -3,7 +3,6 @@ package id.vee.android.ui.login
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -11,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import id.vee.android.BuildConfig
 import id.vee.android.R
 import id.vee.android.databinding.ActivityLoginBinding
@@ -25,7 +27,20 @@ class LoginActivity : AppCompatActivity() {
     private val binding by lazy(LazyThreadSafetyMode.NONE) {
         ActivityLoginBinding.inflate(layoutInflater)
     }
+    private val auth by lazy {
+        Firebase.auth
+    }
+    private val mGoogleSignInClient by lazy {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestId()
+            .requestProfile()
+            .requestEmail()
+            .requestIdToken(BuildConfig.GOOGLE_CLIENT_ID)
+            .build()
+        GoogleSignIn.getClient(this, gso)
+    }
     private val viewModel: LoginViewModel by viewModel()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,14 +52,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // Google sign-in
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestId()
-            .requestProfile()
-            .requestEmail()
-            .requestIdToken(BuildConfig.GOOGLE_CLIENT_ID)
-            .requestServerAuthCode(BuildConfig.GOOGLE_CLIENT_ID)
-            .build()
-        val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
         binding.apply {
             setContentView(root)
@@ -54,8 +61,9 @@ class LoginActivity : AppCompatActivity() {
                 loginUser(vEmail, vPassword)
             }
             googleSignIn.setOnClickListener {
-                val signInIntent = mGoogleSignInClient.signInIntent
-                resultLauncher.launch(signInIntent)
+//                val signInIntent = mGoogleSignInClient.signInIntent
+//                resultLauncher.launch(signInIntent)
+                signIn()
             }
         }
         viewModel.response.observe(this) { response ->
@@ -79,9 +87,15 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             } else {
+                Timber.e("Error: ${response.message}")
                 showLoginFailed()
             }
         }
+    }
+
+    private fun signIn() {
+        val signInIntent = mGoogleSignInClient.signInIntent
+        resultLauncher.launch(signInIntent)
     }
 
     private fun showLoginFailed() {
@@ -102,9 +116,9 @@ class LoginActivity : AppCompatActivity() {
                 val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                 try {
                     val account = task.getResult(ApiException::class.java)!!
-                    account.idToken?.let { loginWithGoogleId(it) }
+                    account.idToken?.let { viewModel.loginGoogle(it) }
                 } catch (e: ApiException) {
-                    Log.w(TAG, "Google sign in failed: ", e)
+                    Timber.e("$e")
                     Toast.makeText(
                         this,
                         getString(R.string.failed_google_sign_in),
@@ -114,9 +128,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-    private fun loginWithGoogleId(idToken: String) {
-        Timber.d("loginWithGoogleId: $idToken")
-    }
 
     private fun loginUser(email: String, password: String) {
         binding.apply {
