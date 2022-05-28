@@ -1,5 +1,6 @@
 package id.vee.android.data
 
+import android.location.Location
 import id.vee.android.data.local.LocalDataSource
 import id.vee.android.data.remote.RemoteDataSource
 import id.vee.android.data.remote.network.ApiResponse

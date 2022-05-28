@@ -90,7 +90,9 @@ object DataMapper {
         }
 
     @JvmName("mapEntitiesToDomain1")
-    fun mapEntitiesToDomain(input: List<GasStationsEntity>): List<GasStations> =
+    fun mapEntitiesToDomain(
+        input: List<GasStationsEntity>
+    ): List<GasStations> =
         input.map {
             GasStations(
                 id = it.id,

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import id.vee.android.R
@@ -66,7 +65,7 @@ class HomeFragment : Fragment() {
                                     setGasStationHomeData(data)
                                 } else
                                     tvNoDataGasStations.visibility = View.VISIBLE
-                                    dataGasStation.visibility = View.GONE
+                                dataGasStation.visibility = View.GONE
                             }
                             is Resource.Error -> {
                                 Timber.e(responses.message)
@@ -76,7 +75,7 @@ class HomeFragment : Fragment() {
                     }
                 }
                 rvStories.apply {
-                    layoutManager = CustomLinearLayoutManager(context).setScrollEnabled(false)
+                    layoutManager = CustomLinearLayoutManager(context)
                     setHasFixedSize(true)
                     adapter = storyAdapter
                 }
@@ -92,14 +91,14 @@ class HomeFragment : Fragment() {
                                 rvStories.visibility = View.VISIBLE
                                 progressBar.visibility = View.GONE
                                 if (responses.data?.isNotEmpty() == true) {
-                                    val activities = responses.data
+                                    var activities = responses.data
                                     activities.mapIndexed { index, activity ->
                                         activity.isMonthShow =
                                             (index > 0 && responses.data[index].date.formatDate("MMM") != responses.data[index - 1].date.formatDate(
                                                 "MMM"
                                             )) || index == 0
                                     }
-                                    storyAdapter.submitList(responses.data)
+                                    storyAdapter.submitList(activities)
                                 } else {
                                     storyAdapter.submitList(null)
                                 }
