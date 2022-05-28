@@ -94,6 +94,7 @@ class NearestGasStationFragment : Fragment() {
                         }
                         is Resource.Error -> {
                             Timber.e(responses.message)
+                            showGasStationsNotAvailable()
                         }
                     }
                 }

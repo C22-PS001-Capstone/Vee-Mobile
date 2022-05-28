@@ -79,16 +79,24 @@ class ListActivityFragment : Fragment() {
                                 storyAdapter.submitList(responses.data)
                             } else {
                                 storyAdapter.submitList(null)
+                                showStoryNotAvailable()
                             }
                         }
                         is Resource.Error -> {
-                            // Show error
+                            showStoryNotAvailable()
                         }
                     }
                 }
             }
         }
 
+    }
+
+    private fun showStoryNotAvailable() {
+        binding?.apply {
+            storiesNotAvailable.visibility = View.VISIBLE
+            rvStories.visibility = View.GONE
+        }
     }
 
     private fun viewModelListener() {
