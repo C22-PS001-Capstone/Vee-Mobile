@@ -59,6 +59,11 @@ class VeeRepository(
             )
         }
     }
+    override fun loginGoogle(token: String): Flow<LoginResponse> {
+        return flow {
+            emit(remoteDataSource.loginGoogle(token))
+        }
+    }
 
     override fun refreshToken(refreshToken: String): Flow<LoginResponse> {
         return flow {
