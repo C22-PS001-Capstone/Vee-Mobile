@@ -5,6 +5,7 @@ import id.vee.android.data.remote.RemoteDataSource
 import id.vee.android.data.remote.network.ApiResponse
 import id.vee.android.data.remote.response.*
 import id.vee.android.domain.model.Activity
+import id.vee.android.domain.model.GasStations
 import id.vee.android.domain.model.Token
 import id.vee.android.domain.model.User
 import id.vee.android.domain.repository.VeeDataSource
@@ -115,16 +116,27 @@ class VeeRepository(
     }
 
     override fun getGasStations(
+        token: String,
         lat: Double,
         lon: Double
-    ): Flow<GasStationsResponse> = flow {
-        emit(
-            remoteDataSource.getGasStations(
-                lat,
-                lon
-            )
-        )
-    }
+    ): Flow<Resource<List<GasStations>>> =
+        object : NetworkBoundResource<List<GasStations>, List<GasStationsResponse>>() {
+            override fun loadFromDB(): Flow<List<GasStations>> {
+                return localDataSource.getGasStations().map {
+                    DataMapper.mapEntitiesToDomain(it)
+                }
+            }
+
+            override fun shouldFetch(data: List<GasStations>?): Boolean = true
+
+            override suspend fun createCall(): Flow<ApiResponse<List<GasStationsResponse>>> =
+                remoteDataSource.getGasStations(token, lat, lon)
+
+            override suspend fun saveCallResult(data: List<GasStationsResponse>) {
+                val gasStationsList = DataMapper.mapResponsesToEntities(data)
+                localDataSource.insertGasStations(gasStationsList)
+            }
+        }.asFlow()
 
     override fun getActivity(token: String): Flow<Resource<List<Activity>>> =
         object : NetworkBoundResource<List<Activity>, List<ActivityResponse>>() {
@@ -148,7 +160,6 @@ class VeeRepository(
     override fun deleteActivity(accessToken: String, id: String): Flow<BasicResponse> {
         return flow {
             emit(remoteDataSource.deleteActivity(accessToken, id))
-            localDataSource.deleteActivity(id)
         }
     }
 

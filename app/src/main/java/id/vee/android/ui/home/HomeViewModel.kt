@@ -6,20 +6,32 @@ import androidx.lifecycle.viewModelScope
 import id.vee.android.data.Resource
 import id.vee.android.data.local.ThemeInterface
 import id.vee.android.domain.model.Activity
+import id.vee.android.domain.model.GasStations
 import id.vee.android.domain.usecase.VeeUseCase
 import id.vee.android.ui.GeneralViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
-class HomeViewModel(
+class HomeViewModel constructor(
     private val useCase: VeeUseCase,
     pref: ThemeInterface
 ) : GeneralViewModel(useCase, pref) {
     private val _activityResponse: MutableLiveData<Resource<List<Activity>>> = MutableLiveData()
     val activityResponse: LiveData<Resource<List<Activity>>> = _activityResponse
+    private val _gasStationsResponse: MutableLiveData<Resource<List<GasStations>>> =
+        MutableLiveData()
+    val gasStationsResponse: LiveData<Resource<List<GasStations>>> = _gasStationsResponse
 
     fun getActivity(token: String) = viewModelScope.launch {
         useCase.getActivity(token).collect {
             _activityResponse.postValue(it)
+        }
+    }
+
+    fun getGasStations(token: String, lat: Double, lon: Double) = viewModelScope.launch {
+        Timber.d("Gas Station: $token $lat $lon")
+        useCase.getGasStations(token, lat, lon).collect {
+            _gasStationsResponse.postValue(it)
         }
     }
 }

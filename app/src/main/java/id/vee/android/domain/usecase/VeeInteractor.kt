@@ -2,10 +2,10 @@ package id.vee.android.domain.usecase
 
 import id.vee.android.data.Resource
 import id.vee.android.data.remote.response.BasicResponse
-import id.vee.android.data.remote.response.GasStationsResponse
 import id.vee.android.data.remote.response.LoginResponse
 import id.vee.android.data.remote.response.UserDetailResponse
 import id.vee.android.domain.model.Activity
+import id.vee.android.domain.model.GasStations
 import id.vee.android.domain.model.Token
 import id.vee.android.domain.model.User
 import id.vee.android.domain.repository.VeeDataSource
@@ -14,9 +14,7 @@ import kotlinx.coroutines.flow.Flow
 class VeeInteractor(private val repository: VeeDataSource) : VeeUseCase {
     override fun getUser(): Flow<User?> = repository.getUser()
 
-
     override fun getToken(): Flow<Token?> = repository.getToken()
-
 
     override fun signup(
         firstName: String,
@@ -91,9 +89,10 @@ class VeeInteractor(private val repository: VeeDataSource) : VeeUseCase {
         repository.updateActivity(id, token, date, distance, litre, expense, lat, long)
 
     override fun getGasStations(
+        token: String,
         lat: Double,
         lon: Double
-    ): Flow<GasStationsResponse> =
-        repository.getGasStations(lat, lon)
+    ): Flow<Resource<List<GasStations>>> =
+        repository.getGasStations(token, lat, lon)
 
 }

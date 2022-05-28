@@ -130,7 +130,7 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
             )
         }
         binding?.apply {
-            userToken?.let {
+            userToken?.let { it ->
                 checkTokenAvailability(viewModel, it, viewLifecycleOwner) {
                     viewModel.insertActivity(
                         it.accessToken,
@@ -228,9 +228,5 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
         binding?.apply {
             edtDate.setText(formatedDate)
         }
-    }
-
-    companion object {
-        private const val TAG = "AddActivityFragment"
     }
 }

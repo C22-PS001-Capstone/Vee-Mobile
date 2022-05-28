@@ -1,6 +1,7 @@
 package id.vee.android.data.local
 
 import id.vee.android.data.local.entity.ActivityEntity
+import id.vee.android.data.local.entity.GasStationsEntity
 import id.vee.android.data.local.entity.TokenEntity
 import id.vee.android.data.local.entity.UserEntity
 import id.vee.android.data.local.room.VeeDao
@@ -33,7 +34,10 @@ class LocalDataSource(
     suspend fun insertActivity(activityList: List<ActivityEntity>) =
         mUserDao.insertActivity(activityList)
 
+    suspend fun insertGasStations(gasStationsList: List<GasStationsEntity>) =
+        mUserDao.insertGasStations(gasStationsList)
+
     fun getActivity(): Flow<List<ActivityEntity>> = mUserDao.getActivity()
-    suspend fun deleteActivities() = mUserDao.deleteActivities()
-    suspend fun deleteActivity(id: String) = mUserDao.deleteActivity(id)
+
+    fun getGasStations(): Flow<List<GasStationsEntity>> = mUserDao.getGasStations()
 }

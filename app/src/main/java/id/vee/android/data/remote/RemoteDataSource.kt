@@ -139,19 +139,17 @@ class RemoteDataSource(
     }
 
     suspend fun getGasStations(
+        token: String,
         lat: Double,
         lon: Double
-    ): GasStationsResponse {
-        return try {
-            apiService.getGasStations(lat, lon)
+    ): Flow<ApiResponse<List<GasStationsResponse>>> = flow {
+        try {
+            val response = apiService.getGasStations(token.bearer(), lat, lon)
+            emit(ApiResponse.Success(response.data.gasStations))
         } catch (e: Exception) {
-            GasStationsResponse(
-                status = "error",
-                message = e.message.toString(),
-                data = null
-            )
+            emit(ApiResponse.Error(e.toString()))
         }
-    }
+    }.flowOn(Dispatchers.IO)
 
     fun getActivity(token: String): Flow<ApiResponse<List<ActivityResponse>>> = flow {
         try {

@@ -6,7 +6,7 @@ The project related to mobile application of vee project.
 - [x] Implementation the design to Application Layout (XML)
 - [ ] Importing the required libraries
 - [ ] Features get nearest gas station
-- [ ] Features users activity
+- [x] Features users activity
 - [x] Make a connection to REST API
 - [ ] Implementation of Machine Learning Model
 - [x] Localization

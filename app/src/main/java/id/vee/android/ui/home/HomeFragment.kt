@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import id.vee.android.R
 import id.vee.android.adapter.ActivityListAdapter
 import id.vee.android.data.Resource
 import id.vee.android.databinding.FragmentHomeBinding
+import id.vee.android.domain.model.GasStations
 import id.vee.android.domain.model.Token
 import id.vee.android.utils.CustomLinearLayoutManager
 import id.vee.android.utils.checkTokenAvailability
@@ -50,6 +53,28 @@ class HomeFragment : Fragment() {
             viewModel.getToken()
             viewModelListener(viewModel)
             binding?.apply {
+                viewModel.gasStationsResponse.observe(viewLifecycleOwner) { responses ->
+                    if (responses != null) {
+                        when (responses) {
+                            is Resource.Loading -> {
+                                progressBar.visibility = View.VISIBLE
+                            }
+                            is Resource.Success -> {
+                                progressBar.visibility = View.GONE
+                                if (responses.data?.isNotEmpty() == true) {
+                                    val data = responses.data
+                                    setGasStationHomeData(data)
+                                } else
+                                    tvNoDataGasStations.visibility = View.VISIBLE
+                                    dataGasStation.visibility = View.GONE
+                            }
+                            is Resource.Error -> {
+                                Timber.e(responses.message)
+                                // Show error
+                            }
+                        }
+                    }
+                }
                 rvStories.apply {
                     layoutManager = CustomLinearLayoutManager(context).setScrollEnabled(false)
                     setHasFixedSize(true)
@@ -87,6 +112,61 @@ class HomeFragment : Fragment() {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    private fun setGasStationHomeData(data: List<GasStations>) {
+        binding?.apply {
+            //data 1
+            when (data[0].vendor) {
+                "Pertamina" -> ivVendor1.setImageResource(R.drawable.pertamina)
+                "Shell" -> ivVendor1.setImageResource(R.drawable.shell)
+                else -> ivVendor1.setImageResource(R.drawable.other_vendor_gasstaions)
+            }
+            tvVendor1.text = data[0].vendor
+            val distance1 = data[0].distance
+            tvDistance1.text = distance1
+            tvDistance1.apply {
+                if (distance1?.toDouble()!! < 0.3) {
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                } else if (distance1.toDouble() < 0.5) {
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+                } else setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
+            }
+
+            //data 2
+            when (data[1].vendor) {
+                "Pertamina" -> ivVendor2.setImageResource(R.drawable.pertamina)
+                "Shell" -> ivVendor2.setImageResource(R.drawable.shell)
+                else -> ivVendor2.setImageResource(R.drawable.other_vendor_gasstaions)
+            }
+            tvVendor2.text = data[1].vendor
+            val distance2 = data[1].distance
+            tvDistance2.text = distance2
+            tvDistance2.apply {
+                if (distance2?.toDouble()!! < 0.3) {
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                } else if (distance2.toDouble() < 0.5) {
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+                } else setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
+            }
+
+            //data 3
+            when (data[2].vendor) {
+                "Pertamina" -> ivVendor3.setImageResource(R.drawable.pertamina)
+                "Shell" -> ivVendor3.setImageResource(R.drawable.shell)
+                else -> ivVendor3.setImageResource(R.drawable.other_vendor_gasstaions)
+            }
+            tvVendor3.text = data[2].vendor
+            val distance3 = data[2].distance
+            tvDistance3.text = distance3
+            tvDistance3.apply {
+                if (distance3?.toDouble()!! < 0.3) {
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                } else if (distance3.toDouble() < 0.5) {
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+                } else setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
             }
         }
     }
