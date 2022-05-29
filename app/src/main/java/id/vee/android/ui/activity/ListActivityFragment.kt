@@ -76,7 +76,7 @@ class ListActivityFragment : Fragment() {
                                             "MMM"
                                         )) || index == 0
                                 }
-                                storyAdapter.submitList(responses.data)
+                                storyAdapter.submitList(activities)
                             } else {
                                 storyAdapter.submitList(null)
                                 showStoryNotAvailable()

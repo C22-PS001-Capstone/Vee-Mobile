@@ -1,5 +1,6 @@
 package id.vee.android.data
 
+import android.location.Location
 import id.vee.android.data.local.LocalDataSource
 import id.vee.android.data.remote.RemoteDataSource
 import id.vee.android.data.remote.network.ApiResponse
@@ -56,6 +57,11 @@ class VeeRepository(
                     password
                 )
             )
+        }
+    }
+    override fun loginGoogle(token: String): Flow<LoginResponse> {
+        return flow {
+            emit(remoteDataSource.loginGoogle(token))
         }
     }
 

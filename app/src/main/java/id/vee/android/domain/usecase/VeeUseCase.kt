@@ -82,4 +82,6 @@ interface VeeUseCase {
         long: Double
     ): Flow<BasicResponse>
 
+    fun loginGoogle(token: String): Flow<LoginResponse>
+
 }

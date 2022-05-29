@@ -10,6 +10,7 @@ import id.vee.android.domain.model.Token
 import id.vee.android.domain.model.User
 import id.vee.android.domain.usecase.VeeUseCase
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class LoginViewModel constructor(private val useCase: VeeUseCase) : ViewModel() {
     private val _response = MutableLiveData<LoginResponse>()
@@ -35,6 +36,13 @@ class LoginViewModel constructor(private val useCase: VeeUseCase) : ViewModel() 
 
     fun saveUser(user: User) = viewModelScope.launch {
         useCase.saveUser(user)
+    }
+
+    fun loginGoogle(token: String) = viewModelScope.launch {
+        useCase.loginGoogle(token).collect { values ->
+            Timber.d("loginGoogle $values")
+            _response.postValue(values)
+        }
     }
 
     companion object {

@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fillViewport="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="45dp"
@@ -15,6 +16,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="32dp"
         android:orientation="vertical">
 
         <TextView
@@ -239,7 +241,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:fontFamily="@font/nunito_bold"
             android:text="@string/histories"
             android:textColor="?android:textColorPrimary"
@@ -248,8 +249,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_stories"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             tools:listitem="@layout/row_stories" />
 
         <ProgressBar

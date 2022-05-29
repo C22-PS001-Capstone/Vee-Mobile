@@ -49,6 +49,18 @@ class RemoteDataSource(
         }
     }
 
+    suspend fun loginGoogle(token: String): LoginResponse {
+        return try {
+            apiService.loginGoogle(token.bearer())
+        } catch (e: Exception) {
+            LoginResponse(
+                status = "error",
+                message = e.message.toString(),
+                data = null
+            )
+        }
+    }
+
     suspend fun refreshToken(refreshToken: String): LoginResponse {
         return try {
             apiService.refreshToken(refreshToken)
