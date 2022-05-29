@@ -141,7 +141,6 @@ class HomeFragment : Fragment() {
                         }
                         else -> {
                             text = "${it * 1000} m"
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.limegreen))
                         }
                     }
                 }
@@ -156,23 +155,12 @@ class HomeFragment : Fragment() {
             tvVendor2.text = data[1].vendor
             val distance2 = data[1].distance
             tvDistance2.text = distance2
-            distance2?.toDouble()?.let {
-                tvDistance2.apply {
-                    when {
-                        it > 1.0 -> {
-                            text = "${it.toInt()} km"
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-                        }
-                        it > 0.5 -> {
-                            text = "${it * 1000} m"
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
-                        }
-                        else -> {
-                            text = "${it * 1000} m"
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.limegreen))
-                        }
-                    }
-                }
+            tvDistance2.apply {
+                if (distance2?.toDouble()!! < 0.3) {
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                } else if (distance2.toDouble() < 0.5) {
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+                } else setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
             }
 
             //data 3
@@ -184,23 +172,12 @@ class HomeFragment : Fragment() {
             tvVendor3.text = data[2].vendor
             val distance3 = data[2].distance
             tvDistance3.text = distance3
-            distance3?.toDouble()?.let {
-                tvDistance3.apply {
-                    when {
-                        it > 1.0 -> {
-                            text = "${it.toInt()} km"
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-                        }
-                        it > 0.5 -> {
-                            text = "${it * 1000} m"
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
-                        }
-                        else -> {
-                            text = "${it * 1000} m"
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.limegreen))
-                        }
-                    }
-                }
+            tvDistance3.apply {
+                if (distance3?.toDouble()!! < 0.3) {
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                } else if (distance3.toDouble() < 0.5) {
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+                } else setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
             }
         }
     }
