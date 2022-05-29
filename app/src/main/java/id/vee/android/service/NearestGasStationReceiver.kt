@@ -34,7 +34,7 @@ class NearestGasStationReceiver : BroadcastReceiver() {
             ) {
                 val geofenceTransitionString =
                     when (geofenceTransition) {
-                        Geofence.GEOFENCE_TRANSITION_ENTER -> "You are near to gas station at %s"
+                        Geofence.GEOFENCE_TRANSITION_ENTER -> "You are near gas station at %s"
                         Geofence.GEOFENCE_TRANSITION_DWELL -> "Are you filling up your vehicle at %s?"
                         Geofence.GEOFENCE_TRANSITION_EXIT -> "Are you leaving gas station at %s?"
                         else -> "Invalid transition type"

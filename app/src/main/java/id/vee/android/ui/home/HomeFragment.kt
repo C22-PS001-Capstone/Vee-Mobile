@@ -178,12 +178,26 @@ class HomeFragment : Fragment() {
         }
         viewModel.tokenResponse.observe(viewLifecycleOwner) { tokenData ->
             userToken = tokenData
-            if (tokenData != null) {
-                checkTokenAvailability(viewModel, tokenData, viewLifecycleOwner) {
-                    viewModel.getActivity(tokenData.accessToken)
-                }
+            getLatestData()
+        }
+    }
+
+    private fun getLatestData() {
+        userToken?.let {
+            checkTokenAvailability(viewModel, it, viewLifecycleOwner) { tokenData ->
+                viewModel.getActivity(tokenData.accessToken)
+                viewModel.getGasStations(
+                    tokenData.accessToken,
+                    0.0,
+                    0.0
+                )
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getLatestData()
     }
 
     private fun showRobo(state: Boolean) {
