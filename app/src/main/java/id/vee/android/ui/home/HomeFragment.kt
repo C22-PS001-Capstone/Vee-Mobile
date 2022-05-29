@@ -1,6 +1,5 @@
 package id.vee.android.ui.home
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -116,7 +115,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    @SuppressLint("SetTextI18n")
     private fun setGasStationHomeData(data: List<GasStations>) {
         binding?.apply {
             //data 1
@@ -127,23 +125,13 @@ class HomeFragment : Fragment() {
             }
             tvVendor1.text = data[0].vendor
             val distance1 = data[0].distance
-            distance1?.toDouble()?.let {
-                tvDistance1.apply {
-                    when {
-                        it > 1.0 -> {
-                            text = "${it.toInt()} km"
-                            setTextColor(resources.getColor(R.color.black))
-                        }
-                        it > 0.5 -> {
-                            text = "${it * 1000} m"
-                            setTextColor(resources.getColor(R.color.primary))
-                        }
-                        else -> {
-                            text = "${it * 1000} m"
-                            setTextColor(resources.getColor(R.color.limegreen))
-                        }
-                    }
-                }
+            tvDistance1.text = distance1
+            tvDistance1.apply {
+                if (distance1?.toDouble()!! < 0.3) {
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.limegreen))
+                } else if (distance1.toDouble() < 0.5) {
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+                } else setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
             }
 
             //data 2
@@ -154,23 +142,13 @@ class HomeFragment : Fragment() {
             }
             tvVendor2.text = data[1].vendor
             val distance2 = data[1].distance
-            distance2?.toDouble()?.let {
-                tvDistance2.apply {
-                    when {
-                        it > 1.0 -> {
-                            text = "${it.toInt()} km"
-                            setTextColor(resources.getColor(R.color.black))
-                        }
-                        it > 0.5 -> {
-                            text = "${it * 1000} m"
-                            setTextColor(resources.getColor(R.color.primary))
-                        }
-                        else -> {
-                            text = "${it * 1000} m"
-                            setTextColor(resources.getColor(R.color.limegreen))
-                        }
-                    }
-                }
+            tvDistance2.text = distance2
+            tvDistance2.apply {
+                if (distance2?.toDouble()!! < 0.3) {
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.limegreen))
+                } else if (distance2.toDouble() < 0.5) {
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+                } else setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
             }
 
             //data 3
@@ -181,23 +159,13 @@ class HomeFragment : Fragment() {
             }
             tvVendor3.text = data[2].vendor
             val distance3 = data[2].distance
-            distance3?.toDouble()?.let {
-                tvDistance3.apply {
-                    when {
-                        it > 1.0 -> {
-                            text = "${it.toInt()} km"
-                            setTextColor(resources.getColor(R.color.black))
-                        }
-                        it > 0.5 -> {
-                            text = "${it * 1000} m"
-                            setTextColor(resources.getColor(R.color.primary))
-                        }
-                        else -> {
-                            text = "${it * 1000} m"
-                            setTextColor(resources.getColor(R.color.limegreen))
-                        }
-                    }
-                }
+            tvDistance3.text = distance3
+            tvDistance3.apply {
+                if (distance3?.toDouble()!! < 0.3) {
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.limegreen))
+                } else if (distance3.toDouble() < 0.5) {
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+                } else setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
             }
         }
     }
