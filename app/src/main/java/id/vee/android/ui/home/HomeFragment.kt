@@ -132,15 +132,15 @@ class HomeFragment : Fragment() {
                     when {
                         it > 1.0 -> {
                             text = "${it.toInt()} km"
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                            setTextColor(resources.getColor(R.color.black))
                         }
                         it > 0.5 -> {
                             text = "${it * 1000} m"
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+                            setTextColor(resources.getColor(R.color.primary))
                         }
                         else -> {
                             text = "${it * 1000} m"
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.limegreen))
+                            setTextColor(resources.getColor(R.color.limegreen))
                         }
                     }
                 }
@@ -159,15 +159,15 @@ class HomeFragment : Fragment() {
                     when {
                         it > 1.0 -> {
                             text = "${it.toInt()} km"
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                            setTextColor(resources.getColor(R.color.black))
                         }
                         it > 0.5 -> {
                             text = "${it * 1000} m"
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+                            setTextColor(resources.getColor(R.color.primary))
                         }
                         else -> {
                             text = "${it * 1000} m"
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.limegreen))
+                            setTextColor(resources.getColor(R.color.limegreen))
                         }
                     }
                 }
@@ -186,15 +186,15 @@ class HomeFragment : Fragment() {
                     when {
                         it > 1.0 -> {
                             text = "${it.toInt()} km"
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                            setTextColor(resources.getColor(R.color.black))
                         }
                         it > 0.5 -> {
                             text = "${it * 1000} m"
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+                            setTextColor(resources.getColor(R.color.primary))
                         }
                         else -> {
                             text = "${it * 1000} m"
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.limegreen))
+                            setTextColor(resources.getColor(R.color.limegreen))
                         }
                     }
                 }
