@@ -1,6 +1,5 @@
 package id.vee.android.ui.home
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -92,7 +91,7 @@ class HomeFragment : Fragment() {
                                 rvStories.visibility = View.VISIBLE
                                 progressBar.visibility = View.GONE
                                 if (responses.data?.isNotEmpty() == true) {
-                                    val activities = responses.data
+                                    var activities = responses.data
                                     activities.mapIndexed { index, activity ->
                                         activity.isMonthShow =
                                             (index > 0 && responses.data[index].date.formatDate("MMM") != responses.data[index - 1].date.formatDate(
@@ -116,7 +115,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    @SuppressLint("SetTextI18n")
     private fun setGasStationHomeData(data: List<GasStations>) {
         binding?.apply {
             //data 1
@@ -128,22 +126,12 @@ class HomeFragment : Fragment() {
             tvVendor1.text = data[0].vendor
             val distance1 = data[0].distance
             tvDistance1.text = distance1
-            distance1?.toDouble()?.let {
-                tvDistance1.apply {
-                    when {
-                        it > 1.0 -> {
-                            text = "${it.toInt()} km"
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-                        }
-                        it > 0.5 -> {
-                            text = "${it * 1000} m"
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
-                        }
-                        else -> {
-                            text = "${it * 1000} m"
-                        }
-                    }
-                }
+            tvDistance1.apply {
+                if (distance1?.toDouble()!! < 0.3) {
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                } else if (distance1.toDouble() < 0.5) {
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+                } else setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
             }
 
             //data 2

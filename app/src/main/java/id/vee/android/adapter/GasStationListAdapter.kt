@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import id.vee.android.R
-import id.vee.android.adapter.GasStationListAdapter.MyViewHolder.Companion.DIFF_CALLBACK
 import id.vee.android.databinding.RowGasStationBinding
 import id.vee.android.domain.model.GasStations
 import java.util.*
@@ -32,71 +31,62 @@ class GasStationListAdapter :
     class MyViewHolder(private val binding: RowGasStationBinding) : RecyclerView.ViewHolder(
         binding.root
     ) {
-        @SuppressLint("SetTextI18n")
         fun bind(gasStations: GasStations, context: Context) {
             binding.vendorGasStation.text = gasStations.vendor
             binding.nameGasStation.text = gasStations.name
             gasStations.distance?.toDouble()?.let {
-                binding.distanceGasStation.apply {
-                    when {
-                        it > 1.0 -> {
-                            text = "${it.toInt()} km"
-                            setTextColor(resources.getColor(R.color.black))
-                        }
-                        it > 0.5 -> {
-                            text = "${it * 1000} m"
-                            setTextColor(resources.getColor(R.color.primary))
-                        }
-                        else -> {
-                            text = "${it * 1000} m"
-                            setTextColor(resources.getColor(R.color.limegreen))
-                        }
+                binding.distanceGasStation.text = when {
+                    it > 1.0 -> {
+                        "${it.toInt()} km"
                     }
-                }
-                when (gasStations.vendor) {
-                    "Pertamina" -> binding.ivVendor.setImageResource(R.drawable.pertamina)
-                    "Shell" -> binding.ivVendor.setImageResource(R.drawable.shell)
-                    else -> binding.ivVendor.setImageResource(R.drawable.other_vendor_gasstaions)
-                }
-                try {
-                    if (gasStations.lat != 0.0 && gasStations.lon != 0.0) {
-                        val geocoder = Geocoder(context, Locale.getDefault())
-                        val addresses =
-                            geocoder.getFromLocation(gasStations.lat, gasStations.lon, 1)
-                        val address = StringBuilder()
-                        addresses[0]?.apply {
-                            address.append(this.locality)
-                            address.append(", ")
-                            address.append(this.adminArea)
-                        }
-                        binding.addressGasStations.text = address
-                    } else {
-                        binding.addressGasStations.visibility = View.GONE
+                    else -> {
+                        "${it * 1000} m"
                     }
-                } catch (IOException: Exception) {
-                    binding.addressGasStations.visibility = View.GONE
                 }
             }
-        }
-
-        companion object {
-            val DIFF_CALLBACK: DiffUtil.ItemCallback<GasStations> =
-                object : DiffUtil.ItemCallback<GasStations>() {
-                    override fun areItemsTheSame(
-                        oldGasStations: GasStations,
-                        newGasStations: GasStations
-                    ): Boolean {
-                        return oldGasStations.id == newGasStations.id
+            when (gasStations.vendor) {
+                "Pertamina" -> binding.ivVendor.setImageResource(R.drawable.pertamina)
+                "Shell" -> binding.ivVendor.setImageResource(R.drawable.shell)
+                else -> binding.ivVendor.setImageResource(R.drawable.other_vendor_gasstaions)
+            }
+            try {
+                if (gasStations.lat != 0.0 && gasStations.lon != 0.0) {
+                    val geocoder = Geocoder(context, Locale.getDefault())
+                    val addresses =
+                        geocoder.getFromLocation(gasStations.lat, gasStations.lon, 1)
+                    val address = StringBuilder()
+                    addresses[0]?.apply{
+                        address.append(this.locality)
+                        address.append(", ")
+                        address.append(this.adminArea)
                     }
-
-                    @SuppressLint("DiffUtilEquals")
-                    override fun areContentsTheSame(
-                        oldGasStations: GasStations,
-                        newGasStations: GasStations
-                    ): Boolean {
-                        return oldGasStations == newGasStations
-                    }
+                    binding.addressGasStations.text = address
+                } else {
+                    binding.addressGasStations.visibility = View.GONE
                 }
+            } catch (IOException: Exception) {
+                binding.addressGasStations.visibility = View.GONE
+            }
         }
+    }
+
+    companion object {
+        val DIFF_CALLBACK: DiffUtil.ItemCallback<GasStations> =
+            object : DiffUtil.ItemCallback<GasStations>() {
+                override fun areItemsTheSame(
+                    oldGasStations: GasStations,
+                    newGasStations: GasStations
+                ): Boolean {
+                    return oldGasStations.id == newGasStations.id
+                }
+
+                @SuppressLint("DiffUtilEquals")
+                override fun areContentsTheSame(
+                    oldGasStations: GasStations,
+                    newGasStations: GasStations
+                ): Boolean {
+                    return oldGasStations == newGasStations
+                }
+            }
     }
 }
