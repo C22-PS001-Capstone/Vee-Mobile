@@ -23,7 +23,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", 'API_URL', '"https://vee-api.herokuapp.com/"'
+        buildConfigField "String", 'API_URL', projectProperties['API_URL']
         buildConfigField "String", 'GOOGLE_CLIENT_ID', projectProperties['CLIENT_ID']
     }
 

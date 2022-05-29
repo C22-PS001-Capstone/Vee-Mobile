@@ -13,9 +13,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -38,6 +36,27 @@ class MainActivity : AppCompatActivity() {
     }
     private val geofencingClient: GeofencingClient by lazy {
         LocationServices.getGeofencingClient(this)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.action_bar_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+            R.id.menu_notification -> {
+                val navController = findNavController(R.id.nav_host_fragment_activity_main)
+                navController.navigateUp()
+                navController.navigate(R.id.navigation_notification)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 
@@ -77,16 +96,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-        // Permission
-        if (!allPermissionsGranted()) {
-            ActivityCompat.requestPermissions(
-                this,
-                REQUIRED_PERMISSIONS,
-                REQUEST_CODE_PERMISSIONS
-            )
-        }
-        checkMyLocation()
+        getMyLocation()
         addGeofence()
     }
 
@@ -132,63 +142,37 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private val requestBackgroundLocationPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                getMyLocation()
+            }
+        }
+
+    private val runningQOrLater = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
+
     @TargetApi(Build.VERSION_CODES.Q)
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_CODE_PERMISSIONS) {
-            if (!allPermissionsGranted()) {
-                AlertDialog.Builder(this).apply {
-                    setTitle(getString(R.string.missing_permission))
-                    setMessage(getString(R.string.missing_permission_description))
-                    setPositiveButton(getString(R.string.yes)) { _, _ -> }
-                    show()
-                }
-            } else {
+    private val requestLocationPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
                 if (runningQOrLater) {
                     requestBackgroundLocationPermissionLauncher.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+                } else {
+                    getMyLocation()
                 }
             }
         }
-    }
 
-    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
-        ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.action_bar_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                onBackPressed()
-                return true
-            }
-            R.id.menu_notification -> {
-                val navController = findNavController(R.id.nav_host_fragment_activity_main)
-                navController.navigateUp()
-                navController.navigate(R.id.navigation_notification)
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    // Permission
     private fun checkPermission(permission: String): Boolean {
         return ContextCompat.checkSelfPermission(
             this,
             permission
         ) == PackageManager.PERMISSION_GRANTED
     }
-
-    private val runningQOrLater = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
 
     @TargetApi(Build.VERSION_CODES.Q)
     private fun checkForegroundAndBackgroundLocationPermission(): Boolean {
@@ -202,36 +186,10 @@ class MainActivity : AppCompatActivity() {
         return foregroundLocationApproved && backgroundPermissionApproved
     }
 
-    @RequiresApi(Build.VERSION_CODES.Q)
-    private val requestBackgroundLocationPermissionLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted: Boolean ->
-            if (isGranted) {
-                checkMyLocation()
-            }
-        }
-
-    @RequiresApi(Build.VERSION_CODES.Q)
     @SuppressLint("MissingPermission")
-    private fun checkMyLocation() {
+    private fun getMyLocation() {
         if (!checkForegroundAndBackgroundLocationPermission()) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_BACKGROUND_LOCATION
-                ),
-                REQUEST_CODE_PERMISSIONS
-            )
+            requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
-    }
-
-    companion object {
-        val REQUIRED_PERMISSIONS = arrayOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        )
-        const val REQUEST_CODE_PERMISSIONS = 10
     }
 }
