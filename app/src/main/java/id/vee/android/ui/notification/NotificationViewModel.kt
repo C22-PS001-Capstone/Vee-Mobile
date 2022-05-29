@@ -5,5 +5,4 @@ import id.vee.android.domain.usecase.VeeUseCase
 
 class NotificationViewModel constructor(
     veeUseCase: VeeUseCase
-) : ViewModel() {
-}
+) : ViewModel()
