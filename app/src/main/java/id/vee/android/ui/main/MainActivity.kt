@@ -1,16 +1,20 @@
-package id.vee.android.ui
+package id.vee.android.ui.main
 
 import android.Manifest
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.PendingIntent
 import android.content.Intent
+import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
+import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -19,15 +23,15 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.gms.location.Geofence
-import com.google.android.gms.location.GeofencingClient
-import com.google.android.gms.location.GeofencingRequest
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import id.vee.android.R
 import id.vee.android.databinding.ActivityMainBinding
 import id.vee.android.service.NearestGasStationReceiver
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 
 @SuppressLint("UnspecifiedImmutableFlag")
 class MainActivity : AppCompatActivity() {
@@ -37,6 +41,20 @@ class MainActivity : AppCompatActivity() {
     private val geofencingClient: GeofencingClient by lazy {
         LocationServices.getGeofencingClient(this)
     }
+    private val locationRequest: LocationRequest by lazy {
+        LocationRequest.create().apply {
+            interval = TimeUnit.SECONDS.toMillis(1)
+            maxWaitTime = TimeUnit.SECONDS.toMillis(1)
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
+    }
+    private lateinit var locationCallback: LocationCallback
+
+    private val fusedLocationClient: FusedLocationProviderClient by lazy {
+        LocationServices.getFusedLocationProviderClient(this)
+    }
+    private val viewModel: MainViewModel by viewModel()
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
@@ -96,9 +114,53 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        getMyLocation()
+        createLocationRequest()
         addGeofence()
+        createLocationCallback()
+        startLocationUpdates()
+        viewModel.getLiveLocation()
+        viewModel.locationResponse.observe(this) {
+            Timber.d("locationResponse: $it")
+        }
     }
+
+    private val resolutionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.StartIntentSenderForResult()
+        ) { result ->
+            when (result.resultCode) {
+                RESULT_OK ->
+                    Timber.i("onActivityResult: All location settings are satisfied.")
+                RESULT_CANCELED ->
+                    Toast.makeText(
+                        this@MainActivity,
+                        "You should turn on GPS to use this app",
+                        Toast.LENGTH_SHORT
+                    ).show()
+            }
+        }
+
+    private fun createLocationRequest() {
+        val builder = LocationSettingsRequest.Builder()
+            .addLocationRequest(locationRequest)
+        val client = LocationServices.getSettingsClient(this)
+        client.checkLocationSettings(builder.build())
+            .addOnSuccessListener {
+                getMyLocation()
+            }
+            .addOnFailureListener { exception ->
+                if (exception is ResolvableApiException) {
+                    try {
+                        resolutionLauncher.launch(
+                            IntentSenderRequest.Builder(exception.resolution).build()
+                        )
+                    } catch (sendEx: IntentSender.SendIntentException) {
+                        Toast.makeText(this, sendEx.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+    }
+
 
     // Geofencing
     private val geofencePendingIntent: PendingIntent by lazy {
@@ -192,4 +254,34 @@ class MainActivity : AppCompatActivity() {
             requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
     }
+
+    private fun createLocationCallback() {
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult) {
+                Timber.d("createLocationCallback")
+                locationResult.lastLocation
+                for (location in locationResult.locations) {
+                    Timber.d("location: ${location.latitude}, ${location.longitude}")
+                    viewModel.updateLocation(location.latitude, location.longitude)
+                }
+            }
+
+            override fun onLocationAvailability(availability: LocationAvailability) {
+                Timber.d("onLocationAvailability: ${availability.isLocationAvailable}")
+            }
+        }
+    }
+
+    private fun startLocationUpdates() {
+        try {
+            fusedLocationClient.requestLocationUpdates(
+                locationRequest,
+                locationCallback,
+                Looper.getMainLooper()
+            )
+        } catch (exception: SecurityException) {
+            Timber.e("Error : " + exception.message)
+        }
+    }
+
 }

@@ -1,17 +1,11 @@
 package id.vee.android.ui.gas
 
-import android.Manifest
-import android.content.Context
-import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -64,7 +58,6 @@ class NearestGasStationFragment : Fragment() {
         viewModelListener()
         context?.let { ctx ->
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(ctx)
-            getMyLastLocation(ctx)
             binding?.apply {
                 rvGasStations.apply {
                     layoutManager = LinearLayoutManager(ctx)
@@ -73,6 +66,7 @@ class NearestGasStationFragment : Fragment() {
                 }
             }
         }
+        viewModel.getLiveLocation()
         viewModel.getToken()
         binding?.apply {
             viewModel.gasStationsResponse.observe(viewLifecycleOwner) { responses ->
@@ -104,10 +98,19 @@ class NearestGasStationFragment : Fragment() {
     }
 
     private fun viewModelListener() {
+        viewModel.locationResponse.observe(viewLifecycleOwner) { location ->
+            currentLocation = location
+        }
         viewModel.tokenResponse.observe(viewLifecycleOwner) { tokenData ->
             userToken = tokenData
             getGasStations()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getLiveLocation()
+        getGasStations()
     }
 
     private fun getGasStations() {
@@ -127,60 +130,6 @@ class NearestGasStationFragment : Fragment() {
                     )
                 }
             }
-        }
-    }
-
-    private val requestPermissionLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions()
-        ) { permissions ->
-            when {
-                permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> {
-                    // Precise location access granted.
-                    context?.let { getMyLastLocation(it) }
-                }
-                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> {
-                    // Only approximate location access granted.
-                    context?.let { getMyLastLocation(it) }
-                }
-                else -> {
-                    // No location access granted.
-                }
-            }
-        }
-
-    private fun checkPermission(permission: String, context: Context): Boolean {
-        return ContextCompat.checkSelfPermission(
-            context,
-            permission
-        ) == PackageManager.PERMISSION_GRANTED
-    }
-
-    private fun getMyLastLocation(context: Context) {
-        if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION, context) &&
-            checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION, context)
-        ) {
-            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-                if (location != null) {
-                    currentLocation = location
-                } else {
-                    Toast.makeText(
-                        context,
-                        getString(R.string.location_not_found),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    showLocationNotAvailable()
-                }
-            }.addOnFailureListener {
-                Timber.e(it)
-            }
-        } else {
-            requestPermissionLauncher.launch(
-                arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                )
-            )
         }
     }
 

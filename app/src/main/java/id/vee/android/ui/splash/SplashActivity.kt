@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import id.vee.android.databinding.ActivitySplashBinding
 import id.vee.android.ui.GeneralViewModel
-import id.vee.android.ui.MainActivity
+import id.vee.android.ui.main.MainActivity
 import id.vee.android.ui.welcome.WelcomeActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

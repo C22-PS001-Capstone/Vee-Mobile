@@ -10,13 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import id.vee.android.BuildConfig
 import id.vee.android.R
 import id.vee.android.databinding.ActivityLoginBinding
-import id.vee.android.ui.MainActivity
+import id.vee.android.ui.main.MainActivity
 import id.vee.android.utils.DataMapper
 import id.vee.android.utils.getCurrentUnix
 import id.vee.android.utils.isValidEmail
