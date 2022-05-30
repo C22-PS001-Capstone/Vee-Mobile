@@ -42,15 +42,30 @@ class GasStationListAdapter :
                     when {
                         distance < 0.3 -> {
                             distanceGasStation.text = "${distance * 1000} m"
-                            cardContainer.setBackgroundColor(ContextCompat.getColor(context, R.color.red_background))
+                            cardContainer.setBackgroundColor(
+                                ContextCompat.getColor(
+                                    context,
+                                    R.color.red_background
+                                )
+                            )
                         }
                         distance < 0.5 -> {
                             distanceGasStation.text = "${distance * 1000} m"
-                            cardContainer.setBackgroundColor(ContextCompat.getColor(context, R.color.yellow_background))
+                            cardContainer.setBackgroundColor(
+                                ContextCompat.getColor(
+                                    context,
+                                    R.color.yellow_background
+                                )
+                            )
                         }
                         else -> {
                             distanceGasStation.text = "$distance km"
-                            cardContainer.setBackgroundColor(ContextCompat.getColor(context, R.color.green_background))
+                            cardContainer.setBackgroundColor(
+                                ContextCompat.getColor(
+                                    context,
+                                    R.color.green_background
+                                )
+                            )
                         }
                     }
                 }
