@@ -42,8 +42,9 @@ class MainActivity : AppCompatActivity() {
         LocationServices.getGeofencingClient(this)
     }
     private val locationRequest: LocationRequest by lazy {
+        // Update interval while web server has cache
         LocationRequest.create().apply {
-            interval = TimeUnit.SECONDS.toMillis(1) * 10
+            interval = TimeUnit.SECONDS.toMillis(1) * 5 * 60
             maxWaitTime = TimeUnit.SECONDS.toMillis(1)
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
@@ -281,6 +282,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun stopLocationUpdates() {
         fusedLocationClient.removeLocationUpdates(locationCallback)
     }
