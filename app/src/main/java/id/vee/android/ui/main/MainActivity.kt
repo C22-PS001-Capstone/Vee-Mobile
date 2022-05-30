@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var locationCallback: LocationCallback
 
     private var lastLocation: Location? = null
+    private var lastGeofenceLocation: Location? = null
 
     private val fusedLocationClient: FusedLocationProviderClient by lazy {
         LocationServices.getFusedLocationProviderClient(this)
@@ -63,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
     private val mGeofenceList: MutableList<Geofence> = mutableListOf()
 
-    private val radiusMeter: Float = 50f
+    private val radiusMeter: Float = 150f
 
     private var hashedData = ""
 
@@ -134,7 +135,13 @@ class MainActivity : AppCompatActivity() {
             Timber.d("locationResponse: $it")
         }
         viewModel.stationsResponse.observe(this) { gasStations ->
-            if (gasStations.isNotEmpty() && hashedData != gasStations.toString().toMD5()) {
+            if (gasStations.isNotEmpty() && hashedData != gasStations.toString()
+                    .toMD5()
+            ) {
+                val lastGasStationLocation = Location("LastLocation").apply {
+                    latitude = gasStations.last().lat
+                    longitude = gasStations.last().lon
+                }
                 hashedData = gasStations.toString().toMD5()
                 mGeofenceList.clear()
                 gasStations.forEach {
@@ -148,11 +155,24 @@ class MainActivity : AppCompatActivity() {
                                 radiusMeter
                             )
                             .setExpirationDuration(TimeUnit.HOURS.toMillis(1))
-                            .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER or Geofence.GEOFENCE_TRANSITION_EXIT)
+                            .setLoiteringDelay(5 * 60 * 1000) //5 minutes for staying in geofence
+                            .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_DWELL)
                             .build()
                     )
                 }
-                addGeofence()
+                if (lastGeofenceLocation == null) {
+                    addGeofence()
+                } else {
+                    lastGeofenceLocation?.let {
+                        if (it.distanceTo(lastGasStationLocation) > 1000) {
+                            addGeofence()
+                        }
+                    }
+                }
+                lastGeofenceLocation = Location("Geofence").apply {
+                    latitude = gasStations[gasStations.size - 1].lat
+                    longitude = gasStations[gasStations.size - 1].lon
+                }
             }
         }
     }
