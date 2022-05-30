@@ -17,8 +17,8 @@
         <item name="actionBarTheme">@style/ThemeOverlay.ActionBar</item>
         <item name="android:textViewStyle">@style/NunitoTextViewStyle</item>
         <item name="android:buttonStyle">@style/NunitoButtonStyle</item>
-
     </style>
+
 
     <style name="ThemeEditText">
         <!-- bottom line color -->
@@ -27,6 +27,24 @@
         <item name="android:textColor">@color/black</item>
         <!-- hint text color -->
         <item name="android:textColorHint">@color/grey</item>
+    </style>
+
+    <style name="drawableColor">
+        <item name="android:drawableTint">@color/grey</item>
+    </style>
+
+    <style name="IconTheme">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:drawableTint">@color/grey</item>
+        <item name="android:fontFamily">@font/nunito_extra_bold</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="NunitoTextViewStyle" parent="android:Widget.TextView">

@@ -28,6 +28,9 @@ open class GeneralViewModel constructor(
     private var _themeResponse: MutableLiveData<Boolean> = MutableLiveData()
     val themeResponse: LiveData<Boolean> = _themeResponse
 
+    private var _batterySaverResponse: MutableLiveData<Boolean> = MutableLiveData()
+    val batterySaverResponse: LiveData<Boolean> = _batterySaverResponse
+
     private var _locationResponse: MutableLiveData<Location> = MutableLiveData()
     val locationResponse: LiveData<Location> = _locationResponse
 
@@ -56,6 +59,11 @@ open class GeneralViewModel constructor(
     fun getThemeSettings() = viewModelScope.launch {
         pref.getSettings().collect { values ->
             _themeResponse.postValue(values.theme)
+        }
+    }
+    fun getBatterySaverSettings() = viewModelScope.launch {
+        pref.getSettings().collect { values ->
+            _batterySaverResponse.postValue(values.saverMode)
         }
     }
 

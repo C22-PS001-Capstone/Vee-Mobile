@@ -42,7 +42,7 @@
         android:id="@+id/fab_add_activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/secondary"
+        android:backgroundTint="?colorSecondary"
         android:contentDescription="@string/fab_add_activity"
         android:src="@drawable/ic_baseline_add_24"
         android:visibility="visible"

@@ -2,10 +2,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:fillViewport="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="45dp"
+    android:fillViewport="true"
     android:orientation="vertical"
     android:paddingLeft="16dp"
     android:paddingTop="16dp"
@@ -16,8 +16,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="32dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="32dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -27,6 +27,7 @@
             android:text="@string/nearest_gas_station"
             android:textColor="?android:textColorPrimary"
             android:textSize="20sp" />
+
         <ProgressBar
             android:id="@+id/progress_bar_nearest"
             android:layout_width="48dp"
@@ -34,6 +35,7 @@
             android:layout_gravity="center"
             android:indeterminateTint="@color/grey_800"
             android:visibility="gone" />
+
         <TextView
             android:id="@+id/tv_no_data_gas_stations"
             android:layout_width="match_parent"
@@ -58,6 +60,7 @@
             android:visibility="gone">
 
             <LinearLayout
+                android:id="@+id/gas_station1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -93,6 +96,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/gas_station2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -128,6 +132,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/gas_station3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

@@ -13,10 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import id.vee.android.R
 import id.vee.android.adapter.GasStationListAdapter.MyViewHolder.Companion.DIFF_CALLBACK
 import id.vee.android.databinding.RowGasStationBinding
+import id.vee.android.domain.model.Activity
 import id.vee.android.domain.model.GasStations
 import java.util.*
 
-class GasStationListAdapter :
+class GasStationListAdapter(private val onItemClick: (GasStations) -> Unit) :
     ListAdapter<GasStations, GasStationListAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -28,6 +29,9 @@ class GasStationListAdapter :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val gasStation = getItem(position)
         holder.bind(gasStation, holder.itemView.context)
+        holder.itemView.setOnClickListener {
+            onItemClick(gasStation)
+        }
     }
 
     class MyViewHolder(private val binding: RowGasStationBinding) : RecyclerView.ViewHolder(
