@@ -1,6 +1,5 @@
 package id.vee.android.data
 
-import android.location.Location
 import id.vee.android.data.local.LocalDataSource
 import id.vee.android.data.remote.RemoteDataSource
 import id.vee.android.data.remote.network.ApiResponse
@@ -59,6 +58,7 @@ class VeeRepository(
             )
         }
     }
+
     override fun loginGoogle(token: String): Flow<LoginResponse> {
         return flow {
             emit(remoteDataSource.loginGoogle(token))
@@ -135,8 +135,10 @@ class VeeRepository(
 
             override fun shouldFetch(data: List<GasStations>?): Boolean = true
 
-            override suspend fun createCall(): Flow<ApiResponse<List<GasStationsResponse>>> =
-                remoteDataSource.getGasStations(token, lat, lon)
+            override suspend fun createCall(): Flow<ApiResponse<List<GasStationsResponse>>> {
+                localDataSource.deleteGasStations()
+                return remoteDataSource.getGasStations(token, lat, lon)
+            }
 
             override suspend fun saveCallResult(data: List<GasStationsResponse>) {
                 val gasStationsList = DataMapper.mapResponsesToEntities(data)
@@ -168,6 +170,11 @@ class VeeRepository(
             emit(remoteDataSource.deleteActivity(accessToken, id))
         }
     }
+
+    override suspend fun getLocalStations(): Flow<List<GasStations>> =
+        localDataSource.getGasStations().map {
+            DataMapper.mapEntitiesToDomain(it)
+        }
 
     override fun updateActivity(
         id: String,

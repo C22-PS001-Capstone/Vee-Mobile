@@ -43,4 +43,6 @@ class LocalDataSource(
 
     fun getNearestGasStation(latitude: Double, longitude: Double): Flow<List<GasStationsEntity>> =
         mUserDao.getNearestGasStation(latitude, longitude)
+
+    suspend fun deleteGasStations() = mUserDao.deleteGasStations()
 }

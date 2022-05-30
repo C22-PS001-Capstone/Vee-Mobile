@@ -96,4 +96,5 @@ class VeeInteractor(private val repository: VeeDataSource) : VeeUseCase {
     ): Flow<Resource<List<GasStations>>> =
         repository.getGasStations(token, lat, lon)
 
+    override suspend fun getLocalStations(): Flow<List<GasStations>> = repository.getLocalStations()
 }
