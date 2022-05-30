@@ -72,4 +72,6 @@ interface VeeDataSource {
         lat: Double,
         long: Double
     ): Flow<BasicResponse>
+
+    suspend fun getLocalStations(): Flow<List<GasStations>>
 }

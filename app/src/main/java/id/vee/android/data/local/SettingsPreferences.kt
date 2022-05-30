@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.doublePreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
+import id.vee.android.domain.model.GasStations
 import id.vee.android.domain.model.Settings
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -40,5 +41,9 @@ class SettingsPreferences(private val context: Context) : SettingsInterface {
             preferences[lat_setting] = lat
             preferences[lon_setting] = lon
         }
+    }
+
+    override fun getStations(): Flow<List<GasStations>> {
+        TODO("Not yet implemented")
     }
 }

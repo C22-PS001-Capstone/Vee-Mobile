@@ -30,9 +30,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import id.vee.android.R
 import id.vee.android.databinding.ActivityMainBinding
 import id.vee.android.service.NearestGasStationReceiver
+import id.vee.android.utils.toMD5
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
+
 
 @SuppressLint("UnspecifiedImmutableFlag")
 class MainActivity : AppCompatActivity() {
@@ -59,6 +61,11 @@ class MainActivity : AppCompatActivity() {
     }
     private val viewModel: MainViewModel by viewModel()
 
+    private val mGeofenceList: MutableList<Geofence> = mutableListOf()
+
+    private val radiusMeter: Float = 50f
+
+    private var hashedData = ""
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
@@ -119,12 +126,34 @@ class MainActivity : AppCompatActivity() {
             }
         }
         createLocationRequest()
-        addGeofence()
         createLocationCallback()
         startLocationUpdates()
         viewModel.getLiveLocation()
+        viewModel.getLocalStations()
         viewModel.locationResponse.observe(this) {
             Timber.d("locationResponse: $it")
+        }
+        viewModel.stationsResponse.observe(this) { gasStations ->
+            if (gasStations.isNotEmpty() && hashedData != gasStations.toString().toMD5()) {
+                hashedData = gasStations.toString().toMD5()
+                mGeofenceList.clear()
+                gasStations.forEach {
+                    val id = "${it.name}"
+                    mGeofenceList.add(
+                        Geofence.Builder()
+                            .setRequestId(id)
+                            .setCircularRegion(
+                                it.lat,
+                                it.lon,
+                                radiusMeter
+                            )
+                            .setExpirationDuration(TimeUnit.HOURS.toMillis(1))
+                            .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER or Geofence.GEOFENCE_TRANSITION_EXIT)
+                            .build()
+                    )
+                }
+                addGeofence()
+            }
         }
     }
 
@@ -179,20 +208,9 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("MissingPermission")
     private fun addGeofence() {
-        val geofence = Geofence.Builder()
-            .setRequestId("kampus")
-            .setCircularRegion(
-                -6.243716,
-                106.626614,
-                400.0.toFloat()
-            )
-            .setExpirationDuration(Geofence.NEVER_EXPIRE)
-            .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_DWELL or Geofence.GEOFENCE_TRANSITION_ENTER or Geofence.GEOFENCE_TRANSITION_EXIT)
-            .setLoiteringDelay(5000)
-            .build()
         val geofencingRequest = GeofencingRequest.Builder()
             .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
-            .addGeofence(geofence)
+            .addGeofences(mGeofenceList)
             .build()
         geofencingClient.removeGeofences(geofencePendingIntent).run {
             addOnCompleteListener {
@@ -266,6 +284,18 @@ class MainActivity : AppCompatActivity() {
     private fun getMyLocation() {
         if (!checkForegroundAndBackgroundLocationPermission()) {
             requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+        } else {
+            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                if (location != null) {
+                    viewModel.updateLocation(location.latitude, location.longitude)
+                } else {
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Location is not found. Try Again",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
     }
 
@@ -274,12 +304,12 @@ class MainActivity : AppCompatActivity() {
             override fun onLocationResult(locationResult: LocationResult) {
                 locationResult.lastLocation
                 for (location in locationResult.locations) {
-                    if(lastLocation == null){
+                    if (lastLocation == null) {
                         lastLocation = location
                     }
                     val distance = location.distanceTo(lastLocation)
                     Timber.d("Distance : $distance")
-                    if(distance > 1000){
+                    if (distance > 100 || location.latitude == 0.0) {
                         Timber.d("location: ${location.latitude}, ${location.longitude}")
                         lastLocation = location
                         viewModel.updateLocation(location.latitude, location.longitude)

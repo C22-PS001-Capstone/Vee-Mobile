@@ -5,8 +5,33 @@ import android.widget.EditText
 import androidx.lifecycle.LifecycleOwner
 import id.vee.android.domain.model.Token
 import id.vee.android.ui.GeneralViewModel
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 import java.text.SimpleDateFormat
 import java.util.*
+
+
+fun String.toMD5(): String {
+    try {
+        // Create MD5 Hash
+        val digest: MessageDigest = MessageDigest
+            .getInstance("MD5")
+        digest.update(this.toByteArray())
+        val messageDigest: ByteArray = digest.digest()
+
+        // Create Hex String
+        val hexString = StringBuilder()
+        for (aMessageDigest in messageDigest) {
+            var h = Integer.toHexString(0xFF and aMessageDigest.toInt())
+            while (h.length < 2) h = "0$h"
+            hexString.append(h)
+        }
+        return hexString.toString()
+    } catch (e: NoSuchAlgorithmException) {
+        e.printStackTrace()
+    }
+    return ""
+}
 
 fun String.isValidEmail(): Boolean {
     return !TextUtils.isEmpty(this) && android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()

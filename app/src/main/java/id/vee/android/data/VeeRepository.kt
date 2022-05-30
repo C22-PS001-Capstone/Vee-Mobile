@@ -171,6 +171,11 @@ class VeeRepository(
         }
     }
 
+    override suspend fun getLocalStations(): Flow<List<GasStations>> =
+        localDataSource.getGasStations().map {
+            DataMapper.mapEntitiesToDomain(it)
+        }
+
     override fun updateActivity(
         id: String,
         token: String,
