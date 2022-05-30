@@ -22,7 +22,7 @@ jobs:
         env:
           PROPERTIES: ${{ secrets.PROJECT_PROPERTIES }}
         run: |
-          touch project.properties && echo $PROPERTIES > project.properties
+          touch project.properties && echo "$PROPERTIES" > project.properties
       - name: Add google services
         env:
           DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
@@ -49,7 +49,7 @@ jobs:
         env:
           PROPERTIES: ${{ secrets.PROJECT_PROPERTIES }}
         run: |
-          touch project.properties && echo $PROPERTIES > project.properties
+          touch project.properties && echo "$PROPERTIES" > project.properties
       - name: Add google services
         env:
           DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
