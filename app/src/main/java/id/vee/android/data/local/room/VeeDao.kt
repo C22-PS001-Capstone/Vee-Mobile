@@ -47,4 +47,7 @@ interface VeeDao {
 
     @Query("DELETE FROM gas_stations_entities WHERE 1")
     suspend fun deleteGasStations()
+
+    @Query("DELETE FROM activity_entities WHERE 1")
+    suspend fun deleteActivities()
 }

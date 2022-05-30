@@ -156,10 +156,13 @@ class VeeRepository(
 
             override fun shouldFetch(data: List<Activity>?): Boolean = true
 
-            override suspend fun createCall(): Flow<ApiResponse<List<ActivityResponse>>> =
-                remoteDataSource.getActivity(token)
+            override suspend fun createCall(): Flow<ApiResponse<List<ActivityResponse>>> {
+                return remoteDataSource.getActivity(token)
+            }
+
 
             override suspend fun saveCallResult(data: List<ActivityResponse>) {
+                localDataSource.deleteActivities()
                 val activityList = DataMapper.mapResponsesToEntities(data)
                 localDataSource.insertActivity(activityList)
             }

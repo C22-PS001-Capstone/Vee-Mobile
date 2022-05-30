@@ -45,4 +45,5 @@ class LocalDataSource(
         mUserDao.getNearestGasStation(latitude, longitude)
 
     suspend fun deleteGasStations() = mUserDao.deleteGasStations()
+    suspend fun deleteActivities() = mUserDao.deleteActivities()
 }
