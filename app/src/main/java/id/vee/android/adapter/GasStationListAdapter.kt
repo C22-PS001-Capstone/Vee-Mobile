@@ -38,19 +38,19 @@ class GasStationListAdapter :
             binding.vendorGasStation.text = gasStations.vendor
             binding.nameGasStation.text = gasStations.name
             gasStations.distance?.toDouble()?.let { distance ->
-                binding.distanceGasStation.apply {
+                binding.apply {
                     when {
                         distance < 0.3 -> {
-                            text = "${distance * 1000} m"
-                            setTextColor(ContextCompat.getColor(context, R.color.limegreen))
+                            distanceGasStation.text = "${distance * 1000} m"
+                            cardContainer.setBackgroundColor(ContextCompat.getColor(context, R.color.red_background))
                         }
                         distance < 0.5 -> {
-                            text = "${distance * 1000} m"
-                            setTextColor(ContextCompat.getColor(context, R.color.primary))
+                            distanceGasStation.text = "${distance * 1000} m"
+                            cardContainer.setBackgroundColor(ContextCompat.getColor(context, R.color.yellow_background))
                         }
                         else -> {
-                            text = "$distance km"
-                            setTextColor(ContextCompat.getColor(context, R.color.black))
+                            distanceGasStation.text = "$distance km"
+                            cardContainer.setBackgroundColor(ContextCompat.getColor(context, R.color.green_background))
                         }
                     }
                 }
