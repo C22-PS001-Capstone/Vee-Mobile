@@ -6,6 +6,7 @@ import android.location.Geocoder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -40,16 +41,16 @@ class GasStationListAdapter :
                 binding.distanceGasStation.apply {
                     when {
                         it > 1.0 -> {
-                            text = "${it.toInt()} km"
-                            setTextColor(resources.getColor(R.color.black))
+                            text = "$it km"
+                            setTextColor(ContextCompat.getColor(context, R.color.black))
                         }
                         it > 0.5 -> {
                             text = "${it * 1000} m"
-                            setTextColor(resources.getColor(R.color.primary))
+                            setTextColor(ContextCompat.getColor(context, R.color.primary))
                         }
-                        else -> {
+                        it > 0.0 -> {
                             text = "${it * 1000} m"
-                            setTextColor(resources.getColor(R.color.limegreen))
+                            setTextColor(ContextCompat.getColor(context, R.color.limegreen))
                         }
                     }
                 }

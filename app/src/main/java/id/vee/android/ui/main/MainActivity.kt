@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     }
     private val locationRequest: LocationRequest by lazy {
         LocationRequest.create().apply {
-            interval = TimeUnit.SECONDS.toMillis(1)
+            interval = TimeUnit.SECONDS.toMillis(1) * 10
             maxWaitTime = TimeUnit.SECONDS.toMillis(1)
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
@@ -229,6 +229,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    override fun onPause() {
+        super.onPause()
+        stopLocationUpdates()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        startLocationUpdates()
+    }
+
     private fun checkPermission(permission: String): Boolean {
         return ContextCompat.checkSelfPermission(
             this,
@@ -270,6 +280,9 @@ class MainActivity : AppCompatActivity() {
                 Timber.d("onLocationAvailability: ${availability.isLocationAvailable}")
             }
         }
+    }
+    private fun stopLocationUpdates() {
+        fusedLocationClient.removeLocationUpdates(locationCallback)
     }
 
     private fun startLocationUpdates() {
