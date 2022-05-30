@@ -4,8 +4,8 @@ import androidx.room.Room
 import id.vee.android.BuildConfig
 import id.vee.android.data.VeeRepository
 import id.vee.android.data.local.LocalDataSource
-import id.vee.android.data.local.ThemeInterface
-import id.vee.android.data.local.ThemePreferences
+import id.vee.android.data.local.SettingsInterface
+import id.vee.android.data.local.SettingsPreferences
 import id.vee.android.data.local.room.VeeDatabase
 import id.vee.android.data.remote.RemoteDataSource
 import id.vee.android.data.remote.network.ApiService
@@ -17,6 +17,7 @@ import id.vee.android.ui.activity.ActivityViewModel
 import id.vee.android.ui.gas.GasStationsViewModel
 import id.vee.android.ui.home.HomeViewModel
 import id.vee.android.ui.login.LoginViewModel
+import id.vee.android.ui.main.MainViewModel
 import id.vee.android.ui.notification.NotificationViewModel
 import id.vee.android.ui.profile.ProfileViewModel
 import id.vee.android.ui.profile.ThemeViewModel
@@ -67,7 +68,7 @@ val repositoryModule = module {
     single<VeeDataSource> { VeeRepository(get(), get()) }
 }
 val preferencesModule = module {
-    factory<ThemeInterface> { ThemePreferences(androidContext()) }
+    factory<SettingsInterface> { SettingsPreferences(androidContext()) }
 }
 
 val useCaseModule = module {
@@ -83,4 +84,5 @@ val viewModelModule = module {
     viewModel { GeneralViewModel(get(), get()) }
     viewModel { ThemeViewModel(get()) }
     viewModel { GasStationsViewModel(get(), get()) }
+    viewModel { MainViewModel(get(), get()) }
 }

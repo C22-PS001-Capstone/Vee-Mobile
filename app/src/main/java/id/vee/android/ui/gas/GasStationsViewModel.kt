@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import id.vee.android.data.Resource
-import id.vee.android.data.local.ThemeInterface
+import id.vee.android.data.local.SettingsInterface
 import id.vee.android.domain.model.GasStations
 import id.vee.android.domain.usecase.VeeUseCase
 import id.vee.android.ui.GeneralViewModel
@@ -13,7 +13,7 @@ import timber.log.Timber
 
 class GasStationsViewModel constructor(
     private val useCase: VeeUseCase,
-    pref: ThemeInterface
+    pref: SettingsInterface
 ) : GeneralViewModel(useCase, pref) {
     private val _gasStationsResponse: MutableLiveData<Resource<List<GasStations>>> =
         MutableLiveData()

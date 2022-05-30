@@ -1,10 +1,11 @@
 package id.vee.android.ui
 
+import android.location.Location
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import id.vee.android.data.local.ThemeInterface
+import id.vee.android.data.local.SettingsInterface
 import id.vee.android.data.remote.response.LoginResponse
 import id.vee.android.domain.model.Token
 import id.vee.android.domain.model.User
@@ -13,7 +14,7 @@ import kotlinx.coroutines.launch
 
 open class GeneralViewModel constructor(
     private val useCase: VeeUseCase,
-    private val pref: ThemeInterface
+    val pref: SettingsInterface
 ) : ViewModel() {
     private val _user: MutableLiveData<User> = MutableLiveData()
     val userResponse: LiveData<User> = _user
@@ -26,6 +27,9 @@ open class GeneralViewModel constructor(
 
     private var _themeResponse: MutableLiveData<Boolean> = MutableLiveData()
     val themeResponse: LiveData<Boolean> = _themeResponse
+
+    private var _locationResponse: MutableLiveData<Location> = MutableLiveData()
+    val locationResponse: LiveData<Location> = _locationResponse
 
     fun getUserData() = viewModelScope.launch {
         useCase.getUser().collect { values ->
@@ -50,8 +54,17 @@ open class GeneralViewModel constructor(
     }
 
     fun getThemeSettings() = viewModelScope.launch {
-        pref.getThemeSetting().collect { values ->
-            _themeResponse.postValue(values)
+        pref.getSettings().collect { values ->
+            _themeResponse.postValue(values.theme)
+        }
+    }
+
+    fun getLiveLocation() = viewModelScope.launch {
+        pref.getSettings().collect { values ->
+            _locationResponse.postValue(Location("Live").apply{
+                latitude = values.latitude
+                longitude = values.longitude
+            })
         }
     }
 }
