@@ -7,6 +7,7 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
@@ -44,12 +45,14 @@ class MainActivity : AppCompatActivity() {
     private val locationRequest: LocationRequest by lazy {
         // Update interval while web server has cache
         LocationRequest.create().apply {
-            interval = TimeUnit.SECONDS.toMillis(1) * 5 * 60
+            interval = TimeUnit.SECONDS.toMillis(1)
             maxWaitTime = TimeUnit.SECONDS.toMillis(1)
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
     }
     private lateinit var locationCallback: LocationCallback
+
+    private var lastLocation: Location? = null
 
     private val fusedLocationClient: FusedLocationProviderClient by lazy {
         LocationServices.getFusedLocationProviderClient(this)
@@ -269,11 +272,18 @@ class MainActivity : AppCompatActivity() {
     private fun createLocationCallback() {
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
-                Timber.d("createLocationCallback")
                 locationResult.lastLocation
                 for (location in locationResult.locations) {
-                    Timber.d("location: ${location.latitude}, ${location.longitude}")
-                    viewModel.updateLocation(location.latitude, location.longitude)
+                    if(lastLocation == null){
+                        lastLocation = location
+                    }
+                    val distance = location.distanceTo(lastLocation)
+                    Timber.d("Distance : $distance")
+                    if(distance > 1000){
+                        Timber.d("location: ${location.latitude}, ${location.longitude}")
+                        lastLocation = location
+                        viewModel.updateLocation(location.latitude, location.longitude)
+                    }
                 }
             }
 

@@ -37,20 +37,20 @@ class GasStationListAdapter :
         fun bind(gasStations: GasStations, context: Context) {
             binding.vendorGasStation.text = gasStations.vendor
             binding.nameGasStation.text = gasStations.name
-            gasStations.distance?.toDouble()?.let {
+            gasStations.distance?.toDouble()?.let { distance ->
                 binding.distanceGasStation.apply {
                     when {
-                        it > 1.0 -> {
-                            text = "$it km"
-                            setTextColor(ContextCompat.getColor(context, R.color.black))
+                        distance < 0.3 -> {
+                            text = "${distance * 1000} m"
+                            setTextColor(ContextCompat.getColor(context, R.color.limegreen))
                         }
-                        it > 0.5 -> {
-                            text = "${it * 1000} m"
+                        distance < 0.5 -> {
+                            text = "${distance * 1000} m"
                             setTextColor(ContextCompat.getColor(context, R.color.primary))
                         }
-                        it > 0.0 -> {
-                            text = "${it * 1000} m"
-                            setTextColor(ContextCompat.getColor(context, R.color.limegreen))
+                        else -> {
+                            text = "$distance km"
+                            setTextColor(ContextCompat.getColor(context, R.color.black))
                         }
                     }
                 }

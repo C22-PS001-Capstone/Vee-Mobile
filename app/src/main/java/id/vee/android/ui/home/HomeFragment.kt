@@ -1,9 +1,11 @@
 package id.vee.android.ui.home
 
+import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -29,6 +31,8 @@ class HomeFragment : Fragment() {
 
     private val viewModel: HomeViewModel by viewModel()
 
+    private var currentLocation: Location? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,22 +54,26 @@ class HomeFragment : Fragment() {
         context?.apply {
             viewModel.getUserData()
             viewModel.getToken()
-            viewModelListener(viewModel)
+            viewModel.getLiveLocation()
+            viewModelListener()
             binding?.apply {
                 viewModel.gasStationsResponse.observe(viewLifecycleOwner) { responses ->
                     if (responses != null) {
                         when (responses) {
                             is Resource.Loading -> {
-                                progressBar.visibility = View.VISIBLE
+                                progressBarNearest.visibility = View.VISIBLE
                             }
                             is Resource.Success -> {
-                                progressBar.visibility = View.GONE
+                                progressBarNearest.visibility = View.GONE
                                 if (responses.data?.isNotEmpty() == true) {
                                     val data = responses.data
-                                    setGasStationHomeData(data)
-                                } else
+                                    dataGasStation.visibility = View.VISIBLE
+                                    tvNoDataGasStations.visibility = View.GONE
+                                    setGasStationHomeData(data.sortedBy { it.distance }.take(3))
+                                } else {
+                                    dataGasStation.visibility = View.GONE
                                     tvNoDataGasStations.visibility = View.VISIBLE
-                                dataGasStation.visibility = View.GONE
+                                }
                             }
                             is Resource.Error -> {
                                 Timber.e(responses.message)
@@ -115,62 +123,49 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun getVendorImage(vendor: String?, view: ImageView) {
+        return when (vendor) {
+            "Pertamina" -> view.setImageResource(R.drawable.pertamina)
+            "Shell" -> view.setImageResource(R.drawable.shell)
+            else -> view.setImageResource(R.drawable.other_vendor_gasstaions)
+        }
+    }
+
     private fun setGasStationHomeData(data: List<GasStations>) {
         binding?.apply {
-            //data 1
-            when (data[0].vendor) {
-                "Pertamina" -> ivVendor1.setImageResource(R.drawable.pertamina)
-                "Shell" -> ivVendor1.setImageResource(R.drawable.shell)
-                else -> ivVendor1.setImageResource(R.drawable.other_vendor_gasstaions)
-            }
-            tvVendor1.text = data[0].vendor
-            val distance1 = data[0].distance
-            tvDistance1.text = distance1
-            tvDistance1.apply {
-                if (distance1?.toDouble()!! < 0.3) {
-                    setTextColor(ContextCompat.getColor(requireContext(), R.color.limegreen))
-                } else if (distance1.toDouble() < 0.5) {
-                    setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
-                } else setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-            }
-
-            //data 2
-            when (data[1].vendor) {
-                "Pertamina" -> ivVendor2.setImageResource(R.drawable.pertamina)
-                "Shell" -> ivVendor2.setImageResource(R.drawable.shell)
-                else -> ivVendor2.setImageResource(R.drawable.other_vendor_gasstaions)
-            }
-            tvVendor2.text = data[1].vendor
-            val distance2 = data[1].distance
-            tvDistance2.text = distance2
-            tvDistance2.apply {
-                if (distance2?.toDouble()!! < 0.3) {
-                    setTextColor(ContextCompat.getColor(requireContext(), R.color.limegreen))
-                } else if (distance2.toDouble() < 0.5) {
-                    setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
-                } else setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-            }
-
-            //data 3
-            when (data[2].vendor) {
-                "Pertamina" -> ivVendor3.setImageResource(R.drawable.pertamina)
-                "Shell" -> ivVendor3.setImageResource(R.drawable.shell)
-                else -> ivVendor3.setImageResource(R.drawable.other_vendor_gasstaions)
-            }
-            tvVendor3.text = data[2].vendor
-            val distance3 = data[2].distance
-            tvDistance3.text = distance3
-            tvDistance3.apply {
-                if (distance3?.toDouble()!! < 0.3) {
-                    setTextColor(ContextCompat.getColor(requireContext(), R.color.limegreen))
-                } else if (distance3.toDouble() < 0.5) {
-                    setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
-                } else setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+            val vendorImage = listOf(ivVendor1, ivVendor2, ivVendor3)
+            val vendorText = listOf(tvVendor1, tvVendor2, tvVendor3)
+            val vendorDistance = listOf(tvDistance1, tvDistance2, tvDistance3)
+            data.forEachIndexed { index, gasStations ->
+                getVendorImage(gasStations.vendor, vendorImage[index])
+                vendorText[index].text = gasStations.vendor
+                vendorDistance[index].text = gasStations.distance.toString()
+                vendorDistance[index].apply {
+                    gasStations.distance?.let { distance ->
+                        val distanceText = StringBuilder()
+                        if (distance.toDouble() < 0.3) {
+                            setTextColor(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color.limegreen
+                                )
+                            )
+                            distanceText.append("${distance.toDouble() * 1000} m")
+                        } else if (distance.toDouble() < 0.5) {
+                            setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+                            distanceText.append("${distance.toDouble() * 1000} m")
+                        } else {
+                            setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                            distanceText.append("${distance.toDouble()} km")
+                        }
+                        text = distanceText
+                    }
+                }
             }
         }
     }
 
-    private fun viewModelListener(viewModel: HomeViewModel) {
+    private fun viewModelListener() {
         viewModel.userResponse.observe(viewLifecycleOwner) { userData ->
             if (userData != null) {
                 changeTitle(userData.firstName)
@@ -179,6 +174,20 @@ class HomeFragment : Fragment() {
         viewModel.tokenResponse.observe(viewLifecycleOwner) { tokenData ->
             userToken = tokenData
             getLatestData()
+        }
+        viewModel.locationResponse.observe(viewLifecycleOwner) {
+            currentLocation = it
+            currentLocation?.let { location ->
+                userToken?.let { token ->
+                    if (location.latitude != 0.0 && location.longitude != 0.0) {
+                        viewModel.getGasStations(
+                            token.accessToken,
+                            location.latitude,
+                            location.longitude
+                        )
+                    }
+                }
+            }
         }
     }
 

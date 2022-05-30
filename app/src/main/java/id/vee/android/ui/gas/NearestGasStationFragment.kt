@@ -65,6 +65,7 @@ class NearestGasStationFragment : Fragment() {
                             val stations = responses.data
                             if (stations?.isNotEmpty() == true) {
                                 stations.sortedBy { it.distance }
+                                gasAdapter.submitList(null)
                                 gasAdapter.submitList(stations)
                             } else {
                                 gasAdapter.submitList(null)
