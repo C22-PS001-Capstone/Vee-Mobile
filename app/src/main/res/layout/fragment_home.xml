@@ -86,7 +86,7 @@
                     android:id="@+id/tv_distance_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_regular"
+                    android:fontFamily="@font/nunito_semi_bold"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     tools:text="500m" />
@@ -121,7 +121,7 @@
                     android:id="@+id/tv_distance_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_regular"
+                    android:fontFamily="@font/nunito_semi_bold"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     tools:text="500m" />
@@ -156,7 +156,7 @@
                     android:id="@+id/tv_distance_3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_regular"
+                    android:fontFamily="@font/nunito_semi_bold"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     tools:text="500m" />

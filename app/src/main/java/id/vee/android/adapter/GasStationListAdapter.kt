@@ -38,32 +38,32 @@ class GasStationListAdapter :
             binding.vendorGasStation.text = gasStations.vendor
             binding.nameGasStation.text = gasStations.name
             gasStations.distance?.toDouble()?.let { distance ->
-                binding.apply {
+                binding.distanceGasStation.apply {
                     when {
                         distance < 0.3 -> {
-                            distanceGasStation.text = "${distance * 1000} m"
-                            cardContainer.setBackgroundColor(
+                            text = "${distance * 1000} m"
+                            setTextColor(
                                 ContextCompat.getColor(
                                     context,
-                                    R.color.red_background
+                                    R.color.limegreen
                                 )
                             )
                         }
                         distance < 0.5 -> {
-                            distanceGasStation.text = "${distance * 1000} m"
-                            cardContainer.setBackgroundColor(
+                            text = "${distance * 1000} m"
+                            setTextColor(
                                 ContextCompat.getColor(
                                     context,
-                                    R.color.yellow_background
+                                    R.color.primary
                                 )
                             )
                         }
                         else -> {
-                            distanceGasStation.text = "$distance km"
-                            cardContainer.setBackgroundColor(
+                            text = "$distance km"
+                            setTextColor(
                                 ContextCompat.getColor(
                                     context,
-                                    R.color.green_background
+                                    R.color.black
                                 )
                             )
                         }
