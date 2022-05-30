@@ -20,9 +20,9 @@ jobs:
           distribution: 'temurin'
       - name: Move properties file
         env:
-          DATA: ${{ secrets.PROJECT_PROPERTIES }}
+          PROPERTIES: ${{ secrets.PROJECT_PROPERTIES }}
         run: |
-          echo $DATA > project.properties
+          touch project.properties && echo $PROPERTIES > project.properties
       - name: Add google services
         env:
           DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
@@ -47,9 +47,9 @@ jobs:
           cache: gradle
       - name: Update properties file
         env:
-          DATA: ${{ secrets.PROJECT_PROPERTIES }}
+          PROPERTIES: ${{ secrets.PROJECT_PROPERTIES }}
         run: |
-          echo $DATA > project.properties
+          touch project.properties && echo $PROPERTIES > project.properties
       - name: Add google services
         env:
           DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
