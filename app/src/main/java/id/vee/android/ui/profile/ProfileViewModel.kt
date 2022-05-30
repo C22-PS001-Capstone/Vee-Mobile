@@ -61,6 +61,10 @@ class ProfileViewModel constructor(
             }
     }
 
+    fun saveThemeSetting(isDarkModeActive: Boolean) = viewModelScope.launch {
+        pref.saveThemeSetting(isDarkModeActive)
+    }
+
     companion object {
         private const val TAG = "ProfileViewModel"
     }

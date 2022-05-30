@@ -22,7 +22,7 @@
     <string name="km_label" translatable="false">Km</string>
     <string name="rp_label" translatable="false">Rp</string>
     <string name="btn_profile">Profile</string>
-    <string name="btn_theme">Theme</string>
+    <string name="btn_theme">Dark Theme</string>
     <string name="btn_language">Language</string>
     <string name="btn_logout">Log Out</string>
     <string name="robo" translatable="false">Robo</string>
@@ -37,7 +37,7 @@
     <string name="title_add_activity">Add Activity</string>
     <string name="title_profile">Profile</string>
     <string name="title_profile_detail">Profile Detail</string>
-    <string name="title_theme">Theme</string>
+    <string name="title_theme">Dark Theme</string>
     <string name="title_notification">Notification</string>
     <string name="title_change_password">Change Password</string>
     <string name="notification">Notification</string>

@@ -20,7 +20,6 @@ import id.vee.android.ui.login.LoginViewModel
 import id.vee.android.ui.main.MainViewModel
 import id.vee.android.ui.notification.NotificationViewModel
 import id.vee.android.ui.profile.ProfileViewModel
-import id.vee.android.ui.profile.ThemeViewModel
 import id.vee.android.ui.signup.SignupViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

@@ -47,9 +47,6 @@
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile">
         <action
-            android:id="@+id/action_navigation_profile_to_navigation_theme"
-            app:destination="@id/navigation_theme" />
-        <action
             android:id="@+id/action_navigation_profile_to_navigation_profile_detail"
             app:destination="@id/navigation_profile_detail" />
     </fragment>
@@ -62,11 +59,6 @@
             android:id="@+id/action_navigation_profile_detail_to_navigation_change_password"
             app:destination="@id/navigation_change_password" />
     </fragment>
-    <fragment
-        android:id="@+id/navigation_theme"
-        android:name="id.vee.android.ui.profile.ThemeFragment"
-        android:label="@string/title_theme"
-        tools:layout="@layout/fragment_theme" />
     <fragment
         android:id="@+id/navigation_notification"
         android:name="id.vee.android.ui.notification.NotificationFragment"

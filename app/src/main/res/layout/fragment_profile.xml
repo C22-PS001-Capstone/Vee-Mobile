@@ -39,32 +39,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/nunito_extra_bold"
-        android:text="@string/title_theme"
-        android:textColor="?colorSecondary" />
-
-    <Button
-        android:id="@+id/btn_theme"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:background="@android:color/transparent"
-        android:backgroundTint="@color/white"
-        android:drawableTint="@color/grey_600"
-        android:fontFamily="@font/nunito_extra_bold"
-        android:text="@string/btn_theme"
-        android:textAlignment="textStart"
-        android:textAllCaps="false"
-        android:textColor="?android:textColorPrimary"
-        android:textSize="16sp"
-        app:drawableLeftCompat="@drawable/ic_baseline_color_lens_24"
-        app:strokeColor="@color/grey"
-        app:strokeWidth="2dp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/nunito_extra_bold"
         android:text="@string/language_theme"
         android:textColor="?colorSecondary" />
 
@@ -85,6 +59,62 @@
         app:drawableLeftCompat="@drawable/ic_baseline_translate_24"
         app:strokeColor="@color/grey"
         app:strokeWidth="2dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/nunito_extra_bold"
+        android:text="@string/title_theme"
+        android:textColor="?colorSecondary" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switch_theme"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="10dp"
+        android:paddingHorizontal="16dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@color/white"
+        android:drawableTint="@color/grey_600"
+        android:fontFamily="@font/nunito_extra_bold"
+        android:text="@string/btn_theme"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        app:drawableLeftCompat="@drawable/ic_baseline_color_lens_24"
+        android:drawablePadding="8dp"
+        app:strokeColor="@color/grey"
+        app:strokeWidth="2dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/nunito_extra_bold"
+        android:text="Battery Saver"
+        android:textColor="?colorSecondary" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switch_battery_saver"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="10dp"
+        android:paddingHorizontal="16dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@color/white"
+        android:drawableTint="@color/grey_600"
+        android:fontFamily="@font/nunito_extra_bold"
+        android:text="Battery Saver"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        app:drawableLeftCompat="@drawable/ic_baseline_battery_saver_24"
+        android:drawablePadding="8dp"
+        app:strokeColor="@color/grey"
+        app:strokeWidth="2dp"/>
 
     <TextView
         android:layout_width="match_parent"

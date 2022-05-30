@@ -12,7 +12,7 @@
     <string name="btn_edit_activity">Ubah</string>
     <string name="btn_delete_activity">Hapus</string>
     <string name="btn_profile">Profil</string>
-    <string name="btn_theme">Tema</string>
+    <string name="btn_theme">Tema Gelap</string>
     <string name="btn_language">Bahasa</string>
     <string name="btn_logout">Keluar</string>
     <string name="robo_this_month_label">Bulan %1s</string>
@@ -43,7 +43,7 @@
     <string name="yes">Ya</string>
     <string name="missing_permission_description">Izin lokasi dibutuhkan untuk menambahkan aktifitas. Kamu bisa mengaktifkan kembali di pengaturan.</string>
     <string name="title_profile_detail">Detail Profil</string>
-    <string name="title_theme">Tema</string>
+    <string name="title_theme">Tema Gelap</string>
     <string name="title_notification">Notifikasi</string>
     <string name="new_password_label">Password Baru</string>
     <string name="current_password_label">Password Saat Ini</string>

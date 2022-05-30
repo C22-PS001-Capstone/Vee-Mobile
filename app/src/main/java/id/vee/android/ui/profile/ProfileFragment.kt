@@ -6,7 +6,9 @@ import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import id.vee.android.R
@@ -45,11 +47,17 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         context?.apply {
             viewModel.getToken()
+            viewModel.getThemeSettings()
             viewModelListener(viewModel)
             binding?.apply {
                 btnProfile.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_profile_to_navigation_profile_detail))
                 btnLanguage.setOnClickListener { startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS)) }
-                btnTheme.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_profile_to_navigation_theme))
+                switchTheme.setOnCheckedChangeListener {_: CompoundButton?, isChecked: Boolean ->
+                    viewModel.saveThemeSetting(isChecked)
+                }
+                switchBatterySaver.setOnCheckedChangeListener {_: CompoundButton?, isChecked: Boolean ->
+                    //TODO implement battery saver
+                }
                 btnLogout.setOnClickListener {
                     btnLogout.isEnabled = false
                     viewModel.logout(userToken?.refreshToken ?: "")
@@ -72,6 +80,15 @@ class ProfileFragment : Fragment() {
                     startActivity(intent)
                 }
                 binding?.btnLogout?.isEnabled = true
+            }
+        }
+        viewModel.themeResponse.observe(viewLifecycleOwner) { isDarkModeActive: Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                binding?.switchTheme?.isChecked = true
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                binding?.switchTheme?.isChecked = false
             }
         }
     }
