@@ -82,4 +82,6 @@
     <string name="btn_continue">Lanjutkan tanpa lokasi</string>
     <string name="no_data">Tidak ada data</string>
     <string name="no_nearest_gas_station">Tidak ada pom bensin terdekat di sekitar Anda</string>
+    <string name="gps_warning">Anda harus mengaktifkan GPS untuk menggunakan aplikasi ini</string>
+    <string name="error_location">Lokasi tidak ditemukan. Coba lagi</string>
 </resources>

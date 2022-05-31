@@ -187,7 +187,7 @@ class MainActivity : AppCompatActivity() {
                 RESULT_CANCELED ->
                     Toast.makeText(
                         this@MainActivity,
-                        "You should turn on GPS to use this app",
+                        getString(R.string.gps_warning),
                         Toast.LENGTH_SHORT
                     ).show()
             }
@@ -311,7 +311,7 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(
                         this@MainActivity,
-                        "Location is not found. Try Again",
+                        getString(R.string.error_location),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -355,7 +355,7 @@ class MainActivity : AppCompatActivity() {
                 Looper.getMainLooper()
             )
         } catch (exception: SecurityException) {
-            Timber.e("Error : " + exception.message)
+            Timber.e("Error : %s", exception.message)
         }
     }
 

@@ -107,5 +107,7 @@
     <string name="btn_continue">Continue without location</string>
     <string name="no_data">No Data</string>
     <string name="no_nearest_gas_station">No nearest gas stations available in your area</string>
+    <string name="gps_warning">You should turn on GPS to use this app</string>
+    <string name="error_location">Location is not found. Try Again</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
