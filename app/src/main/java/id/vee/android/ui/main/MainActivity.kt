@@ -68,6 +68,8 @@ class MainActivity : AppCompatActivity() {
 
     private var hashedData = ""
 
+    private var isBatterySaver = false
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.action_bar_menu, menu)
@@ -126,11 +128,13 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        getMyLocation()
         createLocationRequest()
         createLocationCallback()
         startLocationUpdates()
         viewModel.getLiveLocation()
         viewModel.getLocalStations()
+        viewModel.getBatterySaverSettings()
         viewModel.locationResponse.observe(this) {
             Timber.d("locationResponse: $it")
         }
@@ -174,6 +178,15 @@ class MainActivity : AppCompatActivity() {
                     longitude = gasStations[gasStations.size - 1].lon
                 }
             }
+        }
+        viewModel.batterySaverResponse.observe(this) {
+            isBatterySaver = it
+            if (!it) {
+                startLocationUpdates()
+            } else {
+                stopLocationUpdates()
+            }
+            getMyLocation()
         }
     }
 
@@ -307,7 +320,10 @@ class MainActivity : AppCompatActivity() {
         } else {
             fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
                 if (location != null) {
-                    viewModel.updateLocation(location.latitude, location.longitude)
+                    if (location.latitude != 0.0 && location.longitude != 0.0) {
+                        viewModel.updateLocation(location.latitude, location.longitude)
+                    }
+                    Timber.d("Get last location success $location")
                 } else {
                     Toast.makeText(
                         this@MainActivity,
@@ -354,6 +370,7 @@ class MainActivity : AppCompatActivity() {
                 locationCallback,
                 Looper.getMainLooper()
             )
+            Timber.d("Location update started")
         } catch (exception: SecurityException) {
             Timber.e("Error : %s", exception.message)
         }

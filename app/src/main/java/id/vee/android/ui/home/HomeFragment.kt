@@ -1,6 +1,8 @@
 package id.vee.android.ui.home
 
+import android.content.Intent
 import android.location.Location
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -136,6 +138,7 @@ class HomeFragment : Fragment() {
             val vendorImage = listOf(ivVendor1, ivVendor2, ivVendor3)
             val vendorText = listOf(tvVendor1, tvVendor2, tvVendor3)
             val vendorDistance = listOf(tvDistance1, tvDistance2, tvDistance3)
+            val listGasStation = listOf(gasStation1, gasStation2, gasStation3)
             data.forEachIndexed { index, gasStations ->
                 getVendorImage(gasStations.vendor, vendorImage[index])
                 vendorText[index].text = gasStations.vendor
@@ -161,6 +164,9 @@ class HomeFragment : Fragment() {
                         text = distanceText
                     }
                 }
+                listGasStation[index].setOnClickListener {
+                    // TODO: Navigate to detail
+                }
             }
         }
     }
@@ -174,18 +180,27 @@ class HomeFragment : Fragment() {
         viewModel.tokenResponse.observe(viewLifecycleOwner) { tokenData ->
             userToken = tokenData
             getLatestData()
+            userToken?.let { token ->
+                currentLocation?.latitude?.let { lat ->
+                    currentLocation?.longitude?.let { lng ->
+                        viewModel.getGasStations(
+                            token.accessToken,
+                            lat,
+                            lng
+                        )
+                    }
+                }
+            }
         }
         viewModel.locationResponse.observe(viewLifecycleOwner) {
             currentLocation = it
             currentLocation?.let { location ->
                 userToken?.let { token ->
-                    if (location.latitude != 0.0 && location.longitude != 0.0) {
-                        viewModel.getGasStations(
-                            token.accessToken,
-                            location.latitude,
-                            location.longitude
-                        )
-                    }
+                    viewModel.getGasStations(
+                        token.accessToken,
+                        location.latitude,
+                        location.longitude
+                    )
                 }
             }
         }

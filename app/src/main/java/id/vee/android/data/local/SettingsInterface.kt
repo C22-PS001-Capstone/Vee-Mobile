@@ -8,5 +8,5 @@ interface SettingsInterface {
     fun getSettings(): Flow<Settings>
     suspend fun saveThemeSetting(isDarkModeActive: Boolean)
     suspend fun setLocation(lat: Double, lon: Double)
-    fun getStations(): Flow<List<GasStations>>
+    suspend fun saveBatterySaverSetting(state: Boolean)
 }

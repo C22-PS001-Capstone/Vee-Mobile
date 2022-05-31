@@ -52,11 +52,11 @@ class ProfileFragment : Fragment() {
             binding?.apply {
                 btnProfile.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_profile_to_navigation_profile_detail))
                 btnLanguage.setOnClickListener { startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS)) }
-                switchTheme.setOnCheckedChangeListener {_: CompoundButton?, isChecked: Boolean ->
+                switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
                     viewModel.saveThemeSetting(isChecked)
                 }
-                switchBatterySaver.setOnCheckedChangeListener {_: CompoundButton?, isChecked: Boolean ->
-                    //TODO implement battery saver
+                switchBatterySaver.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+                    viewModel.saveBatterySaverSetting(isChecked)
                 }
                 btnLogout.setOnClickListener {
                     btnLogout.isEnabled = false
@@ -90,6 +90,9 @@ class ProfileFragment : Fragment() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 binding?.switchTheme?.isChecked = false
             }
+        }
+        viewModel.batterySaverResponse.observe(viewLifecycleOwner) { isBatterySaver: Boolean ->
+            binding?.switchBatterySaver?.isChecked = isBatterySaver
         }
     }
 

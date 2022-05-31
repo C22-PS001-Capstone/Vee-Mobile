@@ -81,7 +81,6 @@ val viewModelModule = module {
     viewModel { SignupViewModel(get()) }
     viewModel { ActivityViewModel(get(), get()) }
     viewModel { GeneralViewModel(get(), get()) }
-    viewModel { ThemeViewModel(get()) }
     viewModel { GasStationsViewModel(get(), get()) }
     viewModel { MainViewModel(get(), get()) }
 }
