@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8sp"
             android:fontFamily="@font/nunito_extra_bold"
-            android:text="@string/no_nearest_gas_station"
+            android:text="@string/no_activity"
             android:textAlignment="center"
             android:textColor="?colorOnPrimary"
             android:textSize="20sp" />
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/nunito_semi_bold"
-            android:text="@string/location_not_available_detail"
+            android:text="@string/add_activity_warning"
             android:textAlignment="center"
             android:textColor="?colorOnPrimary"
             android:textSize="16sp" />

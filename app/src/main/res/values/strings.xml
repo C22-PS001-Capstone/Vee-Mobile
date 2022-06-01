@@ -109,5 +109,7 @@
     <string name="no_nearest_gas_station">No nearest gas stations available in your area</string>
     <string name="gps_warning">You should turn on GPS to use this app</string>
     <string name="error_location">Location is not found. Try Again</string>
+    <string name="no_activity">No Activity</string>
+    <string name="add_activity_warning">Add new activity pressing (+) button</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
