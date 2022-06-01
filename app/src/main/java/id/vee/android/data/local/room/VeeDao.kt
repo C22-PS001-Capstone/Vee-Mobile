@@ -33,7 +33,7 @@ interface VeeDao {
     @Query("SELECT * FROM activity_entities")
     fun getActivity(): Flow<List<ActivityEntity>>
 
-    @Query("SELECT SUM(liter) as ltr, SUM(price) as prc FROM activity_entities WHERE MONTH(date) = :month")
+    @Query("SELECT SUM(liter) as ltr, SUM(price) as prc FROM activity_entities WHERE date LIKE '%' || :month || '%'")
     fun getRobo(month: String): Flow<List<RoboEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

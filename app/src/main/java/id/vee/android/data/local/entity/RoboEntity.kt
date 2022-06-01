@@ -5,9 +5,9 @@ import androidx.room.Entity
 
 @Entity(tableName = "robo_entities", primaryKeys = ["price"])
 data class RoboEntity(
-    @ColumnInfo(name = "price")
+    @ColumnInfo(name = "prc")
     val price: Int,
 
-    @ColumnInfo(name = "liter")
+    @ColumnInfo(name = "ltr")
     val liter: Int
 )

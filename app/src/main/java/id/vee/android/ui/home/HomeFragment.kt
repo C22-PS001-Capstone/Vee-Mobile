@@ -56,7 +56,7 @@ class HomeFragment : Fragment() {
             findNavController().navigate(direction)
         }
         val initMonth = SimpleDateFormat(
-            getString(R.string.date_format),
+            getString(R.string.month_format),
             Locale.getDefault())
         context?.apply {
             viewModel.getUserData()
