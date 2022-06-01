@@ -4,10 +4,7 @@ import id.vee.android.data.Resource
 import id.vee.android.data.remote.response.BasicResponse
 import id.vee.android.data.remote.response.LoginResponse
 import id.vee.android.data.remote.response.UserDetailResponse
-import id.vee.android.domain.model.Activity
-import id.vee.android.domain.model.GasStations
-import id.vee.android.domain.model.Token
-import id.vee.android.domain.model.User
+import id.vee.android.domain.model.*
 import id.vee.android.domain.repository.VeeDataSource
 import kotlinx.coroutines.flow.Flow
 
@@ -98,4 +95,6 @@ class VeeInteractor(private val repository: VeeDataSource) : VeeUseCase {
         repository.getGasStations(token, lat, lon)
 
     override suspend fun getLocalStations(): Flow<List<GasStations>> = repository.getLocalStations()
+
+    override suspend fun getRobo(month: String): Flow<List<Robo>> = repository.getRobo(month)
 }

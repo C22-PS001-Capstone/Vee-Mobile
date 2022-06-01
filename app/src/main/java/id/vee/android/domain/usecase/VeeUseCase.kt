@@ -5,10 +5,7 @@ import id.vee.android.data.remote.response.BasicResponse
 import id.vee.android.data.remote.response.GasStationsResponse
 import id.vee.android.data.remote.response.LoginResponse
 import id.vee.android.data.remote.response.UserDetailResponse
-import id.vee.android.domain.model.Activity
-import id.vee.android.domain.model.GasStations
-import id.vee.android.domain.model.Token
-import id.vee.android.domain.model.User
+import id.vee.android.domain.model.*
 import kotlinx.coroutines.flow.Flow
 
 interface VeeUseCase {
@@ -70,6 +67,7 @@ interface VeeUseCase {
     ): Flow<Resource<List<GasStations>>>
 
     fun getActivity(token: String): Flow<Resource<List<Activity>>>
+
     fun deleteActivity(accessToken: String, id: String): Flow<BasicResponse>
     fun updateActivity(
         id: String,
@@ -84,5 +82,7 @@ interface VeeUseCase {
 
     fun loginGoogle(token: String): Flow<LoginResponse>
     suspend fun getLocalStations(): Flow<List<GasStations>>
+
+    suspend fun getRobo(month: String): Flow<List<Robo>>
 
 }

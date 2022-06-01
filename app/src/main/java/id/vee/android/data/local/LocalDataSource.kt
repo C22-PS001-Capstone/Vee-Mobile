@@ -1,9 +1,6 @@
 package id.vee.android.data.local
 
-import id.vee.android.data.local.entity.ActivityEntity
-import id.vee.android.data.local.entity.GasStationsEntity
-import id.vee.android.data.local.entity.TokenEntity
-import id.vee.android.data.local.entity.UserEntity
+import id.vee.android.data.local.entity.*
 import id.vee.android.data.local.room.VeeDao
 import kotlinx.coroutines.flow.Flow
 
@@ -38,6 +35,8 @@ class LocalDataSource(
         mUserDao.insertGasStations(gasStationsList)
 
     fun getActivity(): Flow<List<ActivityEntity>> = mUserDao.getActivity()
+
+    fun getRobo(month: String): Flow<List<RoboEntity>> = mUserDao.getRobo(month)
 
     fun getGasStations(): Flow<List<GasStationsEntity>> = mUserDao.getGasStations()
 

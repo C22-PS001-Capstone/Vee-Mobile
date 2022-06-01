@@ -23,6 +23,8 @@ import id.vee.android.utils.checkTokenAvailability
 import id.vee.android.utils.formatDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class HomeFragment : Fragment() {
@@ -53,10 +55,14 @@ class HomeFragment : Fragment() {
             val direction = HomeFragmentDirections.actionNavigationHomeToDetailActivityFragment(it)
             findNavController().navigate(direction)
         }
+        val initMonth = SimpleDateFormat(
+            getString(R.string.date_format),
+            Locale.getDefault())
         context?.apply {
             viewModel.getUserData()
             viewModel.getToken()
             viewModel.getLiveLocation()
+            viewModel.getRobo(initMonth.toString())
             viewModelListener()
             binding?.apply {
                 viewModel.gasStationsResponse.observe(viewLifecycleOwner) { responses ->
@@ -79,7 +85,8 @@ class HomeFragment : Fragment() {
                             }
                             is Resource.Error -> {
                                 Timber.e(responses.message)
-                                // Show error
+                                dataGasStation.visibility = View.GONE
+                                tvNoDataGasStations.visibility = View.VISIBLE
                             }
                         }
                     }
@@ -118,6 +125,16 @@ class HomeFragment : Fragment() {
                                 progressBar.visibility = View.GONE
                                 // Show error
                             }
+                        }
+                    }
+                }
+                viewModel.roboResponse.observe(viewLifecycleOwner){ robo ->
+                    if (robo != null) {
+                        showRobo(true)
+                        robo.forEach {
+                            dashboardMonth.text = initMonth.toString()
+                            dashboardFillUps.text = resources.getString(R.string.robo_fillups_label, it.price)
+                            dashboardExpenses.text = resources.getString(R.string.robo_expenses_label, it.price)
                         }
                     }
                 }

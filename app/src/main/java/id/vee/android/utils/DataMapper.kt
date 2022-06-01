@@ -1,15 +1,9 @@
 package id.vee.android.utils
 
-import id.vee.android.data.local.entity.ActivityEntity
-import id.vee.android.data.local.entity.GasStationsEntity
-import id.vee.android.data.local.entity.TokenEntity
-import id.vee.android.data.local.entity.UserEntity
+import id.vee.android.data.local.entity.*
 import id.vee.android.data.remote.response.ActivityResponse
 import id.vee.android.data.remote.response.GasStationsResponse
-import id.vee.android.domain.model.Activity
-import id.vee.android.domain.model.GasStations
-import id.vee.android.domain.model.Token
-import id.vee.android.domain.model.User
+import id.vee.android.domain.model.*
 
 object DataMapper {
     fun mapEntityToDomain(input: UserEntity) = User(
@@ -101,6 +95,15 @@ object DataMapper {
                 distance = it.distance,
                 lat = it.lat,
                 lon = it.lon
+            )
+        }
+
+    @JvmName("mapEntitiesToDomain2")
+    fun mapEntitiesToDomain(input: List<RoboEntity>): List<Robo> =
+        input.map {
+            Robo(
+                price = it.price,
+                liter = it.liter
             )
         }
 }

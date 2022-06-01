@@ -1,13 +1,11 @@
 package id.vee.android.data
 
 import id.vee.android.data.local.LocalDataSource
+import id.vee.android.data.local.entity.RoboEntity
 import id.vee.android.data.remote.RemoteDataSource
 import id.vee.android.data.remote.network.ApiResponse
 import id.vee.android.data.remote.response.*
-import id.vee.android.domain.model.Activity
-import id.vee.android.domain.model.GasStations
-import id.vee.android.domain.model.Token
-import id.vee.android.domain.model.User
+import id.vee.android.domain.model.*
 import id.vee.android.domain.repository.VeeDataSource
 import id.vee.android.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
@@ -176,6 +174,11 @@ class VeeRepository(
 
     override suspend fun getLocalStations(): Flow<List<GasStations>> =
         localDataSource.getGasStations().map {
+            DataMapper.mapEntitiesToDomain(it)
+        }
+
+    override suspend fun getRobo(month: String): Flow<List<Robo>> =
+        localDataSource.getRobo(month).map {
             DataMapper.mapEntitiesToDomain(it)
         }
 

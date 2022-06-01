@@ -4,10 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import id.vee.android.data.local.entity.ActivityEntity
-import id.vee.android.data.local.entity.GasStationsEntity
-import id.vee.android.data.local.entity.TokenEntity
-import id.vee.android.data.local.entity.UserEntity
+import id.vee.android.data.local.entity.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -35,6 +32,9 @@ interface VeeDao {
 
     @Query("SELECT * FROM activity_entities")
     fun getActivity(): Flow<List<ActivityEntity>>
+
+    @Query("SELECT SUM(liter) as ltr, SUM(price) as prc FROM activity_entities WHERE MONTH(date) = :month")
+    fun getRobo(month: String): Flow<List<RoboEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGasStations(gasStationsList: List<GasStationsEntity>)
