@@ -13,6 +13,7 @@ import id.vee.android.adapter.ActivityListAdapter.MyViewHolder
 import id.vee.android.databinding.RowStoriesBinding
 import id.vee.android.domain.model.Activity
 import id.vee.android.utils.formatDate
+import java.text.NumberFormat
 import java.util.*
 
 class ActivityListAdapter(private val onItemClick: (Activity) -> Unit) :
@@ -35,10 +36,14 @@ class ActivityListAdapter(private val onItemClick: (Activity) -> Unit) :
         binding.root
     ) {
         fun bind(activity: Activity, context: Context) {
+            val newNumber = NumberFormat.getInstance(Locale.GERMANY)
+            val km = newNumber.format(activity.km)
+            val liter = newNumber.format(activity.liter)
+            val price = newNumber.format(activity.price)
             binding.storyDate.text = activity.date.formatDate()
-            binding.storyKm.text = activity.km.toString()
-            binding.storyLiter.text = activity.liter.toString()
-            binding.storyPrice.text = activity.price.toString()
+            binding.storyKm.text = km.toString()
+            binding.storyLiter.text = liter.toString()
+            binding.storyPrice.text = price.toString()
             if (activity.isMonthShow) {
                 binding.monthName.text = activity.date.formatDate("MMM")
             } else {
