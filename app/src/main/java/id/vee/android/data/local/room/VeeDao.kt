@@ -50,4 +50,13 @@ interface VeeDao {
 
     @Query("DELETE FROM activity_entities WHERE 1")
     suspend fun deleteActivities()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertNotification(notification: NotificationEntity)
+
+    @Query("DELETE FROM notification_entities WHERE 1")
+    suspend fun deleteNotification()
+
+    @Query("SELECT * FROM notification_entities")
+    fun getNotification(): Flow<List<NotificationEntity>>
 }
