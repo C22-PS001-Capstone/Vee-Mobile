@@ -5,13 +5,13 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Activity(
-    val date: String,
-    val owner: String,
+    val date: String?,
+    val owner: String?,
     val km: Int,
     val price: Int,
     val liter: Int,
-    val lon: Double,
+    val lon: Double?,
     val id: String,
-    val lat: Double,
+    val lat: Double?,
     var isMonthShow: Boolean = false
 ) : Parcelable

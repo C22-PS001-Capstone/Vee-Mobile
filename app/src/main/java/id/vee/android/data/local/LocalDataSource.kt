@@ -36,7 +36,7 @@ class LocalDataSource(
 
     fun getActivity(): Flow<List<ActivityEntity>> = mUserDao.getActivity()
 
-    fun getRobo(month: String): Flow<List<RoboEntity>> = mUserDao.getRobo(month)
+    fun getRobo(month: String): Flow<List<ActivityEntity>> = mUserDao.getRobo(month)
 
     fun getGasStations(): Flow<List<GasStationsEntity>> = mUserDao.getGasStations()
 

@@ -7,7 +7,6 @@ import id.vee.android.data.Resource
 import id.vee.android.data.local.SettingsInterface
 import id.vee.android.domain.model.Activity
 import id.vee.android.domain.model.GasStations
-import id.vee.android.domain.model.Robo
 import id.vee.android.domain.usecase.VeeUseCase
 import id.vee.android.ui.GeneralViewModel
 import kotlinx.coroutines.launch
@@ -22,8 +21,8 @@ class HomeViewModel constructor(
     private val _gasStationsResponse: MutableLiveData<Resource<List<GasStations>>> =
         MutableLiveData()
     val gasStationsResponse: LiveData<Resource<List<GasStations>>> = _gasStationsResponse
-    private val _robo: MutableLiveData<List<Robo>> = MutableLiveData()
-    val roboResponse: LiveData<List<Robo>> = _robo
+    private val _robo: MutableLiveData<List<Activity>> = MutableLiveData()
+    val roboResponse: LiveData<List<Activity>> = _robo
 
     fun getActivity(token: String) = viewModelScope.launch {
         useCase.getActivity(token).collect {

@@ -72,7 +72,7 @@ class ListActivityFragment : Fragment() {
                                 val activities = responses.data
                                 activities.mapIndexed { index, activity ->
                                     activity.isMonthShow =
-                                        (index > 0 && responses.data[index].date.formatDate("MMM") != responses.data[index - 1].date.formatDate(
+                                        (index > 0 && responses.data[index].date?.formatDate("MMM") != responses.data[index - 1].date?.formatDate(
                                             "MMM"
                                         )) || index == 0
                                 }

@@ -55,14 +55,10 @@ class HomeFragment : Fragment() {
             val direction = HomeFragmentDirections.actionNavigationHomeToDetailActivityFragment(it)
             findNavController().navigate(direction)
         }
-        val initMonth = SimpleDateFormat(
-            getString(R.string.month_format),
-            Locale.getDefault())
         context?.apply {
             viewModel.getUserData()
             viewModel.getToken()
             viewModel.getLiveLocation()
-            viewModel.getRobo(initMonth.toString())
             viewModelListener()
             binding?.apply {
                 viewModel.gasStationsResponse.observe(viewLifecycleOwner) { responses ->
@@ -105,13 +101,17 @@ class HomeFragment : Fragment() {
                                 progressBar.visibility = View.VISIBLE
                             }
                             is Resource.Success -> {
+                                val initMonth = SimpleDateFormat(
+                                    getString(R.string.month_format),
+                                    Locale.getDefault())
+                                viewModel.getRobo(initMonth.toString())
                                 rvStories.visibility = View.VISIBLE
                                 progressBar.visibility = View.GONE
                                 if (responses.data?.isNotEmpty() == true) {
                                     val activities = responses.data
                                     activities.mapIndexed { index, activity ->
                                         activity.isMonthShow =
-                                            (index > 0 && responses.data[index].date.formatDate("MMM") != responses.data[index - 1].date.formatDate(
+                                            (index > 0 && responses.data[index].date?.formatDate("MMM") != responses.data[index - 1].date?.formatDate(
                                                 "MMM"
                                             )) || index == 0
                                     }
@@ -132,7 +132,7 @@ class HomeFragment : Fragment() {
                     if (robo != null) {
                         showRobo(true)
                         robo.forEach {
-                            dashboardMonth.text = initMonth.toString()
+                            dashboardMonth.text =  resources.getString(R.string.robo_this_month_label, it.date?.formatDate("MMM"))
                             dashboardFillUps.text = resources.getString(R.string.robo_fillups_label, it.price)
                             dashboardExpenses.text = resources.getString(R.string.robo_expenses_label, it.price)
                         }

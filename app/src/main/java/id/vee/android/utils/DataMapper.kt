@@ -97,13 +97,4 @@ object DataMapper {
                 lon = it.lon
             )
         }
-
-    @JvmName("mapEntitiesToDomain2")
-    fun mapEntitiesToDomain(input: List<RoboEntity>): List<Robo> =
-        input.map {
-            Robo(
-                price = it.price,
-                liter = it.liter
-            )
-        }
 }

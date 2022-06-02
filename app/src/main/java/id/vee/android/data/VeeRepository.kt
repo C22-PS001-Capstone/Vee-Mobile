@@ -1,7 +1,6 @@
 package id.vee.android.data
 
 import id.vee.android.data.local.LocalDataSource
-import id.vee.android.data.local.entity.RoboEntity
 import id.vee.android.data.remote.RemoteDataSource
 import id.vee.android.data.remote.network.ApiResponse
 import id.vee.android.data.remote.response.*
@@ -177,7 +176,7 @@ class VeeRepository(
             DataMapper.mapEntitiesToDomain(it)
         }
 
-    override suspend fun getRobo(month: String): Flow<List<Robo>> =
+    override suspend fun getRobo(month: String): Flow<List<Activity>> =
         localDataSource.getRobo(month).map {
             DataMapper.mapEntitiesToDomain(it)
         }

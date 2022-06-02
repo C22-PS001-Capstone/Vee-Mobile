@@ -83,6 +83,6 @@ interface VeeUseCase {
     fun loginGoogle(token: String): Flow<LoginResponse>
     suspend fun getLocalStations(): Flow<List<GasStations>>
 
-    suspend fun getRobo(month: String): Flow<List<Robo>>
+    suspend fun getRobo(month: String): Flow<List<Activity>>
 
 }
