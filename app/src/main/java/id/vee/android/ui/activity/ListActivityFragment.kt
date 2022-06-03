@@ -77,6 +77,7 @@ class ListActivityFragment : Fragment() {
                                         )) || index == 0
                                 }
                                 storyAdapter.submitList(activities)
+                                showStoryNotAvailable(false)
                             } else {
                                 storyAdapter.submitList(null)
                                 showStoryNotAvailable()
@@ -92,10 +93,10 @@ class ListActivityFragment : Fragment() {
 
     }
 
-    private fun showStoryNotAvailable() {
+    private fun showStoryNotAvailable(state: Boolean = true) {
         binding?.apply {
-            storiesNotAvailable.visibility = View.VISIBLE
-            rvStories.visibility = View.GONE
+            storiesNotAvailable.visibility = if(state) View.VISIBLE else View.GONE
+            rvStories.visibility = if(state) View.GONE else View.VISIBLE
         }
     }
 

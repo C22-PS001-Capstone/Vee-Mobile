@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import id.vee.android.R
 import id.vee.android.adapter.GasStationListAdapter
 import id.vee.android.data.Resource
-import id.vee.android.databinding.ActivitySplashBinding
 import id.vee.android.databinding.FragmentNearestGasStationBinding
 import id.vee.android.domain.model.Token
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class NearestGasStationFragment : Fragment() {
     private var _binding: FragmentNearestGasStationBinding? = null
@@ -66,10 +66,12 @@ class NearestGasStationFragment : Fragment() {
                         is Resource.Success -> {
                             progressBar.visibility = View.GONE
                             val stations = responses.data
+                            Timber.d("Gas stations: $stations")
                             if (stations?.isNotEmpty() == true) {
                                 stations.sortedBy { it.distance }
                                 gasAdapter.submitList(null)
                                 gasAdapter.submitList(stations)
+                                showGasStaionNotAvailable(false)
                             } else {
                                 gasAdapter.submitList(null)
                                 showGasStaionNotAvailable()
@@ -84,10 +86,10 @@ class NearestGasStationFragment : Fragment() {
         }
     }
 
-    private fun showGasStaionNotAvailable() {
+    private fun showGasStaionNotAvailable(state: Boolean = true) {
         binding?.apply {
-            gasStationsNotAvailable.visibility = View.VISIBLE
-            rvGasStations.visibility = View.GONE
+            gasStationsNotAvailable.visibility = if(state) View.VISIBLE else View.GONE
+            rvGasStations.visibility = if(state) View.GONE else View.VISIBLE
         }
     }
 

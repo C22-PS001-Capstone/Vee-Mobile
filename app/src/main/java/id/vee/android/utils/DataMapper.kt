@@ -107,8 +107,8 @@ object DataMapper {
     fun mapEntitiesToDomain(input: List<RoboEntity>): List<Robo> =
         input.map {
             Robo(
-                price = it.price,
-                liter = it.liter
+                price = it.prc,
+                liter = it.ltr
             )
         }
 
