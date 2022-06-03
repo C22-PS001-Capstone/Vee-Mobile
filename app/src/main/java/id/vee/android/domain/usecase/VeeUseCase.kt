@@ -2,7 +2,6 @@ package id.vee.android.domain.usecase
 
 import id.vee.android.data.Resource
 import id.vee.android.data.remote.response.BasicResponse
-import id.vee.android.data.remote.response.GasStationsResponse
 import id.vee.android.data.remote.response.LoginResponse
 import id.vee.android.data.remote.response.UserDetailResponse
 import id.vee.android.domain.model.*
@@ -83,6 +82,6 @@ interface VeeUseCase {
     fun loginGoogle(token: String): Flow<LoginResponse>
     suspend fun getLocalStations(): Flow<List<GasStations>>
 
-    suspend fun getRobo(month: String): Flow<List<Activity>>
+    suspend fun getRobo(month: String): Flow<Robo>
 
 }

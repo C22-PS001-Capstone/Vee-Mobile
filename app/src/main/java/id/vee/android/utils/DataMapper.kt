@@ -19,6 +19,11 @@ object DataMapper {
         expiredAt = input.expiredAt,
     )
 
+    fun mapEntityToDomain(input: RoboEntity) = Robo(
+        price = input.prc,
+        liter = input.ltr
+    )
+
     fun mapDomainToEntity(input: User) = UserEntity(
         id = input.id,
         firstName = input.firstName,

@@ -73,5 +73,5 @@ interface VeeDataSource {
 
     suspend fun getLocalStations(): Flow<List<GasStations>>
 
-    suspend fun getRobo(month: String): Flow<List<Activity>>
+    suspend fun getRobo(month: String): Flow<Robo>
 }
