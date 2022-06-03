@@ -27,8 +27,8 @@
     <string name="btn_logout">Log Out</string>
     <string name="robo" translatable="false">Robo</string>
     <string name="robo_this_month_label">This %1s</string>
-    <string name="robo_fillups_label">Fill-ups: %1d Litre</string>
-    <string name="robo_expenses_label">Expenses: Rp %1d</string>
+    <string name="robo_fillups_label">Fill-ups: %1s Litre</string>
+    <string name="robo_expenses_label">Expenses: Rp %1s</string>
     <string name="robo_you_are_label">You are a</string>
     <string name="robo_category_label">Racer</string>
     <string name="title_home">Home</string>

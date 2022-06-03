@@ -21,6 +21,7 @@ import id.vee.android.utils.checkTokenAvailability
 import id.vee.android.utils.formatDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -53,16 +54,22 @@ class HomeFragment : Fragment() {
             val direction = HomeFragmentDirections.actionNavigationHomeToDetailActivityFragment(it)
             findNavController().navigate(direction)
         }
+        val dateFormat = SimpleDateFormat(
+            getString(R.string.month_format),
+            Locale.getDefault()
+        )
         val monthFormat = SimpleDateFormat(
-            "MMMM YYYY",
+            "MMMM",
             Locale.getDefault()
         )
         val date = Date()
+        val initMonth = dateFormat.format(date)
         val monthString = monthFormat.format(date)
         context?.apply {
             viewModel.getUserData()
             viewModel.getToken()
             viewModel.getLiveLocation()
+            viewModel.getRobo(initMonth.toString())
             viewModelListener()
             binding?.apply {
                 viewModel.gasStationsResponse.observe(viewLifecycleOwner) { responses ->
@@ -106,11 +113,6 @@ class HomeFragment : Fragment() {
                                 progressBar.visibility = View.VISIBLE
                             }
                             is Resource.Success -> {
-                                val initMonth = SimpleDateFormat(
-                                    getString(R.string.month_format),
-                                    Locale.getDefault()
-                                )
-                                viewModel.getRobo(initMonth.toString())
                                 rvStories.visibility = View.VISIBLE
                                 progressBar.visibility = View.GONE
                                 if (responses.data?.isNotEmpty() == true) {
@@ -137,12 +139,15 @@ class HomeFragment : Fragment() {
                 viewModel.roboResponse.observe(viewLifecycleOwner) { robo ->
                     if (robo != null) {
                         showRobo(true)
+                        val newNumber = NumberFormat.getInstance(Locale.GERMANY)
+                        val liter = newNumber.format(robo.liter)
+                        val price = newNumber.format(robo.price)
                         dashboardMonth.text =
                             resources.getString(R.string.robo_this_month_label, monthString)
                         dashboardFillUps.text =
-                            resources.getString(R.string.robo_fillups_label, robo.liter)
+                            resources.getString(R.string.robo_fillups_label, liter.toString())
                         dashboardExpenses.text =
-                            resources.getString(R.string.robo_expenses_label, robo.price)
+                            resources.getString(R.string.robo_expenses_label, price.toString())
                     }
                 }
             }
