@@ -25,7 +25,7 @@
     <string name="btn_theme">Dark Theme</string>
     <string name="btn_language">Language</string>
     <string name="btn_logout">Log Out</string>
-    <string name="dashboard" translatable="false">Dashboard</string>
+    <string name="robo" translatable="false">Robo</string>
     <string name="robo_this_month_label">This %1s</string>
     <string name="robo_fillups_label">Fill-ups: %1s Litre</string>
     <string name="robo_expenses_label">Expenses: Rp %1s</string>
