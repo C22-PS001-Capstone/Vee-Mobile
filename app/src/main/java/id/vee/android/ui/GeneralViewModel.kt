@@ -61,6 +61,7 @@ open class GeneralViewModel constructor(
             _themeResponse.postValue(values.theme)
         }
     }
+
     fun getBatterySaverSettings() = viewModelScope.launch {
         pref.getSettings().collect { values ->
             _batterySaverResponse.postValue(values.saverMode)
@@ -69,7 +70,7 @@ open class GeneralViewModel constructor(
 
     fun getLiveLocation() = viewModelScope.launch {
         pref.getSettings().collect { values ->
-            _locationResponse.postValue(Location("Live").apply{
+            _locationResponse.postValue(Location("Live").apply {
                 latitude = values.latitude
                 longitude = values.longitude
             })

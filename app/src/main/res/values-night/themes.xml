@@ -25,9 +25,11 @@
         <!-- hint text color -->
         <item name="android:textColorHint">@color/grey</item>
     </style>
+
     <style name="drawableColor">
         <item name="android:drawableTint">@color/white</item>
     </style>
+
     <style name="IconTheme">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

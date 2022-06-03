@@ -1,8 +1,6 @@
 package id.vee.android.ui.gas
 
-import android.content.Intent
 import android.location.Location
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +15,6 @@ import id.vee.android.databinding.ActivitySplashBinding
 import id.vee.android.databinding.FragmentNearestGasStationBinding
 import id.vee.android.domain.model.Token
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
 
 class NearestGasStationFragment : Fragment() {
     private var _binding: FragmentNearestGasStationBinding? = null
@@ -52,7 +49,7 @@ class NearestGasStationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val gasAdapter = GasStationListAdapter{ gasStation ->
+        val gasAdapter = GasStationListAdapter { gasStation ->
             // TODO: Navigate to detail
         }
         setupRecyclerView(gasAdapter)
@@ -75,14 +72,22 @@ class NearestGasStationFragment : Fragment() {
                                 gasAdapter.submitList(stations)
                             } else {
                                 gasAdapter.submitList(null)
+                                showGasStaionNotAvailable()
                             }
                         }
                         is Resource.Error -> {
-
+                            showGasStaionNotAvailable()
                         }
                     }
                 }
             }
+        }
+    }
+
+    private fun showGasStaionNotAvailable() {
+        binding?.apply {
+            gasStationsNotAvailable.visibility = View.VISIBLE
+            rvGasStations.visibility = View.GONE
         }
     }
 

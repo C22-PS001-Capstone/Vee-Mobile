@@ -1,8 +1,6 @@
 package id.vee.android.ui.home
 
-import android.content.Intent
 import android.location.Location
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +21,7 @@ import id.vee.android.utils.checkTokenAvailability
 import id.vee.android.utils.formatDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -55,9 +54,17 @@ class HomeFragment : Fragment() {
             val direction = HomeFragmentDirections.actionNavigationHomeToDetailActivityFragment(it)
             findNavController().navigate(direction)
         }
-        val initMonth = SimpleDateFormat(
+        val dateFormat = SimpleDateFormat(
             getString(R.string.month_format),
-            Locale.getDefault())
+            Locale.getDefault()
+        )
+        val monthFormat = SimpleDateFormat(
+            "MMMM",
+            Locale.getDefault()
+        )
+        val date = Date()
+        val initMonth = dateFormat.format(date)
+        val monthString = monthFormat.format(date)
         context?.apply {
             viewModel.getUserData()
             viewModel.getToken()
@@ -101,6 +108,7 @@ class HomeFragment : Fragment() {
                         Timber.d("viewModelListener: ${responses.data}")
                         when (responses) {
                             is Resource.Loading -> {
+                                showRobo(false)
                                 rvStories.visibility = View.GONE
                                 progressBar.visibility = View.VISIBLE
                             }
@@ -128,14 +136,18 @@ class HomeFragment : Fragment() {
                         }
                     }
                 }
-                viewModel.roboResponse.observe(viewLifecycleOwner){ robo ->
+                viewModel.roboResponse.observe(viewLifecycleOwner) { robo ->
                     if (robo != null) {
                         showRobo(true)
-                        robo.forEach {
-                            dashboardMonth.text = initMonth.toString()
-                            dashboardFillUps.text = resources.getString(R.string.robo_fillups_label, it.price)
-                            dashboardExpenses.text = resources.getString(R.string.robo_expenses_label, it.price)
-                        }
+                        val newNumber = NumberFormat.getInstance(Locale.GERMANY)
+                        val liter = newNumber.format(robo.liter)
+                        val price = newNumber.format(robo.price)
+                        dashboardMonth.text =
+                            resources.getString(R.string.robo_this_month_label, monthString)
+                        dashboardFillUps.text =
+                            resources.getString(R.string.robo_fillups_label, liter.toString())
+                        dashboardExpenses.text =
+                            resources.getString(R.string.robo_expenses_label, price.toString())
                     }
                 }
             }

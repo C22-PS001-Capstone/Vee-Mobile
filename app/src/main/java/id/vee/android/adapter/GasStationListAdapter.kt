@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import id.vee.android.R
 import id.vee.android.adapter.GasStationListAdapter.MyViewHolder.Companion.DIFF_CALLBACK
 import id.vee.android.databinding.RowGasStationBinding
-import id.vee.android.domain.model.Activity
 import id.vee.android.domain.model.GasStations
 import java.util.*
 
