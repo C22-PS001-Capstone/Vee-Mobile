@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import id.vee.android.R
 import id.vee.android.adapter.GasStationListAdapter
 import id.vee.android.data.Resource
+import id.vee.android.databinding.ActivitySplashBinding
 import id.vee.android.databinding.FragmentNearestGasStationBinding
 import id.vee.android.domain.model.Token
 import org.koin.androidx.viewmodel.ext.android.viewModel

@@ -12,11 +12,27 @@ import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofenceStatusCodes
 import com.google.android.gms.location.GeofencingEvent
 import id.vee.android.R
+import id.vee.android.data.VeeRepository
+import id.vee.android.di.*
+import id.vee.android.domain.model.Notification
+import id.vee.android.domain.repository.VeeDataSource
 import id.vee.android.ui.main.MainActivity
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 import timber.log.Timber
 
-class NearestGasStationReceiver : BroadcastReceiver() {
+@DelicateCoroutinesApi
+class NearestGasStationReceiver : KoinComponent, BroadcastReceiver() {
 
+    private val repository: VeeDataSource by inject()
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == ACTION_GEOFENCE_EVENT) {
             val geofencingEvent = GeofencingEvent.fromIntent(intent)
@@ -81,6 +97,15 @@ class NearestGasStationReceiver : BroadcastReceiver() {
         }
         val notification = mBuilder.build()
         mNotificationManager.notify(NOTIFICATION_ID, notification)
+        GlobalScope.launch(Dispatchers.IO) {
+            repository.insertNotification(
+                Notification(
+                    id = null,
+                    notification = geofenceTransitionDetail,
+                    createdAt = System.currentTimeMillis()
+                )
+            )
+        }
     }
 
     companion object {

@@ -102,4 +102,30 @@ object DataMapper {
                 lon = it.lon
             )
         }
+
+    @JvmName("mapEntitiesToDomain2")
+    fun mapEntitiesToDomain(input: List<RoboEntity>): List<Robo> =
+        input.map {
+            Robo(
+                price = it.price,
+                liter = it.liter
+            )
+        }
+
+    @JvmName("mapEntitiesToDomain3")
+    fun mapEntitiesToDomain(input: List<NotificationEntity>): List<Notification> =
+        input.map {
+            Notification(
+                id = it.id,
+                notification = it.notification,
+                createdAt = it.createdAt
+            )
+        }
+
+    fun mapDomainToEntity(notification: Notification): NotificationEntity =
+        NotificationEntity(
+            id = null,
+            notification = notification.notification,
+            createdAt = notification.createdAt,
+        )
 }

@@ -183,6 +183,18 @@ class VeeRepository(
             DataMapper.mapEntityToDomain(it)
         }
 
+    override suspend fun insertNotification(notification: Notification) {
+        Timber.d("insertNotification: $notification")
+        localDataSource.insertNotification(
+            DataMapper.mapDomainToEntity(notification)
+        )
+    }
+
+    override suspend fun getNotification(): Flow<List<Notification>> =
+        localDataSource.getNotification().map {
+            DataMapper.mapEntitiesToDomain(it)
+        }
+
     override fun updateActivity(
         id: String,
         token: String,

@@ -83,5 +83,6 @@ interface VeeUseCase {
     suspend fun getLocalStations(): Flow<List<GasStations>>
 
     suspend fun getRobo(month: String): Flow<Robo>
+    suspend fun getNotification(): Flow<List<Notification>>
 
 }

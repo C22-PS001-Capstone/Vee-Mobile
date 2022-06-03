@@ -11,31 +11,19 @@
     android:paddingRight="16dp"
     android:paddingBottom="16dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="68dp"
-        android:layout_height="68dp"
-        tools:src="@tools:sample/avatars" />
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center"
+        android:contentDescription="@string/notification"
+        android:src="@drawable/ic_baseline_notifications_24" />
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/nunito_bold"
+        android:textColor="@color/black"
         android:layout_gravity="center"
-        android:layout_marginStart="20dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="3dp"
-            android:fontFamily="@font/nunito_bold"
-            android:textColor="@color/black"
-            tools:text="Jangan Lupa Catat Pengeluaranmu" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_semi_bold"
-            android:textColor="@color/black"
-            tools:text="Ketahui pengeluaran untuk kendaraanmu hari ini." />
-    </LinearLayout>
+        tools:text="Jangan Lupa Catat Pengeluaranmu" />
 </LinearLayout>

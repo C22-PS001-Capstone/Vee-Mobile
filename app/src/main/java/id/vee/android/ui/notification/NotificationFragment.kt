@@ -8,10 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import id.vee.android.R
 import id.vee.android.databinding.FragmentNotificationBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NotificationFragment : Fragment() {
     private var _binding: FragmentNotificationBinding? = null
     private val binding get() = _binding
+
+    private val viewModel: NotificationViewModel by viewModel()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +39,7 @@ class NotificationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        viewModel.getNotification()
     }
 
     override fun onDestroyView() {

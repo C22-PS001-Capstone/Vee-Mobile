@@ -160,6 +160,7 @@ class MainActivity : AppCompatActivity() {
                             )
                             .setExpirationDuration(TimeUnit.HOURS.toMillis(1))
                             .setLoiteringDelay(5 * 60 * 1000) //5 minutes for staying in geofence
+//                            .setLoiteringDelay(5 * 1000) // 5 seconds for staying in geofence
                             .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_DWELL)
                             .build()
                     )
