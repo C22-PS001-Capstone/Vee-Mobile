@@ -101,6 +101,7 @@ class HomeFragment : Fragment() {
                         Timber.d("viewModelListener: ${responses.data}")
                         when (responses) {
                             is Resource.Loading -> {
+                                showRobo(false)
                                 rvStories.visibility = View.GONE
                                 progressBar.visibility = View.VISIBLE
                             }
