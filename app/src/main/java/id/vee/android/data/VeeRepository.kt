@@ -1,7 +1,6 @@
 package id.vee.android.data
 
 import id.vee.android.data.local.LocalDataSource
-import id.vee.android.data.local.entity.RoboEntity
 import id.vee.android.data.remote.RemoteDataSource
 import id.vee.android.data.remote.network.ApiResponse
 import id.vee.android.data.remote.response.*
@@ -11,6 +10,7 @@ import id.vee.android.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+import timber.log.Timber
 
 class VeeRepository(
     private val remoteDataSource: RemoteDataSource,
@@ -179,6 +179,18 @@ class VeeRepository(
 
     override suspend fun getRobo(month: String): Flow<List<Robo>> =
         localDataSource.getRobo(month).map {
+            DataMapper.mapEntitiesToDomain(it)
+        }
+
+    override suspend fun insertNotification(notification: Notification) {
+        Timber.d("insertNotification: $notification")
+        localDataSource.insertNotification(
+            DataMapper.mapDomainToEntity(notification)
+        )
+    }
+
+    override suspend fun getNotification(): Flow<List<Notification>> =
+        localDataSource.getNotification().map {
             DataMapper.mapEntitiesToDomain(it)
         }
 

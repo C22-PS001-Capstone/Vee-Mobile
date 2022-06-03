@@ -106,4 +106,21 @@ object DataMapper {
                 liter = it.liter
             )
         }
+
+    @JvmName("mapEntitiesToDomain3")
+    fun mapEntitiesToDomain(input: List<NotificationEntity>): List<Notification> =
+        input.map {
+            Notification(
+                id = it.id,
+                notification = it.notification,
+                createdAt = it.createdAt
+            )
+        }
+
+    fun mapDomainToEntity(notification: Notification): NotificationEntity =
+        NotificationEntity(
+            id = null,
+            notification = notification.notification,
+            createdAt = notification.createdAt,
+        )
 }

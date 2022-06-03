@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class NotificationEntity(
     @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Int?,
     @ColumnInfo(name = "notification")
     val notification: String,
     @ColumnInfo(name = "created_at")
