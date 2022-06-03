@@ -40,19 +40,19 @@ class ActivityListAdapter(private val onItemClick: (Activity) -> Unit) :
             val km = newNumber.format(activity.km)
             val liter = newNumber.format(activity.liter)
             val price = newNumber.format(activity.price)
-            binding.storyDate.text = activity.date?.formatDate()
+            binding.storyDate.text = activity.date.formatDate()
             binding.storyKm.text = km.toString()
             binding.storyLiter.text = liter.toString()
             binding.storyPrice.text = price.toString()
             if (activity.isMonthShow) {
-                binding.monthName.text = activity.date?.formatDate("MMM")
+                binding.monthName.text = activity.date.formatDate("MMM")
             } else {
                 binding.monthName.visibility = View.GONE
             }
             try {
                 if (activity.lat != 0.0 && activity.lon != 0.0) {
                     val geocoder = Geocoder(context, Locale.getDefault())
-                    val addresses = geocoder.getFromLocation(activity.lat!!, activity.lon!!, 1)
+                    val addresses = geocoder.getFromLocation(activity.lat, activity.lon, 1)
                     val address = StringBuilder()
                     addresses[0]?.let {
                         val tempAddress = it.getAddressLine(0).split(", " + it.locality)[0]

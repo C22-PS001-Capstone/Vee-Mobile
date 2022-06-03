@@ -53,16 +53,11 @@ class HomeFragment : Fragment() {
             val direction = HomeFragmentDirections.actionNavigationHomeToDetailActivityFragment(it)
             findNavController().navigate(direction)
         }
-        val dateFormat = SimpleDateFormat(
-            getString(R.string.month_format),
-            Locale.getDefault()
-        )
         val monthFormat = SimpleDateFormat(
             "MMMM YYYY",
             Locale.getDefault()
         )
         val date = Date()
-        val initMonth = dateFormat.format(date)
         val monthString = monthFormat.format(date)
         context?.apply {
             viewModel.getUserData()
@@ -121,7 +116,7 @@ class HomeFragment : Fragment() {
                                     val activities = responses.data
                                     activities.mapIndexed { index, activity ->
                                         activity.isMonthShow =
-                                            (index > 0 && responses.data[index].date?.formatDate("MMM") != responses.data[index - 1].date?.formatDate(
+                                            (index > 0 && responses.data[index].date.formatDate("MMM") != responses.data[index - 1].date.formatDate(
                                                 "MMM"
                                             )) || index == 0
                                     }
@@ -141,7 +136,8 @@ class HomeFragment : Fragment() {
                 viewModel.roboResponse.observe(viewLifecycleOwner) { robo ->
                     if (robo != null) {
                         showRobo(true)
-                        dashboardMonth.text = monthString
+                        dashboardMonth.text =
+                            resources.getString(R.string.robo_this_month_label, monthString)
                         dashboardFillUps.text =
                             resources.getString(R.string.robo_fillups_label, robo.liter)
                         dashboardExpenses.text =
