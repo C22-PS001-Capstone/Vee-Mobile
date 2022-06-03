@@ -1,7 +1,6 @@
 package id.vee.android.data
 
 import id.vee.android.data.local.LocalDataSource
-import id.vee.android.data.local.entity.RoboEntity
 import id.vee.android.data.remote.RemoteDataSource
 import id.vee.android.data.remote.network.ApiResponse
 import id.vee.android.data.remote.response.*

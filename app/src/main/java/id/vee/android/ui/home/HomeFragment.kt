@@ -68,7 +68,6 @@ class HomeFragment : Fragment() {
             viewModel.getUserData()
             viewModel.getToken()
             viewModel.getLiveLocation()
-            viewModel.getRobo(initMonth.toString())
             viewModelListener()
             binding?.apply {
                 viewModel.gasStationsResponse.observe(viewLifecycleOwner) { responses ->
@@ -111,13 +110,17 @@ class HomeFragment : Fragment() {
                                 progressBar.visibility = View.VISIBLE
                             }
                             is Resource.Success -> {
+                                val initMonth = SimpleDateFormat(
+                                    getString(R.string.month_format),
+                                    Locale.getDefault())
+                                viewModel.getRobo(initMonth.toString())
                                 rvStories.visibility = View.VISIBLE
                                 progressBar.visibility = View.GONE
                                 if (responses.data?.isNotEmpty() == true) {
                                     val activities = responses.data
                                     activities.mapIndexed { index, activity ->
                                         activity.isMonthShow =
-                                            (index > 0 && responses.data[index].date.formatDate("MMM") != responses.data[index - 1].date.formatDate(
+                                            (index > 0 && responses.data[index].date?.formatDate("MMM") != responses.data[index - 1].date?.formatDate(
                                                 "MMM"
                                             )) || index == 0
                                     }

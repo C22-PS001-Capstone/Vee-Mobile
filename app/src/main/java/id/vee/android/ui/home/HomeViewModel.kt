@@ -32,7 +32,6 @@ class HomeViewModel constructor(
     }
 
     fun getRobo(month: String) = viewModelScope.launch {
-
         useCase.getRobo("%$month%").collect {
             _robo.postValue(it)
         }

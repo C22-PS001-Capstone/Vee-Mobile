@@ -74,14 +74,22 @@ class NearestGasStationFragment : Fragment() {
                                 gasAdapter.submitList(stations)
                             } else {
                                 gasAdapter.submitList(null)
+                                showGasStaionNotAvailable()
                             }
                         }
                         is Resource.Error -> {
-
+                            showGasStaionNotAvailable()
                         }
                     }
                 }
             }
+        }
+    }
+
+    private fun showGasStaionNotAvailable() {
+        binding?.apply {
+            gasStationsNotAvailable.visibility = View.VISIBLE
+            rvGasStations.visibility = View.GONE
         }
     }
 
