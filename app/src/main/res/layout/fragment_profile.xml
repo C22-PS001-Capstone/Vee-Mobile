@@ -101,7 +101,7 @@
         android:paddingEnd="24dp"
         android:text="The location might not accurate"
         android:textColor="?colorOnPrimary"
-        android:textSize="12sp"/>
+        android:textSize="12sp" />
 
     <TextView
         android:layout_width="match_parent"

@@ -112,7 +112,8 @@ class HomeFragment : Fragment() {
                             is Resource.Success -> {
                                 val initMonth = SimpleDateFormat(
                                     getString(R.string.month_format),
-                                    Locale.getDefault())
+                                    Locale.getDefault()
+                                )
                                 viewModel.getRobo(initMonth.toString())
                                 rvStories.visibility = View.VISIBLE
                                 progressBar.visibility = View.GONE
