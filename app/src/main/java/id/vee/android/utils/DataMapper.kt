@@ -19,6 +19,11 @@ object DataMapper {
         expiredAt = input.expiredAt,
     )
 
+    fun mapEntityToDomain(input: RoboEntity) = Robo(
+        price = input.prc,
+        liter = input.ltr
+    )
+
     fun mapDomainToEntity(input: User) = UserEntity(
         id = input.id,
         firstName = input.firstName,
@@ -95,15 +100,6 @@ object DataMapper {
                 distance = it.distance,
                 lat = it.lat,
                 lon = it.lon
-            )
-        }
-
-    @JvmName("mapEntitiesToDomain2")
-    fun mapEntitiesToDomain(input: List<RoboEntity>): List<Robo> =
-        input.map {
-            Robo(
-                price = it.price,
-                liter = it.liter
             )
         }
 }

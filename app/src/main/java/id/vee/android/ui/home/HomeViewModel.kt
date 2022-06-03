@@ -22,8 +22,8 @@ class HomeViewModel constructor(
     private val _gasStationsResponse: MutableLiveData<Resource<List<GasStations>>> =
         MutableLiveData()
     val gasStationsResponse: LiveData<Resource<List<GasStations>>> = _gasStationsResponse
-    private val _robo: MutableLiveData<List<Robo>> = MutableLiveData()
-    val roboResponse: LiveData<List<Robo>> = _robo
+    private val _robo: MutableLiveData<Robo> = MutableLiveData()
+    val roboResponse: LiveData<Robo> = _robo
 
     fun getActivity(token: String) = viewModelScope.launch {
         useCase.getActivity(token).collect {
@@ -32,7 +32,8 @@ class HomeViewModel constructor(
     }
 
     fun getRobo(month: String) = viewModelScope.launch {
-        useCase.getRobo(month).collect {
+
+        useCase.getRobo("%$month%").collect {
             _robo.postValue(it)
         }
     }

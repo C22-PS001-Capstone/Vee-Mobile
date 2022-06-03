@@ -96,5 +96,5 @@ class VeeInteractor(private val repository: VeeDataSource) : VeeUseCase {
 
     override suspend fun getLocalStations(): Flow<List<GasStations>> = repository.getLocalStations()
 
-    override suspend fun getRobo(month: String): Flow<List<Robo>> = repository.getRobo(month)
+    override suspend fun getRobo(month: String): Flow<Robo> = repository.getRobo(month)
 }

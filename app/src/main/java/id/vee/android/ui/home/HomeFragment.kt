@@ -1,8 +1,6 @@
 package id.vee.android.ui.home
 
-import android.content.Intent
 import android.location.Location
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -55,9 +53,17 @@ class HomeFragment : Fragment() {
             val direction = HomeFragmentDirections.actionNavigationHomeToDetailActivityFragment(it)
             findNavController().navigate(direction)
         }
-        val initMonth = SimpleDateFormat(
+        val dateFormat = SimpleDateFormat(
             getString(R.string.month_format),
-            Locale.getDefault())
+            Locale.getDefault()
+        )
+        val monthFormat = SimpleDateFormat(
+            "MMMM YYYY",
+            Locale.getDefault()
+        )
+        val date = Date()
+        val initMonth = dateFormat.format(date)
+        val monthString = monthFormat.format(date)
         context?.apply {
             viewModel.getUserData()
             viewModel.getToken()
@@ -128,14 +134,14 @@ class HomeFragment : Fragment() {
                         }
                     }
                 }
-                viewModel.roboResponse.observe(viewLifecycleOwner){ robo ->
+                viewModel.roboResponse.observe(viewLifecycleOwner) { robo ->
                     if (robo != null) {
                         showRobo(true)
-                        robo.forEach {
-                            dashboardMonth.text = initMonth.toString()
-                            dashboardFillUps.text = resources.getString(R.string.robo_fillups_label, it.price)
-                            dashboardExpenses.text = resources.getString(R.string.robo_expenses_label, it.price)
-                        }
+                        dashboardMonth.text = monthString
+                        dashboardFillUps.text =
+                            resources.getString(R.string.robo_fillups_label, robo.liter)
+                        dashboardExpenses.text =
+                            resources.getString(R.string.robo_expenses_label, robo.price)
                     }
                 }
             }

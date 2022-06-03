@@ -11,6 +11,7 @@ import id.vee.android.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+import timber.log.Timber
 
 class VeeRepository(
     private val remoteDataSource: RemoteDataSource,
@@ -177,9 +178,10 @@ class VeeRepository(
             DataMapper.mapEntitiesToDomain(it)
         }
 
-    override suspend fun getRobo(month: String): Flow<List<Robo>> =
+    override suspend fun getRobo(month: String): Flow<Robo> =
         localDataSource.getRobo(month).map {
-            DataMapper.mapEntitiesToDomain(it)
+            Timber.d("getRobo: $it, $month")
+            DataMapper.mapEntityToDomain(it)
         }
 
     override fun updateActivity(
