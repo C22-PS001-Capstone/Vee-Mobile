@@ -1,6 +1,7 @@
 package id.vee.android.ui.customview
 
 import android.content.Context
+import android.graphics.Canvas
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
@@ -40,7 +41,12 @@ class MyPasswordEditText : AppCompatEditText {
                 // Do nothing.
             }
         })
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
         hint = "Minimal 6 characters"
         textAlignment = View.TEXT_ALIGNMENT_VIEW_START
+        paddingRight
     }
 }
