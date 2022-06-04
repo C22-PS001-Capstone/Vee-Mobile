@@ -77,6 +77,8 @@ class HomeFragment : Fragment() {
                         when (responses) {
                             is Resource.Loading -> {
                                 progressBarNearest.visibility = View.VISIBLE
+                                tvNoDataGasStations.visibility = View.GONE
+                                dataGasStation.visibility = View.GONE
                             }
                             is Resource.Success -> {
                                 progressBarNearest.visibility = View.GONE
@@ -111,6 +113,7 @@ class HomeFragment : Fragment() {
                                 showRobo(false)
                                 rvStories.visibility = View.GONE
                                 progressBar.visibility = View.VISIBLE
+                                noActivityImage.visibility = View.GONE
                             }
                             is Resource.Success -> {
                                 rvStories.visibility = View.VISIBLE
@@ -124,14 +127,16 @@ class HomeFragment : Fragment() {
                                             )) || index == 0
                                     }
                                     storyAdapter.submitList(activities)
+                                    noActivityImage.visibility = View.GONE
                                 } else {
+                                    noActivityImage.visibility = View.VISIBLE
                                     storyAdapter.submitList(null)
                                 }
                             }
                             is Resource.Error -> {
                                 rvStories.visibility = View.GONE
                                 progressBar.visibility = View.GONE
-                                // Show error
+                                noActivityImage.visibility = View.GONE
                             }
                         }
                     }
@@ -250,6 +255,21 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+
+        val dateFormat = SimpleDateFormat(
+            getString(R.string.month_format),
+            Locale.getDefault()
+        )
+        val monthFormat = SimpleDateFormat(
+            "MMMM",
+            Locale.getDefault()
+        )
+        val date = Date()
+        val initMonth = dateFormat.format(date)
+        viewModel.getUserData()
+        viewModel.getToken()
+        viewModel.getLiveLocation()
+        viewModel.getRobo(initMonth.toString())
         getLatestData()
     }
 

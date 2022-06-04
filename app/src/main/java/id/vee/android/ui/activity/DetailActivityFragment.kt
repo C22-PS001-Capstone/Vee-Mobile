@@ -88,7 +88,7 @@ class DetailActivityFragment : Fragment(), View.OnClickListener {
                     deleteActivity()
                 }
                 edtDistance.setText(activityData.km.toString())
-                edtDate.setText(activityData.date?.formatDate("dd-MM-yyyy"))
+                edtDate.setText(activityData.date.formatDate("dd-MM-yyyy"))
                 edtLitre.setText(activityData.liter.toString())
                 edtExpense.setText(activityData.price.toString())
             }
