@@ -53,8 +53,12 @@ class NotificationFragment : Fragment() {
             viewModel.notificationResponse.observe(viewLifecycleOwner) { listNotification ->
                 if (listNotification.isEmpty()) {
                     notificationAdapter.submitList(null)
+                    emptyNotificationImage.visibility = View.VISIBLE
+                    emptyNotificationText.visibility = View.VISIBLE
                 } else {
                     notificationAdapter.submitList(listNotification)
+                    emptyNotificationImage.visibility = View.GONE
+                    emptyNotificationText.visibility = View.GONE
                 }
                 progressBar.visibility = View.GONE
             }

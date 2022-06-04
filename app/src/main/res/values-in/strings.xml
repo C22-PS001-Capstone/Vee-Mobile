@@ -86,4 +86,5 @@
     <string name="error_location">Lokasi tidak ditemukan. Coba lagi</string>
     <string name="no_activity">Tidak Ada Aktivitas</string>
     <string name="add_activity_warning">Tambah aktivitas baru dengan menekan tombol (+)</string>
+    <string name="there_is_no_notification">Tidak ada notifikasi yang tersedia</string>
 </resources>
