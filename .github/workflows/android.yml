@@ -28,11 +28,6 @@ jobs:
           DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
         run: |
           echo $DATA > app/google-services.json
-      - name: Add Google Map API Key
-        env:
-          MAP_API: ${{ secrets.GOOGLE_MAP_API_KEY }}
-        run: |
-          sed -i -e 's|<!-- Google Map API -->|'"$MAP_API"'|g' app/src/main/res/values/strings.xml
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Unit tests
@@ -60,6 +55,11 @@ jobs:
           DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
         run: |
           echo $DATA > app/google-services.json
+      - name: Add Google Map API Key
+        env:
+          MAP_API: ${{ secrets.GOOGLE_MAP_API_KEY }}
+        run: |
+          sed -i -e 's|<!-- Google Map API -->|'"$MAP_API"'|g' app/src/main/res/values/strings.xml
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
