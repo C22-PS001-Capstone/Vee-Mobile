@@ -114,4 +114,5 @@
     <string name="add_activity_warning">Add new activity pressing (+) button</string>
     <string name="there_is_no_notification">There is no notification</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <!-- Google Map API -->
 </resources>
