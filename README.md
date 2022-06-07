@@ -54,7 +54,7 @@ cd app && touch google-services.json && nano google-services.json
 After everything is done, you can build the application using android studio and run this project.
 
 ## Suggestion
-If you have any suggestion related to this project you can contact us at [C22-PS00[at]bangkit[dot]academy](mailto:c22-ps001@bangkit.academy)
+If you have any suggestion related to this project you can contact us at [C22-PS001[at]bangkit[dot]academy](mailto:c22-ps001@bangkit.academy)
 
 ## License
 License of this project under MIT. See [LICENSE](LICENSE)
