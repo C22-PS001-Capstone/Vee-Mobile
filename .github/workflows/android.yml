@@ -59,7 +59,7 @@ jobs:
         env:
           MAP_API: ${{ secrets.GOOGLE_MAP_API_KEY }}
         run: |
-          echo $GOOGLE_MAP_API_KEY > app/src/main/res/values/key.xml
+          echo $MAP_API > app/src/main/res/values/key.xml
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
