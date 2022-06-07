@@ -186,7 +186,7 @@
             android:background="@drawable/robo_background"
             android:baselineAligned="false"
             android:orientation="vertical"
-            android:paddingHorizontal="16dp"
+            android:paddingHorizontal="8dp"
             android:paddingTop="15dp"
             android:paddingBottom="15dp">
 
@@ -196,6 +196,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:fontFamily="@font/nunito_bold"
+                android:paddingHorizontal="8dp"
                 android:text="@string/robo_this_month_label"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -203,20 +204,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="4dp"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:background="@drawable/robo_card_background"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/nunito_semi_bold"
+                        android:fontFamily="@font/nunito_bold"
                         android:text="@string/robo_fillups_label"
-                        android:textColor="@color/black"
+                        android:textColor="@color/blue_700"
                         android:textSize="14sp" />
 
                     <TextView
@@ -233,9 +238,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/nunito_semi_bold"
+                        android:fontFamily="@font/nunito_bold"
                         android:text="@string/robo_expenses_label"
-                        android:textColor="@color/black"
+                        android:textColor="@color/blue_700"
                         android:textSize="14sp" />
 
                     <TextView
@@ -252,17 +257,20 @@
                 <LinearLayout
                     android:id="@+id/forecast_section"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="4dp"
                     android:layout_weight="1"
+                    android:background="@drawable/robo_card_background"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:padding="16dp"
+                    android:visibility="visible">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/nunito_semi_bold"
+                        android:fontFamily="@font/nunito_bold"
                         android:text="@string/forecast_next"
-                        android:textColor="@color/black"
+                        android:textColor="@color/blue_700"
                         android:textSize="14sp" />
 
                     <TextView
@@ -278,9 +286,9 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/nunito_semi_bold"
+                        android:fontFamily="@font/nunito_bold"
                         android:text="@string/forecast_average"
-                        android:textColor="@color/black"
+                        android:textColor="@color/blue_700"
                         android:textSize="14sp" />
 
                     <TextView

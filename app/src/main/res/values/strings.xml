@@ -28,7 +28,7 @@
     <string name="robo" translatable="false">Robo</string>
     <string name="robo_this_month_label">This %1s</string>
     <string name="robo_fillups_label">Fill-ups</string>
-    <string name="robo_fillups_value">%1s Litre</string>
+    <string name="robo_fillups_value">%1s\nLitre</string>
     <string name="robo_expenses_label">Expenses</string>
     <string name="robo_expenses_value">Rp %1s</string>
     <string name="robo_you_are_label">You are a</string>

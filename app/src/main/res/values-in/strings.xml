@@ -17,7 +17,7 @@
     <string name="btn_logout">Keluar</string>
     <string name="robo_this_month_label">Bulan %1s</string>
     <string name="robo_fillups_label">Mengisi</string>
-    <string name="robo_fillups_value">%1s Liter</string>
+    <string name="robo_fillups_value">%1s\nLiter</string>
     <string name="robo_expenses_label">Pengeluaran</string>
     <string name="robo_expenses_value">Rp %1s</string>
     <string name="robo_you_are_label">Anda adalah seorang</string>
