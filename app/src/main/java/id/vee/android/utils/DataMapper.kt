@@ -10,7 +10,8 @@ object DataMapper {
         id = input.id,
         firstName = input.firstName,
         lastName = input.lastName,
-        email = input.email
+        email = input.email,
+        passNull = input.passNull,
     )
 
     fun mapEntityToDomain(input: TokenEntity) = Token(
@@ -28,7 +29,8 @@ object DataMapper {
         id = input.id,
         firstName = input.firstName,
         lastName = input.lastName,
-        email = input.email
+        email = input.email,
+        passNull = input.passNull,
     )
 
     fun mapDomainToEntity(input: Token) = TokenEntity(

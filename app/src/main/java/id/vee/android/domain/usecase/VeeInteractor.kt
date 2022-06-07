@@ -70,6 +70,14 @@ class VeeInteractor(private val repository: VeeDataSource) : VeeUseCase {
     ): Flow<BasicResponse> =
         repository.updatePassword(token, passwordCurrent, password, passwordConfirm)
 
+    override fun addPassword(
+        token: String,
+        password: String,
+        passwordConfirm: String
+    ): Flow<BasicResponse> =
+        repository.addPassword(token, password, passwordConfirm)
+
+
     override fun getActivity(token: String): Flow<Resource<List<Activity>>> =
         repository.getActivity(token)
 
@@ -98,6 +106,8 @@ class VeeInteractor(private val repository: VeeDataSource) : VeeUseCase {
     override suspend fun getLocalStations(): Flow<List<GasStations>> = repository.getLocalStations()
 
     override suspend fun getRobo(month: String): Flow<Robo> = repository.getRobo(month)
+    
     override suspend fun getNotification(): Flow<List<Notification>>  = repository.getNotification()
+    
     override fun getForecast(token: String): Flow<ForecastResponse> = repository.getForecast(token)
 }

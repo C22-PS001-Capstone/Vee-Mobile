@@ -52,6 +52,12 @@ interface VeeDataSource {
         passwordConfirm: String
     ): Flow<BasicResponse>
 
+    fun addPassword(
+        token: String,
+        password: String,
+        passwordConfirm: String
+    ): Flow<BasicResponse>
+
     fun getGasStations(
         token: String,
         lat: Double,

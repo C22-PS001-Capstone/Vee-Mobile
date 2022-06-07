@@ -60,6 +60,12 @@ interface VeeUseCase {
         passwordConfirm: String
     ): Flow<BasicResponse>
 
+    fun addPassword(
+        token: String,
+        password: String,
+        passwordConfirm: String
+    ): Flow<BasicResponse>
+
     fun getGasStations(
         token: String,
         lat: Double,
@@ -85,6 +91,6 @@ interface VeeUseCase {
 
     suspend fun getRobo(month: String): Flow<Robo>
     suspend fun getNotification(): Flow<List<Notification>>
-    fun getForecast(token: String): Flow<ForecastResponse>
 
+    fun getForecast(token: String): Flow<ForecastResponse>
 }

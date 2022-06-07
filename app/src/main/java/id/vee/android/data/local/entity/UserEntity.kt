@@ -17,5 +17,8 @@ data class UserEntity(
     val lastName: String,
 
     @field:SerializedName("email")
-    val email: String
+    val email: String,
+
+    @field:SerializedName("passNull")
+    val passNull: Boolean
 )

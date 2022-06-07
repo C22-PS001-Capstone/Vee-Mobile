@@ -91,4 +91,8 @@
     <string name="there_is_no_notification">Tidak ada notifikasi yang tersedia</string>
     <string name="forecast_next">Prediksi Pengeluaran Berikutnya</string>
     <string name="forecast_average">Prediksi Rata-rata Pengeluaran</string>
+    <string name="create">Tambah</string>
+    <string name="create_password">Tambah Kata Sandi</string>
+    <string name="success_create_password">Penambahan Kata Sandi Berhasil</string>
+    <string name="error_create_password">Tdaik dapat menambahkan kata sandi di akun ini</string>
 </resources>

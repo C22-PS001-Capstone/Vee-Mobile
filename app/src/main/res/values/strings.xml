@@ -117,6 +117,10 @@
     <string name="there_is_no_notification">There is no notification</string>
     <string name="forecast_next">Next Expense Forecast</string>
     <string name="forecast_average">Average Expense Forecast</string>
+    <string name="create">Create</string>
+    <string name="create_password">Create Password</string>
+    <string name="success_create_password">Create Password Successful</string>
+    <string name="error_create_password">Unable to create the password to this account</string>
     <!-- TODO: Remove or change this placeholder text -->
     <!-- Google Map API -->
 </resources>
