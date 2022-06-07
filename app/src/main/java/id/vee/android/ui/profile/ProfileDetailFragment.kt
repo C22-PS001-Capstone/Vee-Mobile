@@ -53,7 +53,13 @@ class ProfileDetailFragment : Fragment() {
                 }
             }
         }
-        binding?.btnChangePassword?.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_profile_detail_to_navigation_change_password))
+        binding?.apply {
+            btnChangePassword.setOnClickListener(
+                Navigation.createNavigateOnClickListener(
+                    R.id.action_navigation_profile_detail_to_navigation_change_password
+                )
+            )
+        }
     }
 
     private fun updateName(viewModel: ProfileViewModel) {
@@ -74,6 +80,9 @@ class ProfileDetailFragment : Fragment() {
                         edtFirstName.setText(userData.firstName)
                         edtLastName.setText(userData.lastName)
                         edtEmail.setText(userData.email)
+                        if (userData.passNull) {
+                            btnChangePassword.setText(R.string.create)
+                        }
                     }
                 }
             }
@@ -82,7 +91,7 @@ class ProfileDetailFragment : Fragment() {
             }
             updateNameResponse.observe(viewLifecycleOwner) { response ->
                 if (response.status == "success") {
-                    viewModel.userDetail(userToken!!)
+                    userToken?.let { viewModel.userDetail(it) }
                 } else {
                     activity?.let {
                         AlertDialog.Builder(it)

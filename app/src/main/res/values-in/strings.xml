@@ -87,4 +87,8 @@
     <string name="no_activity">Tidak Ada Aktivitas</string>
     <string name="add_activity_warning">Tambah aktivitas baru dengan menekan tombol (+)</string>
     <string name="there_is_no_notification">Tidak ada notifikasi yang tersedia</string>
+    <string name="create">Tambah</string>
+    <string name="create_password">Tambah Kata Sandi</string>
+    <string name="success_create_password">Penambahan Kata Sandi Berhasil</string>
+    <string name="error_create_password">Tdaik dapat menambahkan kata sandi di akun ini</string>
 </resources>

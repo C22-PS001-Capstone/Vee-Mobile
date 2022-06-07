@@ -16,14 +16,20 @@ class ProfileViewModel constructor(
     private val useCase: VeeUseCase,
     pref: SettingsInterface
 ) : GeneralViewModel(useCase, pref) {
-    private val _logoutResponse: MutableLiveData<BasicResponse> = MutableLiveData()
     private val _updateNameResponse: MutableLiveData<BasicResponse> = MutableLiveData()
     val updateNameResponse = _updateNameResponse
+
     private val _updatePasswordResponse: MutableLiveData<BasicResponse> = MutableLiveData()
     val updatePasswordResponse = _updatePasswordResponse
+
+    private val _logoutResponse: MutableLiveData<BasicResponse> = MutableLiveData()
     val logoutResponse: LiveData<BasicResponse> = _logoutResponse
+
     private val _responseDetail = MutableLiveData<UserDetailResponse>()
     val responseDetail: LiveData<UserDetailResponse> = _responseDetail
+
+    private val _addPasswordResponse: MutableLiveData<BasicResponse> = MutableLiveData()
+    val addPasswordResponse: LiveData<BasicResponse> = _addPasswordResponse
 
     fun userDetail(data: Token) = viewModelScope.launch {
         useCase.userDetail(data).collect { values ->
@@ -60,6 +66,13 @@ class ProfileViewModel constructor(
                 _updatePasswordResponse.postValue(values)
             }
     }
+
+    fun addPassword(token: String, password: String, passwordConfirm: String) =
+        viewModelScope.launch {
+            useCase.addPassword(token, password, passwordConfirm).collect {
+                _addPasswordResponse.postValue(it)
+            }
+        }
 
     fun saveThemeSetting(isDarkModeActive: Boolean) = viewModelScope.launch {
         pref.saveThemeSetting(isDarkModeActive)
