@@ -17,3 +17,4 @@ credentials.json
 project.properties
 /app/google-services.json
 .idea
+/app/src/main/res/values/key.xml
