@@ -8,6 +8,6 @@ The project related to mobile application of vee project.
 - [x] Features get nearest gas station
 - [x] Features users activity
 - [x] Make a connection to REST API
-- [ ] Implementation of Machine Learning Model
+- [x] Implementation of Machine Learning Model
 - [x] Localization
 - [ ] Unit Testing & Android Test
