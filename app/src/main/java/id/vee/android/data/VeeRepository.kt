@@ -195,6 +195,12 @@ class VeeRepository(
             DataMapper.mapEntitiesToDomain(it)
         }
 
+    override fun getForecast(token: String): Flow<ForecastResponse> {
+        return flow{
+            emit(remoteDataSource.getForecast(token))
+        }
+    }
+
     override fun updateActivity(
         id: String,
         token: String,

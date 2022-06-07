@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
+@Suppress("UNCHECKED_CAST")
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding
@@ -150,9 +151,9 @@ class HomeFragment : Fragment() {
                         dashboardMonth.text =
                             resources.getString(R.string.robo_this_month_label, monthString)
                         dashboardFillUps.text =
-                            resources.getString(R.string.robo_fillups_label, liter.toString())
+                            resources.getString(R.string.robo_fillups_value, liter.toString())
                         dashboardExpenses.text =
-                            resources.getString(R.string.robo_expenses_label, price.toString())
+                            resources.getString(R.string.robo_expenses_value, price.toString())
                     }
                 }
             }
@@ -215,13 +216,37 @@ class HomeFragment : Fragment() {
             userToken = tokenData
             getLatestData()
             userToken?.let { token ->
-                currentLocation?.latitude?.let { lat ->
-                    currentLocation?.longitude?.let { lng ->
-                        viewModel.getGasStations(
-                            token.accessToken,
-                            lat,
-                            lng
-                        )
+                checkTokenAvailability(viewModel, tokenData, viewLifecycleOwner) {
+                    currentLocation?.latitude?.let { lat ->
+                        currentLocation?.longitude?.let { lng ->
+                            viewModel.getGasStations(
+                                it.accessToken,
+                                lat,
+                                lng
+                            )
+                        }
+                    }
+                    viewModel.getForecast(it.accessToken)
+                }
+            }
+        }
+        viewModel.forecastResponse.observe(viewLifecycleOwner) { forecastData ->
+            binding?.apply {
+                if (forecastData.status == "success") {
+                    forecastData.data?.let { forecast ->
+                        val nextForecast = forecast.forecast.first()
+                        val averageForecast = forecast.forecast.average()
+                        val newNumber = NumberFormat.getInstance(Locale.GERMANY)
+                        forecastFillUp.text =
+                            resources.getString(
+                                R.string.robo_expenses_value,
+                                newNumber.format(nextForecast.toInt()).toString()
+                            )
+                        forecastAverageFillUp.text =
+                            resources.getString(
+                                R.string.robo_expenses_value,
+                                newNumber.format(averageForecast.toInt()).toString()
+                            )
                     }
                 }
             }
@@ -258,10 +283,6 @@ class HomeFragment : Fragment() {
 
         val dateFormat = SimpleDateFormat(
             getString(R.string.month_format),
-            Locale.getDefault()
-        )
-        val monthFormat = SimpleDateFormat(
-            "MMMM",
             Locale.getDefault()
         )
         val date = Date()

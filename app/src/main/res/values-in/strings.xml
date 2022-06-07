@@ -16,8 +16,10 @@
     <string name="btn_language">Bahasa</string>
     <string name="btn_logout">Keluar</string>
     <string name="robo_this_month_label">Bulan %1s</string>
-    <string name="robo_fillups_label">Mengisi: %1s Litre</string>
-    <string name="robo_expenses_label">Pengeluaran: Rp %1s</string>
+    <string name="robo_fillups_label">Mengisi</string>
+    <string name="robo_fillups_value">%1s Liter</string>
+    <string name="robo_expenses_label">Pengeluaran</string>
+    <string name="robo_expenses_value">Rp %1s</string>
     <string name="robo_you_are_label">Anda adalah seorang</string>
     <string name="robo_category_label">Pembalap</string>
     <string name="title_home">Beranda</string>
@@ -87,4 +89,6 @@
     <string name="no_activity">Tidak Ada Aktivitas</string>
     <string name="add_activity_warning">Tambah aktivitas baru dengan menekan tombol (+)</string>
     <string name="there_is_no_notification">Tidak ada notifikasi yang tersedia</string>
+    <string name="forecast_next">Prediksi Pengeluaran Berikutnya</string>
+    <string name="forecast_average">Prediksi Rata-rata Pengeluaran</string>
 </resources>

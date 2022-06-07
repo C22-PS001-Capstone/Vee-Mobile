@@ -101,4 +101,9 @@ interface ApiService {
         @Query("lat") lat: Double,
         @Query("lon") lon: Double
     ): GasStationsListResponse
+
+    @POST("/forecast")
+    suspend fun getForecast(
+        @Header("Authorization") token: String,
+    ): ForecastResponse
 }

@@ -2,6 +2,7 @@ package id.vee.android.domain.usecase
 
 import id.vee.android.data.Resource
 import id.vee.android.data.remote.response.BasicResponse
+import id.vee.android.data.remote.response.ForecastResponse
 import id.vee.android.data.remote.response.LoginResponse
 import id.vee.android.data.remote.response.UserDetailResponse
 import id.vee.android.domain.model.*
@@ -98,4 +99,5 @@ class VeeInteractor(private val repository: VeeDataSource) : VeeUseCase {
 
     override suspend fun getRobo(month: String): Flow<Robo> = repository.getRobo(month)
     override suspend fun getNotification(): Flow<List<Notification>>  = repository.getNotification()
+    override fun getForecast(token: String): Flow<ForecastResponse> = repository.getForecast(token)
 }
