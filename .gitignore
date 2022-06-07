@@ -16,3 +16,4 @@ local.properties
 credentials.json
 project.properties
 /app/google-services.json
+.idea
