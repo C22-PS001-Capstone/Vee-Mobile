@@ -265,6 +265,9 @@ class HomeFragment : Fragment() {
                                     R.string.robo_expenses_value,
                                     newNumber.format(averageForecast.toInt()).toString()
                                 )
+                            forecastSection.visibility = View.VISIBLE
+                        } else {
+                            forecastSection.visibility = View.GONE
                         }
                     }
                 }
