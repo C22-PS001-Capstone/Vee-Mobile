@@ -2,6 +2,7 @@ package id.vee.android.domain.repository
 
 import id.vee.android.data.Resource
 import id.vee.android.data.remote.response.BasicResponse
+import id.vee.android.data.remote.response.ForecastResponse
 import id.vee.android.data.remote.response.LoginResponse
 import id.vee.android.data.remote.response.UserDetailResponse
 import id.vee.android.domain.model.*
@@ -82,4 +83,5 @@ interface VeeDataSource {
     suspend fun getRobo(month: String): Flow<Robo>
     suspend fun insertNotification(notification: Notification)
     suspend fun getNotification(): Flow<List<Notification>>
+    fun getForecast(token: String): Flow<ForecastResponse>
 }

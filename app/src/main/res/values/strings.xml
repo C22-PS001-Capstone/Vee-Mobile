@@ -27,8 +27,10 @@
     <string name="btn_logout">Log Out</string>
     <string name="robo" translatable="false">Robo</string>
     <string name="robo_this_month_label">This %1s</string>
-    <string name="robo_fillups_label">Fill-ups: %1s Litre</string>
-    <string name="robo_expenses_label">Expenses: Rp %1s</string>
+    <string name="robo_fillups_label">Fill-ups</string>
+    <string name="robo_fillups_value">%1s Litre</string>
+    <string name="robo_expenses_label">Expenses</string>
+    <string name="robo_expenses_value">Rp %1s</string>
     <string name="robo_you_are_label">You are a</string>
     <string name="robo_category_label">Racer</string>
     <string name="title_home">Home</string>
@@ -113,6 +115,8 @@
     <string name="no_activity">No Activity</string>
     <string name="add_activity_warning">Add new activity pressing (+) button</string>
     <string name="there_is_no_notification">There is no notification</string>
+    <string name="forecast_next">Next Expense Forecast</string>
+    <string name="forecast_average">Average Expense Forecast</string>
     <string name="create">Create</string>
     <string name="create_password">Create Password</string>
     <string name="success_create_password">Create Password Successful</string>

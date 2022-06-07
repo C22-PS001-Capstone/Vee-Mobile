@@ -38,6 +38,8 @@ class DetailActivityFragment : Fragment(), View.OnClickListener {
 
     private var currentLocation: Location? = null
 
+    private var successState = false
+
     private val activityData by lazy {
         DetailActivityFragmentArgs.fromBundle(arguments as Bundle).activity
     }
@@ -155,7 +157,10 @@ class DetailActivityFragment : Fragment(), View.OnClickListener {
                     .setMessage(getString(R.string.success_action_activity))
                     .setPositiveButton(getString(R.string.positive_dialog_btn_text)) { dialog, _ ->
                         dialog.dismiss()
-                        findNavController().popBackStack()
+                        if(!successState) {
+                            findNavController().popBackStack()
+                        }
+                        successState = true
                     }
                     .show()
             } else {

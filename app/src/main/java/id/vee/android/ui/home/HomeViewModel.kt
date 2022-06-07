@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import id.vee.android.data.Resource
 import id.vee.android.data.local.SettingsInterface
+import id.vee.android.data.remote.response.ForecastResponse
 import id.vee.android.domain.model.Activity
 import id.vee.android.domain.model.GasStations
 import id.vee.android.domain.model.Robo
@@ -19,11 +20,16 @@ class HomeViewModel constructor(
 ) : GeneralViewModel(useCase, pref) {
     private val _activityResponse: MutableLiveData<Resource<List<Activity>>> = MutableLiveData()
     val activityResponse: LiveData<Resource<List<Activity>>> = _activityResponse
+
     private val _gasStationsResponse: MutableLiveData<Resource<List<GasStations>>> =
         MutableLiveData()
     val gasStationsResponse: LiveData<Resource<List<GasStations>>> = _gasStationsResponse
+
     private val _robo: MutableLiveData<Robo> = MutableLiveData()
     val roboResponse: LiveData<Robo> = _robo
+
+    private val _forecastResponse: MutableLiveData<ForecastResponse> = MutableLiveData()
+    val forecastResponse: LiveData<ForecastResponse> = _forecastResponse
 
     fun getActivity(token: String) = viewModelScope.launch {
         useCase.getActivity(token).collect {
@@ -41,6 +47,12 @@ class HomeViewModel constructor(
         Timber.d("Gas Station: $token $lat $lon")
         useCase.getGasStations(token, lat, lon).collect {
             _gasStationsResponse.postValue(it)
+        }
+    }
+
+    fun getForecast(token: String) = viewModelScope.launch {
+        useCase.getForecast(token).collect {
+            _forecastResponse.postValue(it)
         }
     }
 }

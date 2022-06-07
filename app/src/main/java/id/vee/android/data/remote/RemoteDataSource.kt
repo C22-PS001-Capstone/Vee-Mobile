@@ -219,4 +219,15 @@ class RemoteDataSource(
             )
         }
 
+    suspend fun getForecast(token: String): ForecastResponse =
+        try {
+            apiService.getForecast(token.bearer())
+        } catch (e: Exception) {
+            ForecastResponse(
+                status = "error",
+                message = e.message.toString(),
+                data = null
+            )
+        }
+
 }
