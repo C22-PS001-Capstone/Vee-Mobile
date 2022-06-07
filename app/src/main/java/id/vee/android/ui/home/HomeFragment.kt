@@ -251,19 +251,21 @@ class HomeFragment : Fragment() {
             binding?.apply {
                 if (forecastData.status == "success") {
                     forecastData.data?.let { forecast ->
-                        val nextForecast = forecast.forecast.first()
-                        val averageForecast = forecast.forecast.average()
-                        val newNumber = NumberFormat.getInstance(Locale.GERMANY)
-                        forecastFillUp.text =
-                            resources.getString(
-                                R.string.robo_expenses_value,
-                                newNumber.format(nextForecast.toInt()).toString()
-                            )
-                        forecastAverageFillUp.text =
-                            resources.getString(
-                                R.string.robo_expenses_value,
-                                newNumber.format(averageForecast.toInt()).toString()
-                            )
+                        if(forecast.forecast.isNotEmpty()){
+                            val nextForecast = forecast.forecast.first()
+                            val averageForecast = forecast.forecast.average()
+                            val newNumber = NumberFormat.getInstance(Locale.GERMANY)
+                            forecastFillUp.text =
+                                resources.getString(
+                                    R.string.robo_expenses_value,
+                                    newNumber.format(nextForecast.toInt()).toString()
+                                )
+                            forecastAverageFillUp.text =
+                                resources.getString(
+                                    R.string.robo_expenses_value,
+                                    newNumber.format(averageForecast.toInt()).toString()
+                                )
+                        }
                     }
                 }
             }
