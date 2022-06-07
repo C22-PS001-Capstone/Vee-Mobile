@@ -15,6 +15,7 @@
     <color name="primary">#FFFACC15</color>
     <color name="secondary">#1543FA</color>
     <color name="red">#FFFF4444</color>
+    <color name="orange">#FF6347</color>
     <color name="limegreen">#32CD32</color>
 
     <color name="green_background">#91E1AE</color>

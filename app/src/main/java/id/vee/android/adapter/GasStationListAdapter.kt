@@ -57,7 +57,7 @@ class GasStationListAdapter(private val onItemClick: (GasStations) -> Unit) :
                             setTextColor(
                                 ContextCompat.getColor(
                                     context,
-                                    R.color.primary
+                                    R.color.orange
                                 )
                             )
                         }
