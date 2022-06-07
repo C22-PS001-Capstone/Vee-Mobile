@@ -1,6 +1,8 @@
 package id.vee.android.ui.home
 
+import android.content.Intent
 import android.location.Location
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -200,7 +202,22 @@ class HomeFragment : Fragment() {
                     }
                 }
                 listGasStation[index].setOnClickListener {
-                    // TODO: Navigate to detail
+                    // Navigation to google map and take to direction
+                    var lat = gasStations.lat
+                    var lng = gasStations.lon
+                    currentLocation?.let {
+                        lat = it.latitude
+                        lng = it.longitude
+                    }
+                    val gmmIntentUri =
+                        Uri.parse("http://maps.google.com/maps?saddr=${lat},${lng}&daddr=${gasStations.lat},${gasStations.lon}")
+                    val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                    mapIntent.setPackage("com.google.android.apps.maps")
+                    context?.apply {
+                        mapIntent.resolveActivity(packageManager)?.let {
+                            startActivity(mapIntent)
+                        }
+                    }
                 }
             }
         }

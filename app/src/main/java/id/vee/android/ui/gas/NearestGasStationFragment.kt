@@ -1,6 +1,8 @@
 package id.vee.android.ui.gas
 
+import android.content.Intent
 import android.location.Location
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -50,7 +52,22 @@ class NearestGasStationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val gasAdapter = GasStationListAdapter { gasStation ->
-            // TODO: Navigate to detail
+            // Navigation to google map and take to direction
+            var lat = gasStation.lat
+            var lng = gasStation.lon
+            currentLocation?.let {
+                lat = it.latitude
+                lng = it.longitude
+            }
+            val gmmIntentUri =
+                Uri.parse("http://maps.google.com/maps?saddr=${lat},${lng}&daddr=${gasStation.lat},${gasStation.lon}")
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            context?.apply {
+                mapIntent.resolveActivity(packageManager)?.let {
+                    startActivity(mapIntent)
+                }
+            }
         }
         setupRecyclerView(gasAdapter)
         viewModel.getToken()
