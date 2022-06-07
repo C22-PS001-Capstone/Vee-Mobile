@@ -133,7 +133,7 @@ class ChangePasswordFragment : Fragment() {
                             }
                             .show()
                     }
-                    binding?.apply{
+                    binding?.apply {
                         edtNewPassword.setText("")
                         edtNewPasswordConfirm.setText("")
                     }

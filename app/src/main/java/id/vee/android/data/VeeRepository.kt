@@ -211,7 +211,7 @@ class VeeRepository(
         }
 
     override fun getForecast(token: String): Flow<ForecastResponse> {
-        return flow{
+        return flow {
             emit(remoteDataSource.getForecast(token))
         }
     }

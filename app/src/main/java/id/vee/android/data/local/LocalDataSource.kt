@@ -45,6 +45,8 @@ class LocalDataSource(
 
     suspend fun deleteGasStations() = mUserDao.deleteGasStations()
     suspend fun deleteActivities() = mUserDao.deleteActivities()
-    suspend fun insertNotification(mapDomainToEntity: NotificationEntity) = mUserDao.insertNotification(mapDomainToEntity)
+    suspend fun insertNotification(mapDomainToEntity: NotificationEntity) =
+        mUserDao.insertNotification(mapDomainToEntity)
+
     fun getNotification(): Flow<List<NotificationEntity>> = mUserDao.getNotification()
 }

@@ -105,15 +105,6 @@ object DataMapper {
             )
         }
 
-    @JvmName("mapEntitiesToDomain2")
-    fun mapEntitiesToDomain(input: List<RoboEntity>): List<Robo> =
-        input.map {
-            Robo(
-                price = it.prc,
-                liter = it.ltr
-            )
-        }
-
     @JvmName("mapEntitiesToDomain3")
     fun mapEntitiesToDomain(input: List<NotificationEntity>): List<Notification> =
         input.map {

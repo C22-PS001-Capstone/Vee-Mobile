@@ -100,8 +100,4 @@ class ProfileFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-    companion object {
-        private const val TAG = "ProfileFragment"
-    }
 }

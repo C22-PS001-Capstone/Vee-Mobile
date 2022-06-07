@@ -100,9 +100,9 @@ class DetailActivityFragment : Fragment(), View.OnClickListener {
     }
 
     private fun deleteActivity() {
-        userToken?.let {
-            checkTokenAvailability(viewModel, it, viewLifecycleOwner) {
-                viewModel.deleteActivity(it.accessToken, activityData.id)
+        userToken?.let { tokenData ->
+            checkTokenAvailability(viewModel, tokenData, viewLifecycleOwner) { checkedToken ->
+                viewModel.deleteActivity(checkedToken.accessToken, activityData.id)
             }
         }
     }
@@ -129,11 +129,11 @@ class DetailActivityFragment : Fragment(), View.OnClickListener {
                     it
                 )
             }
-            userToken?.let {
-                checkTokenAvailability(viewModel, it, viewLifecycleOwner) {
+            userToken?.let { dataToken ->
+                checkTokenAvailability(viewModel, dataToken, viewLifecycleOwner) { newToken ->
                     viewModel.updateActivity(
                         activityData.id,
-                        it.accessToken,
+                        newToken.accessToken,
                         formatter.toString(),
                         edtDistance.text.toString().trimDottedString().toInt(),
                         edtLitre.text.toString().trimDottedString().toInt(),
@@ -157,7 +157,7 @@ class DetailActivityFragment : Fragment(), View.OnClickListener {
                     .setMessage(getString(R.string.success_action_activity))
                     .setPositiveButton(getString(R.string.positive_dialog_btn_text)) { dialog, _ ->
                         dialog.dismiss()
-                        if(!successState) {
+                        if (!successState) {
                             findNavController().popBackStack()
                         }
                         successState = true

@@ -12,8 +12,6 @@ import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofenceStatusCodes
 import com.google.android.gms.location.GeofencingEvent
 import id.vee.android.R
-import id.vee.android.data.VeeRepository
-import id.vee.android.di.*
 import id.vee.android.domain.model.Notification
 import id.vee.android.domain.repository.VeeDataSource
 import id.vee.android.ui.main.MainActivity
@@ -21,12 +19,8 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import org.koin.core.context.startKoin
-import org.koin.core.logger.Level
 import timber.log.Timber
 
 @DelicateCoroutinesApi

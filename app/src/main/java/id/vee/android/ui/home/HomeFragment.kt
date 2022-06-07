@@ -12,13 +12,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import id.vee.android.R
 import id.vee.android.adapter.ActivityListAdapter
 import id.vee.android.data.Resource
 import id.vee.android.databinding.FragmentHomeBinding
 import id.vee.android.domain.model.GasStations
 import id.vee.android.domain.model.Token
-import id.vee.android.utils.CustomLinearLayoutManager
 import id.vee.android.utils.checkTokenAvailability
 import id.vee.android.utils.formatDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -104,7 +104,7 @@ class HomeFragment : Fragment() {
                     }
                 }
                 rvStories.apply {
-                    layoutManager = CustomLinearLayoutManager(context)
+                    layoutManager = LinearLayoutManager(context)
                     setHasFixedSize(false)
                     adapter = storyAdapter
                 }
@@ -233,7 +233,7 @@ class HomeFragment : Fragment() {
             userToken = tokenData
             getLatestData()
             userToken?.let { token ->
-                checkTokenAvailability(viewModel, tokenData, viewLifecycleOwner) {
+                checkTokenAvailability(viewModel, token, viewLifecycleOwner) {
                     currentLocation?.latitude?.let { lat ->
                         currentLocation?.longitude?.let { lng ->
                             viewModel.getGasStations(
@@ -251,7 +251,7 @@ class HomeFragment : Fragment() {
             binding?.apply {
                 if (forecastData.status == "success") {
                     forecastData.data?.let { forecast ->
-                        if(forecast.forecast.isNotEmpty()){
+                        if (forecast.forecast.isNotEmpty()) {
                             val nextForecast = forecast.forecast.first()
                             val averageForecast = forecast.forecast.average()
                             val newNumber = NumberFormat.getInstance(Locale.GERMANY)

@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import id.vee.android.data.Resource
 import id.vee.android.domain.model.Notification
 import id.vee.android.domain.usecase.VeeUseCase
 import kotlinx.coroutines.launch

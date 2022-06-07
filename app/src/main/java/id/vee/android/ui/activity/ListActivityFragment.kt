@@ -95,8 +95,8 @@ class ListActivityFragment : Fragment() {
 
     private fun showStoryNotAvailable(state: Boolean = true) {
         binding?.apply {
-            storiesNotAvailable.visibility = if(state) View.VISIBLE else View.GONE
-            rvStories.visibility = if(state) View.GONE else View.VISIBLE
+            storiesNotAvailable.visibility = if (state) View.VISIBLE else View.GONE
+            rvStories.visibility = if (state) View.GONE else View.VISIBLE
         }
     }
 

@@ -10,8 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import id.vee.android.BuildConfig
 import id.vee.android.R
 import id.vee.android.databinding.ActivityLoginBinding
@@ -25,9 +23,6 @@ import timber.log.Timber
 class LoginActivity : AppCompatActivity() {
     private val binding by lazy(LazyThreadSafetyMode.NONE) {
         ActivityLoginBinding.inflate(layoutInflater)
-    }
-    private val auth by lazy {
-        Firebase.auth
     }
     private val mGoogleSignInClient by lazy {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -149,9 +144,5 @@ class LoginActivity : AppCompatActivity() {
             btnLoginActivity.text = getString(R.string.loading_btn)
         }
         viewModel.login(email, password)
-    }
-
-    companion object {
-        private const val TAG = "LoginActivity"
     }
 }

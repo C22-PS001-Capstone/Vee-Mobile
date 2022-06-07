@@ -44,8 +44,4 @@ class LoginViewModel constructor(private val useCase: VeeUseCase) : ViewModel() 
             _response.postValue(values)
         }
     }
-
-    companion object {
-        private const val TAG = "LoginViewModel"
-    }
 }

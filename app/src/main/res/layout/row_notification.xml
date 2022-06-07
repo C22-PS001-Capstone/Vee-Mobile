@@ -22,9 +22,9 @@
         android:id="@+id/notification_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginStart="10dp"
         android:fontFamily="@font/nunito_bold"
         android:textColor="@color/black"
-        android:layout_gravity="center"
         tools:text="Jangan Lupa Catat Pengeluaranmu" />
 </LinearLayout>

@@ -105,8 +105,8 @@ class NearestGasStationFragment : Fragment() {
 
     private fun showGasStaionNotAvailable(state: Boolean = true) {
         binding?.apply {
-            gasStationsNotAvailable.visibility = if(state) View.VISIBLE else View.GONE
-            rvGasStations.visibility = if(state) View.GONE else View.VISIBLE
+            gasStationsNotAvailable.visibility = if (state) View.VISIBLE else View.GONE
+            rvGasStations.visibility = if (state) View.GONE else View.VISIBLE
         }
     }
 
