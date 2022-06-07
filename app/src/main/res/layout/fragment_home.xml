@@ -263,7 +263,7 @@
                     android:background="@drawable/robo_card_background"
                     android:orientation="vertical"
                     android:padding="16dp"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="match_parent"
