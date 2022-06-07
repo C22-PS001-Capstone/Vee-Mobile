@@ -113,6 +113,10 @@
     <string name="no_activity">No Activity</string>
     <string name="add_activity_warning">Add new activity pressing (+) button</string>
     <string name="there_is_no_notification">There is no notification</string>
+    <string name="create">Create</string>
+    <string name="create_password">Create Password</string>
+    <string name="success_create_password">Create Password Successful</string>
+    <string name="error_create_password">Unable to create the password to this account</string>
     <!-- TODO: Remove or change this placeholder text -->
     <!-- Google Map API -->
 </resources>

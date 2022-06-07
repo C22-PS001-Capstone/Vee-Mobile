@@ -150,6 +150,22 @@ class RemoteDataSource(
         }
     }
 
+    suspend fun addPassword(
+        token: String,
+        password: String,
+        passwordConfirm: String
+    ): BasicResponse {
+        return try {
+            apiService.addPassword(token.bearer(), password, passwordConfirm)
+        } catch (e: Exception) {
+            BasicResponse(
+                status = "error",
+                message = e.message.toString(),
+                data = null
+            )
+        }
+    }
+
     suspend fun getGasStations(
         token: String,
         lat: Double,

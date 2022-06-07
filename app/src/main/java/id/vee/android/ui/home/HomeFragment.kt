@@ -260,10 +260,6 @@ class HomeFragment : Fragment() {
             getString(R.string.month_format),
             Locale.getDefault()
         )
-        val monthFormat = SimpleDateFormat(
-            "MMMM",
-            Locale.getDefault()
-        )
         val date = Date()
         val initMonth = dateFormat.format(date)
         viewModel.getUserData()

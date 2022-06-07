@@ -31,6 +31,14 @@ interface ApiService {
         @Field("passwordConfirm") passwordConfirm: String
     ): BasicResponse
 
+    @FormUrlEncoded
+    @PUT("/passwords/google")
+    suspend fun addPassword(
+        @Header("Authorization") token: String,
+        @Field("password") password: String,
+        @Field("passwordConfirm") passwordConfirm: String
+    ): BasicResponse
+
     @POST("/authentications/google")
     suspend fun loginGoogle(
         @Header("Authorization") token: String

@@ -119,6 +119,21 @@ class VeeRepository(
         )
     }
 
+    override fun addPassword(
+        token: String,
+        password: String,
+        passwordConfirm: String
+    ): Flow<BasicResponse> = flow {
+        emit(
+            remoteDataSource.addPassword(
+                token,
+                password,
+                passwordConfirm
+            )
+        )
+    }
+
+
     override fun getGasStations(
         token: String,
         lat: Double,
