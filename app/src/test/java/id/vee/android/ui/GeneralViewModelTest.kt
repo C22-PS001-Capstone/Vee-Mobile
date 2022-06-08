@@ -43,6 +43,17 @@ internal class GeneralViewModelTest {
     }
 
     @Test
+    fun `when get user data, return user data`() = mainCoroutineRule.runBlockingTest {
+        val expectedResult = dummy.getUserData()
+        `when`(useCase.getUser()).thenReturn(flowOf(expectedResult))
+        generalViewModel.getUserData()
+        val actualResult = generalViewModel.userResponse.getOrAwaitValue()
+        assertNotNull(actualResult)
+        assertEquals(expectedResult, actualResult)
+        assertEquals(expectedResult.firstName, actualResult.firstName)
+    }
+
+    @Test
     fun `when get token, return token data`() = mainCoroutineRule.runBlockingTest {
         val expectedResult = dummy.getTokenData()
         `when`(useCase.getToken()).thenReturn(flowOf(expectedResult))
@@ -50,5 +61,27 @@ internal class GeneralViewModelTest {
         val actualResult = generalViewModel.tokenResponse.getOrAwaitValue()
         assertNotNull(actualResult)
         assertEquals(expectedResult, actualResult)
+        assertEquals(expectedResult.accessToken, actualResult.accessToken)
     }
+
+    @Test
+    fun `when get theme setting, return theme setting`() = mainCoroutineRule.runBlockingTest {
+        val expectedResult = dummy.getSettings()
+        `when`(pref.getSettings()).thenReturn(flowOf(expectedResult))
+        generalViewModel.getThemeSettings()
+        val actualResult = generalViewModel.themeResponse.getOrAwaitValue()
+        assertNotNull(actualResult)
+        assertEquals(expectedResult.theme, actualResult)
+    }
+
+    @Test
+    fun `when get battery saver setting, return battery saver setting`() =
+        mainCoroutineRule.runBlockingTest {
+            val expectedResult = dummy.getSettings()
+            `when`(pref.getSettings()).thenReturn(flowOf(expectedResult))
+            generalViewModel.getBatterySaverSettings()
+            val actualResult = generalViewModel.batterySaverResponse.getOrAwaitValue()
+            assertNotNull(actualResult)
+            assertEquals(expectedResult.saverMode, actualResult)
+        }
 }
