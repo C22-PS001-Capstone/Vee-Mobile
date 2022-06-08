@@ -191,7 +191,7 @@ class HomeFragment : Fragment() {
                             )
                             distanceText.append("${distance.toDouble() * 1000} m")
                         } else if (distance.toDouble() < 0.5) {
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+                            setTextColor(ContextCompat.getColor(requireContext(), R.color.orange))
                             distanceText.append("${distance.toDouble() * 1000} m")
                         } else {
                             setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
