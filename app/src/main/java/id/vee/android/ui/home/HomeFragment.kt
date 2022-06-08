@@ -112,7 +112,7 @@ class HomeFragment : Fragment() {
                 }
                 rvStories.apply {
                     layoutManager = LinearLayoutManager(context)
-                    setHasFixedSize(true)
+                    setHasFixedSize(false)
                     adapter = storyAdapter
                 }
                 viewModel.activityResponse.observe(viewLifecycleOwner) { responses ->
