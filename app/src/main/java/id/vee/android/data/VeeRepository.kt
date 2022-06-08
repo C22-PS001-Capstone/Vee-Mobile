@@ -149,7 +149,6 @@ class VeeRepository(
             override fun shouldFetch(data: List<GasStations>?): Boolean = true
 
             override suspend fun createCall(): Flow<ApiResponse<List<GasStationsResponse>>> {
-                localDataSource.deleteGasStations()
                 return remoteDataSource.getGasStations(token, lat, lon)
             }
 

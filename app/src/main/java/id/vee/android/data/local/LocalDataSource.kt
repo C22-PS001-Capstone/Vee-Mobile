@@ -31,8 +31,11 @@ class LocalDataSource(
     suspend fun insertActivity(activityList: List<ActivityEntity>) =
         mUserDao.insertActivity(activityList)
 
-    suspend fun insertGasStations(gasStationsList: List<GasStationsEntity>) =
+    suspend fun insertGasStations(gasStationsList: List<GasStationsEntity>) {
+        val ids: List<String> = gasStationsList.map { it.id }
+        mUserDao.deleteGasStations(ids)
         mUserDao.insertGasStations(gasStationsList)
+    }
 
     fun getActivity(): Flow<List<ActivityEntity>> = mUserDao.getActivity()
 
@@ -43,7 +46,6 @@ class LocalDataSource(
     fun getNearestGasStation(latitude: Double, longitude: Double): Flow<List<GasStationsEntity>> =
         mUserDao.getNearestGasStation(latitude, longitude)
 
-    suspend fun deleteGasStations() = mUserDao.deleteGasStations()
     suspend fun deleteActivities() = mUserDao.deleteActivities()
     suspend fun insertNotification(mapDomainToEntity: NotificationEntity) =
         mUserDao.insertNotification(mapDomainToEntity)

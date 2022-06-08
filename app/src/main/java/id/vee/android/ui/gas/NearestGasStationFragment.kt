@@ -91,6 +91,7 @@ class NearestGasStationFragment : Fragment() {
                                 gasAdapter.submitList(stations)
                                 showGasStaionNotAvailable(false)
                             } else {
+                                Timber.d("Gas stations is empty ${responses.message}")
                                 gasAdapter.submitList(null)
                                 showGasStaionNotAvailable()
                             }

@@ -45,8 +45,8 @@ interface VeeDao {
     @Query("SELECT * FROM gas_stations_entities ORDER BY ABS(lat - :latitude) + ABS(lon - :longitude) ASC")
     fun getNearestGasStation(latitude: Double, longitude: Double): Flow<List<GasStationsEntity>>
 
-    @Query("DELETE FROM gas_stations_entities WHERE 1")
-    suspend fun deleteGasStations()
+    @Query("DELETE FROM gas_stations_entities WHERE id NOT IN (:ids)")
+    suspend fun deleteGasStations(ids: List<String>)
 
     @Query("DELETE FROM activity_entities WHERE 1")
     suspend fun deleteActivities()
