@@ -1,6 +1,7 @@
 package id.vee.android
 
 import android.location.Location
+import id.vee.android.data.local.entity.RoboEntity
 import id.vee.android.data.local.entity.TokenEntity
 import id.vee.android.data.local.entity.UserEntity
 import id.vee.android.data.remote.response.*
@@ -41,6 +42,22 @@ object DataDummy {
         val list: MutableList<GasStations> = mutableListOf()
         for (i in 0 until 10) {
             val gasStation = GasStations(
+                id = "id-$i",
+                name = "name-$i",
+                vendor = "vendor-$i",
+                lat = -6.2233232,
+                lon = 106.8232323,
+                distance = "${i}00",
+            )
+            list.add(gasStation)
+        }
+        return list
+    }
+
+    fun gasStationsResponse(): List<GasStationsResponse> {
+        val list: MutableList<GasStationsResponse> = mutableListOf()
+        for (i in 0 until 10) {
+            val gasStation = GasStationsResponse(
                 id = "id-$i",
                 name = "name-$i",
                 vendor = "vendor-$i",
@@ -112,5 +129,48 @@ object DataDummy {
         status = "success",
         message = "Success",
         data = forecastData()
+    )
+
+    fun getListResponse(): List<ActivityResponse> {
+        val list: MutableList<ActivityResponse> = mutableListOf()
+        for (i in 0 until 10) {
+            val activity = ActivityResponse(
+                id = "id-$i",
+                date = "2020-01-01",
+                owner = "owner-$i",
+                km = i * 100,
+                liter = i * 10,
+                price = i * 1000,
+                lon = 106.8232323,
+                lat = -6.2233232,
+            )
+            list.add(activity)
+        }
+        return list
+    }
+
+    fun getActivityListResponse(): ActivityListResponse = ActivityListResponse(
+        ActivityListDataResponse(
+            activities = getListResponse()
+        ),
+        message = "Success",
+        status = "success"
+    )
+
+    fun getGasStationsListResponse(): GasStationsListResponse = GasStationsListResponse(
+        data = gasStationsResponse(),
+        message = "Success",
+        status = "success"
+    )
+
+    fun getForecastResponse(): ForecastResponse = ForecastResponse(
+        status = "success",
+        message = "Success",
+        data = forecastData()
+    )
+
+    fun getRoboEntity(): RoboEntity = RoboEntity(
+        prc = 1000,
+        ltr = 12
     )
 }
