@@ -39,7 +39,6 @@ class HomeFragment : Fragment() {
 
     private var currentLocation: Location? = null
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -231,7 +230,6 @@ class HomeFragment : Fragment() {
         }
         viewModel.tokenResponse.observe(viewLifecycleOwner) { tokenData ->
             userToken = tokenData
-            getLatestData()
             userToken?.let { token ->
                 checkTokenAvailability(viewModel, token, viewLifecycleOwner) {
                     currentLocation?.latitude?.let { lat ->
@@ -287,19 +285,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun getLatestData() {
-        userToken?.let {
-            checkTokenAvailability(viewModel, it, viewLifecycleOwner) { tokenData ->
-                viewModel.getActivity(tokenData.accessToken)
-                viewModel.getGasStations(
-                    tokenData.accessToken,
-                    0.0,
-                    0.0
-                )
-            }
-        }
-    }
-
     override fun onResume() {
         super.onResume()
 
@@ -313,7 +298,6 @@ class HomeFragment : Fragment() {
         viewModel.getToken()
         viewModel.getLiveLocation()
         viewModel.getRobo(initMonth.toString())
-        getLatestData()
     }
 
     private fun showRobo(state: Boolean) {
