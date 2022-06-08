@@ -73,3 +73,4 @@ We would like to thank the makers of theese cool plugins and images.
 - [Empty Notification Animation](https://lottiefiles.com/99955-empty-notifications)
 - [No Data Animation](https://lottiefiles.com/13659-no-data)
 - [Location Map Animation](https://lottiefiles.com/5733-location-map)
+- [Car fuel vector created by macrovector](https://www.freepik.com/free-vector/gas-stations-refills-isometric-composition-with-gasoline-filling-columns-cars-motorbikes-with-people-characters_7498299.htm)
