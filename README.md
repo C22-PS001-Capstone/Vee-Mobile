@@ -13,6 +13,7 @@ We as Indonesian people usually still calculate the expense that comes from our 
 - [x] Make a connection to REST API
 - [x] Implementation of Machine Learning Model
 - [x] Localization
+- [ ] Paging3 Implementation (In progress)
 - [ ] Unit Testing & Android Test
 
 ## Features
@@ -63,11 +64,13 @@ License of this project under MIT. See [LICENSE](LICENSE)
 We would like to thank the makers of theese cool plugins and images.
 
 ### Plugins
+- [Android Jetpack](https://developer.android.com/jetpack)
 - [Koin](https://insert-koin.io)
 - [Retrofit2](https://square.github.io/retrofit/)
 - [Glide](https://github.com/bumptech/glide)
 - [Circle Image View](https://github.com/hdodenhof/CircleImageView)
 ### Images
-- [Empty Notification Animation](https://lottiefiles.com/99955-empty-notifications)
-- [No Data Animation](https://assets10.lottiefiles.com/packages/lf20_Dczay3.json)
-- [Location Map Animation](https://lottiefiles.com/5733-location-map)
+- [Empty Notification Animation created by Hithesh Vurjana](https://lottiefiles.com/99955-empty-notifications)
+- [No Data Animation created by Aneesh Ravi](https://lottiefiles.com/13659-no-data)
+- [Location Map Animation created by Balram](https://lottiefiles.com/5733-location-map)
+- [Car fuel vector created by macrovector](https://www.freepik.com/free-vector/gas-stations-refills-isometric-composition-with-gasoline-filling-columns-cars-motorbikes-with-people-characters_7498299.htm)

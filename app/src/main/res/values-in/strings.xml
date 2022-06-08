@@ -96,4 +96,6 @@
     <string name="success_create_password">Penambahan Kata Sandi Berhasil</string>
     <string name="error_create_password">Tdaik dapat menambahkan kata sandi di akun ini</string>
     <string name="litre">Liter</string>
+    <string name="warning_battery_saver">Lokasi dapat menjadi tidak akurat</string>
+    <string name="battery_saver">Mode Hemat Baterai</string>
 </resources>
