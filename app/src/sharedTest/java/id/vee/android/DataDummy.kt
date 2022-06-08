@@ -1,6 +1,11 @@
 package id.vee.android
 
 import android.location.Location
+import id.vee.android.data.local.entity.TokenEntity
+import id.vee.android.data.local.entity.UserEntity
+import id.vee.android.data.remote.response.LoginResponse
+import id.vee.android.data.remote.response.UserDetailDataResponse
+import id.vee.android.data.remote.response.UserDetailResponse
 import id.vee.android.domain.model.*
 
 object DataDummy {
@@ -62,4 +67,30 @@ object DataDummy {
         }
         return list
     }
+
+    fun getLoginResponse(): LoginResponse =
+        LoginResponse(
+            status = "success",
+            message = "Login Success",
+            data = TokenEntity(
+                accessToken = "accessToken",
+                refreshToken = "refreshToken",
+                expiredAt = 1654702049
+            ),
+        )
+
+    fun getUserDetail(): UserDetailResponse =
+        UserDetailResponse(
+            status = "success",
+            message = "Login Success",
+            data = UserDetailDataResponse(
+                UserEntity(
+                    id = "id-user",
+                    firstName = "first",
+                    lastName = "last",
+                    email = "mail@mail.com",
+                    passNull = false
+                )
+            )
+        )
 }
