@@ -123,8 +123,6 @@ dependencies {
     // Koin
     implementation "io.insert-koin:koin-core:3.2.0"
     implementation "io.insert-koin:koin-android:3.2.0"
-    // Koin Test features
-    testImplementation "io.insert-koin:koin-test:3.2.0"
 
     // Lottie
     implementation "com.airbnb.android:lottie:3.4.1"
@@ -161,4 +159,8 @@ dependencies {
     //RecyclerViewActions
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.4.0'//IntentsTestRule
     androidTestImplementation "androidx.test.espresso:espresso-core:3.4.0"
+
+    // Koin Test features
+    testImplementation "io.insert-koin:koin-test:3.2.0"
+    androidTestImplementation "io.insert-koin:koin-test-jvm:3.2.0"
 }
