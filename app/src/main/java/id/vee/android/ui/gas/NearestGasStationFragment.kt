@@ -31,6 +31,8 @@ class NearestGasStationFragment : Fragment() {
         (activity as AppCompatActivity)
     }
 
+    private var hasCallLocation = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -71,7 +73,6 @@ class NearestGasStationFragment : Fragment() {
         }
         setupRecyclerView(gasAdapter)
         viewModel.getToken()
-        viewModel.getLiveLocation()
         viewModelListener()
         binding?.apply {
             viewModel.gasStationsResponse.observe(viewLifecycleOwner) { responses ->
@@ -98,6 +99,7 @@ class NearestGasStationFragment : Fragment() {
                             showGasStaionNotAvailable()
                         }
                     }
+                    hasCallLocation = false
                 }
             }
         }
@@ -123,27 +125,22 @@ class NearestGasStationFragment : Fragment() {
     private fun viewModelListener() {
         viewModel.tokenResponse.observe(viewLifecycleOwner) {
             userToken = it
-            userToken?.let { token ->
-                currentLocation?.latitude?.let { lat ->
-                    currentLocation?.longitude?.let { lng ->
-                        viewModel.getGasStations(
-                            token.accessToken,
-                            lat,
-                            lng
-                        )
-                    }
-                }
+            userToken?.let { _ ->
+                viewModel.getLiveLocation()
             }
         }
         viewModel.locationResponse.observe(viewLifecycleOwner) {
             currentLocation = it
             currentLocation?.let { location ->
                 userToken?.let { token ->
-                    viewModel.getGasStations(
-                        token.accessToken,
-                        location.latitude,
-                        location.longitude
-                    )
+                    if (!hasCallLocation) {
+                        hasCallLocation = true
+                        viewModel.getGasStations(
+                            token.accessToken,
+                            location.latitude,
+                            location.longitude
+                        )
+                    }
                 }
             }
         }

@@ -103,9 +103,9 @@ class ListActivityFragment : Fragment() {
     private fun viewModelListener() {
         viewModel.tokenResponse.observe(viewLifecycleOwner) { tokenData ->
             userToken = tokenData
-            if (tokenData != null) {
-                checkTokenAvailability(viewModel, tokenData, viewLifecycleOwner) {
-                    viewModel.getActivity(tokenData.accessToken)
+            userToken?.let { dataToken ->
+                checkTokenAvailability(viewModel, dataToken, viewLifecycleOwner) { newToken ->
+                    viewModel.getActivity(newToken.accessToken)
                 }
             }
         }

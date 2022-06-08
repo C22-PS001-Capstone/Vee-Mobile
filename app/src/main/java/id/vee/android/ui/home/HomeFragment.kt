@@ -242,6 +242,7 @@ class HomeFragment : Fragment() {
                         }
                     }
                     viewModel.getForecast(it.accessToken)
+                    viewModel.getActivity(it.accessToken)
                 }
             }
         }
