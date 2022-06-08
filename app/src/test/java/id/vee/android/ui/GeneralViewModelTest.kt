@@ -65,6 +65,18 @@ internal class GeneralViewModelTest {
     }
 
     @Test
+    fun `when get refresh token, return data`() = runTest {
+        val expectedResult = dummy.getLoginResponse()
+
+        `when`(useCase.refreshToken("token")).thenReturn(flowOf(expectedResult))
+        generalViewModel.refreshToken("token")
+        val actualResult = generalViewModel.refreshResponse.getOrAwaitValue()
+        assertNotNull(actualResult)
+        assertEquals(expectedResult, actualResult)
+        assertEquals(expectedResult.status, actualResult.status)
+    }
+
+    @Test
     fun `when get theme setting, return theme setting`() = runTest {
         val expectedResult = dummy.getSettings()
         `when`(pref.getSettings()).thenReturn(flowOf(expectedResult))
