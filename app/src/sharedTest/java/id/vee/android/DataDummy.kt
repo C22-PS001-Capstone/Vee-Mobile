@@ -1,10 +1,7 @@
 package id.vee.android
 
 import android.location.Location
-import id.vee.android.domain.model.GasStations
-import id.vee.android.domain.model.Settings
-import id.vee.android.domain.model.Token
-import id.vee.android.domain.model.User
+import id.vee.android.domain.model.*
 
 object DataDummy {
     fun getTokenData(): Token =
@@ -49,6 +46,19 @@ object DataDummy {
                 distance = "${i}00",
             )
             list.add(gasStation)
+        }
+        return list
+    }
+
+    fun notificationsData(): List<Notification> {
+        val list: MutableList<Notification> = mutableListOf()
+        for (i in 0 until 10) {
+            val notification = Notification(
+                id = i + 1,
+                notification = "notification-$i",
+                createdAt = 2154702049,
+            )
+            list.add(notification)
         }
         return list
     }
