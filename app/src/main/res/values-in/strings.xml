@@ -17,7 +17,7 @@
     <string name="btn_logout">Keluar</string>
     <string name="robo_this_month_label">Bulan %1s</string>
     <string name="robo_fillups_label">Mengisi</string>
-    <string name="robo_fillups_value">%1s\nLiter</string>
+    <string name="robo_fillups_value">%1s</string>
     <string name="robo_expenses_label">Pengeluaran</string>
     <string name="robo_expenses_value">Rp %1s</string>
     <string name="robo_you_are_label">Anda adalah seorang</string>
@@ -95,4 +95,5 @@
     <string name="create_password">Tambah Kata Sandi</string>
     <string name="success_create_password">Penambahan Kata Sandi Berhasil</string>
     <string name="error_create_password">Tdaik dapat menambahkan kata sandi di akun ini</string>
+    <string name="litre">Liter</string>
 </resources>
