@@ -39,11 +39,15 @@ jobs:
         run: bash ./gradlew test --stacktrace
       - name: Generate Report
         run: bash ./gradlew koverReport
+      - name: Zip Report
+        uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r report.zip app/build/reports/kover
       - name: Upload Report
         uses: actions/upload-artifact@v1
         with:
           name: Kover Report
-          path: app/build/reports/kover/project-html/index.html
+          path: report.zip
 
   build:
 
