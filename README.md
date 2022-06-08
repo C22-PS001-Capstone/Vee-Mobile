@@ -70,5 +70,5 @@ We would like to thank the makers of theese cool plugins and images.
 - [Circle Image View](https://github.com/hdodenhof/CircleImageView)
 ### Images
 - [Empty Notification Animation](https://lottiefiles.com/99955-empty-notifications)
-- [No Data Animation](https://assets10.lottiefiles.com/packages/lf20_Dczay3.json)
+- [No Data Animation](https://lottiefiles.com/13659-no-data)
 - [Location Map Animation](https://lottiefiles.com/5733-location-map)
