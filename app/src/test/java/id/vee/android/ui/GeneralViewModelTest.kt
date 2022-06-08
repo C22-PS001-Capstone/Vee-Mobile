@@ -2,15 +2,15 @@ package id.vee.android.ui
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import id.vee.android.DataDummy
-import id.vee.android.MainCoroutineRule
+import id.vee.android.MainDispatcherRule
 import id.vee.android.data.local.SettingsPreferences
 import id.vee.android.domain.usecase.VeeUseCase
 import id.vee.android.getOrAwaitValue
-import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertNotNull
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -35,7 +35,7 @@ internal class GeneralViewModelTest {
     private lateinit var generalViewModel: GeneralViewModel
 
     @get:Rule
-    var mainCoroutineRule = MainCoroutineRule()
+    var mainDispatcherRule = MainDispatcherRule()
 
     @Before
     fun setUp() {
@@ -43,7 +43,7 @@ internal class GeneralViewModelTest {
     }
 
     @Test
-    fun `when get user data, return user data`() = mainCoroutineRule.runBlockingTest {
+    fun `when get user data, return user data`() = runTest {
         val expectedResult = dummy.getUserData()
         `when`(useCase.getUser()).thenReturn(flowOf(expectedResult))
         generalViewModel.getUserData()
@@ -54,7 +54,7 @@ internal class GeneralViewModelTest {
     }
 
     @Test
-    fun `when get token, return token data`() = mainCoroutineRule.runBlockingTest {
+    fun `when get token, return token data`() = runTest {
         val expectedResult = dummy.getTokenData()
         `when`(useCase.getToken()).thenReturn(flowOf(expectedResult))
         generalViewModel.getToken()
@@ -65,7 +65,7 @@ internal class GeneralViewModelTest {
     }
 
     @Test
-    fun `when get theme setting, return theme setting`() = mainCoroutineRule.runBlockingTest {
+    fun `when get theme setting, return theme setting`() = runTest {
         val expectedResult = dummy.getSettings()
         `when`(pref.getSettings()).thenReturn(flowOf(expectedResult))
         generalViewModel.getThemeSettings()
@@ -76,7 +76,7 @@ internal class GeneralViewModelTest {
 
     @Test
     fun `when get battery saver setting, return battery saver setting`() =
-        mainCoroutineRule.runBlockingTest {
+        runTest {
             val expectedResult = dummy.getSettings()
             `when`(pref.getSettings()).thenReturn(flowOf(expectedResult))
             generalViewModel.getBatterySaverSettings()
