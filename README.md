@@ -64,6 +64,7 @@ License of this project under MIT. See [LICENSE](LICENSE)
 We would like to thank the makers of theese cool plugins and images.
 
 ### Plugins
+- [Android Jetpack](https://developer.android.com/jetpack)
 - [Koin](https://insert-koin.io)
 - [Retrofit2](https://square.github.io/retrofit/)
 - [Glide](https://github.com/bumptech/glide)
