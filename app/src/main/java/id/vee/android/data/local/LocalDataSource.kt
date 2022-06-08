@@ -3,6 +3,7 @@ package id.vee.android.data.local
 import id.vee.android.data.local.entity.*
 import id.vee.android.data.local.room.VeeDao
 import kotlinx.coroutines.flow.Flow
+import timber.log.Timber
 
 class LocalDataSource(
     private val mUserDao: VeeDao
@@ -34,6 +35,7 @@ class LocalDataSource(
     suspend fun insertGasStations(gasStationsList: List<GasStationsEntity>) {
         val ids: List<String> = gasStationsList.map { it.id }
         mUserDao.deleteGasStations(ids)
+        Timber.d("ids: $ids")
         mUserDao.insertGasStations(gasStationsList)
     }
 
