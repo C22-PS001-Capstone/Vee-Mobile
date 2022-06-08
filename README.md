@@ -58,3 +58,16 @@ If you have any suggestion related to this project you can contact us at [C22-PS
 
 ## License
 License of this project under MIT. See [LICENSE](LICENSE)
+
+## Credits
+We would like to thank the makers of theese cool plugins and images.
+
+### Plugins
+- [Koin](https://insert-koin.io)
+- [Retrofit2](https://square.github.io/retrofit/)
+- [Glide](https://github.com/bumptech/glide)
+- [Circle Image View](https://github.com/hdodenhof/CircleImageView)
+### Images
+- [Empty Notification Animation](https://lottiefiles.com/99955-empty-notifications)
+- [No Data Animation](https://assets10.lottiefiles.com/packages/lf20_Dczay3.json)
+- [Location Map Animation](https://lottiefiles.com/5733-location-map)
