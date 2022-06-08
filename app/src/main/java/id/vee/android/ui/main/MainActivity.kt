@@ -31,11 +31,13 @@ import id.vee.android.R
 import id.vee.android.databinding.ActivityMainBinding
 import id.vee.android.service.NearestGasStationReceiver
 import id.vee.android.utils.toMD5
+import kotlinx.coroutines.DelicateCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 
+@DelicateCoroutinesApi
 @SuppressLint("UnspecifiedImmutableFlag")
 class MainActivity : AppCompatActivity() {
     private val binding by lazy(LazyThreadSafetyMode.NONE) {
