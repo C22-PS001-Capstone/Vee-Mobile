@@ -37,19 +37,36 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    sourceSets {
+        androidTest.java.srcDirs += "src/sharedTest/java"
+        test.java.srcDirs += "src/sharedTest/java"
+    }
     kotlinOptions {
         jvmTarget = '1.8'
     }
     buildFeatures {
         viewBinding true
     }
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/AL2.0', 'META-INF/LGPL2.1']
+        }
+    }
+    testOptions {
+        animationsDisabled = true
+        unitTests.all {
+            kover {
+                excludes = ["id.vee.android.BuildConfig"]
+            }
+        }
+    }
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.6.0'
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     //Navigation
@@ -60,7 +77,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
 
     // Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1" //viewModelScope
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1" //liveData
