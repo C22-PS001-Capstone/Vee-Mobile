@@ -72,7 +72,7 @@ interface VeeUseCase {
         lon: Double
     ): Flow<Resource<List<GasStations>>>
 
-    fun getActivity(token: String): Flow<Resource<List<Activity>>>
+    fun getActivity(token: String, initMonthString: String? = null): Flow<Resource<List<Activity>>>
 
     fun deleteActivity(accessToken: String, id: String): Flow<BasicResponse>
     fun updateActivity(

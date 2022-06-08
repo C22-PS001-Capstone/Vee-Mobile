@@ -158,10 +158,10 @@ class VeeRepository(
             }
         }.asFlow()
 
-    override fun getActivity(token: String): Flow<Resource<List<Activity>>> =
+    override fun getActivity(token: String, initMonthString: String?): Flow<Resource<List<Activity>>> =
         object : NetworkBoundResource<List<Activity>, List<ActivityResponse>>() {
             override fun loadFromDB(): Flow<List<Activity>> {
-                return localDataSource.getActivity().map {
+                return localDataSource.getActivity(initMonthString).map {
                     DataMapper.mapEntitiesToDomain(it)
                 }
             }

@@ -39,6 +39,22 @@ class HomeFragment : Fragment() {
 
     private var currentLocation: Location? = null
 
+    private val storyAdapter by lazy {
+        ActivityListAdapter {
+            val direction = HomeFragmentDirections.actionNavigationHomeToDetailActivityFragment(it)
+            findNavController().navigate(direction)
+        }
+    }
+
+    private val initMonthString by lazy {
+        val dateFormat = SimpleDateFormat(
+            getString(R.string.month_format),
+            Locale.getDefault()
+        )
+        val date = Date()
+        dateFormat.format(date).toString()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,28 +68,20 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showRobo(false)
-        val storyAdapter = ActivityListAdapter {
-            val direction = HomeFragmentDirections.actionNavigationHomeToDetailActivityFragment(it)
-            findNavController().navigate(direction)
-        }
-        val dateFormat = SimpleDateFormat(
-            getString(R.string.month_format),
-            Locale.getDefault()
-        )
         val monthFormat = SimpleDateFormat(
             "MMMM",
             Locale.getDefault()
         )
         val date = Date()
-        val initMonth = dateFormat.format(date)
         val monthString = monthFormat.format(date)
         context?.apply {
             viewModel.getUserData()
             viewModel.getToken()
             viewModel.getLiveLocation()
-            viewModel.getRobo(initMonth.toString())
+            viewModel.getRobo(initMonthString)
             viewModelListener()
             binding?.apply {
+                historiesLabel.text = getString(R.string.histories, monthString)
                 viewModel.gasStationsResponse.observe(viewLifecycleOwner) { responses ->
                     if (responses != null) {
                         when (responses) {
@@ -242,7 +250,7 @@ class HomeFragment : Fragment() {
                         }
                     }
                     viewModel.getForecast(it.accessToken)
-                    viewModel.getActivity(it.accessToken)
+                    viewModel.getActivity(it.accessToken, initMonthString)
                 }
             }
         }
@@ -284,21 +292,6 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        val dateFormat = SimpleDateFormat(
-            getString(R.string.month_format),
-            Locale.getDefault()
-        )
-        val date = Date()
-        val initMonth = dateFormat.format(date)
-        viewModel.getUserData()
-        viewModel.getToken()
-        viewModel.getLiveLocation()
-        viewModel.getRobo(initMonth.toString())
     }
 
     private fun showRobo(state: Boolean) {

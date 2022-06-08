@@ -31,8 +31,8 @@ class HomeViewModel constructor(
     private val _forecastResponse: MutableLiveData<ForecastResponse> = MutableLiveData()
     val forecastResponse: LiveData<ForecastResponse> = _forecastResponse
 
-    fun getActivity(token: String) = viewModelScope.launch {
-        useCase.getActivity(token).collect {
+    fun getActivity(token: String, initMonthString: String? = null) = viewModelScope.launch {
+        useCase.getActivity(token, initMonthString).collect {
             _activityResponse.postValue(it)
         }
     }

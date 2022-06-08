@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">Vee</string>
     <string name="vee_logo" translatable="false">Vee Logo</string>
     <string name="nearest_gas_station">Nearest Gas Station</string>
-    <string name="histories">Histories</string>
+    <string name="histories">%s Histories</string>
     <string name="app_name_small" translatable="false">vee</string>
     <string name="welcome">Have a safe driving, %1s</string>
     <string name="date_label">Date</string>

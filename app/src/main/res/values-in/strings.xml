@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="nearest_gas_station">Pom Bensin Terdekat</string>
-    <string name="histories">Riwayat</string>
+    <string name="histories">Riwayat %s</string>
     <string name="welcome">Hati - hati di jalan, %1s</string>
     <string name="date_label">Tanggal</string>
     <string name="quantity_label">Kuantitas</string>

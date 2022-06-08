@@ -78,8 +78,8 @@ class VeeInteractor(private val repository: VeeDataSource) : VeeUseCase {
         repository.addPassword(token, password, passwordConfirm)
 
 
-    override fun getActivity(token: String): Flow<Resource<List<Activity>>> =
-        repository.getActivity(token)
+    override fun getActivity(token: String, initMonthString: String?): Flow<Resource<List<Activity>>> =
+        repository.getActivity(token, initMonthString)
 
     override fun deleteActivity(accessToken: String, id: String): Flow<BasicResponse> =
         repository.deleteActivity(accessToken, id)

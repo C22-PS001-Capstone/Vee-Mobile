@@ -33,6 +33,9 @@ interface VeeDao {
     @Query("SELECT * FROM activity_entities")
     fun getActivity(): Flow<List<ActivityEntity>>
 
+    @Query("SELECT * FROM activity_entities WHERE date LIKE :month")
+    fun getActivityMonth(month: String): Flow<List<ActivityEntity>>
+
     @Query("SELECT SUM(liter) as ltr, SUM(price) as prc FROM activity_entities WHERE date LIKE :month")
     fun getRobo(month: String): Flow<RoboEntity>
 

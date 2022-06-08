@@ -39,7 +39,12 @@ class LocalDataSource(
         mUserDao.insertGasStations(gasStationsList)
     }
 
-    fun getActivity(): Flow<List<ActivityEntity>> = mUserDao.getActivity()
+    fun getActivity(initMonthString: String?): Flow<List<ActivityEntity>> =
+        if (initMonthString != null) {
+            mUserDao.getActivityMonth("%$initMonthString%")
+        } else {
+            mUserDao.getActivity()
+        }
 
     fun getRobo(month: String): Flow<RoboEntity> = mUserDao.getRobo(month)
 
