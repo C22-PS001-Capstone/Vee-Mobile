@@ -13,6 +13,7 @@ We as Indonesian people usually still calculate the expense that comes from our 
 - [x] Make a connection to REST API
 - [x] Implementation of Machine Learning Model
 - [x] Localization
+- [ ] Paging3 Implementation (In progress)
 - [ ] Unit Testing & Android Test
 
 ## Features
