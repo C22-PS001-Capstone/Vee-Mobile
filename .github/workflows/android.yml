@@ -39,7 +39,7 @@ jobs:
         run: bash ./gradlew test --stacktrace
       - name: Generate Report
         run: bash ./gradlew koverReport
-      - name: Upload APK
+      - name: Upload Report
         uses: actions/upload-artifact@v1
         with:
           name: Kover Report
