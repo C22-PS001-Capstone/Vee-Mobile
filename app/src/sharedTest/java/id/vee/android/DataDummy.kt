@@ -3,10 +3,7 @@ package id.vee.android
 import android.location.Location
 import id.vee.android.data.local.entity.TokenEntity
 import id.vee.android.data.local.entity.UserEntity
-import id.vee.android.data.remote.response.BasicResponse
-import id.vee.android.data.remote.response.LoginResponse
-import id.vee.android.data.remote.response.UserDetailDataResponse
-import id.vee.android.data.remote.response.UserDetailResponse
+import id.vee.android.data.remote.response.*
 import id.vee.android.domain.model.*
 
 object DataDummy {
@@ -101,4 +98,19 @@ object DataDummy {
             message = "Success",
             data = null
         )
+
+    fun getRobo(): Robo = Robo(
+        price = 1000,
+        liter = 12
+    )
+
+    fun forecastData(): Forecast = Forecast(
+        forecast = listOf(1.31, 11.2, 3323.1, 12223.3)
+    )
+
+    fun forecastResponseData(): ForecastResponse = ForecastResponse(
+        status = "success",
+        message = "Success",
+        data = forecastData()
+    )
 }

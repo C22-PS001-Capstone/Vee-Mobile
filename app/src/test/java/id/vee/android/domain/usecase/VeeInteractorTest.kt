@@ -3,12 +3,14 @@ package id.vee.android.domain.usecase
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import id.vee.android.DataDummy
 import id.vee.android.MainDispatcherRule
+import id.vee.android.data.Resource
 import id.vee.android.data.VeeRepository
+import id.vee.android.domain.model.GasStations
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -208,5 +210,301 @@ internal class VeeInteractorTest {
             lat = 6.123123132,
             long = -120.123123
         )
+    }
+
+    @Test
+    fun `update name and success`() = runTest {
+        val expectedResult = dummy.getBasicResponse()
+        `when`(
+            repository.updateName(
+                token = "token",
+                firstName = "firstName",
+                lastName = "lastName"
+            )
+        ).thenReturn(flowOf(expectedResult))
+        interactor.updateName(
+            token = "token",
+            firstName = "firstName",
+            lastName = "lastName"
+        ).collect { actualResult ->
+            assertNotNull(actualResult)
+            assertEquals(expectedResult, actualResult)
+            assertEquals(expectedResult.status, actualResult.status)
+        }
+        verify(repository).updateName(
+            token = "token",
+            firstName = "firstName",
+            lastName = "lastName"
+        )
+    }
+
+    @Test
+    fun `update password and success`() = runTest {
+        val expectedResult = dummy.getBasicResponse()
+        `when`(
+            repository.updatePassword(
+                token = "token",
+                passwordCurrent = "password",
+                password = "password",
+                passwordConfirm = "passwordConfirm"
+            )
+        ).thenReturn(flowOf(expectedResult))
+        interactor.updatePassword(
+            token = "token",
+            passwordCurrent = "password",
+            password = "password",
+            passwordConfirm = "passwordConfirm"
+        ).collect { actualResult ->
+            assertNotNull(actualResult)
+            assertEquals(expectedResult, actualResult)
+            assertEquals(expectedResult.status, actualResult.status)
+        }
+        verify(repository).updatePassword(
+            token = "token",
+            passwordCurrent = "password",
+            password = "password",
+            passwordConfirm = "passwordConfirm"
+        )
+    }
+
+    @Test
+    fun `add password and success`() = runTest {
+        val expectedResult = dummy.getBasicResponse()
+        `when`(
+            repository.addPassword(
+                token = "token",
+                password = "password",
+                passwordConfirm = "passwordConfirm"
+            )
+        ).thenReturn(flowOf(expectedResult))
+        interactor.addPassword(
+            token = "token",
+            password = "password",
+            passwordConfirm = "passwordConfirm"
+        ).collect { actualResult ->
+            assertNotNull(actualResult)
+            assertEquals(expectedResult, actualResult)
+            assertEquals(expectedResult.status, actualResult.status)
+        }
+        verify(repository).addPassword(
+            token = "token",
+            password = "password",
+            passwordConfirm = "passwordConfirm"
+        )
+    }
+
+    @Test
+    fun `delete activity and success`() = runTest {
+        val expectedResult = dummy.getBasicResponse()
+        `when`(
+            repository.deleteActivity(
+                accessToken = "token",
+                id = "id"
+            )
+        ).thenReturn(flowOf(expectedResult))
+        interactor.deleteActivity(
+            accessToken = "token",
+            id = "id"
+        ).collect { actualResult ->
+            assertNotNull(actualResult)
+            assertEquals(expectedResult, actualResult)
+            assertEquals(expectedResult.status, actualResult.status)
+        }
+        verify(repository).deleteActivity(
+            accessToken = "token",
+            id = "id"
+        )
+    }
+
+    @Test
+    fun `update activity and success`() = runTest {
+        val expectedResult = dummy.getBasicResponse()
+        `when`(
+            repository.updateActivity(
+                token = "token",
+                id = "id",
+                date = "2020-01-01",
+                distance = 233,
+                litre = 233,
+                expense = 233,
+                lat = 6.123123132,
+                long = -120.123123
+            )
+        ).thenReturn(flowOf(expectedResult))
+        interactor.updateActivity(
+            token = "token",
+            id = "id",
+            date = "2020-01-01",
+            distance = 233,
+            litre = 233,
+            expense = 233,
+            lat = 6.123123132,
+            long = -120.123123
+        ).collect { actualResult ->
+            assertNotNull(actualResult)
+            assertEquals(expectedResult, actualResult)
+            assertEquals(expectedResult.status, actualResult.status)
+        }
+        verify(repository).updateActivity(
+            token = "token",
+            id = "id",
+            date = "2020-01-01",
+            distance = 233,
+            litre = 233,
+            expense = 233,
+            lat = 6.123123132,
+            long = -120.123123
+        )
+    }
+
+    @Test
+    fun `get gas station and success`() = runTest {
+        val expectedResult = dummy.gasStations()
+        val coveredExpectedResult = flow {
+            emit(Resource.Success(expectedResult))
+        }
+        `when`(
+            repository.getGasStations(
+                token = "token",
+                lat = 6.123123132,
+                lon = -120.123123
+            )
+        ).thenReturn(coveredExpectedResult)
+        interactor.getGasStations(
+            token = "token",
+            lat = 6.123123132,
+            lon = -120.123123
+        ).collect { actualResult ->
+            assertNotNull(actualResult)
+            assertTrue(actualResult is Resource.Success)
+            assertEquals(expectedResult, (actualResult as Resource.Success).data)
+            assertEquals(expectedResult[0].id, actualResult.data?.get(0)?.id)
+        }
+        verify(repository).getGasStations(
+            token = "token",
+            lat = 6.123123132,
+            lon = -120.123123
+        )
+    }
+
+    @Test
+    fun `get gas station and loading`() = runTest {
+        val expectedResult = dummy.gasStations()
+        val coveredExpectedResult = flow {
+            emit(Resource.Loading(expectedResult))
+        }
+        `when`(
+            repository.getGasStations(
+                token = "token",
+                lat = 6.123123132,
+                lon = -120.123123
+            )
+        ).thenReturn(coveredExpectedResult)
+        interactor.getGasStations(
+            token = "token",
+            lat = 6.123123132,
+            lon = -120.123123
+        ).collect { actualResult ->
+            assertNotNull(actualResult)
+            assertTrue(actualResult is Resource.Loading)
+            assertEquals(expectedResult, (actualResult as Resource.Loading).data)
+            assertEquals(expectedResult[0].id, actualResult.data?.get(0)?.id)
+        }
+        verify(repository).getGasStations(
+            token = "token",
+            lat = 6.123123132,
+            lon = -120.123123
+        )
+    }
+
+    @Test
+    fun `get gas station and error`() = runTest {
+        val expectedResult = "Error"
+        val coveredExpectedResult = flow {
+            emit(Resource.Error<List<GasStations>>(expectedResult))
+        }
+        `when`(
+            repository.getGasStations(
+                token = "token",
+                lat = 6.123123132,
+                lon = -120.123123
+            )
+        ).thenReturn(coveredExpectedResult)
+        interactor.getGasStations(
+            token = "token",
+            lat = 6.123123132,
+            lon = -120.123123
+        ).collect { actualResult ->
+            assertNotNull(actualResult)
+            assertTrue(actualResult is Resource.Error)
+            assertEquals(expectedResult, (actualResult as Resource.Error).message)
+        }
+        verify(repository).getGasStations(
+            token = "token",
+            lat = 6.123123132,
+            lon = -120.123123
+        )
+    }
+
+    @Test
+    fun `get local stations and success`() = runTest {
+        val expectedResult = dummy.gasStations()
+        `when`(
+            repository.getLocalStations()
+        ).thenReturn(flowOf(expectedResult))
+        interactor.getLocalStations().collect { actualResult ->
+            assertNotNull(actualResult)
+            assertEquals(expectedResult, actualResult)
+            assertEquals(expectedResult[0].id, actualResult[0].id)
+        }
+        verify(repository).getLocalStations()
+    }
+
+    @Test
+    fun `get robo and success`() = runTest {
+        val expectedResult = dummy.getRobo()
+        `when`(
+            repository.getRobo(
+                "-06-"
+            )
+        ).thenReturn(flowOf(expectedResult))
+        interactor.getRobo(
+            "-06-"
+        ).collect { actualResult ->
+            assertNotNull(actualResult)
+            assertEquals(expectedResult, actualResult)
+            assertEquals(expectedResult.liter, actualResult.liter)
+        }
+        verify(repository).getRobo(
+            "-06-"
+        )
+    }
+
+    @Test
+    fun `get notification and success`() = runTest {
+        val expectedResult = dummy.notificationsData()
+        `when`(
+            repository.getNotification()
+        ).thenReturn(flowOf(expectedResult))
+        interactor.getNotification().collect { actualResult ->
+            assertNotNull(actualResult)
+            assertEquals(expectedResult, actualResult)
+            assertEquals(expectedResult[0].notification, actualResult[0].notification)
+        }
+        verify(repository).getNotification()
+    }
+
+    @Test
+    fun `get forecast and success`() = runTest {
+        val expectedResult = dummy.forecastResponseData()
+        `when`(
+            repository.getForecast("token")
+        ).thenReturn(flowOf(expectedResult))
+        interactor.getForecast("token").collect { actualResult ->
+            assertNotNull(actualResult)
+            assertEquals(expectedResult, actualResult)
+            assertEquals(expectedResult.data, actualResult.data)
+        }
+        verify(repository).getForecast("token")
     }
 }
