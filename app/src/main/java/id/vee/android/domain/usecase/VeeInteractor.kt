@@ -1,5 +1,6 @@
 package id.vee.android.domain.usecase
 
+import androidx.paging.PagingData
 import id.vee.android.data.Resource
 import id.vee.android.data.remote.response.BasicResponse
 import id.vee.android.data.remote.response.ForecastResponse
@@ -80,6 +81,8 @@ class VeeInteractor(private val repository: VeeDataSource) : VeeUseCase {
 
     override fun getActivity(token: String, initMonthString: String?): Flow<Resource<List<Activity>>> =
         repository.getActivity(token, initMonthString)
+
+    override fun getPagedActivity(token: String): Flow<PagingData<Activity>> = repository.getPagedActivity(token)
 
     override fun deleteActivity(accessToken: String, id: String): Flow<BasicResponse> =
         repository.deleteActivity(accessToken, id)

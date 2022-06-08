@@ -1,12 +1,15 @@
 package id.vee.android.data.local
 
+import androidx.paging.PagingSource
 import id.vee.android.data.local.entity.*
+import id.vee.android.data.local.room.RemoteKeysDao
 import id.vee.android.data.local.room.VeeDao
 import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
 
 class LocalDataSource(
-    private val mUserDao: VeeDao
+    private val mUserDao: VeeDao,
+    private val remoteKeysDao: RemoteKeysDao
 ) {
     fun getUser(): Flow<UserEntity?> = mUserDao.getUser()
     suspend fun deleteToken() {
@@ -45,6 +48,7 @@ class LocalDataSource(
         } else {
             mUserDao.getActivity()
         }
+    fun getPagedActivity(): PagingSource<Int, ActivityEntity> = mUserDao.getPagedActivity()
 
     fun getRobo(month: String): Flow<RoboEntity> = mUserDao.getRobo(month)
 
@@ -58,4 +62,9 @@ class LocalDataSource(
         mUserDao.insertNotification(mapDomainToEntity)
 
     fun getNotification(): Flow<List<NotificationEntity>> = mUserDao.getNotification()
+
+    suspend fun getRemoteKeysId(id: String) = remoteKeysDao.getRemoteKeysId(id)
+    suspend fun insertKeys(keys: List<RemoteKeysEntity>) = remoteKeysDao.insertAll(keys)
+    suspend fun deleteRemoteKeys() = remoteKeysDao.deleteRemoteKeys()
+
 }

@@ -17,9 +17,11 @@ import id.vee.android.ui.main.MainActivity
 import id.vee.android.utils.DataMapper
 import id.vee.android.utils.getCurrentUnix
 import id.vee.android.utils.isValidEmail
+import kotlinx.coroutines.DelicateCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
+@DelicateCoroutinesApi
 class LoginActivity : AppCompatActivity() {
     private val binding by lazy(LazyThreadSafetyMode.NONE) {
         ActivityLoginBinding.inflate(layoutInflater)
@@ -34,7 +36,6 @@ class LoginActivity : AppCompatActivity() {
         GoogleSignIn.getClient(this, gso)
     }
     private val viewModel: LoginViewModel by viewModel()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

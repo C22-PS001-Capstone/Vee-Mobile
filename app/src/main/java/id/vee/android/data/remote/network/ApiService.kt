@@ -84,6 +84,13 @@ interface ApiService {
         @Header("Authorization") token: String,
     ): ActivityListResponse
 
+    @GET("/activities")
+    suspend fun getPaggedActivity(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int,
+        @Query("size") pageSize: Int
+    ): ActivityListResponse
+
     @DELETE("/activities/{id}")
     suspend fun deleteActivity(
         @Path("id") id: String,
