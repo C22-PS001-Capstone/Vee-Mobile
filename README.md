@@ -70,7 +70,7 @@ We would like to thank the makers of theese cool plugins and images.
 - [Glide](https://github.com/bumptech/glide)
 - [Circle Image View](https://github.com/hdodenhof/CircleImageView)
 ### Images
-- [Empty Notification Animation](https://lottiefiles.com/99955-empty-notifications)
-- [No Data Animation](https://lottiefiles.com/13659-no-data)
-- [Location Map Animation](https://lottiefiles.com/5733-location-map)
+- [Empty Notification Animation created by Hithesh Vurjana](https://lottiefiles.com/99955-empty-notifications)
+- [No Data Animation created by Aneesh Ravi](https://lottiefiles.com/13659-no-data)
+- [Location Map Animation created by Balram](https://lottiefiles.com/5733-location-map)
 - [Car fuel vector created by macrovector](https://www.freepik.com/free-vector/gas-stations-refills-isometric-composition-with-gasoline-filling-columns-cars-motorbikes-with-people-characters_7498299.htm)
