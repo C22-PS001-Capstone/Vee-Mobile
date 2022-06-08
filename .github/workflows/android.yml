@@ -2,9 +2,9 @@ name: Android CI
 
 on:
   push:
-    branches: [ main, test ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, test ]
+    branches: [ main ]
 
 jobs:
 
@@ -37,6 +37,13 @@ jobs:
         run: chmod +x gradlew
       - name: Unit tests
         run: bash ./gradlew test --stacktrace
+      - name: Generate Report
+        run: bash ./gradlew koverReport
+      - name: Upload APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: Kover Report
+          path: app/build/reports/kover/project-html/index.html
 
   build:
 
