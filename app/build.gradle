@@ -12,6 +12,7 @@ def projectPropertiesFile = rootProject.file("project.properties")
 def projectProperties = new Properties()
 projectProperties.load(new FileInputStream(projectPropertiesFile))
 
+
 android {
     compileSdk 32
 

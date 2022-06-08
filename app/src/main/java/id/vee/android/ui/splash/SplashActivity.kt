@@ -10,11 +10,13 @@ import id.vee.android.databinding.ActivitySplashBinding
 import id.vee.android.ui.GeneralViewModel
 import id.vee.android.ui.main.MainActivity
 import id.vee.android.ui.welcome.WelcomeActivity
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@DelicateCoroutinesApi
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     private val binding by lazy(LazyThreadSafetyMode.NONE) {

@@ -8,8 +8,10 @@ import id.vee.android.R
 import id.vee.android.databinding.ActivitySignupBinding
 import id.vee.android.ui.login.LoginActivity
 import id.vee.android.utils.isValidEmail
+import kotlinx.coroutines.DelicateCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@DelicateCoroutinesApi
 class SignupActivity : AppCompatActivity() {
 
     private val binding by lazy(LazyThreadSafetyMode.NONE) {

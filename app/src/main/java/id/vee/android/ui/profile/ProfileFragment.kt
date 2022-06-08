@@ -15,8 +15,10 @@ import id.vee.android.R
 import id.vee.android.databinding.FragmentProfileBinding
 import id.vee.android.domain.model.Token
 import id.vee.android.ui.welcome.WelcomeActivity
+import kotlinx.coroutines.DelicateCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@DelicateCoroutinesApi
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding
