@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import id.vee.android.databinding.ActivityWelcomeBinding
 import id.vee.android.ui.login.LoginActivity
 import id.vee.android.ui.signup.SignupActivity
+import kotlinx.coroutines.DelicateCoroutinesApi
 
+@DelicateCoroutinesApi
 class WelcomeActivity : AppCompatActivity() {
     private val binding by lazy(LazyThreadSafetyMode.NONE) {
         ActivityWelcomeBinding.inflate(layoutInflater)

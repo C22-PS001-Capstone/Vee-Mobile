@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/nunito_extra_bold"
-        android:text="Battery Saver"
+        android:text="@string/battery_saver"
         android:textColor="?colorSecondary" />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
@@ -83,7 +83,7 @@
         android:drawablePadding="8dp"
         android:fontFamily="@font/nunito_extra_bold"
         android:paddingHorizontal="16dp"
-        android:text="Battery Saver"
+        android:text="@string/battery_saver"
         android:textAlignment="textStart"
         android:textAllCaps="false"
         android:textColor="?android:textColorPrimary"
@@ -99,7 +99,7 @@
         android:layout_marginBottom="10dp"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
-        android:text="The location might not accurate"
+        android:text="@string/warning_battery_saver"
         android:textColor="?colorOnPrimary"
         android:textSize="12sp" />
 
