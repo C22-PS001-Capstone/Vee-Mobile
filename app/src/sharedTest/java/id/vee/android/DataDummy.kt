@@ -1,10 +1,7 @@
 package id.vee.android
 
 import android.location.Location
-import id.vee.android.data.local.entity.ActivityEntity
-import id.vee.android.data.local.entity.RoboEntity
-import id.vee.android.data.local.entity.TokenEntity
-import id.vee.android.data.local.entity.UserEntity
+import id.vee.android.data.local.entity.*
 import id.vee.android.data.remote.response.*
 import id.vee.android.domain.model.*
 
@@ -72,6 +69,21 @@ object DataDummy {
         val list: MutableList<GasStations> = mutableListOf()
         for (i in 0 until 10) {
             val gasStation = GasStations(
+                id = "id-$i",
+                name = "name-$i",
+                vendor = "vendor-$i",
+                lat = -6.2233232,
+                lon = 106.8232323,
+                distance = "${i}00",
+            )
+            list.add(gasStation)
+        }
+        return list
+    }
+    fun gasStationsEntity(): List<GasStationsEntity> {
+        val list: MutableList<GasStationsEntity> = mutableListOf()
+        for (i in 0 until 10) {
+            val gasStation = GasStationsEntity(
                 id = "id-$i",
                 name = "name-$i",
                 vendor = "vendor-$i",
