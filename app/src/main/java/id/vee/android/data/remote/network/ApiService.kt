@@ -79,7 +79,7 @@ interface ApiService {
         @Query("refreshToken") refreshToken: String
     ): BasicResponse
 
-    @GET("/activities")
+    @GET("/activities/month/now")
     suspend fun getActivity(
         @Header("Authorization") token: String,
     ): ActivityListResponse
