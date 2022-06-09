@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import id.vee.android.R
 import id.vee.android.adapter.ActivityPagedAdapter.MyViewHolder
 import id.vee.android.databinding.RowStoriesBinding
 import id.vee.android.domain.model.Activity
@@ -45,10 +46,15 @@ class ActivityPagedAdapter(private val onItemClick: (Activity) -> Unit) :
             val km = newNumber.format(activity.km)
             val liter = newNumber.format(activity.liter)
             val price = newNumber.format(activity.price)
+            val literText = "$liter ${context.getString(R.string.litre)}"
+            val kmText = "$km km"
             binding.storyDate.text = activity.date.formatDate()
-            binding.storyKm.text = km.toString()
-            binding.storyLiter.text = liter.toString()
-            binding.storyPrice.text = price.toString()
+            binding.storyKm.text = kmText
+            binding.storyLiter.text = literText
+            binding.storyPrice.text = context.getString(
+                R.string.rupiah_formatter,
+                price.toString()
+            )
             if (activity.isMonthShow) {
                 binding.monthName.text = activity.date.formatDate("MMM")
             } else {
