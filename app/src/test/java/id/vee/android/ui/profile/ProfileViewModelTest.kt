@@ -3,13 +3,10 @@ package id.vee.android.ui.profile
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import id.vee.android.DataDummy
 import id.vee.android.MainDispatcherRule
-import id.vee.android.data.Resource
 import id.vee.android.data.local.SettingsPreferences
 import id.vee.android.domain.usecase.VeeUseCase
 import id.vee.android.getOrAwaitValue
-import id.vee.android.ui.login.LoginViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
@@ -18,7 +15,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
@@ -46,11 +42,11 @@ internal class ProfileViewModelTest {
     }
 
     @Test
-    fun `get user detail and success`() = runTest {
+    fun `get user detail and return success`() = runTest {
         val expectedResult = dummy.getUserDetail()
         val dummyToken = dummy.getTokenData()
         `when`(useCase.userDetail(dummyToken)).thenReturn(flowOf(expectedResult))
-        profileViewModel.getUserData()
+        profileViewModel.userDetail(dummyToken)
         val actualResult = profileViewModel.responseDetail.getOrAwaitValue()
         Assert.assertNotNull(actualResult)
         Assert.assertEquals(expectedResult, actualResult)
@@ -65,9 +61,16 @@ internal class ProfileViewModelTest {
     }
 
     @Test
-    fun `delete user and success`() = runTest {
-        val dummyToken = dummy.getTokenData().refreshToken
-        profileViewModel.logout(dummyToken)
+    fun `logout user and success`() = runTest {
+        val expectedResult = dummy.getBasicResponse()
+        val dummyToken = dummy.getTokenData()
+        val dummyRefreshToken = dummyToken.refreshToken
+        `when`(useCase.deleteTokenNetwork(dummyRefreshToken)).thenReturn(flowOf(expectedResult))
+        profileViewModel.logout(dummyRefreshToken)
+        val actualResult = profileViewModel.logoutResponse.getOrAwaitValue()
+        Assert.assertNotNull(actualResult)
+        Assert.assertEquals(expectedResult, actualResult)
+        Assert.assertEquals(expectedResult.status, actualResult.status)
         verify(useCase).deleteUser()
         verify(useCase).deleteToken()
     }
@@ -146,6 +149,6 @@ internal class ProfileViewModelTest {
     @Test
     fun `testing save battery saver setting`() = runTest {
         profileViewModel.saveBatterySaverSetting(false)
-        verify(pref).saveThemeSetting(false)
+        verify(pref).saveBatterySaverSetting(false)
     }
 }
