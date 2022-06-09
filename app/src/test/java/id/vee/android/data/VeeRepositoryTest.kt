@@ -221,7 +221,7 @@ internal class VeeRepositoryTest {
         val sampleToken = dummy.getListEntityResponse()
         localDataSource.insertActivity(sampleToken)
         localDataSource.deleteActivities()
-        localDataSource.getActivity("-00-").collect{
+        localDataSource.getActivity("-00-").collect {
             assertEquals(0, it.size)
         }
     }
