@@ -65,6 +65,12 @@ class FakeApiService : ApiService {
     override suspend fun getActivity(token: String): ActivityListResponse =
         dummy.getActivityListResponse()
 
+    override suspend fun getPaggedActivity(
+        token: String,
+        page: Int,
+        pageSize: Int
+    ): ActivityListResponse = dummy.getActivityListResponse()
+
     override suspend fun deleteActivity(id: String, bearer: String): BasicResponse =
         dummy.getBasicResponse()
 

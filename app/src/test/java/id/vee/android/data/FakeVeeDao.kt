@@ -1,5 +1,6 @@
 package id.vee.android.data
 
+import androidx.paging.PagingSource
 import id.vee.android.DataDummy
 import id.vee.android.data.local.entity.*
 import id.vee.android.data.local.room.VeeDao
@@ -47,6 +48,10 @@ class FakeVeeDao : VeeDao {
 
     override fun getActivity(): Flow<List<ActivityEntity>> {
         return flowOf(activityData)
+    }
+
+    override fun getPagedActivity(): PagingSource<Int, ActivityEntity> {
+        TODO("Not yet implemented")
     }
 
     override fun getActivityMonth(month: String): Flow<List<ActivityEntity>> {

@@ -1,9 +1,11 @@
 package id.vee.android.data
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.paging.ExperimentalPagingApi
 import id.vee.android.DataDummy
 import id.vee.android.MainDispatcherRule
 import id.vee.android.data.local.LocalDataSource
+import id.vee.android.data.local.room.RemoteKeysDao
 import id.vee.android.data.local.room.VeeDao
 import id.vee.android.data.remote.RemoteDataSource
 import id.vee.android.data.remote.network.ApiService
@@ -16,6 +18,7 @@ import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
+@ExperimentalPagingApi
 internal class VeeRepositoryTest {
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
@@ -25,6 +28,7 @@ internal class VeeRepositoryTest {
 
     private lateinit var apiService: ApiService
     private lateinit var veeDao: VeeDao
+    private lateinit var remoteKeysDao: RemoteKeysDao
     private lateinit var veeRepository: VeeRepository
     private lateinit var remoteDataSource: RemoteDataSource
     private lateinit var localDataSource: LocalDataSource
@@ -36,7 +40,7 @@ internal class VeeRepositoryTest {
         apiService = FakeApiService()
         veeDao = FakeVeeDao()
         remoteDataSource = RemoteDataSource(apiService)
-        localDataSource = LocalDataSource(veeDao)
+        localDataSource = LocalDataSource(veeDao, remoteKeysDao)
         veeRepository = VeeRepository(remoteDataSource, localDataSource)
     }
 

@@ -1,6 +1,7 @@
 package id.vee.android.data
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.paging.ExperimentalPagingApi
 import id.vee.android.DataDummy
 import id.vee.android.MainDispatcherRule
 import id.vee.android.data.local.LocalDataSource
@@ -24,6 +25,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
 @ExperimentalCoroutinesApi
+@ExperimentalPagingApi
 @RunWith(MockitoJUnitRunner::class)
 class RepositoryTest {
     @get:Rule
