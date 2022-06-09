@@ -43,12 +43,33 @@ internal class HomeViewModelTest {
         homeViewModel = HomeViewModel(useCase, pref)
     }
 
-    /*@Test
+    @Test
+    fun `get activity and success`() = runTest {
+        val expectedResult = dummy.getActivities()
+        val wrappedExpectedResult = flow {
+            emit(Resource.Success(expectedResult))
+        }
+        `when`(useCase.getActivity("token")).thenReturn(wrappedExpectedResult)
+        homeViewModel.getActivity("token")
+        val actualResult = homeViewModel.activityResponse.getOrAwaitValue()
+        Assert.assertNotNull(actualResult)
+        Assert.assertTrue(actualResult is Resource.Success)
+        when (actualResult) {
+            is Resource.Success -> {
+                Assert.assertEquals(actualResult.data, dummy.getActivities())
+            }
+            else -> {
+
+            }
+        }
+    }
+
+    @Test
     fun `get robo and success`() = runTest {
         val expectedResult = dummy.getRobo()
         `when`(
             useCase.getRobo(
-                "-06-"
+                "%-06-%"
             )
         ).thenReturn(flowOf(expectedResult))
         homeViewModel.getRobo(
@@ -58,7 +79,7 @@ internal class HomeViewModelTest {
         Assert.assertNotNull(actualResult)
         Assert.assertEquals(expectedResult, actualResult)
         Assert.assertEquals(expectedResult.liter, actualResult.liter)
-    }*/
+    }
 
     @Test
     fun `get gas station and success`() = runTest {

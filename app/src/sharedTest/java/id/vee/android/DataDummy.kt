@@ -221,6 +221,23 @@ object DataDummy {
         }
         return list
     }
+    fun getActivities(): List<Activity> {
+        val list: MutableList<Activity> = mutableListOf()
+        for (i in 0 until 10) {
+            val activity = Activity(
+                id = "id-$i",
+                date = "2020-01-01",
+                owner = "owner-$i",
+                km = i * 100,
+                liter = i * 10,
+                price = i * 1000,
+                lon = 106.8232323,
+                lat = -6.2233232,
+            )
+            list.add(activity)
+        }
+        return list
+    }
 
     fun getListEntityResponse(): List<ActivityEntity> {
         val list: MutableList<ActivityEntity> = mutableListOf()
