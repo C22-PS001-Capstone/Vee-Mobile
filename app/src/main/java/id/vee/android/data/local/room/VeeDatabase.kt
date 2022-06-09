@@ -10,11 +10,13 @@ import id.vee.android.data.local.entity.*
         TokenEntity::class,
         ActivityEntity::class,
         GasStationsEntity::class,
-        NotificationEntity::class
+        NotificationEntity::class,
+        RemoteKeysEntity::class
     ],
     version = 1,
     exportSchema = false
 )
 abstract class VeeDatabase : RoomDatabase() {
     abstract fun veeDao(): VeeDao
+    abstract fun remoteKeysDao(): RemoteKeysDao
 }

@@ -7,14 +7,13 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.vee.android.R
-import id.vee.android.adapter.ActivityListAdapter
-import id.vee.android.data.Resource
+import id.vee.android.adapter.ActivityPagedAdapter
 import id.vee.android.databinding.FragmentListActivityBinding
 import id.vee.android.domain.model.Token
 import id.vee.android.utils.checkTokenAvailability
-import id.vee.android.utils.formatDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListActivityFragment : Fragment() {
@@ -46,51 +45,35 @@ class ListActivityFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getToken()
-        val storyAdapter = ActivityListAdapter {
+        val storyPagedAdapter = ActivityPagedAdapter {
             val direction =
                 ListActivityFragmentDirections.actionNavigationActivityToDetailActivityFragment(it)
             findNavController().navigate(direction)
-            // Implement next time
         }
         viewModelListener()
         binding?.apply {
             rvStories.apply {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
-                adapter = storyAdapter
+                adapter = storyPagedAdapter
             }
-            viewModel.activityResponse.observe(viewLifecycleOwner) { responses ->
-                if (responses != null) {
-                    storyAdapter.submitList(null)
-                    when (responses) {
-                        is Resource.Loading -> {
-                            progressBar.visibility = View.VISIBLE
-                        }
-                        is Resource.Success -> {
-                            progressBar.visibility = View.GONE
-                            if (responses.data?.isNotEmpty() == true) {
-                                val activities = responses.data
-                                activities.mapIndexed { index, activity ->
-                                    activity.isMonthShow =
-                                        (index > 0 && responses.data[index].date.formatDate("MMM") != responses.data[index - 1].date.formatDate(
-                                            "MMM"
-                                        )) || index == 0
-                                }
-                                storyAdapter.submitList(activities)
-                                showStoryNotAvailable(false)
-                            } else {
-                                storyAdapter.submitList(null)
-                                showStoryNotAvailable()
-                            }
-                        }
-                        is Resource.Error -> {
-                            showStoryNotAvailable()
-                        }
+            storyPagedAdapter.apply {
+                addLoadStateListener { loadState ->
+                    if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && itemCount < 1) {
+                        showStoryNotAvailable()
+                        progressBar.visibility = View.GONE
+                    } else if (loadState.source.refresh is LoadState.Loading) {
+                        progressBar.visibility = View.VISIBLE
+                    } else {
+                        showStoryNotAvailable(false)
+                        progressBar.visibility = View.GONE
                     }
                 }
             }
+            viewModel.pagedActivityResponse.observe(viewLifecycleOwner) { responses ->
+                storyPagedAdapter.submitData(lifecycle, responses)
+            }
         }
-
     }
 
     private fun showStoryNotAvailable(state: Boolean = true) {
@@ -105,7 +88,7 @@ class ListActivityFragment : Fragment() {
             userToken = tokenData
             userToken?.let { dataToken ->
                 checkTokenAvailability(viewModel, dataToken, viewLifecycleOwner) { newToken ->
-                    viewModel.getActivity(newToken.accessToken)
+                    viewModel.getPagedActivity(newToken.accessToken)
                 }
             }
         }

@@ -1,5 +1,6 @@
 package id.vee.android.domain.usecase
 
+import androidx.paging.PagingData
 import id.vee.android.data.Resource
 import id.vee.android.data.remote.response.BasicResponse
 import id.vee.android.data.remote.response.ForecastResponse
@@ -73,6 +74,7 @@ interface VeeUseCase {
     ): Flow<Resource<List<GasStations>>>
 
     fun getActivity(token: String, initMonthString: String? = null): Flow<Resource<List<Activity>>>
+    fun getPagedActivity(token: String): Flow<PagingData<Activity>>
 
     fun deleteActivity(accessToken: String, id: String): Flow<BasicResponse>
     fun updateActivity(
