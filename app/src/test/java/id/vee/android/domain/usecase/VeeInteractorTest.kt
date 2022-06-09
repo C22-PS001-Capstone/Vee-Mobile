@@ -4,7 +4,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import id.vee.android.DataDummy
 import id.vee.android.MainDispatcherRule
 import id.vee.android.data.Resource
-import id.vee.android.data.VeeRepository
 import id.vee.android.domain.model.GasStations
 import id.vee.android.domain.repository.VeeDataSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
