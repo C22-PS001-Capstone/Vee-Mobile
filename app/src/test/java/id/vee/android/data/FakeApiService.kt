@@ -62,7 +62,8 @@ class FakeApiService : ApiService {
     override suspend fun logout(refreshToken: String): BasicResponse =
         dummy.getBasicResponse()
 
-    override suspend fun getActivity(token: String): ActivityListResponse = dummy.getActivityListResponse()
+    override suspend fun getActivity(token: String): ActivityListResponse =
+        dummy.getActivityListResponse()
 
     override suspend fun deleteActivity(id: String, bearer: String): BasicResponse =
         dummy.getBasicResponse()

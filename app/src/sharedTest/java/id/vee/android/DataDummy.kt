@@ -12,6 +12,7 @@ object DataDummy {
             refreshToken = "refreshToken",
             expiredAt = 1654702049
         )
+
     fun getTokenEntity(): TokenEntity =
         TokenEntity(
             accessToken = "accessToken",
@@ -27,6 +28,7 @@ object DataDummy {
             email = "email@mail.com",
             passNull = false
         )
+
     fun getUserEntity(): UserEntity =
         UserEntity(
             id = "id-user-2",
@@ -80,6 +82,7 @@ object DataDummy {
         }
         return list
     }
+
     fun gasStationsEntity(): List<GasStationsEntity> {
         val list: MutableList<GasStationsEntity> = mutableListOf()
         for (i in 0 until 10) {
@@ -95,6 +98,7 @@ object DataDummy {
         }
         return list
     }
+
 
     fun gasStationsResponse(): List<GasStationsResponse> {
         val list: MutableList<GasStationsResponse> = mutableListOf()
@@ -124,6 +128,33 @@ object DataDummy {
         }
         return list
     }
+
+    fun notificationData(): Notification =
+        Notification(
+            id = null,
+            notification = "notification-1",
+            createdAt = 2154702049,
+        )
+
+    fun notificationsEntity(): NotificationEntity = NotificationEntity(
+        id = null,
+        notification = "notification-1",
+        createdAt = 2154702049,
+    )
+
+    fun listNotificationEntities(): List<NotificationEntity>{
+        val list: MutableList<NotificationEntity> = mutableListOf()
+        for (i in 0 until 10) {
+            val notification = NotificationEntity(
+                id = i + 1,
+                notification = "notification-$i",
+                createdAt = 2154702049,
+            )
+            list.add(notification)
+        }
+        return list
+    }
+
 
     fun getLoginResponse(): LoginResponse =
         LoginResponse(
@@ -190,7 +221,8 @@ object DataDummy {
         }
         return list
     }
-    fun getListEntityResponse(): List<ActivityEntity>{
+
+    fun getListEntityResponse(): List<ActivityEntity> {
         val list: MutableList<ActivityEntity> = mutableListOf()
         for (i in 0 until 10) {
             val activity = ActivityEntity(

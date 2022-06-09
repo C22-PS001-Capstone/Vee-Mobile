@@ -207,16 +207,6 @@ internal class VeeRepositoryTest {
     }
 
     @Test
-    fun getGasStations() = runTest {
-        // TODO because using network bound
-    }
-
-    @Test
-    fun getActivity() = runTest {
-        // TODO because it will updated soon
-    }
-
-    @Test
     fun deleteActivity() = runTest {
         val sampleToken = dummy.getListEntityResponse()
         localDataSource.insertActivity(sampleToken)
@@ -224,45 +214,5 @@ internal class VeeRepositoryTest {
         localDataSource.getActivity("-00-").collect {
             assertEquals(0, it.size)
         }
-    }
-
-    @Test
-    fun getLocalStations() = runTest {
-    }
-
-    @Test
-    fun getRobo() = runTest {
-    }
-
-    @Test
-    fun insertNotification() = runTest {
-    }
-
-    @Test
-    fun getNotification() = runTest {
-    }
-
-    @Test
-    fun getForecast() = runTest {
-    }
-
-    @Test
-    fun updateActivity() = runTest {
-    }
-
-    @Test
-    fun userDetail() = runTest {
-    }
-
-    @Test
-    fun saveToken() = runTest {
-    }
-
-    @Test
-    fun saveUser() = runTest {
-    }
-
-    @Test
-    fun insertActivity() = runTest {
     }
 }

@@ -167,13 +167,13 @@ class RepositoryTest {
 
     @Test
     fun `test delete user`() = runTest {
-        localDataSource.deleteUser()
+        repository.deleteUser()
         verify(localDataSource).deleteUser()
     }
 
     @Test
     fun `test delete token`() = runTest {
-        localDataSource.deleteToken()
+        repository.deleteToken()
         verify(localDataSource).deleteToken()
     }
 
@@ -273,12 +273,186 @@ class RepositoryTest {
         `when`(localDataSource.getNearestGasStation(6.000, 120.000)).thenReturn(localResponse)
         repository.getGasStations("token", 6.000, 120.000).onEach {
             assertNotNull(it)
-            when(it){
+            when (it) {
                 is Resource.Success -> {
                     assertEquals(expected.data, it.data)
                     assertEquals(expected.data?.size, it.data?.size)
                 }
+                else -> {
+
+                }
             }
         }.collect()
+    }
+
+    @Test
+    fun `test delete activity`() = runTest {
+        val expected = dummy.getBasicResponse()
+        `when`(
+            remoteDataSource.deleteActivity(
+                "token",
+                "id"
+            )
+        ).thenReturn(expected)
+        repository.deleteActivity(
+            "token",
+            "id"
+        ).collect {
+            assertEquals(expected, it)
+            assertNotNull(it)
+            assertEquals(expected.status, it.status)
+        }
+    }
+
+    @Test
+    fun `get local stations`() = runTest {
+        val expected = dummy.gasStations()
+        val localResponse = dummy.gasStationsEntity()
+        `when`(localDataSource.getGasStations()).thenReturn(flowOf(localResponse))
+
+        repository.getLocalStations().collect {
+            assertEquals(expected, it)
+            assertNotNull(it)
+        }
+    }
+
+    @Test
+    fun `get robo`() = runTest {
+        val expected = dummy.getRobo()
+        val localResponse = dummy.getRoboEntity()
+        `when`(localDataSource.getRobo("-11-")).thenReturn(flowOf(localResponse))
+
+        repository.getRobo("-11-").collect {
+            assertEquals(expected, it)
+            assertNotNull(it)
+        }
+    }
+
+    @Test
+    fun `insert notification`() = runTest {
+        repository.insertNotification(dummy.notificationData())
+        verify(localDataSource).insertNotification(dummy.notificationsEntity())
+    }
+
+    @Test
+    fun `get notification`() = runTest {
+        val expected = dummy.notificationsData()
+        val localResponse = dummy.listNotificationEntities()
+        `when`(localDataSource.getNotification()).thenReturn(flowOf(localResponse))
+
+        repository.getNotification().collect {
+            assertEquals(expected, it)
+            assertNotNull(it)
+        }
+    }
+
+    @Test
+    fun `get forecast`() = runTest {
+        val expected = dummy.getForecastResponse()
+        `when`(
+            remoteDataSource.getForecast(
+                "token"
+            )
+        ).thenReturn(expected)
+        repository.getForecast(
+            "token",
+        ).collect {
+            assertEquals(expected, it)
+            assertNotNull(it)
+            assertEquals(expected.status, it.status)
+        }
+    }
+
+    @Test
+    fun `update activity`() = runTest {
+        val expected = dummy.getBasicResponse()
+        `when`(
+            remoteDataSource.updateActivity(
+                "token",
+                "id",
+                "title",
+                1000,
+                10,
+                100,
+                6.00001,
+                120.0001
+            )
+        ).thenReturn(expected)
+        repository.updateActivity(
+            "token",
+            "id",
+            "title",
+            1000,
+            10,
+            100,
+            6.00001,
+            120.0001
+        ).collect {
+            assertEquals(expected, it)
+            assertNotNull(it)
+            assertEquals(expected.status, it.status)
+        }
+    }
+
+    @Test
+    fun `get user detail`() = runTest {
+        val expected = dummy.getUserDetail()
+        val tokenData = dummy.getTokenData()
+        val tokenEntity = dummy.getTokenEntity()
+        `when`(
+            remoteDataSource.userDetail(
+                tokenEntity
+            )
+        ).thenReturn(expected)
+        repository.userDetail(
+            tokenData
+        ).collect {
+            assertEquals(expected, it)
+            assertNotNull(it)
+            assertEquals(expected.status, it.status)
+        }
+    }
+
+    @Test
+    fun `save token`() = runTest {
+        repository.saveToken(dummy.getTokenData())
+        verify(localDataSource).saveToken(dummy.getTokenEntity())
+        verify(localDataSource).deleteToken()
+    }
+
+    @Test
+    fun `save user`() = runTest {
+        repository.saveUser(dummy.getUserData())
+        verify(localDataSource).saveUser(dummy.getUserEntity())
+        verify(localDataSource).deleteUser()
+    }
+
+    @Test
+    fun `insert activity`() = runTest {
+        val expected = dummy.getBasicResponse()
+        `when`(
+            remoteDataSource.insertActivity(
+                "token",
+                date = "2020-01-01",
+                1000,
+                10,
+                100,
+                6.00001,
+                120.0001
+            )
+        ).thenReturn(expected)
+        repository.insertActivity(
+            token = "token",
+            date = "2020-01-01",
+            1000,
+            10,
+            100,
+            6.00001,
+            120.0001
+        ).collect {
+            assertEquals(expected, it)
+            assertNotNull(it)
+            assertEquals(expected.status, it.status)
+        }
     }
 }
