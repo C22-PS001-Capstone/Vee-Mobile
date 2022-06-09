@@ -90,7 +90,7 @@
     <string name="add_activity_warning">Tambah aktivitas baru dengan menekan tombol (+)</string>
     <string name="there_is_no_notification">Tidak ada notifikasi yang tersedia</string>
     <string name="forecast_next">Prediksi Pengeluaran Berikutnya</string>
-    <string name="forecast_average">Prediksi Rata-rata Pengeluaran</string>
+    <string name="forecast_average">Prediksi Rata-Rata Pengeluaran</string>
     <string name="create">Tambah</string>
     <string name="create_password">Tambah Kata Sandi</string>
     <string name="success_create_password">Penambahan Kata Sandi Berhasil</string>
