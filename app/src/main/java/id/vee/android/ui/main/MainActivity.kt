@@ -193,6 +193,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     private val resolutionLauncher =
         registerForActivityResult(
             ActivityResultContracts.StartIntentSenderForResult()
@@ -286,11 +287,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-    override fun onPause() {
-        super.onPause()
-        stopLocationUpdates()
-    }
 
     override fun onResume() {
         super.onResume()
