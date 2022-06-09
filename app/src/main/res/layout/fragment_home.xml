@@ -28,13 +28,13 @@
             android:textColor="?android:textColorPrimary"
             android:textSize="20sp" />
 
-        <ProgressBar
-            android:id="@+id/progress_bar_nearest"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
-            android:indeterminateTint="@color/grey_800"
-            android:visibility="gone" />
+        <!--        <ProgressBar-->
+        <!--            android:id="@+id/progress_bar_nearest"-->
+        <!--            android:layout_width="48dp"-->
+        <!--            android:layout_height="48dp"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:indeterminateTint="@color/grey_800"-->
+        <!--            android:visibility="gone" />-->
 
         <TextView
             android:id="@+id/tv_no_data_gas_stations"
@@ -46,6 +46,18 @@
             android:textColor="?android:textColorPrimary"
             android:textSize="15sp"
             android:visibility="gone" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/progress_bar_nearest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shimmer_auto_start="true">
+            <include layout="@layout/gas_placeholder" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <LinearLayout
             android:id="@+id/data_gas_station"
@@ -331,6 +343,32 @@
             android:textColor="?android:textColorPrimary"
             android:textSize="20sp" />
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:shimmer_auto_start="true">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/row_stories_placeholder" />
+
+                    <include layout="@layout/row_stories_placeholder" />
+
+                    <include layout="@layout/row_stories_placeholder" />
+
+                    <include layout="@layout/row_stories_placeholder" />
+                </LinearLayout>
+            </ScrollView>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_stories"
             android:layout_width="match_parent"
@@ -338,13 +376,13 @@
             android:nestedScrollingEnabled="false"
             tools:listitem="@layout/row_stories" />
 
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
-            android:indeterminateTint="@color/grey_800"
-            android:visibility="gone" />
+        <!--        <ProgressBar-->
+        <!--            android:id="@+id/progress_bar"-->
+        <!--            android:layout_width="48dp"-->
+        <!--            android:layout_height="48dp"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:indeterminateTint="@color/grey_800"-->
+        <!--            android:visibility="gone" />-->
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/no_activity_image"

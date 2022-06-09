@@ -124,6 +124,7 @@
     <string name="error_create_password">Unable to create the password to this account</string>
     <string name="warning_battery_saver">The location might not accurate</string>
     <string name="battery_saver">Battery Saver</string>
+    <string name="address_placeholder" translatable="false">Jl. Testing no 21</string>
     <!-- TODO: Remove or change this placeholder text -->
     <!-- Google Map API -->
 </resources>
