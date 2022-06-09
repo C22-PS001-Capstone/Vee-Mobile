@@ -102,6 +102,10 @@ class DetailActivityFragment : Fragment(), View.OnClickListener {
     private fun deleteActivity() {
         userToken?.let { tokenData ->
             checkTokenAvailability(viewModel, tokenData, viewLifecycleOwner) { checkedToken ->
+                binding?.apply{
+                    btnDeleteActivity.isEnabled = false
+                    btnDeleteActivity.text = getString(R.string.loading_btn)
+                }
                 viewModel.deleteActivity(checkedToken.accessToken, activityData.id)
             }
         }
@@ -131,6 +135,8 @@ class DetailActivityFragment : Fragment(), View.OnClickListener {
             }
             userToken?.let { dataToken ->
                 checkTokenAvailability(viewModel, dataToken, viewLifecycleOwner) { newToken ->
+                    btnEditActivity.isEnabled = false
+                    btnEditActivity.text = getString(R.string.loading_btn)
                     viewModel.updateActivity(
                         activityData.id,
                         newToken.accessToken,
@@ -171,6 +177,12 @@ class DetailActivityFragment : Fragment(), View.OnClickListener {
                         dialog.dismiss()
                     }
                     .show()
+                binding?.apply{
+                    btnEditActivity.isEnabled = true
+                    btnEditActivity.text = getString(R.string.btn_edit_activity)
+                    btnDeleteActivity.isEnabled = true
+                    btnDeleteActivity.text = getString(R.string.btn_delete_activity)
+                }
             }
         }
     }

@@ -109,6 +109,10 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
                         dialog.dismiss()
                     }
                     .show()
+                binding?.apply {
+                    btnAddActivity.isEnabled = true
+                    btnAddActivity.text = getString(R.string.btn_add_activity)
+                }
             }
         }
     }
@@ -132,6 +136,8 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
         binding?.apply {
             userToken?.let { it ->
                 checkTokenAvailability(viewModel, it, viewLifecycleOwner) {
+                    btnAddActivity.isEnabled = false
+                    btnAddActivity.text = getString(R.string.loading_btn)
                     viewModel.insertActivity(
                         it.accessToken,
                         formatter.toString(),
