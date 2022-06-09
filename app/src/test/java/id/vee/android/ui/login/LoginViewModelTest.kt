@@ -26,8 +26,6 @@ internal class LoginViewModelTest {
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 
-    @Mock
-    private lateinit var pref: SettingsPreferences
     private val dummy = DataDummy
 
     @Mock

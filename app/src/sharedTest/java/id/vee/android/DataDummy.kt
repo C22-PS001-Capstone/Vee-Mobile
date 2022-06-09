@@ -38,21 +38,6 @@ object DataDummy {
             passNull = false
         )
 
-    fun getUserEntities(): List<UserEntity> {
-        val list: MutableList<UserEntity> = mutableListOf()
-        for (i in 0..10) {
-            val user = UserEntity(
-                id = "id-user-$i",
-                firstName = "first-$i",
-                lastName = "last-$i",
-                email = "email@mail.com",
-                passNull = false
-            )
-            list.add(user)
-        }
-        return list
-    }
-
     fun getSettings(): Settings =
         Settings(
             theme = false,
@@ -60,12 +45,6 @@ object DataDummy {
             latitude = -6.2233232,
             longitude = 106.8232323
         )
-
-    fun getLiveLocation(): Location =
-        Location("Live").apply {
-            latitude = -6.2233232
-            longitude = 106.8232323
-        }
 
     fun gasStations(): List<GasStations> {
         val list: MutableList<GasStations> = mutableListOf()

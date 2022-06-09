@@ -27,12 +27,7 @@ class RemoteDataSourceTest {
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 
-    @Mock
-    private lateinit var pref: SettingsPreferences
     private val dummy = DataDummy
-
-    @Mock
-    private lateinit var veeDao: VeeDao
 
     @Mock
     private lateinit var apiService: ApiService
