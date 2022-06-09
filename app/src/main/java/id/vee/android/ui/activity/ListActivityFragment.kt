@@ -67,11 +67,14 @@ class ListActivityFragment : Fragment() {
                     if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && itemCount < 1) {
                         showStoryNotAvailable()
                         progressBar.visibility = View.GONE
+                        rvStories.visibility = View.VISIBLE
                     } else if (loadState.source.refresh is LoadState.Loading) {
                         progressBar.visibility = View.VISIBLE
+                        rvStories.visibility = View.GONE
                     } else {
                         showStoryNotAvailable(false)
                         progressBar.visibility = View.GONE
+                        rvStories.visibility = View.VISIBLE
                     }
                 }
             }
