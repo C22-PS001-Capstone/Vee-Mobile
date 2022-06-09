@@ -6,6 +6,7 @@ import id.vee.android.MainDispatcherRule
 import id.vee.android.data.Resource
 import id.vee.android.data.VeeRepository
 import id.vee.android.domain.model.GasStations
+import id.vee.android.domain.repository.VeeDataSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
@@ -29,7 +30,7 @@ internal class VeeInteractorTest {
     private val dummy = DataDummy
 
     @Mock
-    private lateinit var repository: VeeRepository
+    private lateinit var repository: VeeDataSource
     private lateinit var interactor: VeeInteractor
 
     @get:Rule
