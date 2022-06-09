@@ -1,5 +1,6 @@
 package id.vee.android.di
 
+import androidx.paging.ExperimentalPagingApi
 import androidx.room.Room
 import id.vee.android.BuildConfig
 import id.vee.android.data.VeeRepository
@@ -32,6 +33,7 @@ import java.util.concurrent.TimeUnit
 
 val databaseModule = module {
     factory { get<VeeDatabase>().veeDao() }
+    factory { get<VeeDatabase>().remoteKeysDao() }
     single {
         Room.databaseBuilder(
             androidContext(),
@@ -61,8 +63,9 @@ val networkModule = module {
         retrofit.create(ApiService::class.java)
     }
 }
+@ExperimentalPagingApi
 val repositoryModule = module {
-    single { LocalDataSource(get()) }
+    single { LocalDataSource(get(), get()) }
     single { RemoteDataSource(get()) }
     single<VeeDataSource> { VeeRepository(get(), get()) }
 }

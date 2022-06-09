@@ -1,5 +1,6 @@
 package id.vee.android.data
 
+import androidx.paging.*
 import id.vee.android.data.local.LocalDataSource
 import id.vee.android.data.remote.RemoteDataSource
 import id.vee.android.data.remote.network.ApiResponse
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
 
+@ExperimentalPagingApi
 class VeeRepository(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource
@@ -158,7 +160,10 @@ class VeeRepository(
             }
         }.asFlow()
 
-    override fun getActivity(token: String, initMonthString: String?): Flow<Resource<List<Activity>>> =
+    override fun getActivity(
+        token: String,
+        initMonthString: String?
+    ): Flow<Resource<List<Activity>>> =
         object : NetworkBoundResource<List<Activity>, List<ActivityResponse>>() {
             override fun loadFromDB(): Flow<List<Activity>> {
                 return localDataSource.getActivity(initMonthString).map {
@@ -179,6 +184,19 @@ class VeeRepository(
                 localDataSource.insertActivity(activityList)
             }
         }.asFlow()
+
+    override fun getPagedActivity(token: String): Flow<PagingData<Activity>> {
+        val pagingDataFlow = Pager(
+            config = PagingConfig(pageSize = 10),
+            remoteMediator = ActivityMediator(localDataSource, remoteDataSource, token),
+            pagingSourceFactory = { localDataSource.getPagedActivity() }
+        ).flow
+        return pagingDataFlow.map { pagingData ->
+            pagingData.map {
+                DataMapper.mapEntityToDomain(it)
+            }
+        }
+    }
 
     override fun deleteActivity(accessToken: String, id: String): Flow<BasicResponse> {
         return flow {

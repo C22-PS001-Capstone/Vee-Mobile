@@ -1,5 +1,6 @@
 package id.vee.android.data.local.room
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -32,6 +33,9 @@ interface VeeDao {
 
     @Query("SELECT * FROM activity_entities")
     fun getActivity(): Flow<List<ActivityEntity>>
+
+    @Query("SELECT * FROM activity_entities")
+    fun getPagedActivity(): PagingSource<Int, ActivityEntity>
 
     @Query("SELECT * FROM activity_entities WHERE date LIKE :month")
     fun getActivityMonth(month: String): Flow<List<ActivityEntity>>

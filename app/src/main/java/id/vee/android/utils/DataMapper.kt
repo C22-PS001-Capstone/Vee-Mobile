@@ -25,6 +25,18 @@ object DataMapper {
         liter = input.ltr
     )
 
+    fun mapEntityToDomain(input: ActivityEntity): Activity =
+        Activity(
+            date = input.date,
+            owner = input.owner,
+            km = input.km,
+            price = input.price,
+            liter = input.liter,
+            lon = input.lon,
+            id = input.id,
+            lat = input.lat,
+        )
+
     fun mapDomainToEntity(input: User) = UserEntity(
         id = input.id,
         firstName = input.firstName,

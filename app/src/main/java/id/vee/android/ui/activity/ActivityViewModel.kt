@@ -3,6 +3,7 @@ package id.vee.android.ui.activity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import id.vee.android.data.Resource
 import id.vee.android.data.local.SettingsInterface
 import id.vee.android.data.remote.response.BasicResponse
@@ -20,6 +21,9 @@ class ActivityViewModel constructor(
 
     private val _activityResponse: MutableLiveData<Resource<List<Activity>>> = MutableLiveData()
     val activityResponse: LiveData<Resource<List<Activity>>> = _activityResponse
+
+    private val _pagedActivityResponse: MutableLiveData<PagingData<Activity>> = MutableLiveData()
+    val pagedActivityResponse: LiveData<PagingData<Activity>> = _pagedActivityResponse
 
     fun insertActivity(
         token: String,
@@ -40,6 +44,11 @@ class ActivityViewModel constructor(
     fun getActivity(token: String) = viewModelScope.launch {
         useCase.getActivity(token).collect {
             _activityResponse.postValue(it)
+        }
+    }
+    fun getPagedActivity(token: String) = viewModelScope.launch {
+        useCase.getPagedActivity(token).collect{
+            _pagedActivityResponse.postValue(it)
         }
     }
 

@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import timber.log.Timber
 
 class RemoteDataSource(
     private val apiService: ApiService
@@ -187,6 +188,12 @@ class RemoteDataSource(
             emit(ApiResponse.Error(e.toString()))
         }
     }.flowOn(Dispatchers.IO)
+
+    suspend fun getPagedActivity(token: String, page: Int, pageSize: Int): List<ActivityResponse> {
+        val response = apiService.getPaggedActivity(token.bearer(), page, pageSize)
+        Timber.d("Response getPagedActivity: ${response.data.activities}")
+        return response.data.activities
+    }
 
     suspend fun deleteActivity(accessToken: String, id: String): BasicResponse =
         try {
