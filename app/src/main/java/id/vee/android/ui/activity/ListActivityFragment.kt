@@ -11,6 +11,7 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.vee.android.R
 import id.vee.android.adapter.ActivityPagedAdapter
+import id.vee.android.adapter.LoadingStateAdapter
 import id.vee.android.databinding.FragmentListActivityBinding
 import id.vee.android.domain.model.Token
 import id.vee.android.utils.checkTokenAvailability
@@ -55,7 +56,11 @@ class ListActivityFragment : Fragment() {
             rvStories.apply {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
-                adapter = storyPagedAdapter
+                adapter = storyPagedAdapter.withLoadStateFooter(
+                    footer = LoadingStateAdapter {
+                        storyPagedAdapter.retry()
+                    }
+                )
             }
             storyPagedAdapter.apply {
                 addLoadStateListener { loadState ->
