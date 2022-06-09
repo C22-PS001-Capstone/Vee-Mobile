@@ -39,6 +39,7 @@ internal class VeeRepositoryTest {
     fun setUp() {
         apiService = FakeApiService()
         veeDao = FakeVeeDao()
+        remoteKeysDao = FakeRemoteKeysDao()
         remoteDataSource = RemoteDataSource(apiService)
         localDataSource = LocalDataSource(veeDao, remoteKeysDao)
         veeRepository = VeeRepository(remoteDataSource, localDataSource)
