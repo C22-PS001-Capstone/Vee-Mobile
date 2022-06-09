@@ -106,6 +106,7 @@ class HomeFragment : Fragment() {
                                 Timber.e(responses.message)
                                 dataGasStation.visibility = View.GONE
                                 tvNoDataGasStations.visibility = View.VISIBLE
+                                progressBarNearest.visibility = View.GONE
                             }
                         }
                     }
