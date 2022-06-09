@@ -1,6 +1,7 @@
 package id.vee.android
 
 import android.location.Location
+import id.vee.android.data.local.entity.ActivityEntity
 import id.vee.android.data.local.entity.RoboEntity
 import id.vee.android.data.local.entity.TokenEntity
 import id.vee.android.data.local.entity.UserEntity
@@ -14,15 +15,44 @@ object DataDummy {
             refreshToken = "refreshToken",
             expiredAt = 1654702049
         )
+    fun getTokenEntity(): TokenEntity =
+        TokenEntity(
+            accessToken = "accessToken",
+            refreshToken = "refreshToken",
+            expiredAt = 1654702049
+        )
 
     fun getUserData(): User =
         User(
-            id = "id-user",
-            firstName = "first",
-            lastName = "last",
+            id = "id-user-2",
+            firstName = "first-2",
+            lastName = "last-2",
             email = "email@mail.com",
             passNull = false
         )
+    fun getUserEntity(): UserEntity =
+        UserEntity(
+            id = "id-user-2",
+            firstName = "first-2",
+            lastName = "last-2",
+            email = "email@mail.com",
+            passNull = false
+        )
+
+    fun getUserEntities(): List<UserEntity> {
+        val list: MutableList<UserEntity> = mutableListOf()
+        for (i in 0..10) {
+            val user = UserEntity(
+                id = "id-user-$i",
+                firstName = "first-$i",
+                lastName = "last-$i",
+                email = "email@mail.com",
+                passNull = false
+            )
+            list.add(user)
+        }
+        return list
+    }
 
     fun getSettings(): Settings =
         Settings(
@@ -135,6 +165,23 @@ object DataDummy {
         val list: MutableList<ActivityResponse> = mutableListOf()
         for (i in 0 until 10) {
             val activity = ActivityResponse(
+                id = "id-$i",
+                date = "2020-01-01",
+                owner = "owner-$i",
+                km = i * 100,
+                liter = i * 10,
+                price = i * 1000,
+                lon = 106.8232323,
+                lat = -6.2233232,
+            )
+            list.add(activity)
+        }
+        return list
+    }
+    fun getListEntityResponse(): List<ActivityEntity>{
+        val list: MutableList<ActivityEntity> = mutableListOf()
+        for (i in 0 until 10) {
+            val activity = ActivityEntity(
                 id = "id-$i",
                 date = "2020-01-01",
                 owner = "owner-$i",
