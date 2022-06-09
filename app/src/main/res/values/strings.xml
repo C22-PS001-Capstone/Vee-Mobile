@@ -31,7 +31,7 @@
     <string name="robo_fillups_value">%1s</string>
     <string name="litre">Litre</string>
     <string name="robo_expenses_label">Expenses</string>
-    <string name="robo_expenses_value">Rp %1s</string>
+    <string name="rupiah_formatter">Rp %1s</string>
     <string name="robo_you_are_label">You are a</string>
     <string name="robo_category_label">Racer</string>
     <string name="title_home">Home</string>

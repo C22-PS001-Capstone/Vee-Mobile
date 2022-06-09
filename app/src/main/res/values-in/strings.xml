@@ -19,7 +19,7 @@
     <string name="robo_fillups_label">Mengisi</string>
     <string name="robo_fillups_value">%1s</string>
     <string name="robo_expenses_label">Pengeluaran</string>
-    <string name="robo_expenses_value">Rp %1s</string>
+    <string name="rupiah_formatter">Rp %1s</string>
     <string name="robo_you_are_label">Anda adalah seorang</string>
     <string name="robo_category_label">Pembalap</string>
     <string name="title_home">Beranda</string>

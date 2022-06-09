@@ -163,7 +163,7 @@ class HomeFragment : Fragment() {
                         dashboardFillUps.text =
                             resources.getString(R.string.robo_fillups_value, liter.toString())
                         dashboardExpenses.text =
-                            resources.getString(R.string.robo_expenses_value, price.toString())
+                            resources.getString(R.string.rupiah_formatter, price.toString())
                     }
                 }
             }
@@ -265,12 +265,12 @@ class HomeFragment : Fragment() {
                             val newNumber = NumberFormat.getInstance(Locale.GERMANY)
                             forecastFillUp.text =
                                 resources.getString(
-                                    R.string.robo_expenses_value,
+                                    R.string.rupiah_formatter,
                                     newNumber.format(nextForecast.toInt()).toString()
                                 )
                             forecastAverageFillUp.text =
                                 resources.getString(
-                                    R.string.robo_expenses_value,
+                                    R.string.rupiah_formatter,
                                     newNumber.format(averageForecast.toInt()).toString()
                                 )
                             forecastSection.visibility = View.VISIBLE
