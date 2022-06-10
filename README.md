@@ -14,7 +14,7 @@ We as Indonesian people usually still calculate the expense that comes from our 
 - [x] Implementation of Machine Learning Model
 - [x] Localization
 - [x] Paging3 Implementation
-- [x] Unit Testing & Android Test
+- [x] Unit Testing
 
 ## Features
 - Get the nearest location of gas stations
