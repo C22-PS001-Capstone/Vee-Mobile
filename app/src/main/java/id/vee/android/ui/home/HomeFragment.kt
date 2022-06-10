@@ -191,22 +191,22 @@ class HomeFragment : Fragment() {
                 vendorText[index].text = gasStations.vendor
                 vendorDistance[index].text = gasStations.distance.toString()
                 vendorDistance[index].apply {
-                    gasStations.distance?.let { distance ->
+                    gasStations.distance.let { distance ->
                         val distanceText = StringBuilder()
-                        if (distance.toDouble() < 0.3) {
+                        if (distance < 0.3) {
                             setTextColor(
                                 ContextCompat.getColor(
                                     requireContext(),
                                     R.color.limegreen
                                 )
                             )
-                            distanceText.append("${distance.toDouble() * 1000} m")
-                        } else if (distance.toDouble() < 0.5) {
+                            distanceText.append("${distance * 1000} m")
+                        } else if (distance < 0.5) {
                             setTextColor(ContextCompat.getColor(requireContext(), R.color.orange))
-                            distanceText.append("${distance.toDouble() * 1000} m")
+                            distanceText.append("${distance * 1000} m")
                         } else {
                             setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-                            distanceText.append("${distance.toDouble()} km")
+                            distanceText.append("$distance km")
                         }
                         text = distanceText
                     }
