@@ -3,6 +3,7 @@ package id.vee.android
 import android.app.Application
 import androidx.paging.ExperimentalPagingApi
 import id.vee.android.di.*
+import id.vee.android.utils.ReleaseTree
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -29,6 +30,8 @@ class VeeApplication : Application() {
         }
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
+        }else {
+            Timber.plant(ReleaseTree())
         }
     }
 }

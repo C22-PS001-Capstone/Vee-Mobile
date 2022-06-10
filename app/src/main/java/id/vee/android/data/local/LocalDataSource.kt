@@ -54,8 +54,8 @@ class LocalDataSource(
 
     fun getGasStations(): Flow<List<GasStationsEntity>> = mUserDao.getGasStations()
 
-    fun getNearestGasStation(latitude: Double, longitude: Double): Flow<List<GasStationsEntity>> =
-        mUserDao.getNearestGasStation(latitude, longitude)
+    fun getNearestGasStation(): Flow<List<GasStationsEntity>> =
+        mUserDao.getNearestGasStation()
 
     suspend fun deleteActivities() = mUserDao.deleteActivities()
     suspend fun insertNotification(mapDomainToEntity: NotificationEntity) =

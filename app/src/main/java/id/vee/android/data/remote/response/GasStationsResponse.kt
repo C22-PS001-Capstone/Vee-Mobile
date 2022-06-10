@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class GasStationsResponse(
     @field:SerializedName("distance")
-    val distance: String? = null,
+    val distance: Double,
 
     @field:SerializedName("vendor")
     val vendor: String? = null,

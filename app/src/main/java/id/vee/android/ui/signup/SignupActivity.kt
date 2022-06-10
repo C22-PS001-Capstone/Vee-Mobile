@@ -54,7 +54,7 @@ class SignupActivity : AppCompatActivity() {
             } else {
                 AlertDialog.Builder(this)
                     .setTitle(getString(R.string.error))
-                    .setMessage(response.message)
+                    .setMessage(getString(R.string.sign_up_error))
                     .setPositiveButton(getString(R.string.positive_dialog_btn_text)) { dialog, _ ->
                         dialog.dismiss()
                         binding.btnSignupActivity.isEnabled = true

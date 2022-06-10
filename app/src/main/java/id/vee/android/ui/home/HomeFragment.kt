@@ -129,7 +129,12 @@ class HomeFragment : Fragment() {
                             is Resource.Success -> {
                                 rvStories.visibility = View.VISIBLE
                                 progressBar.visibility = View.GONE
-                                if (responses.data?.isNotEmpty() == true) {
+                                Timber.d("responses is null: ${responses.data.isNullOrEmpty()}")
+                                if (responses.data.isNullOrEmpty()) {
+                                    noActivityImage.visibility = View.VISIBLE
+                                    Timber.d("no activity")
+                                    storyAdapter.submitList(null)
+                                } else {
                                     val activities = responses.data
                                     activities.mapIndexed { index, activity ->
                                         activity.isMonthShow =
@@ -139,15 +144,12 @@ class HomeFragment : Fragment() {
                                     }
                                     storyAdapter.submitList(activities)
                                     noActivityImage.visibility = View.GONE
-                                } else {
-                                    noActivityImage.visibility = View.VISIBLE
-                                    storyAdapter.submitList(null)
                                 }
                             }
                             is Resource.Error -> {
                                 rvStories.visibility = View.GONE
                                 progressBar.visibility = View.GONE
-                                noActivityImage.visibility = View.GONE
+                                noActivityImage.visibility = View.VISIBLE
                             }
                         }
                     }

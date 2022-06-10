@@ -15,7 +15,7 @@ data class GasStationsEntity(
     val vendor: String?,
 
     @ColumnInfo(name = "distance")
-    val distance: String?,
+    val distance: Double,
 
     @ColumnInfo(name = "lat")
     val lat: Double = 0.0,

@@ -199,8 +199,10 @@ class MainActivity : AppCompatActivity() {
             ActivityResultContracts.StartIntentSenderForResult()
         ) { result ->
             when (result.resultCode) {
-                RESULT_OK ->
+                RESULT_OK ->{
+                    startLocationUpdates()
                     Timber.i("onActivityResult: All location settings are satisfied.")
+                }
                 RESULT_CANCELED ->
                     Toast.makeText(
                         this@MainActivity,
@@ -269,6 +271,7 @@ class MainActivity : AppCompatActivity() {
         ) { isGranted: Boolean ->
             if (isGranted) {
                 getMyLocation()
+                startLocationUpdates()
             }
         }
 
@@ -284,6 +287,7 @@ class MainActivity : AppCompatActivity() {
                     requestBackgroundLocationPermissionLauncher.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
                 } else {
                     getMyLocation()
+                    startLocationUpdates()
                 }
             }
         }
@@ -337,7 +341,7 @@ class MainActivity : AppCompatActivity() {
     private fun createLocationCallback() {
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
-                locationResult.lastLocation
+                Timber.d("locationCallback ${locationResult.lastLocation}")
                 for (location in locationResult.locations) {
                     if (lastLocation == null) {
                         lastLocation = location

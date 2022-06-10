@@ -40,7 +40,7 @@ class GasStationListAdapter(private val onItemClick: (GasStations) -> Unit) :
         fun bind(gasStations: GasStations, context: Context) {
             binding.vendorGasStation.text = gasStations.vendor
             binding.nameGasStation.text = gasStations.name
-            gasStations.distance?.toDouble()?.let { distance ->
+            gasStations.distance.let { distance ->
                 binding.distanceGasStation.apply {
                     when {
                         distance < 0.3 -> {
