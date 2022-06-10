@@ -50,7 +50,7 @@ class FakeApiService : ApiService {
         token: String,
         date: String,
         distance: Int,
-        litre: Int,
+        litre: Double,
         expense: Int,
         lat: Double,
         lon: Double
@@ -79,7 +79,7 @@ class FakeApiService : ApiService {
         id: String,
         date: String,
         distance: Int,
-        litre: Int,
+        litre: Double,
         expense: Int,
         lat: Double,
         lon: Double

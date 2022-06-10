@@ -374,7 +374,7 @@ class RepositoryTest {
                 "id",
                 "title",
                 1000,
-                10,
+                100.2,
                 100,
                 6.00001,
                 120.0001
@@ -385,7 +385,7 @@ class RepositoryTest {
             "id",
             "title",
             1000,
-            10,
+            100.2,
             100,
             6.00001,
             120.0001
@@ -437,7 +437,7 @@ class RepositoryTest {
                 "token",
                 date = "2020-01-01",
                 1000,
-                10,
+                100.2,
                 100,
                 6.00001,
                 120.0001
@@ -447,7 +447,7 @@ class RepositoryTest {
             token = "token",
             date = "2020-01-01",
             1000,
-            10,
+            100.2,
             100,
             6.00001,
             120.0001

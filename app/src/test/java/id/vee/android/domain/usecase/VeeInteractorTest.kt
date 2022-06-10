@@ -182,7 +182,7 @@ internal class VeeInteractorTest {
                 token = "token",
                 date = "2020-01-01",
                 distance = 233,
-                litre = 233,
+                litre = 233.2,
                 expense = 233,
                 lat = 6.123123132,
                 long = -120.123123
@@ -192,7 +192,7 @@ internal class VeeInteractorTest {
             token = "token",
             date = "2020-01-01",
             distance = 233,
-            litre = 233,
+            litre = 233.2,
             expense = 233,
             lat = 6.123123132,
             long = -120.123123
@@ -205,7 +205,7 @@ internal class VeeInteractorTest {
             token = "token",
             date = "2020-01-01",
             distance = 233,
-            litre = 233,
+            litre = 233.2,
             expense = 233,
             lat = 6.123123132,
             long = -120.123123
@@ -325,7 +325,7 @@ internal class VeeInteractorTest {
                 id = "id",
                 date = "2020-01-01",
                 distance = 233,
-                litre = 233,
+                litre = 233.2,
                 expense = 233,
                 lat = 6.123123132,
                 long = -120.123123
@@ -336,7 +336,7 @@ internal class VeeInteractorTest {
             id = "id",
             date = "2020-01-01",
             distance = 233,
-            litre = 233,
+            litre = 233.2,
             expense = 233,
             lat = 6.123123132,
             long = -120.123123
@@ -350,7 +350,7 @@ internal class VeeInteractorTest {
             id = "id",
             date = "2020-01-01",
             distance = 233,
-            litre = 233,
+            litre = 233.2,
             expense = 233,
             lat = 6.123123132,
             long = -120.123123
