@@ -69,7 +69,7 @@ class ActivityPagedAdapter(private val onItemClick: (Activity) -> Unit) :
                         val tempAddress = it.getAddressLine(0).split(", " + it.locality)[0]
                         address.append(tempAddress)
                     }
-                    binding.storyAddress.text = address.toString()
+                    binding.storyAddress.text = address.toString().trim()
                 } else {
                     binding.storyAddress.visibility = View.GONE
                 }
