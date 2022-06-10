@@ -143,7 +143,7 @@ class VeeRepository(
     ): Flow<Resource<List<GasStations>>> =
         object : NetworkBoundResource<List<GasStations>, List<GasStationsResponse>>() {
             override fun loadFromDB(): Flow<List<GasStations>> {
-                return localDataSource.getNearestGasStation(lat, lon).map {
+                return localDataSource.getNearestGasStation().map {
                     DataMapper.mapEntitiesToDomain(it)
                 }
             }
