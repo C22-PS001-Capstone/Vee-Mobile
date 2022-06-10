@@ -14,6 +14,7 @@ import id.vee.android.utils.DataMapper
 import id.vee.android.utils.checkEmptyEditText
 import id.vee.android.utils.checkTokenAvailability
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class ChangePasswordFragment : Fragment() {
     private var _binding: FragmentChangePasswordBinding? = null
@@ -74,35 +75,28 @@ class ChangePasswordFragment : Fragment() {
             }
             userResponse.observe(viewLifecycleOwner) { userData ->
                 binding?.apply {
-                    if (userData.passNull) {
-                        currentPasswordLabel.visibility = View.GONE
-                        edtCurrentPassword.visibility = View.GONE
-                        btnUpdatePassword.visibility = View.GONE
-                        btnCreatePassword.visibility = View.VISIBLE
-                        (activity as AppCompatActivity).supportActionBar?.title = getString(
-                            R.string.create_password
-                        )
+                    userData?.let {
+                        if (userData.passNull) {
+                            currentPasswordLabel.visibility = View.GONE
+                            edtCurrentPassword.visibility = View.GONE
+                            btnUpdatePassword.visibility = View.GONE
+                            btnCreatePassword.visibility = View.VISIBLE
+                            (activity as AppCompatActivity).supportActionBar?.title = getString(
+                                R.string.create_password
+                            )
+                        }
                     }
                 }
             }
-            responseDetail.observe(viewLifecycleOwner) { responseUserData ->
-                if (responseUserData.status == "success" && responseUserData.data != null && responseUserData.data.user != null) {
-                    val mapperData = DataMapper.mapEntityToDomain(responseUserData.data.user)
-                    saveUser(mapperData)
+            responseDetail.observe(viewLifecycleOwner) { response ->
+                if (response.status == "success" && response.data != null && response.data.user != null) {
+                    val mapperData = DataMapper.mapEntityToDomain(response.data.user)
+                    viewModel.saveUser(mapperData)
                 }
             }
             addPasswordResponse.observe(viewLifecycleOwner) { response ->
                 binding?.apply {
                     if (response.status == "success") {
-                        activity?.let {
-                            AlertDialog.Builder(it)
-                                .setTitle(getString(R.string.success))
-                                .setMessage(getString(R.string.success_create_password))
-                                .setPositiveButton(getString(R.string.positive_dialog_btn_text)) { dialog, _ ->
-                                    dialog.dismiss()
-                                }
-                                .show()
-                        }
                         currentPasswordLabel.visibility = View.VISIBLE
                         edtCurrentPassword.visibility = View.VISIBLE
                         btnCreatePassword.visibility = View.GONE
@@ -119,7 +113,15 @@ class ChangePasswordFragment : Fragment() {
                                 viewModel.userDetail(newToken)
                             }
                         }
-
+                        activity?.let {
+                            AlertDialog.Builder(it)
+                                .setTitle(getString(R.string.success))
+                                .setMessage(getString(R.string.success_create_password))
+                                .setPositiveButton(getString(R.string.positive_dialog_btn_text)) { dialog, _ ->
+                                    dialog.dismiss()
+                                }
+                                .show()
+                        }
                         (activity as AppCompatActivity).supportActionBar?.title = getString(
                             R.string.update_password
                         )

@@ -59,7 +59,7 @@
     <string name="date_time_picker" translatable="false">Date Time Picker</string>
     <string name="first_name_placeholder" translatable="false">John</string>
     <string name="last_name_placeholder" translatable="false">Doe</string>
-    <string name="change">Change</string>
+    <string name="change_password">Change Password</string>
     <string name="dummy" translatable="false">dummy</string>
     <string name="save_profile">Save Profile</string>
     <string name="retry">Retry</string>
