@@ -165,7 +165,7 @@
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
-            <id.vee.android.ui.customview.MyNumberEditText
+            <EditText
                 android:id="@+id/edt_litre"
                 style="@style/ThemeEditText"
                 android:layout_width="0dp"
@@ -175,7 +175,7 @@
                 android:fontFamily="@font/nunito_medium"
                 android:hint="@string/fillups_hint"
                 android:importantForAutofill="no"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:paddingStart="8dp"
                 android:paddingTop="12dp"
                 android:paddingEnd="8dp"
