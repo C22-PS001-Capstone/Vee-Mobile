@@ -55,7 +55,7 @@ object DataDummy {
                 vendor = "vendor-$i",
                 lat = -6.2233232,
                 lon = 106.8232323,
-                distance = "${i}00",
+                distance = 10.0,
             )
             list.add(gasStation)
         }
@@ -71,7 +71,7 @@ object DataDummy {
                 vendor = "vendor-$i",
                 lat = -6.2233232,
                 lon = 106.8232323,
-                distance = "${i}00",
+                distance = 10.0,
             )
             list.add(gasStation)
         }
@@ -88,7 +88,7 @@ object DataDummy {
                 vendor = "vendor-$i",
                 lat = -6.2233232,
                 lon = 106.8232323,
-                distance = "${i}00",
+                distance = 10.0,
             )
             list.add(gasStation)
         }
