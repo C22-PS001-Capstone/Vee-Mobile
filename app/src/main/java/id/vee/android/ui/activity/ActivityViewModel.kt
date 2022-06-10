@@ -7,7 +7,10 @@ import androidx.paging.PagingData
 import id.vee.android.data.Resource
 import id.vee.android.data.local.SettingsInterface
 import id.vee.android.data.remote.response.BasicResponse
+import id.vee.android.data.remote.response.UserDetailResponse
 import id.vee.android.domain.model.Activity
+import id.vee.android.domain.model.Token
+import id.vee.android.domain.model.User
 import id.vee.android.domain.usecase.VeeUseCase
 import id.vee.android.ui.GeneralViewModel
 import kotlinx.coroutines.launch
@@ -24,6 +27,9 @@ class ActivityViewModel constructor(
 
     private val _pagedActivityResponse: MutableLiveData<PagingData<Activity>> = MutableLiveData()
     val pagedActivityResponse: LiveData<PagingData<Activity>> = _pagedActivityResponse
+
+    private val _responseDetail = MutableLiveData<UserDetailResponse>()
+    val responseDetail: LiveData<UserDetailResponse> = _responseDetail
 
     fun insertActivity(
         token: String,
@@ -46,8 +52,9 @@ class ActivityViewModel constructor(
             _activityResponse.postValue(it)
         }
     }
+
     fun getPagedActivity(token: String) = viewModelScope.launch {
-        useCase.getPagedActivity(token).collect{
+        useCase.getPagedActivity(token).collect {
             _pagedActivityResponse.postValue(it)
         }
     }
@@ -71,5 +78,15 @@ class ActivityViewModel constructor(
         useCase.updateActivity(id, token, date, distance, litre, expense, lat, long).collect {
             _actionResponse.postValue(it)
         }
+    }
+
+    fun userDetail(data: Token) = viewModelScope.launch {
+        useCase.userDetail(data).collect { values ->
+            _responseDetail.postValue(values)
+        }
+    }
+
+    fun saveUser(user: User) = viewModelScope.launch {
+        useCase.saveUser(user)
     }
 }

@@ -125,6 +125,7 @@
     <string name="warning_battery_saver">The location might not accurate</string>
     <string name="battery_saver">Battery Saver</string>
     <string name="address_placeholder" translatable="false">Jl. Testing no 21</string>
+    <string name="sign_up_error">The account has been created with this email, or check your connection</string>
     <!-- TODO: Remove or change this placeholder text -->
     <!-- Google Map API -->
 </resources>

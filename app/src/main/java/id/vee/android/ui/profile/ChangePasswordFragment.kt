@@ -10,7 +10,9 @@ import androidx.fragment.app.Fragment
 import id.vee.android.R
 import id.vee.android.databinding.FragmentChangePasswordBinding
 import id.vee.android.domain.model.Token
+import id.vee.android.utils.DataMapper
 import id.vee.android.utils.checkEmptyEditText
+import id.vee.android.utils.checkTokenAvailability
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChangePasswordFragment : Fragment() {
@@ -70,7 +72,7 @@ class ChangePasswordFragment : Fragment() {
                 userToken = tokenData
                 viewModel.userDetail(tokenData)
             }
-            viewModel.userResponse.observe(viewLifecycleOwner) { userData ->
+            userResponse.observe(viewLifecycleOwner) { userData ->
                 binding?.apply {
                     if (userData.passNull) {
                         currentPasswordLabel.visibility = View.GONE
@@ -81,6 +83,12 @@ class ChangePasswordFragment : Fragment() {
                             R.string.create_password
                         )
                     }
+                }
+            }
+            responseDetail.observe(viewLifecycleOwner) { responseUserData ->
+                if (responseUserData.status == "success" && responseUserData.data != null && responseUserData.data.user != null) {
+                    val mapperData = DataMapper.mapEntityToDomain(responseUserData.data.user)
+                    saveUser(mapperData)
                 }
             }
             addPasswordResponse.observe(viewLifecycleOwner) { response ->
@@ -102,6 +110,15 @@ class ChangePasswordFragment : Fragment() {
 
                         edtNewPassword.setText("")
                         edtNewPasswordConfirm.setText("")
+                        userToken?.let { tokenData ->
+                            checkTokenAvailability(
+                                viewModel,
+                                tokenData,
+                                viewLifecycleOwner
+                            ) { newToken ->
+                                viewModel.userDetail(newToken)
+                            }
+                        }
 
                         (activity as AppCompatActivity).supportActionBar?.title = getString(
                             R.string.update_password
@@ -168,12 +185,16 @@ class ChangePasswordFragment : Fragment() {
                 edtNewPasswordConfirm.requestFocus()
                 return
             }
-            viewModel.updatePassword(
-                userToken?.accessToken ?: "",
-                currentPassword,
-                password,
-                passwordConfirm
-            )
+            userToken?.let { tokenData ->
+                checkTokenAvailability(viewModel, tokenData, viewLifecycleOwner) {
+                    viewModel.updatePassword(
+                        userToken?.accessToken ?: "",
+                        currentPassword,
+                        password,
+                        passwordConfirm
+                    )
+                }
+            }
         }
     }
 
@@ -188,11 +209,15 @@ class ChangePasswordFragment : Fragment() {
                 edtNewPasswordConfirm.requestFocus()
                 return
             }
-            viewModel.addPassword(
-                userToken?.accessToken ?: "",
-                password,
-                passwordConfirm
-            )
+            userToken?.let { tokenData ->
+                checkTokenAvailability(viewModel, tokenData, viewLifecycleOwner) {
+                    viewModel.addPassword(
+                        it.accessToken,
+                        password,
+                        passwordConfirm
+                    )
+                }
+            }
         }
     }
 
