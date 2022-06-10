@@ -70,10 +70,7 @@ class FakeVeeDao : VeeDao {
         return flowOf(gasStationsData)
     }
 
-    override fun getNearestGasStation(
-        latitude: Double,
-        longitude: Double
-    ): Flow<List<GasStationsEntity>> {
+    override fun getNearestGasStation(): Flow<List<GasStationsEntity>> {
         return flowOf(gasStationsData)
     }
 

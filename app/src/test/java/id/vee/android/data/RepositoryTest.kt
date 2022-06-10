@@ -272,7 +272,7 @@ class RepositoryTest {
             emit(dummy.gasStationsEntity())
         }
         `when`(remoteDataSource.getGasStations("token", 6.000, 120.000)).thenReturn(networkResponse)
-        `when`(localDataSource.getNearestGasStation(6.000, 120.000)).thenReturn(localResponse)
+        `when`(localDataSource.getNearestGasStation()).thenReturn(localResponse)
         repository.getGasStations("token", 6.000, 120.000).onEach {
             assertNotNull(it)
             when (it) {
