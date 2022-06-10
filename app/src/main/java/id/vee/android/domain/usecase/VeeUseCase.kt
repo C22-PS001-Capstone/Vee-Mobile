@@ -42,7 +42,7 @@ interface VeeUseCase {
         token: String,
         date: String,
         distance: Int,
-        litre: Int,
+        litre: Double,
         expense: Int,
         lat: Double,
         long: Double
@@ -82,7 +82,7 @@ interface VeeUseCase {
         token: String,
         date: String,
         distance: Int,
-        litre: Int,
+        litre: Double,
         expense: Int,
         lat: Double,
         long: Double

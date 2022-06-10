@@ -49,7 +49,7 @@ class VeeInteractor(private val repository: VeeDataSource) : VeeUseCase {
         token: String,
         date: String,
         distance: Int,
-        litre: Int,
+        litre: Double,
         expense: Int,
         lat: Double,
         long: Double
@@ -92,7 +92,7 @@ class VeeInteractor(private val repository: VeeDataSource) : VeeUseCase {
         token: String,
         date: String,
         distance: Int,
-        litre: Int,
+        litre: Double,
         expense: Int,
         lat: Double,
         long: Double

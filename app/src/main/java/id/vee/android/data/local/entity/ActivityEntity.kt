@@ -18,7 +18,7 @@ data class ActivityEntity(
     val price: Int,
 
     @ColumnInfo(name = "liter")
-    val liter: Int,
+    val liter: Double,
 
     @ColumnInfo(name = "lon")
     val lon: Double,

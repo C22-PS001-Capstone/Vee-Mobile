@@ -39,7 +39,7 @@ class ActivityListAdapter(private val onItemClick: (Activity) -> Unit) :
         fun bind(activity: Activity, context: Context) {
             val newNumber = NumberFormat.getInstance(Locale.GERMANY)
             val km = newNumber.format(activity.km)
-            val liter = newNumber.format(activity.liter)
+            val liter = activity.liter
             val price = newNumber.format(activity.price)
             val literText = "$liter ${context.getString(R.string.litre)}"
             val kmText = "$km km"

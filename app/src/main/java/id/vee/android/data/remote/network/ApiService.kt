@@ -62,7 +62,7 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Field("date") date: String,
         @Field("km") distance: Int,
-        @Field("liter") litre: Int,
+        @Field("liter") litre: Double,
         @Field("price") expense: Int,
         @Field("lat") lat: Double,
         @Field("lon") lon: Double
@@ -104,7 +104,7 @@ interface ApiService {
         @Path("id") id: String,
         @Field("date") date: String,
         @Field("km") distance: Int,
-        @Field("liter") litre: Int,
+        @Field("liter") litre: Double,
         @Field("price") expense: Int,
         @Field("lat") lat: Double,
         @Field("lon") lon: Double

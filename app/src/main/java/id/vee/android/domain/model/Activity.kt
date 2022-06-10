@@ -9,7 +9,7 @@ data class Activity(
     val owner: String,
     val km: Int,
     val price: Int,
-    val liter: Int,
+    val liter: Double,
     val lon: Double,
     val id: String,
     val lat: Double,

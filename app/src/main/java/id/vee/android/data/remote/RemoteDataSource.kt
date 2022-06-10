@@ -90,7 +90,7 @@ class RemoteDataSource(
         token: String,
         date: String,
         distance: Int,
-        litre: Int,
+        litre: Double,
         expense: Int,
         lat: Double,
         long: Double
@@ -211,7 +211,7 @@ class RemoteDataSource(
         token: String,
         date: String,
         distance: Int,
-        litre: Int,
+        litre: Double,
         expense: Int,
         lat: Double,
         long: Double

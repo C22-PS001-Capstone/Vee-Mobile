@@ -16,7 +16,7 @@ data class ActivityResponse(
     val price: Int,
 
     @field:SerializedName("liter")
-    val liter: Int,
+    val liter: Double,
 
     @field:SerializedName("lon")
     val lon: Double,

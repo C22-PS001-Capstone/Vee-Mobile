@@ -142,7 +142,7 @@ class AddActivityFragment : Fragment(), View.OnClickListener {
                         it.accessToken,
                         formatter.toString(),
                         edtDistance.text.toString().trimDottedString().toInt(),
-                        edtLitre.text.toString().trimDottedString().toInt(),
+                        edtLitre.text.toString().toDouble(),
                         edtExpense.text.toString().trimDottedString().toInt(),
                         lat,
                         lon
