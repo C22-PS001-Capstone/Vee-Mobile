@@ -1,4 +1,5 @@
 # Mobile Application Vee
+![example workflow](https://github.com/C22-PS001-Capstone/Vee-Mobile/actions/workflows/android.yml/badge.svg)
 
 ## Background
 We as Indonesian people usually still calculate the expense that comes from our vehicle manually, by gathering all bills that came from gas stations. We usually calculate the total expenses from all bills at the end of the month. Our problem led us to our ideas in this project. To build an integrated mobile app for tracking the expenses from our vehicle. Later on, this app will be our everyday’s partner when using our vehicle.
