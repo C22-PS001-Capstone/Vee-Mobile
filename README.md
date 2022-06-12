@@ -60,6 +60,11 @@ If you have any suggestion related to this project you can contact us at [C22-PS
 ## License
 License of this project under MIT. See [LICENSE](LICENSE)
 
+## Common Issues
+**Problem**: Unable to receive accurate nearest gas station.
+
+**Solving**: Turn on the battery saver, and turn off immediately the battery saver. The application will reset the location listener.
+
 ## Credits
 We would like to thank the makers of theese cool plugins and images.
 
